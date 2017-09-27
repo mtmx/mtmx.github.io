@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pluie on mtmx</title>
+    <link>https://mtmx.github.io/tags/pluie/</link>
+    <description>Recent content in Pluie on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mtmx.github.io/tags/pluie/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>De la pluie : en fréquence et en quantité</title>
+      <link>https://mtmx.github.io/blog/carto_meteo/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mtmx.github.io/blog/carto_meteo/</guid>
+      <description>Après avoir vérifié où se trouvaient nos vaches, nos chèvres et nos cochons, voici une analyse du pays selon un facteur météorologique crucial qui détermine les cultures agricoles, les toits des maisons voire le moral des habitants : la pluie bien sûr. Poussé par la salutaire dynamique d’ouverture des données, Meteo France a publié quelques jeux de données issus de ses travaux (utilisées notamment pour visualiser le réchauffement climatique.</description>
+    </item>
+    
+  </channel>
+</rss>

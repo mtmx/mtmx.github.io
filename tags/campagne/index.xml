@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Campagne on mtmx</title>
+    <link>https://mtmx.github.io/tags/campagne/</link>
+    <description>Recent content in Campagne on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mtmx.github.io/tags/campagne/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>De la pluie : en fréquence et en quantité</title>
+      <link>https://mtmx.github.io/blog/carto_meteo/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mtmx.github.io/blog/carto_meteo/</guid>
+      <description>Après avoir vérifié où se trouvaient nos vaches, nos chèvres et nos cochons, voici une analyse du pays selon un facteur météorologique crucial qui détermine les cultures agricoles, les toits des maisons voire le moral des habitants : la pluie bien sûr. Poussé par la salutaire dynamique d’ouverture des données, Meteo France a publié quelques jeux de données issus de ses travaux (utilisées notamment pour visualiser le réchauffement climatique.</description>
+    </item>
+    
+    <item>
+      <title>Cartes à points pour bêtes à poils</title>
+      <link>https://mtmx.github.io/blog/carto_cheptels/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mtmx.github.io/blog/carto_cheptels/</guid>
+      <description>Si les campagnes françaises sont (pour moi au moins) aussi sexy, c’est d’abord grâce à leur grande diversité : humides ou torrides, plates ou montagneuses, sauvages ou domptées par l’homme. L’idée ici est donc de quantifier cette variété de paysages grâce à des indicateurs objectifs. On commence par le peuplement de ces campagnes par les différents types de cheptels qu’on peut y trouver : vaches, chevaux, moutons, chèvres… Toutes les données sont dispos sur le site du ministère de l’agriculture.</description>
+    </item>
+    
+  </channel>
+</rss>

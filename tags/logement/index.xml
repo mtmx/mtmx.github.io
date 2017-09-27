@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logement on mtmx</title>
+    <link>https://mtmx.github.io/tags/logement/</link>
+    <description>Recent content in Logement on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mtmx.github.io/tags/logement/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Colocs en stock</title>
+      <link>https://mtmx.github.io/blog/metrololo_logement/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mtmx.github.io/blog/metrololo_logement/</guid>
+      <description>Quatrième épisode de notre série sur l’analyse urbaine de l’agglomération parisienne, cette fois on se penche sur les compositions des ménages et les différentes stratégies de partage de l’habitat. Le mêtre carré est cher, on en vient donc à le partager pour pouvoir rester à proximité des pôles d’emploi et des universités, bref, de là où les choses se passent et les connexions se font.</description>
+    </item>
+    
+  </channel>
+</rss>
