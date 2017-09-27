@@ -1,17 +1,14 @@
 #amber-btn {
-  font-weight: 900;
+  font-weight: 700;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 6px 6px;
-  font-size: 8px;
+  font-size: 7px;
   line-height: 1.42857143;
   border-radius: 0;
   border: 1px solid #e01557;
 }
-
-
-
 
 
 
@@ -37,7 +34,7 @@
  
   
  .back-to-top i {
-   font-size: 60px;
+   font-size: 50px;
  }
 
 
@@ -108,7 +105,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
 }
 .panel.sidebar-menu ul.tag-cloud li a:hover {
   color: #38a7bb;
@@ -151,7 +148,7 @@
 }
 .panel.sidebar-menu ul.popular li img,
 .panel.sidebar-menu ul.recent li img {
-  width: 50px;
+  width: 40px;
   margin-right: 10px;
 }
 .panel.sidebar-menu ul.popular li h5,
