@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mamies on mtmx</title>
-    <link>https://mtmx.github.io/tags/mamies/</link>
+    <link>/tags/mamies/</link>
     <description>Recent content in Mamies on mtmx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
     <lastBuildDate>Fri, 26 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mtmx.github.io/tags/mamies/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/mamies/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Les mamies de Paris</title>
-      <link>https://mtmx.github.io/blog/metrololo_mamies/</link>
+      <link>/blog/metrololo_mamies/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/metrololo_mamies/</guid>
+      <guid>/blog/metrololo_mamies/</guid>
       <description>A l’heure de la “smart city” augmentée par les outils numériques de ses citoyens, de la métropole rayonnante par ses activités universitaires et son économie mondialisée , la “ville inclusive” reste-t-elle aussi accueillante pour les seniors qui y ont fait leur vie. Laisse-t-elle encore une place aux mamies qui déambulent dans les rues et cassent le rythme frénétique de l’urbanité ?</description>
     </item>
     

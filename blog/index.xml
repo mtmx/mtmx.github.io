@@ -2,77 +2,77 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on mtmx</title>
-    <link>https://mtmx.github.io/blog/</link>
+    <link>/blog/</link>
     <description>Recent content in Blogs on mtmx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
     <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mtmx.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>De la pluie : en fréquence et en quantité</title>
-      <link>https://mtmx.github.io/blog/carto_meteo/</link>
+      <link>/blog/carto_meteo/</link>
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/carto_meteo/</guid>
+      <guid>/blog/carto_meteo/</guid>
       <description>Après avoir vérifié où se trouvaient nos vaches, nos chèvres et nos cochons, voici une analyse du pays selon un facteur météorologique crucial qui détermine les cultures agricoles, les toits des maisons voire le moral des habitants : la pluie bien sûr. Poussé par la salutaire dynamique d’ouverture des données, Meteo France a publié quelques jeux de données issus de ses travaux (utilisées notamment pour visualiser le réchauffement climatique.</description>
     </item>
     
     <item>
       <title>Cartes à points pour bêtes à poils</title>
-      <link>https://mtmx.github.io/blog/carto_cheptels/</link>
+      <link>/blog/carto_cheptels/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/carto_cheptels/</guid>
+      <guid>/blog/carto_cheptels/</guid>
       <description>Si les campagnes françaises sont (pour moi au moins) aussi sexy, c’est d’abord grâce à leur grande diversité : humides ou torrides, plates ou montagneuses, sauvages ou domptées par l’homme. L’idée ici est donc de quantifier cette variété de paysages grâce à des indicateurs objectifs. On commence par le peuplement de ces campagnes par les différents types de cheptels qu’on peut y trouver : vaches, chevaux, moutons, chèvres… Toutes les données sont dispos sur le site du ministère de l’agriculture.</description>
     </item>
     
     <item>
       <title>Colocs en stock</title>
-      <link>https://mtmx.github.io/blog/metrololo_logement/</link>
+      <link>/blog/metrololo_logement/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/metrololo_logement/</guid>
+      <guid>/blog/metrololo_logement/</guid>
       <description>Quatrième épisode de notre série sur l’analyse urbaine de l’agglomération parisienne, cette fois on se penche sur les compositions des ménages et les différentes stratégies de partage de l’habitat. Le mêtre carré est cher, on en vient donc à le partager pour pouvoir rester à proximité des pôles d’emploi et des universités, bref, de là où les choses se passent et les connexions se font.</description>
     </item>
     
     <item>
       <title>Gentrification résidentielle</title>
-      <link>https://mtmx.github.io/blog/metrololo_diplomes/</link>
+      <link>/blog/metrololo_diplomes/</link>
       <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/metrololo_diplomes/</guid>
+      <guid>/blog/metrololo_diplomes/</guid>
       <description>Après deux épisodes consacrés aux enfants et aux mamies, on rentre dans le tas en abordant un sujet sensible : la gentrification. Parce qu’il semble que tout le monde peut prétendre avoir un avis sur le sujet, je m’y mets aussi. Mon postulat de départ veut que les gentrifieurs soient jeunes et diplômés, donc que les quartiers ayant vu une arrivée de diplomés plus rapide qu’ailleurs depuis les années 1990 sont davantage susceptibles d’être soumis à un processus de gentrification.</description>
     </item>
     
     <item>
       <title>Wikilacs</title>
-      <link>https://mtmx.github.io/blog/wikilacs/</link>
+      <link>/blog/wikilacs/</link>
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/wikilacs/</guid>
+      <guid>/blog/wikilacs/</guid>
       <description>L’été revient et avec lui l’époque des baignades. On peut aller chercher l’eau salée à l’océan ou à la mer mais les lacs ont un charme incomparable, même quand un inconnu s’y baigne… Comme ça serait dommage de rater un bon spot je me suis mis en tête de réaliser une cartographie des lacs remarquables et wikipedia est venu à ma rescousse grâce à cette page les référençant.</description>
     </item>
     
     <item>
       <title>Des poussettes dans la ville</title>
-      <link>https://mtmx.github.io/blog/metrololo_poussettes/</link>
+      <link>/blog/metrololo_poussettes/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/metrololo_poussettes/</guid>
+      <guid>/blog/metrololo_poussettes/</guid>
       <description>Après un premier épisode consacré aux 👵, venons-en aux 👶
 On parle des enfants âgés de 0 à 5 ans, au nombre de 4.6 millions dans tout le pays soit plus de 7% de la population totale. Un peu de contextuale national : les mouflets sont sur-représentés dans l’Ouest intérieur et le Nord du pays, aux abords des métropoles et près de le frontière suisse :</description>
     </item>
     
     <item>
       <title>Les mamies de Paris</title>
-      <link>https://mtmx.github.io/blog/metrololo_mamies/</link>
+      <link>/blog/metrololo_mamies/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/metrololo_mamies/</guid>
+      <guid>/blog/metrololo_mamies/</guid>
       <description>A l’heure de la “smart city” augmentée par les outils numériques de ses citoyens, de la métropole rayonnante par ses activités universitaires et son économie mondialisée , la “ville inclusive” reste-t-elle aussi accueillante pour les seniors qui y ont fait leur vie. Laisse-t-elle encore une place aux mamies qui déambulent dans les rues et cassent le rythme frénétique de l’urbanité ?</description>
     </item>
     

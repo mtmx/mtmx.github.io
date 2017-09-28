@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lacs on mtmx</title>
-    <link>https://mtmx.github.io/tags/lacs/</link>
+    <link>/tags/lacs/</link>
     <description>Recent content in Lacs on mtmx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
     <lastBuildDate>Wed, 14 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mtmx.github.io/tags/lacs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/lacs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Wikilacs</title>
-      <link>https://mtmx.github.io/blog/wikilacs/</link>
+      <link>/blog/wikilacs/</link>
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/wikilacs/</guid>
+      <guid>/blog/wikilacs/</guid>
       <description>L’été revient et avec lui l’époque des baignades. On peut aller chercher l’eau salée à l’océan ou à la mer mais les lacs ont un charme incomparable, même quand un inconnu s’y baigne… Comme ça serait dommage de rater un bon spot je me suis mis en tête de réaliser une cartographie des lacs remarquables et wikipedia est venu à ma rescousse grâce à cette page les référençant.</description>
     </item>
     

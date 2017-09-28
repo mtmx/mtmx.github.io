@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Enfants on mtmx</title>
-    <link>https://mtmx.github.io/tags/enfants/</link>
+    <link>/tags/enfants/</link>
     <description>Recent content in Enfants on mtmx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
     <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mtmx.github.io/tags/enfants/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/enfants/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Des poussettes dans la ville</title>
-      <link>https://mtmx.github.io/blog/metrololo_poussettes/</link>
+      <link>/blog/metrololo_poussettes/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/metrololo_poussettes/</guid>
+      <guid>/blog/metrololo_poussettes/</guid>
       <description>Après un premier épisode consacré aux 👵, venons-en aux 👶
 On parle des enfants âgés de 0 à 5 ans, au nombre de 4.6 millions dans tout le pays soit plus de 7% de la population totale. Un peu de contextuale national : les mouflets sont sur-représentés dans l’Ouest intérieur et le Nord du pays, aux abords des métropoles et près de le frontière suisse :</description>
     </item>

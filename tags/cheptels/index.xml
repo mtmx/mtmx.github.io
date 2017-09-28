@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cheptels on mtmx</title>
-    <link>https://mtmx.github.io/tags/cheptels/</link>
+    <link>/tags/cheptels/</link>
     <description>Recent content in Cheptels on mtmx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
     <lastBuildDate>Wed, 23 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mtmx.github.io/tags/cheptels/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/cheptels/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cartes à points pour bêtes à poils</title>
-      <link>https://mtmx.github.io/blog/carto_cheptels/</link>
+      <link>/blog/carto_cheptels/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mtmx.github.io/blog/carto_cheptels/</guid>
+      <guid>/blog/carto_cheptels/</guid>
       <description>Si les campagnes françaises sont (pour moi au moins) aussi sexy, c’est d’abord grâce à leur grande diversité : humides ou torrides, plates ou montagneuses, sauvages ou domptées par l’homme. L’idée ici est donc de quantifier cette variété de paysages grâce à des indicateurs objectifs. On commence par le peuplement de ces campagnes par les différents types de cheptels qu’on peut y trouver : vaches, chevaux, moutons, chèvres… Toutes les données sont dispos sur le site du ministère de l’agriculture.</description>
     </item>
     
