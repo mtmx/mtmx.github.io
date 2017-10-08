@@ -97,10 +97,6 @@
   
   <url>
     <loc>/contact/</loc>
-  </url>
-  
-  <url>
-    <loc>/contact/</loc>
     <priority>0</priority>
   </url>
   
@@ -120,6 +116,10 @@
     <loc>/tags/gentrification/</loc>
     <lastmod>2017-06-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/contact/</loc>
   </url>
   
   <url>
