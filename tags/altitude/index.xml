@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Altitude on mtmx</title>
+    <link>/tags/altitude/</link>
+    <description>Recent content in Altitude on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sun, 08 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/altitude/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>La platitude</title>
+      <link>/blog/carto_alti/</link>
+      <pubDate>Sun, 08 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/carto_alti/</guid>
+      <description>Si les touristes viennent nombreux visiter la France pour ses paysages variés, le relief n’est pas étranger à cette richesse de contrastes. Plus que l’altitude c’est la déclivité qui affecte largement notre perception des paysages. En tout cas, la mienne.</description>
+    </item>
+    
+  </channel>
+</rss>

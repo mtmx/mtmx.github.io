@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>La platitude</title>
+      <link>/blog/carto_alti/</link>
+      <pubDate>Sun, 08 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/carto_alti/</guid>
+      <description>Si les touristes viennent nombreux visiter la France pour ses paysages variés, le relief n’est pas étranger à cette richesse de contrastes. Plus que l’altitude c’est la déclivité qui affecte largement notre perception des paysages. En tout cas, la mienne.</description>
+    </item>
     
     <item>
       <title>De la pluie : en fréquence et en quantité</title>
