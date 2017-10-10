@@ -1,6 +1,0 @@
----
-title: "Contact"
-type: "contact"
----
-
-Théoriquement joignable ici : 
