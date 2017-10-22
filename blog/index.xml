@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Sun, 08 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>La campagne au poil</title>
+      <link>/blog/appli_campagnes/</link>
+      <pubDate>Sat, 21 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/appli_campagnes/</guid>
+      <description>Parce que les ballades à la campagne sont cools mais que certains coins sont plus jolis que d’autres, j’ai essayé de quantifier cet intérêt purement esthétique à l’aide de plusieurs sources. On avait regardé :
+ ici où il pleut le plus,  là où les animaux d’élevage sont les plus nombreux,
+ ou encore ici où le relief est plat.
+  On ajoute trois indicateurs complémentaires :
+ la présence de vieilles pierres  l’importance des forêts  et des surfaces en eau</description>
+    </item>
     
     <item>
       <title>La platitude</title>

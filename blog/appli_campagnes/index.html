@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>La campagne au poil</title>
+<meta name="description" content="blog d&#39;analyse de données">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="all,follow">
+<meta name="googlebot" content="index,follow,snippet,archive">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/owl.carousel.css">
+<link rel="stylesheet" href="/css/owl.theme.css">
+<link rel="stylesheet" href="/css/github-gist.css">
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+  <link href="/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+
+<link href="/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              
+<div id="sidebar" class="col-sb-fixedpos col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="/">mtmx</a></h1>
+
+    <ul class="sidebar-menu">
+      
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/blog/">Articles</a></li>
+      
+        <li><a href="/tags/">Thèmes</a></li>
+      
+        <li><a href="/contact/">Contact</a></li>
+      
+
+       
+
+<div class="panel panel-default sidebar-menu">
+
+   
+
+    <div class="panel-body">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+            <div class="input-group">
+                <input type="search" name="q" results="0" class="form-control" placeholder="Recherche">
+                <input type="hidden" name="q" value="site:/">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+ 
+
+      
+
+ 
+
+      
+ 
+
+    </ul>
+    <p class="social">
+  
+  
+  
+  <a href="https://twitter.com/matamix" data-animate-hover="pulse" class="external twitter">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  <a href="mailto:matai.data@gmail.com" data-animate-hover="pulse" class="email">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+<a href="https://www.github.com/mtmx">
+  <i class="fa fa-github"></i>
+</a>
+
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2017 mtmx
+        
+        | Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background col-main-fixedpos">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="/">mtmx</a></h1>
+</div>
+
+
+            <div class="row">
+                  <div class="col-sm-4">
+                    <div class="image">
+                      <img src="/blog/img/img_campagne.png" class="img-responsive" alt="">
+                    </div>
+                  </div>
+
+                  <div class="col-md-8">
+                      <h2>La campagne au poil</h2>
+                          <p class="author-category">
+                            Mathieu
+                          </p>
+
+                          <p class="date-comments">
+                          <i class="fa fa-calendar-o"></i> October 21, 2017
+                          </p>
+
+                          <ul class="tags-cloud">
+                          
+                             <li><a href="/tags/campagne"><i class="fa fa-tags"></i> campagne</a></li>
+                          
+                          </ul>
+                   
+                            
+
+                          
+                  
+                      </div>
+                    </div>
+                  </br>
+
+<div class="row">
+   <div class="content-column-content">
+          <div class="col-lg-8">
+
+<p>Parce que les ballades à la campagne sont cools mais que certains coins sont plus jolis que d’autres, j’ai essayé de quantifier cet intérêt purement esthétique à l’aide de plusieurs sources. On avait regardé :</p>
+<ul>
+<li><a href="https://mtmx.github.io/blog/carto_meteo/">ici</a> où il pleut le plus, <br /></li>
+<li><a href="https://mtmx.github.io/blog/carto_cheptels/">là</a> où les animaux d’élevage sont les plus nombreux,<br /></li>
+<li>ou encore <a href="https://mtmx.github.io/blog/carto_alti/">ici</a> où le relief est plat.<br /></li>
+</ul>
+<p>On ajoute trois indicateurs complémentaires :</p>
+<ul>
+<li>la présence de vieilles pierres <br /></li>
+<li>l’importance des forêts <br /></li>
+<li>et des surfaces en eau<br /> <br /></li>
+</ul>
+<p>Pour accéder directement à l’application, c’est en <a href="#application">bas de page</a>.</p>
+<div id="section-methode-et-passage-en-revue-des-indicateurs" class="section level3">
+<h3>Méthode et passage en revue des indicateurs</h3>
+<p>Les scripts pour produire les indicateurs et l’appli shiny sont dispos sur la page github du projet <a href="https://github.com/mtmx/quanticampagnes">quanticampagnes</a> (notamment le script ‘appli_data.R’ qui rassemble les données utilisées ici).</p>
+<p>La maille choisie est le canton : il fleure bon le comice agricole et le tournoi de football des pupilles, bref ça sent la campagne. Logiquement on a sorti du périmètre de l’analyse les cantons densément peuplés d’après la grille de densité de l’Insee :</p>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_grille_densite-1.png" width="480" /></p>
+<p>Pour chacun des 6 indicateurs, on répartit les 1700 cantons non-denses de France métropolitaine en 5 quantiles (les 20% de cantons avec le niveau le plus faible, les 20% suivants, etc…) pour les classer en 5 catégories (“très peu”, “peu”, etc…).</p>
+<ul>
+<li>Pour la densité de “belles bêtes”, j’ai simplifié l’analyse produite <a href="https://mtmx.github.io/blog/carto_cheptels/">ici</a> à partir des données du <a href="https://stats.agriculture.gouv.fr/cartostat/#l=fr;i=stru1.saumoy10;v=map2">ministère de l’agriculture</a> en totalisant le nombre de bovins, d’équidés, de caprins et d’ovins (ces deux-là avec un coefficient de 0,3 vue leur taille) et en le rapportant à la superficie du canton :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_betes-1.png" width="480" /></p>
+<ul>
+<li>Sous le terme de “vieilles pierres” on rassemble les logements construits avant 1919 d’après le <a href="https://www.insee.fr/fr/statistiques/2863604?sommaire=2867813">fichier des logements</a> du dernier recensement de l’Insee, et on le rapporte au nombre total de logements :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_logements-1.png" width="480" /></p>
+<ul>
+<li>Pour quantifier la fréquence de la pluie on repart des données de <a href="http://www.data.gouv.fr/fr/datasets/indices-mensuels-de-precipitations-et-nombre-de-jours-de-precipitations-issus-du-modele-aladin-climat/">Météo-France</a> utilisées <a href="https://mtmx.github.io/blog/carto_meteo/">ici</a> pour afficher simplement le nombre de jours de pluie moyen par mois :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_pluie-1.png" width="480" /></p>
+<ul>
+<li>Parce que le plat c’est terriblement emmerdant j’avais regardé <a href="https://mtmx.github.io/blog/carto_alti/">ici</a> quels coins éviter grâce à l’exploitation de la <a href="https://www.data.gouv.fr/fr/datasets/bd-alti-r-75-m-250-m-1-000-m/">BD Alti de l’IGN</a>. Ici on cartographie la même information, c’est à dire l’éacrt-type de l’altitude, mais au niveau des cantons :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_decli-1.png" width="480" /></p>
+<ul>
+<li>La présence des forêts est définie grâce à l’exploitation de la <a href="http://osr-cesbio.ups-tlse.fr/~oso/">carte d’occupation des sols OSO</a> réalisée par le Centre d’études spatiales de la biosphère (ça fait un peu rêver…), issues de photos satellites Sentinel-2 et Landsat-8 à 20 mètres de résolution et datant de 2016. Les surfaces couvertes par les catégories “forêts de feuillus” et “forêts de conifères” ont été aggrégées et rapportées à la superficie totale du canton :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_fore%CC%82ts-1.png" width="480" /></p>
+<ul>
+<li>Enfin la présence de l’eau est le résultat des surfaces en eau repérérées d’après cette même carte d’occupation des sols, complétées par la surface située à moins de 50 mètres du <a href="http://www.data.gouv.fr/fr/datasets/trait-de-cote-histolitt/">trait de côte</a> du littoral français produit par le SHOM (aka Service hydrographique et océanographique de la marine) :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_eau-1.png" width="480" /></p>
+</div>
+<div id="section-application" class="section level3">
+<h3>Application</h3>
+<p>Il suffit de jouer donc de jouer avec les filtres pour trouver son coin de campagne idéal. On peut aussi zoomer à l’aide de la loupe en haut à droite (patience la carte peut mettre quelques secondes à s’afficher)</p>
+<iframe src="http://matai.shinyapps.io/appli_campagnes_v3" width="900" height="700" style="border: none;">
+</iframe>
+<p>Par défaut ce sont les critéres que j’ai choisi qui s’affichent à l’initialisation : une campagne avec des animaux dans les champs, des vieilles maisons, de la pluie pour de l’herbe bien grasse, des collines et quelques plans d’eau pour aèrer tout ça. Sans surprise je retrouve des coins que j’aime déjà (le Perche, les monts d’Arrée, le Pas-de-Calais, le Périgord, la Bourgogne, la Lorraine…) mais d’autres du même profil ont l’air bien sympas (les Vosges, le Béarn, les Ardennes…)</p>
+</div>
+
+      
+       </div>
+     </div>
+   </div>
+
+
+
+
+
+        <a href="#" class="back-to-top">
+        <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+
+        </a>
+
+         <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'mtmx';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+   
+
+          </div>
+      </div>
+  </div>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.cookie.js"> </script>
+<script src="/js/ekko-lightbox.js"></script>
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/front.js"></script>
+<script src="/js/backtotop.js"></script> 
+
+</body>
+</html>
