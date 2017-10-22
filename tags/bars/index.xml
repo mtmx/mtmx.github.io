@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bars on mtmx</title>
+    <link>/tags/bars/</link>
+    <description>Recent content in Bars on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/bars/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bistrographie</title>
+      <link>/blog/bistrographie/</link>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/bistrographie/</guid>
+      <description>Le bistrot, égérie du mode de vie français, est-il en voie de disparition ? 15% d’entre eux ont disparu entre 2003 et 2011 d’après une étude de l’Insee, une baisse encore plus rapide dans les banlieues et les zones périurbaines que dans les espaces ruraux. C’est pourtant un lieu où se tisse du lien, parfois dans des communes où il est devenu le seul espace d’échanges ouvert : échanger les dernières nouvelles autour d’un ballon de rouge, refaire le monde entre deux Suzes… La baisse du nombre de bistrots est notamment sensible en Bretagne où le Télégramme de Brest a consacré quelques articles sur le sujet.</description>
+    </item>
+    
+  </channel>
+</rss>

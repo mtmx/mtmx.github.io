@@ -48,6 +48,75 @@
   </url>
   
   <url>
+    <loc>/blog/bistrographie/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/carto_db_fr/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_bordeaux_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_lille_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_lyon_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_marseille_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_nantes_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_nice_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_paris_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_paris_2/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_rennes_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/cartomicro_bars_strasbourg_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/deps/leaflet-providers-1.0.27/contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/deps/leaflet-providers-1.0.27/readme/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/deps/leaflet-providers-1.0.27/license/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/palmares_rues_soif/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/bistrographie/wc_noms_bars/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/altitude/</loc>
     <lastmod>2017-10-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -62,6 +131,18 @@
   <url>
     <loc>/tags/baignades/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/bars/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/bistrots/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
