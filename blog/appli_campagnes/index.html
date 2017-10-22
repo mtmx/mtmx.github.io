@@ -191,13 +191,13 @@
 </ul>
 <p><img src="/blog/appli_campagnes_files/figure-html/carte_pluie-1.png" width="480" /></p>
 <ul>
-<li>La présence des forêts est définie grâce à l’exploitation de la <a href="http://osr-cesbio.ups-tlse.fr/~oso/">carte d’occupation des sols OSO</a> réalisée par le Centre d’études spatiales de la biosphère (ça fait un peu rêver…), issues de photos satellites Sentinel-2 et Landsat-8 à 20 mètres de résolution et datant de 2016. Les surfaces couvertes par les catégories “forêts de feuillus” et “forêts de conifères” ont été aggrégées et rapportées à la superficie totale du canton :</li>
-</ul>
-<p><img src="/blog/appli_campagnes_files/figure-html/carte_fore%CC%82ts-1.png" width="480" /></p>
-<ul>
 <li>Parce que le plat c’est terriblement emmerdant j’avais regardé <a href="https://mtmx.github.io/blog/carto_alti/">ici</a> quels coins éviter grâce à l’exploitation de la <a href="https://www.data.gouv.fr/fr/datasets/bd-alti-r-75-m-250-m-1-000-m/">BD Alti de l’IGN</a>. Ici on cartographie la même information, c’est à dire l’éacrt-type de l’altitude, mais au niveau des cantons :</li>
 </ul>
 <p><img src="/blog/appli_campagnes_files/figure-html/carte_decli-1.png" width="480" /></p>
+<ul>
+<li>La présence des forêts est définie grâce à l’exploitation de la <a href="http://osr-cesbio.ups-tlse.fr/~oso/">carte d’occupation des sols OSO</a> réalisée par le Centre d’études spatiales de la biosphère (ça fait un peu rêver…), issues de photos satellites Sentinel-2 et Landsat-8 à 20 mètres de résolution et datant de 2016. Les surfaces couvertes par les catégories “forêts de feuillus” et “forêts de conifères” ont été aggrégées et rapportées à la superficie totale du canton :</li>
+</ul>
+<p><img src="/blog/appli_campagnes_files/figure-html/carte_forets-1.png" width="480" /></p>
 <ul>
 <li>Enfin la présence de l’eau est le résultat des surfaces en eau repérérées d’après cette même carte d’occupation des sols, complétées par la surface située à moins de 50 mètres du <a href="http://www.data.gouv.fr/fr/datasets/trait-de-cote-histolitt/">trait de côte</a> du littoral français produit par le SHOM (aka Service hydrographique et océanographique de la marine) :</li>
 </ul>
@@ -206,7 +206,7 @@
 <div id="section-application" class="section level3">
 <h3>Application</h3>
 <p>Il suffit de jouer donc de jouer avec les filtres pour trouver son coin de campagne idéal. On peut aussi zoomer à l’aide de la loupe en haut à droite (patience la carte peut mettre quelques secondes à s’afficher)</p>
-<iframe src="http://matai.shinyapps.io/appli_campagnes_v3" width="900" height="700" style="border: none;">
+<iframe src="http://matai.shinyapps.io/appli_campagnes_v3" width="900" height="700">
 </iframe>
 <p>Par défaut ce sont les critéres que j’ai choisi qui s’affichent à l’initialisation : une campagne avec des animaux dans les champs, des vieilles maisons, de la pluie pour de l’herbe bien grasse, des collines et quelques plans d’eau pour aèrer tout ça. Sans surprise je retrouve des coins que j’aime déjà (le Perche, les monts d’Arrée, le Pas-de-Calais, le Périgord, la Bourgogne, la Lorraine…) mais d’autres du même profil ont l’air bien sympas (les Vosges, le Béarn, les Ardennes…)</p>
 </div>
