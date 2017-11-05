@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Sat, 21 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Nov 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Graphiques linéaires géospatiaux</title>
+      <link>/blog/carto_lignes/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/carto_lignes/</guid>
+      <description>Autant que l’album en lui-même, pierre angulaire de la cold wave, la couverture de Unknown Pleasures est restée dans les mémoires : un article de début 2015 revenait sur la genèse du visuel utilisé sur la pochette de Joy Division. Issue d’une revue d’astronomie, l’image représente les ondes du premier pulsar découvert dans les années 1970.
+Le cartographe anglais James Cheshire a édité une carte de la population mondiale en s’inspirant de ce mode de réprésentation et Ryan Brideau a eu la bonne idée de rechercher et de publier le processus permettant de jouer avec ces lignes.</description>
+    </item>
     
     <item>
       <title>La campagne au poil</title>

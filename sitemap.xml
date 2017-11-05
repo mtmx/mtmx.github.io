@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/carto_lignes/</loc>
+    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/appli_campagnes/</loc>
     <lastmod>2017-10-21T00:00:00+00:00</lastmod>
   </url>
@@ -148,13 +153,19 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2017-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/campagne/</loc>
     <lastmod>2017-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/carte/</loc>
+    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -211,6 +222,12 @@
   <url>
     <loc>/tags/lacs/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/lignes/</loc>
+    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -273,7 +290,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

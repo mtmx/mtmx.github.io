@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Graphiques linéaires géospatiaux</title>
+<meta name="description" content="blog d&#39;analyse de données">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="all,follow">
+<meta name="googlebot" content="index,follow,snippet,archive">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/owl.carousel.css">
+<link rel="stylesheet" href="/css/owl.theme.css">
+<link rel="stylesheet" href="/css/github-gist.css">
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+  <link href="/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+
+<link href="/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              
+<div id="sidebar" class="col-sb-fixedpos col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="/">mtmx</a></h1>
+
+    <ul class="sidebar-menu">
+      
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/blog/">Articles</a></li>
+      
+        <li><a href="/tags/">Thèmes</a></li>
+      
+        <li><a href="/contact/">Contact</a></li>
+      
+
+       
+
+<div class="panel panel-default sidebar-menu">
+
+   
+
+    <div class="panel-body">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+            <div class="input-group">
+                <input type="search" name="q" results="0" class="form-control" placeholder="Recherche">
+                <input type="hidden" name="q" value="site:/">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+ 
+
+      
+
+ 
+
+      
+ 
+
+    </ul>
+    <p class="social">
+  
+  
+  
+  <a href="https://twitter.com/matamix" data-animate-hover="pulse" class="external twitter">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  <a href="mailto:matai.data@gmail.com" data-animate-hover="pulse" class="email">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+<a href="https://www.github.com/mtmx">
+  <i class="fa fa-github"></i>
+</a>
+
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2017 mtmx
+        
+        | Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background col-main-fixedpos">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="/">mtmx</a></h1>
+</div>
+
+
+            <div class="row">
+                  <div class="col-sm-4">
+                    <div class="image">
+                      <img src="/blog/img/img_linemap.png" class="img-responsive" alt="">
+                    </div>
+                  </div>
+
+                  <div class="col-md-8">
+                      <h2>Graphiques linéaires géospatiaux</h2>
+                          <p class="author-category">
+                            Mathieu
+                          </p>
+
+                          <p class="date-comments">
+                          <i class="fa fa-calendar-o"></i> November 5, 2017
+                          </p>
+
+                          <ul class="tags-cloud">
+                          
+                             <li><a href="/tags/lignes"><i class="fa fa-tags"></i> lignes</a></li>
+                          
+                             <li><a href="/tags/carte"><i class="fa fa-tags"></i> carte</a></li>
+                          
+                          </ul>
+                   
+                            
+
+                          
+                  
+                      </div>
+                    </div>
+                  </br>
+
+<div class="row">
+   <div class="content-column-content">
+          <div class="col-lg-8">
+
+<p>Autant que l’album en lui-même, pierre angulaire de la cold wave, la couverture de Unknown Pleasures est restée dans les mémoires : un <a href="http://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-8217-s-unknown-pleasures-album-cover-video/">article</a> de début 2015 revenait sur la genèse du visuel utilisé sur la pochette de Joy Division. Issue d’une revue d’astronomie, l’image représente les ondes du premier pulsar découvert dans les années 1970.</p>
+<p><img src="https://recordmad.co.za/wp-content/uploads/2017/06/JOY-DiV.jpeg" width="50%" /></p>
+<p>Le cartographe anglais James Cheshire a édité une <a href="http://spatial.ly/2017/07/joy-division-population-surfaces-and-pioneering-electronic-cartography/">carte de la population mondiale</a> en s’inspirant de ce mode de réprésentation et Ryan Brideau a eu la bonne idée de rechercher et de <a href="http://www.whackdata.com/2014/08/04/line-graphs-parallel-processing-r/">publier</a> le processus permettant de jouer avec ces lignes. Récemment Timothée Giraud en a fait un <a href="https://github.com/rCarto/linemap">package R</a> impeccable qui permet de s’amuser plus facilement avec ce type de représentation.</p>
+<p>Voilà le résultat pour la population de France métropolitaine : chaque ligne approxime la population située sur la latitude correspondante, avec une animation montrant l’évolution depuis 1968 pour chaque année du recensement de l’Insee.</p>
+<p><img src="/img/linemap/gif_linemap_pop_FR.gif" width="100%" style="float:left" /></p>
+<p><br> Sans aucune délimitation des coutours administratifs, on reconnait immédiatement les pôles denses (oui, les villes) et les territoires structurés autour d’eux. Cette visualisation à mi chemin entre le diagramme en ligne et la carte, entre l’isoplèthe et la 3D, n’est peut-être pas la meilleure pour rendre compte précisément des masses de population, mais elle est assez inhabituelle pour nous faire porter un regard neuf sur ces données mille fois vues et revues.</p>
+<p>Avec des données localement plus précises (en l’occurence la <a href="https://www.insee.fr/fr/statistiques/3137409">population par iris</a>), on peut faire des portraits étonnants des grandes villes françaises.</p>
+<p>On reconnait rapidement les contours de Paris où la densité est largement plus élevé que dans ses banlieues limitrophes, excepté au Nord-Est où des communes comme Levallois-Perret et Courbevoie ont été très urbanisées au 20ème siècle. Le parcours de la Seine et les bois de Boulogne et de Vincennes sont facilement repérables avec des lignes plates où la population est absente.</p>
+<p><img src="/blog/carto_lignes_files/figure-html/paris_pop-1.png" width="100%" style="float:left" /></p>
+<p><br> Forcément plus simple dans le cas de Marseille avec le découpage du littoral et le Frioul : on peut observer l’hyper densité du centre ville, la zone portuaire par défintion peu habitée, les quartiers périphériques densément peuplés et les communes au-delà des collines comme Aubagne ou Cassis. C’est quasiment le miroir du vrai relief puisque les zones les plus habitées sont aussi les plus plates.</p>
+<p><img src="/blog/carto_lignes_files/figure-html/marseille_pop-1.png" width="100%" style="float:left" /> <br> A Lyon on distingue le tracé du Rhône, le centre-ville et les communes denses de la banlieue Est (Saint Priest au Sud-Est, Rilleux la Pape au Nord).</p>
+<p><img src="/blog/carto_lignes_files/figure-html/lyon_pop-1.png" width="100%" style="float:left" /></p>
+<p>Enfin en cartographiant d’une part le nombre d’actifs à leur lieu de résidence, d’autre part le nombre d’actifs à leur lieu d’emploi, on peut approximer la densité de population le jour et la nuit, en Ile de France par exemple. En journée, au moment où les actifs sont sur leur lieu de travail, la population se concentre dans les zones d’emploi symbolisés par des montagnes (ou parce que vous voulez, l’animation peut être suggestive…) : le coeur de Paris, la Défense, Roissy, le plateau de Saclay… La nuit elle se desserre pour se trouver en nombre plus important dans les zones résidentielles de banlieue.</p>
+<p><img src="/img/linemap/gif_linemap_pop_emp_IDF.gif" width="100%" style="float:left" /></p>
+
+      
+       </div>
+     </div>
+   </div>
+
+
+
+
+
+        <a href="#" class="back-to-top">
+        <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+
+        </a>
+
+         <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = '';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+   
+
+          </div>
+      </div>
+  </div>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.cookie.js"> </script>
+<script src="/js/ekko-lightbox.js"></script>
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/front.js"></script>
+<script src="/js/backtotop.js"></script> 
+
+</body>
+</html>
