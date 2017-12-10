@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Johnny on mtmx</title>
+    <link>/tags/johnny/</link>
+    <description>Recent content in Johnny on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/johnny/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jojographie</title>
+      <link>/blog/jojographie/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/jojographie/</guid>
+      <description>Même si je n’étais pas fan je dois avouer que la longévité de Johnny Hallyday ainsi que la variété de ses productions musicales, du yéyé à l’opéra-rock en passant par la country et le rap (si, si), forcent le respect. Difficile de ne pas être touché quand un taulier comme Bertrand Burgalat en parle aussi bien. Son bilan sur scène est impressionnant : plus de 3000 concerts pour une carrière musicale qui aura duré 57 ans.</description>
+    </item>
+    
+  </channel>
+</rss>

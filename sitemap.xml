@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/jojographie/</loc>
+    <lastmod>2017-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/carto_lignes/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
   </url>
@@ -153,7 +158,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -193,6 +198,12 @@
   </url>
   
   <url>
+    <loc>/tags/concerts/</loc>
+    <lastmod>2017-12-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/contact/</loc>
     <priority>0</priority>
   </url>
@@ -217,6 +228,12 @@
   
   <url>
     <loc>/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/johnny/</loc>
+    <lastmod>2017-12-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -290,7 +307,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -7,17 +7,225 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sun, 08 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Thèmes</title>
-      <link>/tags/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Altitude</title>
+      <link>/tags/altitude/</link>
+      <pubDate>Sun, 08 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/</guid>
-      <description>Liste des thèmes traités sur ce blog.</description>
+      <guid>/tags/altitude/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Animaux</title>
+      <link>/tags/animaux/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/animaux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Baignades</title>
+      <link>/tags/baignades/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/baignades/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bars</title>
+      <link>/tags/bars/</link>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bars/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bistrots</title>
+      <link>/tags/bistrots/</link>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bistrots/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Campagne</title>
+      <link>/tags/campagne/</link>
+      <pubDate>Sat, 21 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/campagne/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Carte</title>
+      <link>/tags/carte/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/carte/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cheptels</title>
+      <link>/tags/cheptels/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/cheptels/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chill</title>
+      <link>/tags/chill/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/chill/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Colocation</title>
+      <link>/tags/colocation/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/colocation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Concerts</title>
+      <link>/tags/concerts/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/concerts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diplômés</title>
+      <link>/tags/dipl%C3%B4m%C3%A9s/</link>
+      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dipl%C3%B4m%C3%A9s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Enfants</title>
+      <link>/tags/enfants/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/enfants/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gentrification</title>
+      <link>/tags/gentrification/</link>
+      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gentrification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Johnny</title>
+      <link>/tags/johnny/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/johnny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lacs</title>
+      <link>/tags/lacs/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lignes</title>
+      <link>/tags/lignes/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lignes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Logement</title>
+      <link>/tags/logement/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/logement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mamies</title>
+      <link>/tags/mamies/</link>
+      <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mamies/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Metros</title>
+      <link>/tags/metros/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/metros/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Météo</title>
+      <link>/tags/m%C3%A9t%C3%A9o/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/m%C3%A9t%C3%A9o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pluie</title>
+      <link>/tags/pluie/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/pluie/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Relief</title>
+      <link>/tags/relief/</link>
+      <pubDate>Sun, 08 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/relief/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ville</title>
+      <link>/tags/ville/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ville/</guid>
+      <description></description>
     </item>
     
   </channel>
