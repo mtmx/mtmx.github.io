@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title>Chanson</title>
+      <link>/tags/chanson/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/chanson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cheptels</title>
       <link>/tags/cheptels/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
@@ -202,6 +211,15 @@
     </item>
     
     <item>
+      <title>Paroles</title>
+      <link>/tags/paroles/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/paroles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Pluie</title>
       <link>/tags/pluie/</link>
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
@@ -216,6 +234,24 @@
       <pubDate>Sun, 08 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/relief/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Textes</title>
+      <link>/tags/textes/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/textes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Variétés</title>
+      <link>/tags/vari%C3%A9t%C3%A9s/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/vari%C3%A9t%C3%A9s/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chanson on mtmx</title>
+    <link>/tags/chanson/</link>
+    <description>Recent content in Chanson on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/chanson/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Paroles, paroles et paroles</title>
+      <link>/blog/paroles_chansonfr/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/paroles_chansonfr/</guid>
+      <description>Grâce à l’implémentation de nouvelles méthodes et à leur vulgarisation notamment par le biais de R et de sa communauté (on notera le beau travail de Julia Silge et David Robinson développeurs du package ‘tidytext’ utilisé pour ce papier), l’analyse textuelle est en vogue. On peut l’appliquer à des documents littéraires mais ici on va tester ce panel d’analyses sur des paroles de chansons, en l’occurence celles des poids lourds de la chanson française.</description>
+    </item>
+    
+  </channel>
+</rss>
