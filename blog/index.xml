@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Montreuil by Google</title>
+      <link>/blog/montreuil_google/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/montreuil_google/</guid>
+      <description>La multiplication des traces numériques déposées sur les internets et le besoin compulsif d’objectiver chaque expérience, favorisé par l’usage des smartphones et des outils cartographiques, a permis l’émergence de sources de données potentiellement éclairantes pour comprendre les lieux de la ville. Les possibilités de l’outil Google Places, sur lequel toute personne peut déposer une note et un avis sur n’importe quel lieu public, a été joliment décrit par Jean-Laurent Cassely dans cet article sur le phénomène.</description>
+    </item>
     
     <item>
       <title>Paroles, paroles et paroles</title>
