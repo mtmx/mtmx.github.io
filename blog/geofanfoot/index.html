@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Géographie du supportariat</title>
+<meta name="description" content="blog d&#39;analyse de données">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="all,follow">
+<meta name="googlebot" content="index,follow,snippet,archive">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/owl.carousel.css">
+<link rel="stylesheet" href="/css/owl.theme.css">
+<link rel="stylesheet" href="/css/github-gist.css">
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+  <link href="/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+
+<link href="/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              
+<div id="sidebar" class="col-sb-fixedpos col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="/">mtmx</a></h1>
+
+    <ul class="sidebar-menu">
+      
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/blog/">Articles</a></li>
+      
+        <li><a href="/tags/">Thèmes</a></li>
+      
+        <li><a href="/contact/">Contact</a></li>
+      
+
+       
+
+
+
+ 
+
+      
+
+ 
+
+      
+ 
+
+    </ul>
+    <p class="social">
+  
+  
+  
+  <a href="https://twitter.com/matamix" data-animate-hover="pulse" class="external twitter">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  <a href="mailto:matai.data@gmail.com" data-animate-hover="pulse" class="email">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+<a href="https://www.github.com/mtmx">
+  <i class="fa fa-github"></i>
+</a>
+
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2017 mtmx
+        
+        | Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background col-main-fixedpos">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="/">mtmx</a></h1>
+</div>
+
+
+            <div class="row">
+                  <div class="col-sm-4">
+                    <div class="image">
+                      <img src="/blog/img/img_geofanfoot3D.png" class="img-responsive" alt="">
+                    </div>
+                  </div>
+
+                  <div class="col-md-8">
+                      <h2>Géographie du supportariat</h2>
+                          <p class="author-category">
+                            Mathieu
+                          </p>
+
+                          <p class="date-comments">
+                          <i class="fa fa-calendar-o"></i> October 27, 2019
+                          </p>
+
+                          <ul class="tags-cloud">
+                          
+                             <li><a href="/tags/twitter"><i class="fa fa-tags"></i> twitter</a></li>
+                          
+                             <li><a href="/tags/football"><i class="fa fa-tags"></i> football</a></li>
+                          
+                             <li><a href="/tags/supporters"><i class="fa fa-tags"></i> supporters</a></li>
+                          
+                          </ul>
+                   
+                            
+
+                          
+                  
+                      </div>
+                    </div>
+                  </br>
+
+<div class="row">
+   <div class="content-column-content">
+          <div class="col-lg-8">
+
+<p>Où cesse-t-on de supporter Lille pour passer du côté Lensois ? Y a-t-il des supporters marseillais partout en France ? La Lorraine est-elle (vraiment) grenat ? Toutes ces questions ont déjà été posées milles fois : la géographie ça sert d’abord à faire <del>la guerre</del> du foot !</p>
+<p>Mais comment connaître ces liens qui unissent une équipe et ses fans ? Plutôt facile à l’échelle d’un club qui peut utiliser les adresses de ses abonnés pour détecter leur résidence d’origine, ou procéder à des enquêtes auprès des détenteurs de billets de matchs. Ou bien encore exploiter les données de téléphonie mobile pour comprendre d’où viennent les smartphones présents dans le stade au moment du match. Mais pour avoir une vision plus globale de l’histoire, les réseaux sociaux et Twitter en particulier sont bien utiles d’autant plus quand la moindre étude de « marché » est jalousement gardée secrète par les dits clubs.</p>
+<div id="methodologie" class="section level2">
+<h2>Méthodologie</h2>
+<p>On part du postulat, très fort, qu’on suit un club sur Twitter lorsqu’on en est plutôt supporter alors qu’on peut bien sûr systématiquement troller son ennemi intime en le suivant sur twitter, c’est autorisé. Une autre limite réside dans la base d’utilisateurs plutôt jeune et urbaine de ce réseau social : Facebook aurait été sûrement plus représentatif mais apparemment seul le New York Times a le loisir <a href="https://www.nytimes.com/interactive/2014/05/12/upshot/12-upshot-nba-basketball.html">de s’amuser</a> <a href="https://www.nytimes.com/interactive/2014/04/23/upshot/24-upshot-baseball.html">avec ses données</a>. Enfin la localisation déclarée dans la biographie des twittos semble sur-représentée dans les zones urbaines, voire à Paris où c’est probablement plus classe de se déclarer résident. Les scripts R sont en vrac <a href="https://github.com/mtmx/geofanbase">ici</a>.</p>
+<p>Très rapidement les grandes étapes du processus :</p>
+<ul>
+<li><p>recensement des comptes twitter officiels des 43 clubs de L1/L2 pour la saison 2018/2019 (oui ça date un peu) + 3 gros clubs de National (Tours FC, SC Bastia et Stade Lavallois)</p></li>
+<li><p>requêtage de l’API Twitter pour récupérer la liste des comptes followers des 43 clubs (20 millions de followers au total) [via <a href="https://github.com/ropensci/rtweet"><code>rtweet</code></a>]</p></li>
+<li><p>requêtage de l’API Twitter pour récupérer les métadonnées (language utilisé, biographie renseignée…) sur ces comptes (11 millions de followers distincts)</p></li>
+<li><p>géocodage du référentiel des localisations indiquées dans les biographies des followers [via <a href="https://github.com/ropensci/opencage"><code>opencage</code></a>]</p></li>
+<li><p>affectation d’un poids de pondération des comptes followers selon la sur/sous représentation de leur commune de localisation (référence <a href="https://www.insee.fr/fr/statistiques/4171351">population Insee</a>)</p></li>
+<li><p>aggrégation des stats communales sur une grille de carreaux de 10 km de côté</p></li>
+</ul>
+</div>
+<div id="le-psg-et-les-autres" class="section level2">
+<h2>Le PSG et les autres</h2>
+<p>D’abord un petit rappel sur les forces en présence : le club parisien est loin devant tout le monde et son envergure internationale en fait de loin le club le plus suivi à l’étranger. L’AS Monaco a la deuxième base étrangère mais relativement peu suivi en France.</p>
+<p><img src="/blog/geofanfoot_files/figure-html/graphique_fanbase_france-1.png" width="672" /></p>
+</div>
+<div id="cartographie-des-aires-dinfluence-des-clubs-de-football" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Cartographie des aires d’influence des clubs de football</h2>
+<p>La carte qui suit permet d’afficher le club français qui compte le plus de fans dans chaque zone de 10 km de côté, la commune indiquée étant la plus peuplée de ce carré. Seuls ceux comptant plus de 10 twittos (ajustements compris, cf. méthodo) sont indiqués donc de nombreuses zones peu denses ne sont pas renseignées.
+<br></p>
+<iframe src="https://mtmx.github.io/geofanbase/carte_club_max_grille_v1.html" width="700" height="780" style="border: none;">
+</iframe>
+<p>Si les aires géographiques à proximité des clubs d’envergure sont bien respectées, on peut tout de même voir l’influence du PSG à distance dans tous les interstices où ces grands clubs sont trop éloignés et où parallèlement les petits et moyens clubs n’attirent pas encore assez de fans. A l’Ouest c’est le cas par exemple dans le Centre-Bretagne, dans le Léon ou en Cornouaille, et à l’Est dans les Vosges ou dans la Meuse.</p>
+<p>Dans le centre et le sud-ouest du pays, le PSG se retrouve souvent en position de premier club suivi en l’absence de concurrents à sa mesure, même au pays basque où les Girondins semblaient autrefois (dans les années 1990-2000, une éternité) les plus supportés localement. En termes footballistiques et non plus géologiques, le bassin parisien s’étend très loin : de la côte d’Opale à l’Aisne, de la Sarthe (en l’absence temporaire du MUC 72 ?) au Morvan. Dans les Pyrénées aussi il est devant mais l’influence des clubs espagnols doit également y être forte : FC Barcelone en Catalogne et Real Sociedad au pays basque ?</p>
+<p>L’Olympique de Marseille reste loin devant le PSG dans quasiment tout PACA, les trois clubs corses sont maitres chez eux avec une nette avance pour le Sporting Club de Bastia pourtant redescendu au niveau amateur.
+L’Olympique Lyonnais se rassure jusqu’à Valence et dans le Dauphiné mais n’est définitivement pas le club des Alpes où le club parisien reste devant. Dès la limite départementale avec la Loire franchie, on bascule dans la zone d’influence stéphanoise.
+Le club en 2ème position est affiché dans l’autre onglet de la carte : on peut y voir la diffusion de l’OM même dans le Nord (et l’intrication PSG/OM avec de nombreux territoires où ce sont les deux clubs les plus suivis) , ou encore l’importance du club parisien dans les zones avec un club local fortement suivi (Stade Rennais, FC Nantes, Girondins de Bordeaux…)</p>
+<div id="support-your-local-club" class="section level3">
+<h3>Support your local club</h3>
+<p>La localisation des fans via leur bio twitter étant largement disparate et insuffisante dans les zones moins densément peuplées (cf. les points non renseignés sur la première carte), on peut extrapoler sur ces territoires avec la méthode des plus proches voisins et en profiter pour éliminer le bruit et quelques données aberrantes. Dans les cartes qui suivent, à chaque club on affecte une couleur et son intensité est proportionnelle au degré de certitude dans le résultat. Seules les fanbases des clubs qui apparaissent dans la zone sont analysées : contrairement à la carte précédente on évite donc de montrer les supporters « à distance », notamment ceux du PSG.
+On refait le match :</p>
+<div id="psg-vs-om-vs-ol" class="section level4">
+<h4>PSG vs OM vs OL</h4>
+<div style="float:right;position: relative; top: -10px;">
+<p><img src="/blog/geofanfoot_files/figure-html/unnamed-chunk-1-1.png" width="384" /></p>
+</div>
+<p>Les 3 clubs les plus populaires, dont on peut dire sans trop s’avancer qu’ils sont les seuls dotés d’une envergue nationale. Au sein de ce trio, le PSG est devant ses deux rivaux sur les ¾ du pays : le fléau du QSG et de son effectif de stars sont passés par là, entrainant avec eux des suiveurs aux 4 coins de la France. L’OM résiste en PACA à l’exception notable du littoral de Saint Tropez jusqu’à Menton ou c’est bien le club parisien qui est devant, profitant peut-être d’un surplus d’étrangers et de retraités venus du Nord ? La Lozère, le Sud-Cantal et quelques zones du littoral Languedocien restent tout de même plus attirés par l’OM que par le PSG.</p>
+<p>Dans les environs de Valence (Drôme) le cœur balance : c’est à partir de là que les supporters lyonnais se font majoritaires bien que le PSG soit également en bonne position. Dans un rayon de 100 km autour de Lyon c’est l’OL qui reste le club préféré sauf dans la Loire où les Stéphanois préfèrent encore le PSG au rival lyonnais.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+</div>
+<div id="au-nord" class="section level4">
+<h4>Au Nord</h4>
+<div style="float:left;position: relative; top: -10px;">
+<p><img src="/blog/geofanfoot_files/figure-html/unnamed-chunk-2-1.png" width="307.2" /></p>
+</div>
+<p>Bien pourvues en club de premier ou de second plan (Calais, Dunkerque, Boulogne, Wasquehal…), seuls 4 clubs de la région ont assez de followers pour faire partie de l’analyse : le Losc règne sur la moitié septentrionale du département du Nord, le Valenciennes FC au Sud, l’Amiens SC garde son fief dans presque toute la Somme et le RC Lens reste majoritaire partout ailleurs.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+</div>
+<div id="a-lest" class="section level4">
+<h4>A l’Est</h4>
+<div style="float:right;position: relative; top: -10px;">
+<p><img src="/blog/geofanfoot_files/figure-html/unnamed-chunk-3-1.png" width="355.2" /></p>
+</div>
+<p>Le RC Strasbourg fait la fierté de toute l’Alsace et sa zone de confort épouse preque parfaitement les contours des Haut-Rhin et Bas-Rhin, tout en se permettant une petite incursion en Moselle près de Sarrebourg. Ici commence le territoire du FC Metz, qui inclue le périmètre du département 57 version pré-annexion allemande de 1871 ainsi que le Nord de la Meuse jusqu’à Commercy, alors que le rival lorrain de l’AS Nancy-Lorraine règne sur le département disparu de la Meurthe et une bonne partie des Vosges (où l’on retrouve parfois quelques velléités grenat). Le FC Sochaux-Montbéliard reste roi à Belfort, dans le Doubs et la Haute-Saône même si le club de Dijon gagne des fans presque jusqu’à Vesoul.</p>
+<p><br>
+<br>
+<br>
+<br></p>
+</div>
+<div id="a-louest" class="section level4">
+<h4>A l’Ouest</h4>
+<div style="float:left;position: relative; top: -10px;">
+<p><img src="/blog/geofanfoot_files/figure-html/unnamed-chunk-4-1.png" width="336" /></p>
+</div>
+<p>Les deux grands clubs de la région que sont le Stade Rennais et le FC Nantes ont leur fief dans leurs départements respectifs (35 et 44) : pendant que les canaris recrutent des fans jusque dans le Sud Mayenne, le Choletais et toute la Vendée, le Stade Rennais tente une timide percée dans la Manche mais les Normands restent majoritairement malherbistes bien que très éloignés de Caen. Par contre les rouges et noirs semblent majoritaires dans les Côtes d’Armor jusqu’aux environs de Collinée (ce qui confirmerait ce <a href="https://youtu.be/kN3aZ7KLmck?t=91">reportage mythique de Canal+</a> dans les années 1990) et dans le Morbihan jusqu’à Ploërmel voire Locminé. Vannes se situe aux confins des influences nantaise et lorientaise mais une poche de résistance stadiste semble émerger dans la presqu’ile de Rhuys : une explication serait-elle à trouver du côté des résidences secondaires et des retraités venus de Rennes ? Le Stade Brestois quant à lui se voit un peu étriqué dans le Nord Finistère où même Morlaix échapperait à son emprise, mais il aura probablement conquis de nouveau à l’Est après sa montée en L1 cette année et la descente de l’En Avant Guingamp.</p>
+<p><br>
+<br>
+<br></p>
+</div>
+<div id="au-sud" class="section level4">
+<h4>Au Sud</h4>
+<div style="float:right;position: relative; top: -10px;">
+<p><img src="/blog/geofanfoot_files/figure-html/unnamed-chunk-5-1.png" width="345.6" /></p>
+</div>
+<p>Si on exclue le PSG de l’analyse (pour rappel ces cartes ne montrent que les fanbases locales), l’Olympique de Marseille écrase tout le littoral méditerranéen et phagocyte les bases de supporters potentiels des autres clubs. Tout le littoral ? Non, à partir d’Antibes on lui préfère tout de même l’OGC Nice comme dans une grande partie du département des Alpes-Maritimes, voire l’AS Monaco sur une petite dizaine de kilomètres de côte. Le Montpellier Hérault SC garde la main-mise du Sud des Cévennes jusqu’à l’arrière-pays héraultais mais se fait doubler par l’OM partout ailleurs. Le rival Nîmois, fort de ses bons résultats récents, tente de reconquérir le Gard mais se limite pour l’instant à un rayon de 10/15 km autour du stade des Costières.</p>
+<p><br>
+<br>
+<br>
+<br></p>
+</div>
+<div id="fiefs-et-diasporas" class="section level4">
+<h4>Fiefs et diasporas</h4>
+<p>Pour rentrer dans le détail on regardera les cartes qui suivent pour connaitre, toujours pour chaque zone de 10 km de côté, le nombre et la part des twittos qui suivent le club sélectionné dans le menu déroulant. Bien sûr le total par carreau fera plus de 100% puisque certains twittos suivent plusieurs clubs en même temps :
+<br>
+<br></p>
+<iframe src="https://mtmx.github.io/geofanbase/carte_club_grid_v1.html" width="700" height="780" style="border: none;">
+</iframe>
+<p>On remarque souvent une cohérence des zones d’influence des clubs avec les contours des départements, preuve s’il en fallait de la pertinence toujours actuelle de ce découpage. Mais les zones d’influence des clubs évoluent dans le temps avec l’aléa des résultats sportifs. Quel aurait été le constat il y a ne serait-ce que 10 ans avant le rachat du PSG par les Qataris ? Bien sûr impossible de répondre à cette question, tout du moins pas avec cette méthodologie puisque les utilisateurs de Twitter en France étaient trop peu nombreux et que l’API ne permet pas de requêter à cette époque. Mais il existe probablement d’autres moyens pour enfin percer les secrets de l’affect footballistique et de son impact territorial !</p>
+</div>
+</div>
+</div>
+
+      
+       </div>
+     </div>
+   </div>
+
+
+
+
+
+        <a href="#" class="back-to-top">
+        <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+
+        </a>
+
+         <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = '';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+   
+
+          </div>
+      </div>
+  </div>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.cookie.js"> </script>
+<script src="/js/ekko-lightbox.js"></script>
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/front.js"></script>
+<script src="/js/backtotop.js"></script> 
+
+</body>
+</html>

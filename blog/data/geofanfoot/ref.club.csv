@@ -1,0 +1,44 @@
+initiales_club,alias_club,col_club,club_domicile_actuel,stade,ville,logo_png,capacite_stade,x.ctr,y.ctr
+SRFC,staderennais,#FF2800,Stade Rennais FC,Stade de la Route de Lorient,Rennes,./logos_clubs/SRFC.png,29778,351799.966339505,6789600.03980575
+FCN,FCNantes,#FFEF00,FC Nantes,Stade de La Beaujoire - Louis Fonteneau,Nantes,./logos_clubs/FCN.png,37473,355500.026715641,6689499.94968666
+FCL,FCLorient,#FF8C00,FC Lorient,Stade Yves Allainmat - Le Moustoir,Lorient,./logos_clubs/FCL.png,18500,223400.021218137,6757600.00593585
+EAG,EAGuingamp,#000000,EA Guingamp,Stade Municipal de Roudourou,Guingamp,./logos_clubs/EAG.png,19033,246499.983098697,6846799.94615171
+SB,SB29,#FF4040,Stade Brestois 29,Stade Francis Le Blé,Brest,./logos_clubs/SB29.png,16000,146500.041112554,6836200.04964132
+SCO,AngersSCO,#000000,Angers SCO,Stade Jean Bouin,Angers,./logos_clubs/SCO.png,17835,432199.98099204,6713999.97623093
+FCGB,girondins,#0018A8,FC Girondins de Bordeaux,Stade Jacques Chaban-Delmas,Bordeaux,./logos_clubs/FCGB.png,42115,417200.034259154,6421799.99639696
+SMC,SMCaen,#5D8AA8,SM Caen,Stade Michel d'Ornano,Caen,./logos_clubs/SMC.png,20453,454299.999651515,6903199.97050318
+DFCO,DFCO_Officiel,#FF0800,Dijon FCO,Stade Gaston Gérard,Dijon,./logos_clubs/DFCO.png,15459,854200.00035006,6693399.98068024
+LOSC,losclive,#ED2939,Lille OSC,Stade Grimonprez-Jooris,Lille,./logos_clubs/LOSC.png,50157,704000.004992316,7059399.96401094
+OL,OL,#AB274F,Olympique Lyonnais,Stade Municipal de Gerland,Lyon,./logos_clubs/OL.png,59286,842651.321058366,6519246.4171002
+OM,OM_Officiel,#89CFF0,Olympique de Marseille,Stade Vélodrome,Marseille,./logos_clubs/OM.png,67394,893320.696064117,6245272.67648896
+ASM,AS_Monaco,#FF0000,AS Monaco,Stade Louis II,Monaco,./logos_clubs/ASM.png,18523,1055710.86873469,6302001.36170073
+MHSC,MontpellierHSC,#ED872D,Montpellier Hérault SC,Stade de la Mosson - Mondial 98,Montpellier,./logos_clubs/MHSC.png,32900,770700.029804463,6279499.97202122
+OGCN,ogcnice,#B5651D,OGC Nice,Stade du Ray - Léon Lagrange,Nice,./logos_clubs/OGCN.png,35624,1043899.96855825,6298499.99533322
+NO,nimesolympique,#CE2029,Nîmes Olympique,Stade des Costières,Nîmes,./logos_clubs/NO.png,18482,809299.960402407,6305100.04673613
+PSG,PSG_inside,#554177,Paris Saint-Germain FC,Parc des Princes,Paris,./logos_clubs/PSG.png,48583,652082.270345987,6862294.20282175
+SR,StadeDeReims,#CB4154,Stade de Reims,Stade Auguste Delaune,Reims,./logos_clubs/SR.png,21628,774800.011034322,6907700.04630036
+ASSE,ASSEofficiel,#00AD43,AS Saint-Etienne,Stade Geoffroy Guichard,Saint-Etienne,./logos_clubs/ASSE.png,41965,808600.010274924,6482500.0156338
+RCSA,RCSA,#1F75FE,RC Strasbourg Alsace,Stade de la Meinau,Strasbourg,./logos_clubs/RCS.png,26000,1049899.96600101,6841999.95873292
+TFC,ToulouseFC,#966FD6,Toulouse FC,Stadium,Toulouse,./logos_clubs/TFC.png,33150,574100.016704376,6279600.03591257
+ACA,ACAjaccio,#FF0800,AC Ajaccio,Stade François Coty,Ajaccio,./logos_clubs/ACA.png,10446,1176399.9762853,6108900.01857405
+GFCA,gfc_ajaccio,#333399,GFC Ajaccio,Stade Ange Casanova,Ajaccio,./logos_clubs/GFCA.png,8000,1176399.9762853,6108900.01857405
+AJA,AJA,#7CB9E8,AJ Auxerre,Stade de l'Abbé Deschamps,Auxerre,./logos_clubs/AJA.png,18101,742400.008149322,6744200.01680194
+LBC,LaBerrichonne,#F2003C,LB Châteauroux,Stade Gaston Petit,Châteauroux,./logos_clubs/LBC.png,17072,600100.023299209,6635200.01357805
+HAC,HAC_Foot,#1E90FF,Havre AC,Stade Jules Deschaseaux,Le Havre,./logos_clubs/HAC.png,25178,490400.033646719,6936499.95508436
+RCL,RCLens,#FFE302,RC Lens,Stade Félix Bollaert,Lens,./logos_clubs/RCL.png,38223,687999.966369025,7037099.97789313
+FCM,FCMetz,#C71585,FC Metz,Stade Saint-Symphorien,Longeville-lès-Metz,./logos_clubs/FCM.png,25636,928800.011482877,6895000.02323273
+ASNL,asnlofficiel,#FF3855,AS Nancy Lorraine,Stade Marcel Picot,Tomblaine,./logos_clubs/ASNL.png,20087,936299.988933702,6847599.98874565
+FCSM,FCSM_officiel,#EEE600,FC Sochaux-Montbéliard,Stade Auguste Bonal,Montbéliard,./logos_clubs/FCSM.png,20005,985700.038238899,6718899.96688716
+ESTAC,estac_officiel,#966FD6,ESTAC Troyes,Stade de l'Aube,Troyes,./logos_clubs/ESTAC.png,20400,779900.033595943,6800300.03429075
+VAFC,VAFC,#FF2800,Valenciennes FC,Stade Nungesser,Valenciennes,./logos_clubs/VAFC.png,24926,737400.010233952,7029100.04608517
+SCB,SCBastia,#1F75FE,SC Bastia,Stade Armand Cesari,Furiani,./logos_clubs/SCB.png,16500,1227499.96468906,6194400.03155015
+ASB,ASBeziersFoot,#FF0800,AS Béziers,Stade de la Méditerranée,Béziers,./logos_clubs/ASB.png,18555,721660.900222819,6248427.11141787
+CF,ClermontFoot,#D70A53,Clermont Foot 63,Stade Gabriel-Montpied,Clermont-Ferrand,./logos_clubs/CF.png,11980,709449.257836748,6524011.11075955
+GF,GF38_Officiel,#6495ED,Grenoble Foot 38,Stade des Alpes,Grenoble,./logos_clubs/GF.png,20068,915169.575566286,6457964.92341999
+CN,ChamoisNiortais,#2E5894,Chamois Niortais,Stade René-Gaillard,Niort,./logos_clubs/CN.png,11352,431554.873597367,6585646.8670459
+USO,US_Orleans,#FFD300,US Orléans,Stade de la Source,Orléans,./logos_clubs/USO.png,8000,620843.111575323,6749421.44319261
+PFC,ParisFC,#062A78,Paris FC,Stade Charléty,Paris,./logos_clubs/PFC.png,20000,652053.098218714,6857826.21332108
+RS,RedStarFC,#0E7C61,Red Star,Stade Bauer,Saint-Ouen,./logos_clubs/RS.png,10178,651734.045451245,6867538.79777434
+SL,stadelavallois,#FF6103,Stade Lavallois,Stade Francis-Le-Basser,Laval,./logos_clubs/SL.png,18607,420463.443455439,6782480.69351637
+TOFC,ToursFC,#6CADDE,Tours FC,Stade de la Vallée du Cher,Tours,./logos_clubs/TOFC.png,10128,528603.337136288,6699747.76392086
+ASC,AmiensSC,#91A3B0,Amiens SC,Stade Crédit Agricole La Licorne,Amiens,./logos_clubs/ASC.png,12097,647034.446013656,6977420.82671052

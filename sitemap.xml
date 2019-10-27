@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/geofanfoot/</loc>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/montreuil_google/</loc>
     <lastmod>2018-04-15T00:00:00+00:00</lastmod>
   </url>
@@ -137,6 +142,178 @@
   </url>
   
   <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/ac-ajaccio-aca/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/aj-auxerre-aja/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/as-b%C3%A9ziers-asb/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/as-monaco-asm/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/as-nancy-lorraine-asnl/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/as-saint-etienne-asse/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/amiens-sc-asc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/angers-sco-sco/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/chamois-niortais-cn/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/clermont-foot-63-cf/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/dijon-fco-dfco/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/ea-guingamp-eag/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/estac-troyes-estac/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/fc-girondins-de-bordeaux-fcgb/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/fc-lorient-fcl/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/fc-metz-fcm/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/fc-nantes-fcn/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/fc-sochaux-montb%C3%A9liard-fcsm/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/gfc-ajaccio-gfca/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/grenoble-foot-38-gf/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/havre-ac-hac/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/lb-ch%C3%A2teauroux-lbc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/lille-osc-losc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/montpellier-h%C3%A9rault-sc-mhsc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/n%C3%AEmes-olympique-no/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/ogc-nice-ogcn/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/olympique-lyonnais-ol/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/olympique-de-marseille-om/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/paris-fc-pfc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/paris-saint-germain-fc-psg/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/rc-lens-rcl/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/rc-strasbourg-alsace-rcsa/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/red-star-rs/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/sc-bastia-scb/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/sm-caen-smc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/stade-brestois-29-sb/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/stade-lavallois-sl/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/stade-rennais-fc-srfc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/stade-de-reims-sr/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/toulouse-fc-tfc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/tours-fc-tofc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/us-orl%C3%A9ans-uso/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/data/geofanfoot/dropdown_grid_html/valenciennes-fc-vafc/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/altitude/</loc>
     <lastmod>2017-10-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -174,7 +351,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -239,6 +416,12 @@
   <url>
     <loc>/tags/enfants/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/football/</loc>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -331,6 +514,12 @@
   </url>
   
   <url>
+    <loc>/tags/supporters/</loc>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <priority>0</priority>
   </url>
@@ -352,6 +541,12 @@
   </url>
   
   <url>
+    <loc>/tags/twitter/</loc>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/vari%C3%A9t%C3%A9s/</loc>
     <lastmod>2017-12-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -365,7 +560,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

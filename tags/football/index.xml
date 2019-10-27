@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Football on mtmx</title>
+    <link>/tags/football/</link>
+    <description>Recent content in Football on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Sun, 27 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/football/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Géographie du supportariat</title>
+      <link>/blog/geofanfoot/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/geofanfoot/</guid>
+      <description>Où cesse-t-on de supporter Lille pour passer du côté Lensois ? Y a-t-il des supporters marseillais partout en France ? La Lorraine est-elle (vraiment) grenat ? Toutes ces questions ont déjà été posées milles fois : la géographie ça sert d’abord à faire la guerre du foot !
+Mais comment connaître ces liens qui unissent une équipe et ses fans ? Plutôt facile à l’échelle d’un club qui peut utiliser les adresses de ses abonnés pour détecter leur résidence d’origine, ou procéder à des enquêtes auprès des détenteurs de billets de matchs.</description>
+    </item>
+    
+  </channel>
+</rss>
