@@ -148,7 +148,7 @@
 
 <p>Où cesse-t-on de supporter Lille pour passer du côté Lensois ? Y a-t-il des supporters marseillais partout en France ? La Lorraine est-elle (vraiment) grenat ? Toutes ces questions ont déjà été posées milles fois : la géographie ça sert d’abord à faire <del>la guerre</del> du foot !</p>
 <p>Mais comment connaître ces liens qui unissent une équipe et ses fans ? Plutôt facile à l’échelle d’un club qui peut utiliser les adresses de ses abonnés pour détecter leur résidence d’origine, ou procéder à des enquêtes auprès des détenteurs de billets de matchs. Ou bien encore exploiter les données de téléphonie mobile pour comprendre d’où viennent les smartphones présents dans le stade au moment du match. Mais pour avoir une vision plus globale de l’histoire, les réseaux sociaux et Twitter en particulier sont bien utiles d’autant plus quand la moindre étude de « marché » est jalousement gardée secrète par les dits clubs.</p>
-<div id="methodologie" class="section level2">
+<div id="méthodologie" class="section level2">
 <h2>Méthodologie</h2>
 <p>On part du postulat, très fort, qu’on suit un club sur Twitter lorsqu’on en est plutôt supporter alors qu’on peut bien sûr systématiquement troller son ennemi intime en le suivant sur twitter, c’est autorisé. Une autre limite réside dans la base d’utilisateurs plutôt jeune et urbaine de ce réseau social : Facebook aurait été sûrement plus représentatif mais apparemment seul le New York Times a le loisir <a href="https://www.nytimes.com/interactive/2014/05/12/upshot/12-upshot-nba-basketball.html">de s’amuser</a> <a href="https://www.nytimes.com/interactive/2014/04/23/upshot/24-upshot-baseball.html">avec ses données</a>. Enfin la localisation déclarée dans la biographie des twittos semble sur-représentée dans les zones urbaines, voire à Paris où c’est probablement plus classe de se déclarer résident. Les scripts R sont en vrac <a href="https://github.com/mtmx/geofanbase">ici</a>.</p>
 <p>Très rapidement les grandes étapes du processus :</p>
@@ -170,7 +170,7 @@
 <h2>Cartographie des aires d’influence des clubs de football</h2>
 <p>La carte qui suit permet d’afficher le club français qui compte le plus de fans dans chaque zone de 10 km de côté, la commune indiquée étant la plus peuplée de ce carré. Seuls ceux comptant plus de 10 twittos (ajustements compris, cf. méthodo) sont indiqués donc de nombreuses zones peu denses ne sont pas renseignées.
 <br></p>
-<iframe src="https://mtmx.github.io/geofanbase/carte_club_max_grille_v1.html" width="700" height="780" style="border: none;">
+<iframe src="https://mtmx.github.io/carto_d3/carte_club_max1_d3_legende_logos_zoom2.html" width="900" height="980" style="border: none;">
 </iframe>
 <p>Si les aires géographiques à proximité des clubs d’envergure sont bien respectées, on peut tout de même voir l’influence du PSG à distance dans tous les interstices où ces grands clubs sont trop éloignés et où parallèlement les petits et moyens clubs n’attirent pas encore assez de fans. A l’Ouest c’est le cas par exemple dans le Centre-Bretagne, dans le Léon ou en Cornouaille, et à l’Est dans les Vosges ou dans la Meuse.</p>
 <p>Dans le centre et le sud-ouest du pays, le PSG se retrouve souvent en position de premier club suivi en l’absence de concurrents à sa mesure, même au pays basque où les Girondins semblaient autrefois (dans les années 1990-2000, une éternité) les plus supportés localement. En termes footballistiques et non plus géologiques, le bassin parisien s’étend très loin : de la côte d’Opale à l’Aisne, de la Sarthe (en l’absence temporaire du MUC 72 ?) au Morvan. Dans les Pyrénées aussi il est devant mais l’influence des clubs espagnols doit également y être forte : FC Barcelone en Catalogne et Real Sociedad au pays basque ?</p>
@@ -186,7 +186,7 @@ On refait le match :</p>
 <div style="float:right;position: relative; top: -10px;">
 <p><img src="/blog/geofanfoot_files/figure-html/unnamed-chunk-1-1.png" width="384" /></p>
 </div>
-<p>Les 3 clubs les plus populaires, dont on peut dire sans trop s’avancer qu’ils sont les seuls dotés d’une envergue nationale. Au sein de ce trio, le PSG est devant ses deux rivaux sur les ¾ du pays : le fléau du QSG et de son effectif de stars sont passés par là, entrainant avec eux des suiveurs aux 4 coins de la France. L’OM résiste en PACA à l’exception notable du littoral de Saint Tropez jusqu’à Menton ou c’est bien le club parisien qui est devant, profitant peut-être d’un surplus d’étrangers et de retraités venus du Nord ? La Lozère, le Sud-Cantal et quelques zones du littoral Languedocien restent tout de même plus attirés par l’OM que par le PSG.</p>
+<p>Les 3 clubs les plus populaires, dont on peut dire sans trop s’avancer qu’ils sont les seuls dotés d’une envergue nationale (celle de l’OM a pnotamment été documentée par <a href="https://www.metropolitiques.eu/Un-club-un-stade-une-ville.html">Ludovic Lestrelin</a>. Au sein de ce trio, le PSG est devant ses deux rivaux sur les ¾ du pays : son effectif de stars est passé par là, entrainant avec lui des suiveurs aux 4 coins de la France. L’OM résiste en PACA à l’exception notable du littoral de Saint Tropez jusqu’à Menton ou c’est bien le club parisien qui est devant, profitant peut-être d’un surplus d’étrangers et de retraités venus du Nord ? La Lozère, le Sud-Cantal et quelques zones du littoral Languedocien restent tout de même plus attirés par l’OM que par le PSG.</p>
 <p>Dans les environs de Valence (Drôme) le cœur balance : c’est à partir de là que les supporters lyonnais se font majoritaires bien que le PSG soit également en bonne position. Dans un rayon de 100 km autour de Lyon c’est l’OL qui reste le club préféré sauf dans la Loire où les Stéphanois préfèrent encore le PSG au rival lyonnais.</p>
 <p><br>
 <br>
@@ -246,7 +246,7 @@ On refait le match :</p>
 <p>Pour rentrer dans le détail on regardera les cartes qui suivent pour connaitre, toujours pour chaque zone de 10 km de côté, le nombre et la part des twittos qui suivent le club sélectionné dans le menu déroulant. Bien sûr le total par carreau fera plus de 100% puisque certains twittos suivent plusieurs clubs en même temps :
 <br>
 <br></p>
-<iframe src="https://mtmx.github.io/geofanbase/carte_club_grid_v1.html" width="700" height="780" style="border: none;">
+<iframe src="https://mtmx.github.io/geofanbase/carte_club_grid_v2.html" width="700" height="780" style="border: none;">
 </iframe>
 <p>On remarque souvent une cohérence des zones d’influence des clubs avec les contours des départements, preuve s’il en fallait de la pertinence toujours actuelle de ce découpage. Mais les zones d’influence des clubs évoluent dans le temps avec l’aléa des résultats sportifs. Quel aurait été le constat il y a ne serait-ce que 10 ans avant le rachat du PSG par les Qataris ? Bien sûr impossible de répondre à cette question, tout du moins pas avec cette méthodologie puisque les utilisateurs de Twitter en France étaient trop peu nombreux et que l’API ne permet pas de requêter à cette époque. Mais il existe probablement d’autres moyens pour enfin percer les secrets de l’affect footballistique et de son impact territorial !</p>
 </div>
