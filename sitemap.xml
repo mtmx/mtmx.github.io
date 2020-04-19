@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/geofanfoot/</loc>
-    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/blog/montreuil_google/</loc>
     <lastmod>2018-04-15T00:00:00+00:00</lastmod>
   </url>
@@ -75,6 +70,11 @@
   <url>
     <loc>/blog/bistrographie/</loc>
     <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/geofanfoot/</loc>
+    <lastmod>2014-10-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -351,7 +351,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -421,7 +421,7 @@
   
   <url>
     <loc>/tags/football/</loc>
-    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2014-10-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -515,7 +515,7 @@
   
   <url>
     <loc>/tags/supporters/</loc>
-    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2014-10-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -542,7 +542,7 @@
   
   <url>
     <loc>/tags/twitter/</loc>
-    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2014-10-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -560,7 +560,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

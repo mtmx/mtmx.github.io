@@ -7,20 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Sun, 27 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Géographie du supportariat</title>
-      <link>/blog/geofanfoot/</link>
-      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/geofanfoot/</guid>
-      <description>Où cesse-t-on de supporter Lille pour passer du côté Lensois ? Y a-t-il des supporters marseillais partout en France ? La Lorraine est-elle (vraiment) grenat ? Toutes ces questions ont déjà été posées milles fois : la géographie ça sert d’abord à faire la guerre du foot !
-Mais comment connaître ces liens qui unissent une équipe et ses fans ? Plutôt facile à l’échelle d’un club qui peut utiliser les adresses de ses abonnés pour détecter leur résidence d’origine, ou procéder à des enquêtes auprès des détenteurs de billets de matchs.</description>
-    </item>
     
     <item>
       <title>Montreuil by Google</title>
@@ -152,6 +142,16 @@ On parle des enfants âgés de 0 à 5 ans, au nombre de 4.6 millions dans tout l
       
       <guid>/blog/bistrographie/</guid>
       <description>Le bistrot, égérie du mode de vie français, est-il en voie de disparition ? 15% d’entre eux ont disparu entre 2003 et 2011 d’après une étude de l’Insee, une baisse encore plus rapide dans les banlieues et les zones périurbaines que dans les espaces ruraux. C’est pourtant un lieu où se tisse du lien, parfois dans des communes où il est devenu le seul espace d’échanges ouvert : échanger les dernières nouvelles autour d’un ballon de rouge, refaire le monde entre deux Suzes… La baisse du nombre de bistrots est notamment sensible en Bretagne où le Télégramme de Brest a consacré quelques articles sur le sujet.</description>
+    </item>
+    
+    <item>
+      <title>Géographie du supportariat</title>
+      <link>/blog/geofanfoot/</link>
+      <pubDate>Mon, 27 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/geofanfoot/</guid>
+      <description>Où cesse-t-on de supporter Lille pour passer du côté Lensois ? Y a-t-il des supporters marseillais partout en France ? La Lorraine est-elle (vraiment) grenat ? Toutes ces questions ont déjà été posées milles fois : la géographie ça sert d’abord à faire la guerre du foot !
+Mais comment connaître ces liens qui unissent une équipe et ses fans ? Plutôt facile à l’échelle d’un club qui peut utiliser les adresses de ses abonnés pour détecter leur résidence d’origine, ou procéder à des enquêtes auprès des détenteurs de billets de matchs.</description>
     </item>
     
     <item>
