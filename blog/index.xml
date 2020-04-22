@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Sun, 15 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Décès pendant la pandémie</title>
+      <link>/blog/deces_pandemie/</link>
+      <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/deces_pandemie/</guid>
+      <description>  Méthodo  Analyse de l’Insee Fichier de données individuelles Modélisation de l’excédent de décès Code des graphiques et stats      Profil age/sexe  Localisation département  Localisation plus précise  Stats par commune  </description>
+    </item>
     
     <item>
       <title>Montreuil by Google</title>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pandémie on mtmx</title>
+    <link>/tags/pand%C3%A9mie/</link>
+    <description>Recent content in Pandémie on mtmx</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;2017 mtmx</copyright>
+    <lastBuildDate>Tue, 21 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/pand%C3%A9mie/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Décès pendant la pandémie</title>
+      <link>/blog/deces_pandemie/</link>
+      <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/deces_pandemie/</guid>
+      <description>  Méthodo  Analyse de l’Insee Fichier de données individuelles Modélisation de l’excédent de décès Code des graphiques et stats      Profil age/sexe  Localisation département  Localisation plus précise  Stats par commune  </description>
+    </item>
+    
+  </channel>
+</rss>
