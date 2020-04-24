@@ -152,42 +152,37 @@
 <h4>Méthodo</h4>
 <ul>
 <li><a href="https://www.insee.fr/fr/information/4470857">Analyse de l’Insee</a></li>
-<li><a href="https://www.insee.fr/fr/statistiques/fichier/4470857/2020-04-17_detail.zip">Fichier de données individuelles publiées par l’Insee</a></li>
+<li><a href="https://www.insee.fr/fr/statistiques/fichier/4470857/2020-04-24_detail.zip">Fichier de données individuelles publiées par l’Insee</a></li>
 <li><a href="https://statisfaction.wordpress.com/2020/04/12/a-quick-preliminary-study-of-covid-death-under-reporting-in-france/">Modélisation de l’excédent de décès</a></li>
-<li><a href="https://github.com/mtmx">Code des graphiques et stats</a></li>
+<li><a href="https://github.com/mtmx/pandemie_excedeces">Code des graphiques et stats de ce post</a></li>
 </ul>
-<p>Comme dans l’analyse de l’Insee l’idée globale de ce qui suit est donc une <strong>analyse de l’excédent de décès pendant la pandémie de Covid-19</strong> : on compare le nombre de décès du 1er mars au 6 avril des années précédentes (2018 et 2019) au nombre de décès du 1er mars au 6 avril 2020.
+<p>Comme dans l’analyse de l’Insee l’idée globale de ce qui suit est donc une <strong>analyse de l’excédent de décès pendant la pandémie de Covid-19</strong> : on compare le nombre de décès du 1er mars au 13 avril des années précédentes (2018 et 2019) au nombre de décès du 1er mars au 13 avril 2020.
 <strong>On ne peut donc pas conclure directement que ces décès sont des malades du Covid-19.</strong></p>
 <p>Les alertes méthodologiques de l’Insee :</p>
 <ul>
 <li>Les chiffres sont provisoires et seront révisés dans les prochaines semaines (délai de transmissions à l’Insee variables)</li>
 <li>Entre mi-mars et fin mars, la mairie de Marseille a fait face à des problèmes techniques ayant affecté ses transmissions à l’Insee. Le nombre de décès y est donc largement sous-valorisé</li>
 </ul>
-<p>Librairies R bien utiles pour créer ce qui suit :</p>
-<ul>
-<li><a href="https://cran.r-project.org/web/packages/tidyverse/index.html">tidyverse</a> : meta package pour la gestion/transformation/visualisation des données</li>
-<li><a href="https://cran.r-project.org/web/packages/tidyverse/index.html">sf</a> gestion des données spatiales</li>
-<li><a href="https://github.com/ateucher/rmapshaper">rmapshaper</a> : simplification des geometries</li>
-<li><a href="https://github.com/hrbrmstr/hrbrthemes">hrbrthemes</a> : style des sorties graphiques</li>
-<li><a href="https://github.com/antuki/CARTElette">CARTElette</a> : fonds carto communes France métropolitaine et DROM</li>
-<li><a href="https://github.com/antuki/COGugaison">COGugaison</a> : vérification et conversion entre millésimes de Code Officiel Géographique</li>
-<li><a href="https://github.com/observatoire-territoires/migR">migR</a> : ajout de codes et libellés géographiques</li>
-<li><a href="https://github.com/slu-openGIS/areal">areal</a> : interpolation spatiale des stats communales vers grille</li>
-<li><a href="https://github.com/sjewo/cartogram">cartogram</a> : cartogrammes de Dorling</li>
-<li><a href="https://github.com/hafen/geofacet">geofacet</a> : faceting pseudo géographique</li>
-</ul>
+<p><br>
+<br></p>
 </div>
 <div id="profil-agesexe" class="section level3">
 <h3>Profil age/sexe</h3>
-<p>On compare les décès de cette année (1er mars - 6 avril) à ceux des années précédents sur la même période.
+<p>On compare les décès de cette année (période 1er mars - 13 avril) à ceux des années précédents sur la même période.
 En foncé on distingue donc l’excédent des décès pendant cette période de pandémie (versus les années précédentes) :</p>
-<p><img src="/blog/deces_pandemie_files/figure-html/pyramide_1-1.png" width="768" /></p>
-<p>Ci-dessous uniquement l’excédent (ou le déficit pour les classes d’âge jeunes) de décès pendant cette période de pandémie, c’est à dire ce qui était en couleur foncée dans le premier graphique :</p>
+<p><img src="/blog/deces_pandemie_files/figure-html/pyramide_1-1.png" width="864" /></p>
+<p>Ci-dessous on s’intéresse uniquement l’excédent (ou le déficit pour les classes d’âge jeunes) de décès pendant cette période de pandémie, c’est à dire ce qui était en couleur foncée dans le premier graphique :</p>
 <p><img src="/blog/deces_pandemie_files/figure-html/evol_agesexe-1.png" width="768" /></p>
+<p>C’est chez les femmes de 85 à 100 ans qu’on trouve le plus d’excédent de décès mais chez les hommes de 70 à 90 ans que la surmortalité par rapport aux années précédentes est la plus forte.</p>
+<p><br></p>
 </div>
 <div id="localisation-des-décès-au-niveau-départemental" class="section level3">
 <h3>Localisation des décès au niveau départemental</h3>
+<p>Ici on regarde de quels départements proviennent les décès : la différence semble ténue, que l’on regarde où ont eu lieu les décès (à gauche) ou où étaient domiciliées les personnes décédées.</p>
 <p><img src="/blog/deces_pandemie_files/figure-html/carte_dep-1.png" width="960" /></p>
+<p>Mais en regardant les liens entre département de domicile et département de décès (et surtout ceux en rouge qui ont largement augmenté par rapport aux années précédentes), on peut distinguer les transferts vers les centres hospitaliers situés dans les grandes villes. Le plus
+Le zoom sur l’Ile de France est illisible mais on peut simplement voir que tous les flux ont augmenté.</p>
+<p><img src="/blog/deces_pandemie_files/figure-html/carte_dep_flux-1.png" width="1056" /></p>
 </div>
 <div id="localisation-des-décès-au-niveau-local" class="section level3">
 <h3>Localisation des décès au niveau local</h3>
@@ -195,14 +190,19 @@ En foncé on distingue donc l’excédent des décès pendant cette période de 
 </div>
 <div id="stats-par-commune" class="section level3">
 <h3>Stats par commune</h3>
-<p><img src="/blog/deces_pandemie_files/figure-html/palmares_communes-1.png" width="768" /></p>
+<p>Il s’agit là des communes où ont eu lieu les décès donc celles qui accueillent un hopital sur leur territoire sont sur-représentées.
+Le cas de Marseille reste illisible à cause des données manquantes du mois de mars.</p>
+<p><img src="/blog/deces_pandemie_files/figure-html/palmares_communes-1.png" width="960" /></p>
 </div>
 <div id="evolution-temporelle-en-france" class="section level3">
 <h3>Evolution temporelle en France</h3>
 <p><img src="/blog/deces_pandemie_files/figure-html/evol_temp_fr-1.png" width="768" /></p>
+<p>Le 31 mars 2020 on a compté quasiment 10 00 décès de plus que le 31 mars des années précédentes (moyenne 2018 et 2019), soit + 57%. Il semble que la sur-mortalité soit en baisse mais l’Insee alerte sur la possibilité de retards dans la remontée de déclaration des décès.</p>
+<p><br></p>
 </div>
 <div id="evolution-temporelle-par-région" class="section level3">
 <h3>Evolution temporelle par région</h3>
+<p>Même chose mais par région pour distinguer la dynamique de sur-mortalité.</p>
 <p><img src="/blog/deces_pandemie_files/figure-html/evol_temp_reg-1.png" width="960" /></p>
 </div>
 
