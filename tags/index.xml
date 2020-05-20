@@ -240,7 +240,7 @@
     <item>
       <title>Montreuil</title>
       <link>/tags/montreuil/</link>
-      <pubDate>Sun, 15 Apr 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 22 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/montreuil/</guid>
       <description></description>
@@ -249,7 +249,7 @@
     <item>
       <title>Météo</title>
       <link>/tags/m%C3%A9t%C3%A9o/</link>
-      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 22 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/m%C3%A9t%C3%A9o/</guid>
       <description></description>
@@ -285,7 +285,7 @@
     <item>
       <title>Pluie</title>
       <link>/tags/pluie/</link>
-      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 22 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/pluie/</guid>
       <description></description>
@@ -342,6 +342,15 @@
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/ville/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vélo</title>
+      <link>/tags/v%C3%A9lo/</link>
+      <pubDate>Fri, 22 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/v%C3%A9lo/</guid>
       <description></description>
     </item>
     
