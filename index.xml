@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;2017 mtmx</copyright>
-    <lastBuildDate>Fri, 22 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Vélo vs météo</title>
       <link>/blog/velo_meteo_montreuil/</link>
-      <pubDate>Fri, 22 May 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/velo_meteo_montreuil/</guid>
       <description>Pour accompagner son plan vélo et quantifier le trafic cycliste dans le centre-ville, la ville de Montreuil a installé en 2018 un compteur place Croix-de-Chavaux et publie en open-data les résultats toutes les semaines. Voici ce qu’il peut nous apprendre sur le trafic cycliste en ville.

@@ -121,7 +121,7 @@
                           </p>
 
                           <p class="date-comments">
-                          <i class="fa fa-calendar-o"></i> May 22, 2020
+                          <i class="fa fa-calendar-o"></i> June 10, 2020
                           </p>
 
                           <ul class="tags-cloud">
@@ -185,48 +185,37 @@ Phénomène qui se remarque pour tous les modes de transports, le vendredi on d�
 </div>
 <div id="linfluence-de-la-météo" class="section level2">
 <h2>L’influence de la météo</h2>
-<p>Impossible de parler vélo sans parler météo. Si les averses et les bourrasques ne décourageront pas les vrais vélotaffeurs équipés, elle peut tout de même refroidir les cyclistes moins avertis. Mais à quel point peut-elle jouer dans leur décision ?
-On va donc comparer les <a href="https://donneespubliques.meteofrance.fr/?fond=produit&amp;id_produit=90&amp;id_rubrique=32">données en open-data de Meteo France</a> qui informent sur les conditions (précipitations, nébulosité, état du sol…) par tranche de 3 heures au nombre de passages vélo à Croix de Chavaux pendant ce même créneau. Ici on analyse les données météo de la station de l’aéroport d’Orly puisque c’est la plus proche de Montreuil.</p>
+<p>Impossible de parler vélo sans évoquer la météo. Si les averses et les bourrasques ne décourageront pas les vrais vélotaffeurs équipés, elle peut tout de même refroidir les cyclistes moins avertis. Mais à quel point peut-elle jouer dans leur décision ?</p>
+<p>Une <a href="http://documents.irevues.inist.fr/bitstream/handle/2042/70560/meteo_2019_107_64.pdf">sympathique étude</a> a montré que les trajets mouillés à vélo étaient finalement assez rares. Les données du <a href="https://donneespubliques.meteofrance.fr/?fond=produit&amp;id_produit=93&amp;id_rubrique=32">réseau Radome</a> de Météo-France utilisées pour cette étude auraient été parfaites (infos sur les précipitations actualisées toutes les 6 minutes), mais malheureusement pas en open data (80 000€ tout de même).
+On va donc prendre l’option gratuite avec ces <a href="https://donneespubliques.meteofrance.fr/?fond=produit&amp;id_produit=90&amp;id_rubrique=32">données en open-data de Meteo France</a> qui informent sur les conditions (précipitations, nébulosité, état du sol…) par tranche de 3 heures et les comparer nombre de passages vélo à Croix de Chavaux pendant ce même créneau. Ici on analyse les données météo de la station de l’aéroport d’Orly puisque c’est la plus proche de Montreuil.</p>
 <p><img src="/blog/velo_meteo_montreuil_files/figure-html/diag_precipitations-1.png" width="864" /></p>
 <p>Donc 86% du temps il ne pleut pas une goutte. Voilà ce que ça représente depuis un an, jour par jour. Finalement un cycliste a peu de chances de se faire mouiller (traits en bleu) et encore moins d’être trempé (traits en noir).</p>
 <p><img src="/blog/velo_meteo_montreuil_files/figure-html/timeline_precipitations-1.png" width="960" /></p>
 <p>2% des passages de vélo à Croix de Chavaux ont donc été effectué dans un créneau de 3 heures où il a beaucoup plu : désolé pour ceux qui se trouvaient sous l’averse ! Voyons maintenant quelles sont les stats moyennes de fréquentation selon l’intensité de la pluie :</p>
 <p style="color:#78B7C5">
-55 passages de vélos par heure quand il ne pleut pas
+56 passages de vélos par heure quand il ne pleut pas
 </p>
 <p style="color:#3B9AB2;fontface:bold">
 49 passages de vélos quand il pleut un peu (entre 0 et 2 mm sur un créneau de 3 heures)
 </p>
 <p style="color:#132e2d">
-39 passages de vélos quand il pleut beaucoup (plus de 2 mm sur un créneau de 3 heures)
+41 passages de vélos quand il pleut beaucoup (plus de 2 mm sur un créneau de 3 heures)
 </p>
-<p>16 personnes abandonneraient donc leur vélo lorsqu’il pleut franchement.</p>
 <p><br>
 <br></p>
-<p>Est-ce que le vent pourrait influencer le trafic ?</p>
-<p><img src="/blog/velo_meteo_montreuil_files/figure-html/diag_vent-1.png" width="864" /></p>
-<p>En moyenne par heure, on décompte :</p>
-<p style="color:#ee8176;fontface:bold">
-52 passages de vélos quand il n’y a pas de vent (&lt; 6 m/s en moyenne)
-</p>
-<p style="color:#a1352a;fontface:bold">
-63 passages de vélos quand il y en a.
-</p>
-<p>Il y aurait donc plus de circulation quand il vente un peu, étonnant.</p>
 <p><br>
 <br></p>
 <p>Qu’en est il de l’ensoleillement ?</p>
 <p><img src="/blog/velo_meteo_montreuil_files/figure-html/diag_nebulosite-1.png" width="864" /></p>
 <p>21% du temps il fait grand beau, 21% il fait bien gris. Et c’est entre les deux, c’est à dire quand il y a des nuages, que le trafic cycliste est le plus dense :</p>
 <p style="color:#c8b0d1;fontface:bold">
-43 passages de vélos par heure quand le ciel est dégagé
+49 passages de vélos par heure quand le ciel est dégagé
 </p>
 <p style="color:#9262a3;fontface:bold">
-59
-passages de vélos quand il y a des nuages.
+60 passages de vélos quand il y a des nuages.
 </p>
 <p style="color:#493151;fontface:bold">
-48 passages de vélos quand il fait gris.
+49 passages de vélos quand il fait gris.
 </p>
 <p><br>
 <br></p>
@@ -243,12 +232,29 @@ passages de vélos quand il y a des nuages.
 54 passages de vélos quand il fait doux (10 à 18 degrès)
 </p>
 <p style="color:#e34a33;fontface:bold">
-61 passages de vélos quand il fait chaud (18 à 26 degrès)
+66 passages de vélos quand il fait chaud (18 à 26 degrès)
 </p>
 <p style="color:#b30000;fontface:bold">
-61 passages de vélos quand il fait très chaud (plus de 26 degrès)
+64 passages de vélos quand il fait très chaud (plus de 26 degrès)
 </p>
-<p>Un petit modèle ?</p>
+<p><br>
+<br></p>
+</div>
+<div id="modélisation" class="section level2">
+<h2>Modélisation</h2>
+<p>Pour comprendre quels facteurs influencent le plus la fréquentation, on procède à l’ajustement d’un modèle de régression linéaire. Après plusieurs tentatives on atterrit sur un r2 de 0,7, un pouvoir explicatif correct, et voilà ce qu’on peut en retirer (évidemment on a exclu la période de confinement).</p>
+<p><img src="/blog/velo_meteo_montreuil_files/figure-html/model-1.png" width="768" /></p>
+<p>Voici comment interpréter le graphique de bas en haut :</p>
+<ul>
+<li>Moins de vélos en été (probablement moins de Montreuillois présents aussi), mais ça reste assez équivalent pendant les autres saisons.</li>
+<li>Si on prend comme référence le lundi, le vendredi compte 19 cyclistes de plus par créneau de 3 heures, le samedi 19 de moins et surtout le dimanche on compte presque 50 cyclistes de moins.</li>
+<li>Un dimanche, un jour férié ou un jour de vacances scolaires c’est quasiment le même effet : - 50 cyclistes. Waou tout ça pour en arriver là ! C’est rassurant.</li>
+<li>La nuit c’est 85 cyclistes de moins que le jour. Il faut aussi avouer qu’on a plutôt tendance à dormir la nuit qu’à faire du vélo, mais le jour étant plus long en été qu’en hiver ça contrebalance les niveaux de passage par saison.</li>
+<li>1 degré de plus c’est 1,5 passages supplémentaires. Là ça commence à être intéressant puisque la température calculée par créneau ici est relative, comparée à la température moyenne de la saison et le créneau horaire : qu’elle que soit la saison, plus il fait relativement doux/chaud, plus le trafic cycliste est important.</li>
+<li>Lorsqu’il pleut beaucoup, c’est comme si c’était dimanche ! 51 cyclistes ont disparu, et lorsqu’il pleutine (&lt; 2 mm en 3 heures) c’est 31 cyclistes en moins.</li>
+<li>Un sol gelé ou enneigé freine plus les ardeurs des cyclistes qui seront 68 de moins, là encore c’est assez logique.</li>
+<li>Enfin a priori pas d’effet remarqué du débit moyen du vent sur le trafic.</li>
+</ul>
 </div>
 
       
