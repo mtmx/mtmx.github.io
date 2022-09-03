@@ -2,14 +2,21 @@ project:
   type: website
 
 website:
-  title: "mtmx"
+  title: "datamix"
+  site-url: https://mtmx.netlify.app/
+  repo-url: https://github.com/mtmx/mtmx
+  open-graph: true
+  twitter-card:
+    creator: "@matamix"
+    card-style: summary_large_image
   navbar:
+    background: "#eeeeee"
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/mtmx
       - icon: twitter
-        href: https://twitter.com
+        href: https://twitter.com/matamix
 format:
   html:
     theme: cosmo

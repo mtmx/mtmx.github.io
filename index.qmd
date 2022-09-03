@@ -1,12 +1,15 @@
 ---
-title: "mtmx"
+title: "Divagations quantifiées"
 listing:
+  feed: true
   contents: posts
   sort: "date desc"
-  type: default
+  type: grid
+  grid-columns: 3
+  image-height: 250px
+  page-size: 100
   categories: true
-  sort-ui: false
-  filter-ui: false
 page-layout: full
 title-block-banner: true
+image: img_campagne.jpg
 ---

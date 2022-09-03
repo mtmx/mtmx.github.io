@@ -1,0 +1,253 @@
+---
+title: "Jojographie"
+author: "Mathieu"
+date: "2017-12-10"
+showonlyimage: false
+draft: false
+image: img/img_jojographie.png
+weight: 0
+type: "post"
+description: "Bête de scène"
+categories: ["johnny", "concerts"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+# import données
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(lubridate)
+
+
+  # parametrage du thème ggplot
+  thm <- 
+  theme(legend.position="right",
+        legend.text=element_text(size=6),
+        legend.title=element_text(size=7),
+        axis.line=element_blank(),
+        axis.text.x=element_text(size=9, color = "grey20"),#element_blank(),
+        axis.title.x=element_blank(),
+        axis.text.y=element_text(size=9, color = "grey20"),#element_blank(),#element_text(size=9, color = "black"),
+        axis.title.y=element_text(size=9, color = "grey",face="italic"),#element_blank(), #element_text(size=9, color = "grey",face="italic"),
+        axis.ticks=element_blank(),
+        panel.background=element_blank(),panel.border=element_blank(),
+        panel.grid.major.y=element_line(colour = 'grey60', linetype = 'dotdash', size = 0.15),
+        panel.grid.major.x=element_line(colour = 'grey60', linetype = 'dotdash', size = 0.15),#element_blank(),
+        panel.grid.minor=element_blank(),
+        plot.background=element_blank(),
+        legend.key = element_rect(fill = NA, colour = NA),
+        legend.key.width = unit(0.5, "cm"),
+        strip.text.y = element_text(size = 5, colour = "black", angle = 0),
+        strip.text.x = element_text(size = 5, colour = "black", angle = 0),
+        plot.title=element_text(size=12,face="bold"),
+        plot.subtitle=element_text(size=9,face="italic"),
+        plot.caption=element_text(size=6,colour = "grey20")) 
+
+# fonction conv accents
+  conv_accents <- function(x) {
+    x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+    x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+    x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+    x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+    x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+    x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+    x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+    x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+    x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+    x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+    x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+    x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+    
+    x <- gsub(pattern = "è", replacement = "&Egrave;", x = x)
+    x <- gsub(pattern = "é", replacement = "&Eacute;", x = x)
+    x <- gsub(pattern = "ê", replacement = "&Ecirc;", x = x)
+    x <- gsub(pattern = "ë", replacement = "&Euml;", x = x)
+    x <- gsub(pattern = "î", replacement = "&Icirc;", x = x)
+    x <- gsub(pattern = "ï", replacement = "&Iuml;", x = x)
+    x <- gsub(pattern = "û", replacement = "&Ucirc;", x = x)
+    x <- gsub(pattern = "ü", replacement = "&Uuml;", x = x)
+    x <- gsub(pattern = "ô", replacement = "&Ocirc;", x = x)
+    x <- gsub(pattern = "à", replacement = "&Agrave;", x = x)
+    x <- gsub(pattern = "â", replacement = "&Acirc;", x = x)
+    x <- gsub(pattern = "ç", replacement = "&Ccedil;", x = x)
+    x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+    
+    return(x)
+  }
+  
+  # style du popup
+#tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0;width:50px;height:10px"
+tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0.2"
+
+
+  
+```
+
+
+
+Même si je n'étais pas fan je dois avouer que la longévité de Johnny Hallyday ainsi que la variété de ses productions musicales, du yéyé à l'opéra-rock en passant par la country et le rap ([si, si](http://www.mouv.fr/article-johnny-hallyday-et-le-rap-fran-ais-une-histoire-mouvement-e)), forcent le respect. Difficile de ne pas être touché quand un taulier comme [Bertrand Burgalat](https://noisey.vice.com/fr/article/xwap5j/bertrand-burgalat-les-defauts-de-johnny-je-les-trouve-splendides) en parle aussi bien.
+Son bilan sur scène est impressionnant : plus de 3000 concerts pour une carrière musicale qui aura duré 57 ans. Le site de fans [hallyday.com](http://www.hallyday.com/), doté d'un design terriblement Johnny, a recensé l'ensemble de ses performances en y ajoutant quelques anecdotes. Après quelques corrections ou extrapolations sur des données manquantes, voici le nombre annuel de ses concerts depuis sa naissance en 1943:
+
+
+```{r graphique_an, echo=F, message=F, warning=F ,fig.height=3}
+
+# graphique ggplot
+
+library(ggiraph)
+
+df_concerts_jojo_FULLGEO <- fread( "./data/df_concerts_jojo_FULLGEO.csv", verbose = F) %>%
+  mutate(date_ok = as.Date(date_ok,"%Y-%m-%d"))
+
+
+# temporelle
+cpt_concerts_an <-
+  df_concerts_jojo_FULLGEO %>%
+  mutate(annee = as.numeric(format(date_ok, "%Y"))) %>%
+  filter(!type_concert %in% 'Concert annulé') %>%
+  group_by(annee, zone) %>%
+  summarise(nb_concerts = n()) %>% mutate(nb_concerts = as.numeric(nb_concerts)) %>%
+  ungroup() %>%
+  complete(annee = full_seq(annee, 1)) %>%
+  mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .))) %>%
+  mutate(zone = factor(zone, levels = c("France","Europe","Afrique","Amériques","Asie"))) %>%
+  mutate(tip_1 = paste0("<b>","<font size=2.5 color=black>", nb_concerts," concerts en ",conv_accents(zone)," en ",annee ,"</b>","</font>", "<br>")) %>%
+  as.data.frame() %>%
+  mutate(id = row_number()) 
+
+
+
+ggi <-
+ggplot() +
+  #geom_bar(stat = "identity") +
+  geom_bar_interactive(data = cpt_concerts_an,aes(x = annee, y = nb_concerts, fill = zone, tooltip = tip_1,
+                           data_id = as.character(id)), stat = "identity") +
+  scale_x_continuous(expand = c(0,0), limits = c(1943, 2018), breaks = c(1943,seq(from = 1960, to = 2018, by = 2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_fill_manual(values = c("#6495ed","#00008b","#9932cc","#dc143c","#ffa07a"), name = "Zone") +
+  labs(x="", y="",
+       title="Nombre de concerts de Johnny par an",
+       subtitle="source : www.hallyday.com",
+       caption="") + 
+  annotate("text", label="Naissance", x=1946.5, y=13, size=2,  fontface="italic", colour='grey20') +
+  geom_segment(aes(x = 1946.5, y = 8, xend = 1943.5, yend = 0.5), colour='grey20', size=0.2,arrow = arrow(length = unit(0.1, "cm"))) +
+  annotate("text", label="1er concert\nà 16 ans", x=1954, y=20, size=2,  fontface="italic", colour='grey20') +
+  geom_segment(aes(x = 1954, y = 12, xend = 1959, yend = 0.5), colour='grey20', size=0.2,arrow = arrow(length = unit(0.1, "cm"))) +
+  thm +
+  theme(axis.text.x=element_text(size = 4, colour = "grey40", angle = 40),
+        legend.position = c(0.8,0.8), legend.key.size = unit(0.4, "cm"), 
+        legend.text=element_text(size=5),
+        legend.title=element_text(size=6)) 
+
+
+# ggiraph
+ggiraph(code = {print(ggi)},#dep_dir = "./temp/",
+        #selection_type = "multiple", 
+        # height_svg = 50, 
+        #  width_svg = 50,
+        #width = 0.7,
+        height = 3.5,
+        tooltip_extra_css = tooltip_css,
+        tooltip_offx = -40, tooltip_offy = -30,
+        zoom_max = 2,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+
+
+Après une première à 16 ans dans un petit cabaret icaunais (la belle histoire de l'Escale à Migennes est racontée [ici](https://www.francebleu.fr/infos/culture-loisirs/yonne-les-enregistrements-du-tout-premier-concert-de-johnny-a-migennes-1506620019)), Johnny va se produire jusqu'à 180 fois en 1963, tout simplement 1 jour sur 2. Si dans les années 1960 il tourne beaucoup à l'étranger et notamment en Europe de l'Est (cf. le récit de ses [dates mouvementées en Tchécoslovaquie](http://www.radio.cz/fr/rubrique/histoire/liberec-en-1966-johnny-hallyday-et-les-chevelus)) pour faire découvrir le rock'n roll à la française, il se recentra sur les scènes françaises à partir de la fin des années 1970.
+
+Même sans connaitre l'affluence de ses concerts, on se doute qu'elle est inversement proportionnelle au nombre de ses concerts : les zéniths de France ont remplacé les petites salles de sous-préfectures et de stations balnéaires. 
+
+Pour rentrer dans le détail, le calendrier de ses 3 200 dates :
+
+```{r graphique_jour, echo=F, message=F, warning=F,fig.height=12,fig.height=9}
+
+# calendrier pour ggiraph
+df_concerts_jojo_VISU <- df_concerts_jojo_FULLGEO %>%
+  mutate(annee = as.numeric(format(date_ok, "%Y"))) %>%
+  mutate(jour = format(date_ok, format="%m-%d")) %>%
+  mutate(anecdote = str_replace(anecdote, pattern = "[\r\n]", replacement = "")) %>%
+  mutate(anecdote = str_replace(anecdote, pattern = "[\r]", replacement = "")) %>%
+  mutate(salle = str_replace(salle, pattern = "[\r\n]", replacement = "")) %>%
+  mutate(salle = str_replace(salle, pattern = "[\r]", replacement = "")) %>%
+  mutate(tip_1 = paste0("<b>","<font size=2.5 color=black>", paste0(day(date_ok),"/",month(date_ok),"/",annee),"</b>","</font>", "<br>",
+                        "<font size=2 color=black>","ville : " , conv_accents(name),"</font>", "<br>",
+                        "<font size=1 color=black>" ,"salle : ", conv_accents(salle),"</font>", "<br>",
+                        "<font size=1 color=black>" , conv_accents(anecdote),"</font>", "<br>")) %>%
+  mutate(type_concert_ordre = factor(type_concert, levels = c("Concert","Concert à problèmes","Concert annulé"))) 
+
+
+# graphique interactif
+
+my_gg <-
+  ggplot() +
+   geom_point_interactive(data = df_concerts_jojo_VISU, aes(x = jour, y = annee, color = type_concert_ordre,
+                                             tooltip = tip_1,
+                                             data_id = id_concert), 
+             size = 3.5, shape =  '|', lwd = 0.5) +
+  scale_y_continuous(trans = "reverse", breaks = seq(from=1960, to =2017, by =1)) +
+  scale_color_manual(values = c("#7a96ea","black","#c0c0c0"),name ="") +
+ # thm +
+  # annotations
+  labs(
+    title = "Les 3 200 concerts de Johnny Hallyday",
+    subtitle = "source : www.hallyday.com"
+  ) + 
+  thm +
+  theme(axis.text.x=element_blank(),axis.title.y=element_blank(),
+        panel.grid.major.x=element_blank(),
+        axis.text.y=element_text(size = 5, colour = "grey40", angle = 0),
+         legend.key.size = unit(0.4, "cm"), 
+        legend.text=element_text(size=5),
+        legend.title=element_text(size=6),
+        legend.position = "top")
+
+# ggiraph
+ggiraph(code = {print(my_gg)},#dep_dir = "./temp/",
+        #selection_type = "multiple", 
+        # height_svg = 50, 
+        #  width_svg = 50,
+        width = 1,
+        height = 8,
+        tooltip_extra_css = tooltip_css,
+        tooltip_offx = 0, tooltip_offy = -30,
+        zoom_max = 2,
+        hover_css = "{color:orange;r:6px;}")
+
+```
+
+ 
+Visuellement on repère les grandes tournées où les dates s'enchainent jour après jour puis qui s'espacent de quelques jours de repos pour soulager le bonhomme, mais aussi quelques dates en gris qui ont été annulées principalement pour des raisons de santé [comme ce fut le cas](http://www.20minutes.fr/people/371518-20091216-tournee-johnny-hallyday-annulee).
+On remarque aussi des concerts où des problèmes divers sont intervenus : un malaise au Palais des Sports de Toulouse en 1964, des bagarres au Forum de Liège en 1972, une chute dans la fosse en 1968 à Johannesburg...
+
+
+Près de 2800 de ses concerts (87% du total) ont eu lieu en France, les trois pays suivants étant tous francophones avec 160 dates en Belgique, 86 en Suisse et 30 au Canada. Paris reste de loin la ville la plus visitée avec plus de 600 concerts soit 20% du total : le Zénith restera la salle où il a le plus joué (89 concerts) devant l'Olympia (86), le Palais des Sports (82) et Bercy (75).
+
+```{r treemap, echo=F, message=F, warning=F,fig.height=8, fig.width=8}
+
+library(treemap)
+
+# classement villes arbo
+cpt_concerts_geo_arbo <-
+  df_concerts_jojo_FULLGEO %>%
+  filter(!type_concert %in% 'Concert annulé') %>%
+  group_by(continent, country.name.fr, name, salle) %>%
+  summarise(nb_concerts = n())
+
+treemap(cpt_concerts_geo_arbo, #Your data frame object
+        index=c("continent", "country.name.fr","name"),
+        vSize="nb_concerts",
+        type="index", #Type sets the organization and color scheme of your treemap
+        palette = c("#7a96ea"),  #Select your color palette from the RColorBrewer presets or make your own.
+        title="Nombre de concerts de Johnny Hallyday par ville", #Customize your title
+        fontsize.title = 14 #Change the font size of the title
+)
+
+
+```
+
+Salut l'artiste.

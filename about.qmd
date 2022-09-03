@@ -1,19 +1,15 @@
 ---
-title: "About"
-image: profile.jpg
+title: "A propos"
+image: img_campagne.jpg
 about:
   template: jolla
   links:
     - icon: twitter
       text: Twitter
-      href: https://twitter.com
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com
+      href: https://twitter.com/matamix
     - icon: github
       text: Github
-      href: https://github.com
-
+      href: https://github.com/mtmx
 ---
 
-About this blog
+A propos de ce blog
