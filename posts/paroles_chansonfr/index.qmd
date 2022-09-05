@@ -1,0 +1,483 @@
+---
+title: "Paroles, paroles et paroles"
+author: "Mathieu"
+date: "2017-12-31"
+showonlyimage: false
+draft: false
+image: img/img_paroles_chansonsfr.png
+weight: 0
+type: "post"
+description: "Analyse textuelle"
+categories: ["paroles", "textes","chanson","variétés"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+# import données
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(lubridate)
+
+# import df paroles
+chansonshorsalbums_infos_paroles <- fread( "./data/chansonshorsalbums_infos_paroles.csv", colClasses ="character" )
+chansonsalbums_infos_paroles <- fread( "./data/chansonsalbums_infos_paroles.csv", colClasses ="character") %>%
+  mutate(date_album = as.Date(date_album,"%Y-%m-%d"))
+
+chansonsfull_infos_paroles <- chansonsalbums_infos_paroles %>%
+  rbind.data.frame(chansonshorsalbums_infos_paroles %>%
+                     select(-pages_chanson) %>% mutate(url_album = NA,nom_album =NA, date_album = NA )) %>%
+  filter(!url_photo %in% 'http://paroles2chansons.lemonde.fr')
+
+# parametrage du thème ggplot
+thm <- 
+theme(legend.position="right",
+      legend.text=element_text(size=6),
+      legend.title=element_text(size=7),
+      axis.line=element_blank(),
+      axis.text.x=element_text(size=9, color = "grey20"),#element_blank(),
+      axis.title.x=element_blank(),
+      axis.text.y=element_text(size=9, color = "grey20"),#element_blank(),#element_text(size=9, color = "black"),
+      axis.title.y=element_text(size=9, color = "grey",face="italic"),#element_blank(), #element_text(size=9, color = "grey",face="italic"),
+      axis.ticks=element_blank(),
+      panel.background=element_blank(),panel.border=element_blank(),
+      panel.grid.major.y=element_line(colour = 'grey60', linetype = 'dotdash', size = 0.15),
+      panel.grid.major.x=element_line(colour = 'grey60', linetype = 'dotdash', size = 0.15),#element_blank(),
+      panel.grid.minor=element_blank(),
+      plot.background=element_blank(),
+      legend.key = element_rect(fill = NA, colour = NA),
+      legend.key.width = unit(0.5, "cm"),
+      strip.text.y = element_text(size = 5, colour = "black", angle = 0),
+      strip.text.x = element_text(size = 5, colour = "black", angle = 0),
+      plot.title=element_text(size=12,face="bold"),
+      plot.subtitle=element_text(size=9,face="italic"),
+      plot.caption=element_text(size=6,colour = "grey20")) 
+
+# fonction conv accents
+  conv_accents <- function(x) {
+    x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+    x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+    x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+    x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+    x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+    x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+    x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+    x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+    x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+    x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+    x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+    x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+    
+    x <- gsub(pattern = "è", replacement = "&Egrave;", x = x)
+    x <- gsub(pattern = "é", replacement = "&Eacute;", x = x)
+    x <- gsub(pattern = "ê", replacement = "&Ecirc;", x = x)
+    x <- gsub(pattern = "ë", replacement = "&Euml;", x = x)
+    x <- gsub(pattern = "î", replacement = "&Icirc;", x = x)
+    x <- gsub(pattern = "ï", replacement = "&Iuml;", x = x)
+    x <- gsub(pattern = "û", replacement = "&Ucirc;", x = x)
+    x <- gsub(pattern = "ü", replacement = "&Uuml;", x = x)
+    x <- gsub(pattern = "ô", replacement = "&Ocirc;", x = x)
+    x <- gsub(pattern = "à", replacement = "&Agrave;", x = x)
+    x <- gsub(pattern = "â", replacement = "&Acirc;", x = x)
+    x <- gsub(pattern = "ç", replacement = "&Ccedil;", x = x)
+    x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+    
+    return(x)
+  }
+  
+  # style du popup
+#tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0;width:50px;height:10px"
+tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0.2"
+
+
+  
+```
+
+
+Grâce à l'implémentation de nouvelles méthodes et à leur vulgarisation notamment par le biais de R et de sa communauté (on notera le beau travail de Julia Silge et David Robinson développeurs du package ['tidytext'](https://www.tidytextmining.com/) utilisé pour ce papier), l'analyse textuelle est en vogue. On peut l'appliquer à des documents littéraires mais ici on va tester ce panel d'analyses sur des paroles de chansons, en l'occurence celles des poids lourds de la chanson française.
+
+Pour établir la liste forcément subjective des artistes old school inclus dans notre analyse, on part de cet article de [topito](http://www.topito.com/top-artistes-incontournables-chanson-francaise) qui recense entre autres Georges Brassens, Yves Duteil ou Sylvie Vartan, et on en rajoute quelques uns (Francis Cabrel, quand même !) pour arriver à un échantillon de 63 artistes. On va ensuite scraper les paroles de toutes leurs chansons disponibles sur le site [paroles2chansons.lemonde.fr](http://paroles2chansons.lemonde.fr/) grâce aux tuyaux de [Colin Fay](http://colinfay.me/purrr-web-mining/) et au package purrr (<3).
+
+Première statistique très simple qui permet de voir que la longueur des textes est très variable :
+
+```{r graphique_longueur_textes, echo=F, message=F, warning=F ,fig.height=6,fig.width=8}
+
+library(tidytext)
+library(proustr)
+library(ggrepel)
+library(rfeel)
+library(hrbrthemes)
+library(scales)
+
+# format ligne par mot
+chansons_infos_paroles.mot <- 
+  unnest_tokens(chansonsfull_infos_paroles %>%
+                  mutate(paroles_chanson = gsub("’", "´", paroles_chanson)) %>%
+                  mutate(paroles_chanson = gsub("'", "´", paroles_chanson)) ,
+                mot, paroles_chanson) %>%
+  left_join(rfeel(type = "polarity"), by = c("mot"="word")) %>%
+  left_join(rfeel(type = "score"), by = c("mot"="word")) %>%
+  left_join(proust_stopwords() %>% mutate (stopword = "stopword")  , by = c("mot"="word") )
+
+
+# nombre de mots moyen par chanson et par artiste
+liste_chansons_artiste <-
+  chansons_infos_paroles.mot %>%
+  group_by(nom_artiste, nom_album, nom_chanson) %>%
+  summarise(nb_mots =n(), nb_mots_diffs =n_distinct(mot))
+
+ana_chanson_artiste <-
+  chansons_infos_paroles.mot %>%
+  group_by(nom_artiste, nom_album, nom_chanson, url_photo) %>%
+  summarise(nb_mots =n(), nb_mots_diffs =n_distinct(mot)) %>%
+  group_by(nom_artiste, url_photo) %>%
+  summarise(moychanson_nb_mots = mean(nb_mots),
+            moychanson_nb_mots_diffs = mean(nb_mots_diffs),
+            nb_chansons = n())
+
+ana_artiste <-
+  chansons_infos_paroles.mot %>%
+  group_by(nom_artiste, url_photo) %>%
+  summarise(nb_mots =n(), nb_mots_diffs =n_distinct(mot), ttr = nb_mots_diffs/nb_mots ) 
+
+# graphique ligne
+ggplot() +
+  geom_label_repel(data = ana_chanson_artiste , aes(x= moychanson_nb_mots, y = 1, label = nom_artiste, fill =  moychanson_nb_mots), 
+                  angle = 0, label.size =  0, color = "white",size = 2.5, nudge_y = 0, segment.color = NA, fontface = "bold", box.padding = unit(0.05, "lines"), point.padding = unit(0.05, "lines")) +
+  scale_x_continuous(limits = c(60,180),  name = "", breaks = seq(from=60, to=180, by = 20)) +
+  scale_y_continuous(name ="",limits = c(0.2,1.8)) +
+  coord_flip() +
+  scale_fill_distiller(palette = "RdBu") +
+  theme_ipsum() +
+  annotate("text", x = 175,y=0.3, label = "les plus bavards",fontface="bold", family="Calibri", size =3, color ="#b2182b") +
+  annotate("text", x = 70,y=0.3, label = "les moins bavards",fontface="bold", family="Calibri", size =3, color ="#2166ac") +
+  geom_segment(aes(x = 75, y = 0.3, xend = 170, yend = 0.3), colour='grey', size=0.6,arrow = arrow(length = unit(0.2, "cm"))) +
+  labs(title="Longueur des paroles de chansons",
+       subtitle="Nombre de mots par chanson, moyenne par artiste",
+       caption="source : paroles2chansons.lemonde.fr") +
+  #theme_ipsum_rc(grid="XY") +
+  #theme(axis.text.x=element_text(hjust=c(0, 0.5, 0.5, 0.5, 1))) +
+  theme(legend.position="none", axis.text.x = element_blank(), axis.line.x = element_blank(),axis.ticks.x=element_blank(),
+        panel.grid.minor.x= element_blank(),panel.grid.major.x= element_blank())
+
+
+
+```
+
+
+Léo Ferré a les textes les plus longs avec en moyenne 180 mots par chanson, suivent Renaud Georges Brassens et Anne Sylvestre. Au contraire Serge Gainsbourg avec à peine 60 mots est le plus concis de tous les interprètes.
+
+Les chanteurs et chanteuses aiment parler d'eux et de leurs états d'âme, ou tout du moins incarner leurs textes à la première personne. Michel Polnareff est le champion du 'moi je' alors que Léo Ferré et Georges Brassens sont dans un tout autre état d'esprit :
+
+```{r graphique_autocentre, echo=F, message=F, warning=F ,fig.height=6,fig.width=8}
+
+
+############################
+# artiste le plus auto-centré
+
+ana_chansons_je <-
+  liste_chansons_artiste %>%
+  left_join(
+    chansons_infos_paroles.mot %>%
+      filter(grepl("j'",mot)|mot %in% c("j","je","moi","mon","ma","mien")) %>%
+      group_by(nom_artiste,nom_chanson) %>%
+      summarise(nb_mots_je =n()) ,
+    by = c("nom_artiste","nom_chanson")) %>%
+  mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
+
+ana_artiste_je <- ana_chansons_je %>%
+  group_by(nom_artiste) %>%
+  summarise(moychanson_nb_mots = mean(nb_mots),
+            moychanson_nb_mots_je = mean(nb_mots_je),
+            nb_chansons = n()) %>%
+  mutate(pct_mot_je = moychanson_nb_mots_je /moychanson_nb_mots  )
+
+# graphique ligne
+ggplot() +
+ geom_label_repel(data = ana_artiste_je , aes(x= pct_mot_je, y = 1, label = nom_artiste, fill =  pct_mot_je), 
+                  angle = 0, label.size =  0, color = "white",size = 2.5, nudge_y = 0, segment.color = NA, fontface = "bold", box.padding = unit(0.05, "lines"), point.padding = unit(0.05, "lines")) +
+  scale_x_continuous(limits = c(0.02,0.07), labels = percent, name = "") +
+ scale_y_continuous(name ="",limits = c(0.2,1.8)) +
+  coord_flip() +
+  scale_fill_distiller(palette = "PRGn") +
+  theme_ipsum() +
+  annotate("text", x = 0.068,y=0.3, label = "les plus auto-centrés",fontface="bold", family="Calibri", size =3, color ="#762a83") +
+  annotate("text", x = 0.022,y=0.3, label = "les moins auto-centrés",fontface="bold", family="Calibri", size =3, color ="#1b7837") +
+  geom_segment(aes(x = 0.025, y = 0.3, xend = 0.065, yend = 0.3), colour='grey', size=0.6,arrow = arrow(length = unit(0.2, "cm"))) +
+  labs(title="Auto-référence dans les paroles de chansons",
+       subtitle="Pourcentage de 'je' et de 'moi' dans les textes, moyenne par artiste",
+       caption="source : paroles2chansons.lemonde.fr") +
+  #theme_ipsum_rc(grid="XY") +
+  #theme(axis.text.x=element_text(hjust=c(0, 0.5, 0.5, 0.5, 1))) +
+  theme(legend.position="none", axis.text.x = element_blank(), axis.line.x = element_blank(),axis.ticks.x=element_blank(),
+        panel.grid.minor.x= element_blank(),panel.grid.major.x= element_blank())
+
+
+```
+
+
+Les différents interprètes, qu'ils soient auteurs de leurs textes ou qu'ils fassent appel à des paroliers, utilisent un registre de mots plus ou moins étendu. Pour mesurer cette variété de vocabulaire on calcule un indice de diversité égal au ratio entre le nombre de mots distincts et le nombre total de mots. Bien sûr plus il a de chansons a son répertoire, plus l'auteur a tendance à réutiliser les mêmes mots : on visualise donc en plus de l'indicateur le résidu de la régression, les artistes usant d'une grande diversité de mots relativement à leur répertoire sont en violet (et inversement en orange).
+
+```{r graphique_diversite, echo=F, message=F, warning=F ,fig.height=6,fig.width=14}
+
+  # régression locale
+library(modelr)
+reg <- loess(ttr ~ log(nb_mots), data = ana_artiste)
+
+ana_artiste <- ana_artiste %>% 
+  add_predictions(reg) %>%
+  add_residuals(reg)
+
+library(ggiraph)
+
+ggi <-
+ggplot() +
+geom_text_interactive( data = ana_artiste,
+           aes(nb_mots, ttr,  label = nom_artiste, color = resid,
+               data_id =nom_artiste,
+               tooltip =  paste0("<style> div.leaflet-popup-content {width:auto !important;}</style>",
+                                 "<b>","<font size=2.5 color=black>" , nom_artiste,"</b>","</font>", "<br>",
+                                 "<img src = ", url_photo, " height=\"50\" width=\"80\">")),
+           size = 1.8, fontface = "bold"
+) +
+  scale_color_distiller(palette = "PuOr", name = "Résidus", direction = 1) +
+  scale_x_continuous(limits = c(0,70000), name = "Nombre total de mots") +
+  scale_y_continuous( name = "Indice de diversité du vocabulaire") +
+    annotate("text", x = 30000,y=0.23, label = "grande diversité",fontface="bold", family="Calibri", size =2, color ="#542788", angle = 330) +
+  annotate("text", x = 16000,y=0.105, label = "faible diversité",fontface="bold", family="Calibri", size =2, color ="#b35806", angle = 330) +
+  theme_ipsum() +
+  scale_fill_ipsum() +
+  labs(title="Diversité du vocabulaire des paroles de chansons",
+       subtitle=" Indice de diversité : ratio nombre de mots distincts / nombre de mots",
+       caption="source : paroles2chansons.lemonde.fr") +
+  theme(legend.position="none",
+        plot.title=element_text(size=12),
+      plot.subtitle=element_text(size=8),
+      plot.caption=element_text(size=6 ),
+      legend.text=element_text(size=6),
+      legend.title=element_text(size=7),
+      axis.text=element_text(size=4))
+
+ggiraph(code = {print(ggi)},
+         height = 6, width = 1,
+        tooltip_extra_css = tooltip_css,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+Plutôt cohérent de trouver Brigitte Fontaine, Boby Lapointe, Georges Brassens ou Léo Ferré dans les plus créatifs des chanteurs : ils sont là les "chanteurs à textes".
+A l'inverse Michel Berger, Claude François ou encore Véronique Sanson utilisent un registre plus restreint de mots : Johnny aussi, on voit d'ailleurs qu'il est l'artiste le plus prolixe en chansons (plus de 600 référencées sur le site [paroles2chansons.lemonde.fr](http://paroles2chansons.lemonde.fr/)) comme en nombre de [concerts donnés à son public](https://mtmx.netlify.app/posts/jojographie/).
+
+On peut ensuite tenter de déceler l'humeur des interprètes à partir des mots employés dans leur chansons : chaque mot est associé à un type de sentiment (exemples : 'accuser' est négatif, 'actif' est positif) grâce au lexique de sentiments issu du package ['proustr'](https://cran.r-project.org/web/packages/proustr/index.html). A ce jeu-là les chanteurs les moins négatifs sont Laurent Voulzy et Joe Dassin, Michel Berger étant au contraire celui qui utilise le plus de mots à connotation négative. L'emploi de mots positifs n'est pas forcément inversement proportionnel : Serge Gainsbourg est celui qui emploie un minimum de termes positifs et Yves Duteil un maximum.
+
+
+```{r graphique_polarite, echo=F, message=F, warning=F ,fig.height=4,fig.width=10}
+
+library(proustr)
+
+artiste_polarite_moy <-
+  chansons_infos_paroles.mot %>% 
+  filter(is.na(stopword)) %>%
+  filter(nchar(mot) >2) %>%
+  group_by(nom_artiste, polarity) %>%
+  summarise(nb_mots = n()) %>%
+  mutate(pct = nb_mots / sum(nb_mots))
+
+artiste_polarite_moy.lng <-
+  artiste_polarite_moy %>%
+  select(nom_artiste,polarity, pct) %>%
+  spread(key = "polarity", value = "pct")
+
+
+### evolution bi
+p <-
+ggplot(artiste_polarite_moy.lng) +
+  geom_segment_interactive(aes(x=1, xend=2, y=negative, yend=positive, data_id = nom_artiste,
+                               tooltip = paste0("<style> div.leaflet-popup-content {width:auto !important;}</style>",
+                                 "<b>","<font size=2.5 color=grey>" , conv_accents(nom_artiste),"</b>","</font>", "<br>",
+                                  "<font size=1.5 color=#d73027>",sprintf("%1.0f%%", 100*negative), "de mots négatifs","</font>", "<br>",
+                                  "<font size=1.5 color=#1b7837>",sprintf("%1.0f%%", 100*positive), "de mots positifs","</font>", "<br>")),
+                           size=.35, color ="grey", show.legend=F) + 
+  geom_vline(xintercept=1, linetype="dashed", size=.1) + 
+  geom_vline(xintercept=2, linetype="dashed", size=.1) +
+  scale_color_manual(labels = c("Up", "Down"), 
+                     values = c("green"="#00ba38", "red"="#f8766d")) +  # color of lines
+  labs(x="", y="") +
+  scale_y_continuous(labels = percent, name = "", limits = c(0.1,0.38)) +
+  xlim(.5, 2.5) +
+  geom_text(aes(label=artiste_polarite_moy.lng$nom_artiste, y=artiste_polarite_moy.lng$negative, x=rep(1, NROW(artiste_polarite_moy.lng))), hjust=1.2, size=1.1) +
+  geom_text(label=artiste_polarite_moy.lng$nom_artiste, y=artiste_polarite_moy.lng$positive, x=rep(2, NROW(artiste_polarite_moy.lng)), hjust=-0.1, size=1.1) + 
+  geom_text(label="Part de mots négatifs", x=1, y=1.1*(max(artiste_polarite_moy.lng$negative, artiste_polarite_moy.lng$positive)), hjust=1.2, size=2.5, color = "#d73027",fontface="bold", family="Calibri") +
+  geom_text(label="Part de mots positifs", x=2, y=1.1*(max(artiste_polarite_moy.lng$negative, artiste_polarite_moy.lng$positive)), hjust=-0.1, size=2.5,color = "#1b7837",fontface="bold", family="Calibri") +
+theme_ipsum() +
+  scale_fill_ipsum() +
+  labs(title="Polarité des paroles de chaque artiste",
+       subtitle="passez sur la ligne pour afficher les statistiques",
+       caption="source : paroles2chansons.lemonde.fr") +
+  theme(legend.position="none",plot.margin = unit(c(1,2,1,2), "cm"), axis.text.x = element_blank(), axis.line.x = element_blank(),axis.ticks.x=element_blank(),panel.grid.minor.x= element_blank(),panel.grid.major.x= element_blank(),
+        plot.title=element_text(size=12),
+      plot.subtitle=element_text(size=8),
+      plot.caption=element_text(size=6 ),
+      axis.text=element_text(size=4))
+
+ggiraph(code = {print(p)},
+        width = 1, height = 5.5,
+        tooltip_extra_css = tooltip_css,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+
+```
+
+
+Venons-en à l'analyse des mots en tant que telle avec la liste des 8 mots revenant le plus fréquemment dans les paroles de chacun de nos artistes, classés de gauche à droite :
+
+
+```{r graphique_occurences, echo=F, message=F, warning=F ,fig.height=8,fig.width=10}
+
+tfidf_artiste <-
+  chansons_infos_paroles.mot %>%
+  filter(is.na(stopword)) %>%
+  filter(!stopword %in% '') %>%
+  group_by(nom_artiste, mot) %>%
+  summarise(nb_occ =n()) %>%
+  bind_tf_idf(mot, nom_artiste, nb_occ)
+
+# graphique ligne avec les 5 mots les plus utilisés par artiste
+
+ggplot() +
+  geom_text(data = tfidf_artiste  %>%
+              group_by(nom_artiste) %>% 
+              top_n(n = 8, wt = nb_occ) %>%
+              arrange(nom_artiste,desc(nb_occ)) %>%
+              mutate(n = row_number())%>%
+              filter(n <= 8) %>%
+              as.data.frame(), 
+            aes(x= n, y = reorder(nom_artiste, desc(nom_artiste)), label = mot, size =  nb_occ, color = nb_occ), 
+                  angle = 0,  fontface = "bold") +
+  scale_x_continuous(labels = dollar_format(suffix = "", prefix = "#"),name = "", breaks = seq(1,8,1)) +
+  scale_y_discrete(name ="") +
+  scale_size_continuous(name = "Nombre\nd'occurrences", range = c(2, 4)) +
+  #coord_flip() +
+  #scale_color_distiller(palette = "Reds", direction =1,name ='tf-idf', values = c(0.01,0.04)) +
+  scale_color_gradient(low = "#a6bddb", high = "#023858",name ="Nombre\nd'occurrences") +
+  theme_ipsum() +
+  scale_fill_ipsum() +
+  labs(title="Les 8 mots les plus utilisés par artiste",
+       subtitle="selon le nombre d'occurences",
+       caption="source : paroles2chansons.lemonde.fr") +
+  #theme_ipsum_rc(grid="XY") +
+  #theme(axis.text.x=element_text(hjust=c(0, 0.5, 0.5, 0.5, 1))) +
+  theme(legend.position="right",  panel.grid.minor.x= element_blank(),panel.grid.major.x= element_blank())
+
+
+```
+
+
+'Amour', 'vie', 'nuit' et 'vent' sont les termes qui reviennent le plus souvent dans la bouche de nos chanteurs/chanteuses mais certains montrent une plus grande spécificite : 'coeur' pour Aznavour, 'blues' pour Eddy Mitchell ou 'noir' pour Nino Ferrer.
+
+Un autre moyen de réperer ces termes spécifiques est la méthode 'tf-idf' qui affecte un score de sur-représentation à chaque terme selon sa fréquence dans l'ensemble des paroles des 63 interprètes. On voit ainsi des termes moins employés mais très spécifiques au vocabulaire de l'interprète, parfois à cause d'une seule chanson dans laquelle le terme en question est répété :
+
+
+```{r graphique_tf_idf, echo=F, message=F, warning=F ,fig.height=8,fig.width=10}
+
+# graphique ligne avec les 5 mots les plus représentés par artiste
+
+ggplot() +
+  geom_text(data = tfidf_artiste  %>%
+              group_by(nom_artiste) %>% 
+              top_n(n = 8, wt = tf_idf) %>%
+              arrange(nom_artiste,desc(tf_idf)) %>%
+              mutate(n = row_number())%>%
+              filter(n <= 8) %>%
+              as.data.frame(), 
+            aes(x= n, y = reorder(nom_artiste, desc(nom_artiste)), label = mot, size =  nb_occ, color = tf_idf), 
+                  angle = 0,  fontface = "bold") +
+  scale_x_continuous(labels = dollar_format(suffix = "", prefix = "#"),name = "", breaks = seq(1,8,1)) +
+  scale_y_discrete(name ="") +
+  scale_size_continuous(name = "Nombre\nd'occurrences", range = c(2, 4)) +
+  #coord_flip() +
+  #scale_color_distiller(palette = "Reds", direction =1,name ='tf-idf', values = c(0.01,0.04)) +
+  scale_color_gradient(low = "#fc9272", high = "#67000d",name ='tf-idf') +
+  theme_ipsum() +
+  scale_fill_ipsum() +
+  labs(title="Les 8 mots les plus sur-utilisés par artiste",
+       subtitle="selon l'indicateur 'tf-idf' relativement à l'ensemble des paroles",
+       caption="source : paroles2chansons.lemonde.fr") +
+  #theme_ipsum_rc(grid="XY") +
+  #theme(axis.text.x=element_text(hjust=c(0, 0.5, 0.5, 0.5, 1))) +
+  theme(legend.position="right",  panel.grid.minor.x= element_blank(),panel.grid.major.x= element_blank())
+
+```
+
+
+Enfin pour catégoriser les interprètes selon leur vocabulaire utilisé, la méthode de classification non supervisée dite du 'topic modelling' (dont la méthode est bien détaillée [ici]https://www.tidytextmining.com/topicmodeling.html) peut nous aider. Elle permet de discerner cing groupes d'interprètes : les termes qu'ils utilisent en priorité sont listés avec le score correspondant et les chanteurs/chanteuses qui en font partie sont détaillés dans le graphique du bas.
+
+```{r graphique_topicmodelling, echo=F, message=F, warning=F ,fig.height=8,fig.width=10}
+
+library(topicmodels)
+library(tm)
+library(tidyquant)
+
+dtm_words_count <- chansons_infos_paroles.mot %>%
+  mutate(mot = removeNumbers(mot)) %>%
+  filter(is.na(stopword)) %>%
+  mutate(titre_chanson_artiste = paste0(titre_chanson, "-",nom_artiste)) %>%
+  count(nom_artiste, mot, sort = TRUE) %>%
+  ungroup() %>%
+  filter(mot != "") %>%
+  cast_dtm(nom_artiste, mot, n)
+
+# set a seed so that the output of the model is predictable
+dtm_lda <- LDA(dtm_words_count, k = 5, control = list(seed = 1234))
+
+topics_beta <- tidy(dtm_lda, matrix = "beta")
+
+p1 <- topics_beta %>%
+  filter(grepl("[a-z]+", term)) %>% 
+  group_by(topic) %>%
+  top_n(20, beta) %>%
+  ungroup() %>%
+  arrange(topic, -beta) %>%
+  mutate(term = reorder(term, beta)) %>%
+  ggplot(aes(term, beta, color = factor(topic), fill = factor(topic))) +
+  geom_col(show.legend = FALSE, alpha = 0.8) +
+  scale_color_manual(values = palette_light()) +
+  scale_fill_manual(values = palette_light()) +
+  facet_wrap(~ topic, ncol = 5) +
+  coord_flip() +
+  theme_tq() +
+  labs(x = "",
+       y = "beta (~ occurrences par groupe)",
+       title = "Les 20 mots les plus caractéristiques de chaque groupe")
+
+user_topic <- tidy(dtm_lda, matrix = "gamma") %>%
+  arrange(desc(gamma)) %>%
+  group_by(document) %>%
+  top_n(1, gamma)
+
+p2 <- user_topic %>%
+  group_by(topic) %>%
+  top_n(15, gamma) %>%
+  ggplot(aes(x = reorder(document, -gamma), y = gamma, color = factor(topic))) +
+  facet_wrap(~ topic, scales = "free", ncol = 5) +
+  geom_point(show.legend = FALSE, size = 4, alpha = 0.8) +
+  scale_color_manual(values = palette_light()) +
+  scale_fill_manual(values = palette_light()) +
+  theme_tq() +
+  coord_flip() +
+  labs(x = "",
+       y = "gamma\n(~ affiliation au groupe)")
+
+library(grid)
+library(gridExtra)
+grid.arrange(p1, p2, ncol = 1, heights = c(0.7, 0.3))
+
+
+```
+
+Johnny Hallyday et Sylvie Vartan sont dans le même groupe où 'coeur', 'blues' et 'enfer' reviennent souvent, probablement à cause de paroliers communs.
+Arthur H, Guy Béart, Gainsbourg et Bashung se retrouvent dans le groupe 5 où 'amour' est moins présent mais 'mort', 'chanson' et 'enfer' davantage. Une méthode qui semble donc plutôt cohérente pour déceler des affinités entre artistes.

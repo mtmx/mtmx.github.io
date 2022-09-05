@@ -1,0 +1,17 @@
+"COD_VAR";"LIB_VAR";"LIB_VAR_LONG";"COD_MOD";"LIB_MOD";"TYPE_VAR";"LONG_VAR"
+"ADEC";"Année de décès";"Année de décès de la personne décédée";;;"NUM";4
+"MDEC";"Mois de décès";"Mois de décès de la personne décédée";;;"NUM";2
+"JDEC";"Jour de décès";"Jour de décès de la personne décédée";;;"NUM";2
+"DEPDEC";"Département de décès";"Département d'enregistrement du décès de la personne décédée";;;"CHAR";3
+"COMDEC";"Commune de décès";"Commune d'enregistrement du décès de la personne décédée";;;"CHAR";5
+"ANAISS";"Année de naissance";"Année de naissance de la personne décédée";;;"NUM";4
+"MNAISS";"Mois de naissance";"Mois de naissance de la personne décédée";;;"NUM";2
+"JNAISS";"Jour de naissance";"Jour de naissance de la personne décédée";;;"NUM";2
+"SEXE";"Sexe";"Sexe de la personne décédée";"M";"Homme";"CHAR";1
+"SEXE";"Sexe";"Sexe de la personne décédée";"F";"Femme";"CHAR";1
+"DEPDOM";"Département de domicile du décès";"Département de domicile de la personne décédée";;;"CHAR";3
+"LIEUDEC2";"Lieu de décès";"Type de lieu de décès";"HopCli";"hôpital ou clinique privée";"CHAR";30
+"LIEUDEC2";"Lieu de décès";"Type de lieu de décès";"hosmar";"hospice ou maison de retraite ou EHPAD";"CHAR";30
+"LIEUDEC2";"Lieu de décès";"Type de lieu de décès";"loge";"logement";"CHAR";30
+"LIEUDEC2";"Lieu de décès";"Type de lieu de décès";"Autres";"voie publique ou autre";"CHAR";30
+"LIEUDEC2";"Lieu de décès";"Type de lieu de décès";"Non renseigne";"lieu de décès absent du bulletin de décès";"CHAR";30

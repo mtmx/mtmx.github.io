@@ -1,0 +1,1082 @@
+---
+title: "Vélo vs météo"
+author: "Mathieu"
+date: "2020-06-10"
+showonlyimage: false
+draft: false
+image: img/img_velo_meteo_montreuil.png
+weight: 0
+type: "post"
+description: "Circulation de vélos à Montreuil"
+categories: ["montreuil", "vélo","pluie","météo"]
+---
+
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+
+library(data.table)
+library(tidyverse)
+library(lubridate)
+library(gganimate)
+require(plyr)
+library(zoo)
+library(viridis)
+library(ggpattern)
+library(hrbrthemes)
+library(ggtext)
+library(scales)
+library(conflicted)
+conflict_prefer(name = "summarise", winner = "dplyr")
+conflict_prefer(name = "mutate", winner = "dplyr")
+conflict_prefer(name = "filter", winner = "dplyr")
+conflict_prefer(name = "between", winner = "dplyr")
+conflict_prefer(name = "rename", winner = "dplyr")
+conflict_prefer(name = "select", winner = "dplyr")
+conflict_prefer(name = "first", winner = "dplyr")
+conflict_prefer(name = "replace_na", winner = "tidyr")
+conflict_prefer("month", "lubridate")
+conflict_prefer("year", "lubridate")
+conflict_prefer("week", "lubridate")
+conflict_prefer("hour", "lubridate")
+
+data_cdc.df.jfv <- fread( "./data/df_cdc_trafic.csv", na.strings = "") %>%
+  mutate(date_fmt = as.POSIXct(date_fmt, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+         date_fmt_2 = as.POSIXct(date_fmt_2, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+         jour = as.Date(jour, tz = "UTC"))
+
+df_cdc_meteo <- fread( "./data/df_cdc_meteo.csv", na.strings = "", colClasses = c(date = "character")) 
+
+df_cdc_meteo <- 
+  df_cdc_meteo %>%
+  mutate(date.ok = as.POSIXct(date, format ="%Y%m%d%H%M%S", tz = "CET" ) ) %>%
+  mutate(t =as.numeric(t)) %>%
+  # précipitations mq en 0
+  mutate(rr3 = replace_na(rr3,0)) %>%
+  # nébulosité mq en 0
+  mutate(n = replace_na(n,0)) %>%
+  # conversion valeurs négatives en nulles
+  mutate_if(is.numeric, funs(ifelse(.<0, 0, .))) %>%
+  # date jour
+  mutate(jour.ok = as.Date(date.ok))%>%
+  mutate(temp = t - 273.15) %>%
+  mutate(rr3 = case_when(rr3 < 0 ~ 0, TRUE ~ rr3))
+  
+
+# décalage 3 heures pour précipitations
+df_cdc_meteo.precip <-
+  df_cdc_meteo %>%
+  select(date.ok , rr3) %>%
+  mutate(date.ok = date.ok - hours(3))
+
+######## cumul des passages vélos par tranche de 3 heures iso meteo
+
+# cumul par heure
+
+data_cdc.df.3h.meteo <-
+  data_cdc.df.jfv %>%
+  #filter(type_confinement %in% 'nonconfinement') %>%
+  mutate(date_fmt_3h=floor_date(date_fmt_2, "3 hours")) %>%
+  group_by(date_fmt_3h, ) %>%
+  summarise(total_croix_de_chavaux=sum(total_croix_de_chavaux), 
+            cdc_vers_mairie=sum(cdc_vers_mairie),
+            cdc_vers_paris=sum(cdc_vers_paris),
+            # ajout type jours 
+            jour = first(jour),
+            jour_semaine = first(jour_semaine),
+            type_vacs = first(type_vacs),
+            type_ferie = first(type_ferie),
+            type_jour = first(type_jour),
+            type_confinement = first(type_confinement)) %>%
+  as.data.frame() %>%
+  mutate(jour = as.Date(date_fmt_3h)) %>%
+  #filter(jour == as.Date("2020-04-28"))
+  mutate(dt.3h.txt = as.character(date_fmt_3h)) %>%
+  left_join(df_cdc_meteo %>%
+              select(date.ok, temp, n, ff, vv, u, pres, rafper, etat_sol, ssfrai) %>%
+              mutate(dt.3h.txt = as.character(date.ok)) %>%
+              select(-date.ok),
+            by = c("dt.3h.txt")) %>%
+  left_join(df_cdc_meteo.precip  %>%
+              mutate(dt.3h.txt = as.character(date.ok)),
+            by = c("dt.3h.txt")) 
+
+
+```
+
+
+Pour accompagner son [plan vélo](https://www.montreuil.fr/fileadmin/user_upload/01_La_ville/10_Venir_et_se_deplacer/montreuil-plan-velo-juin-2018.pdf) et quantifier le trafic cycliste dans le centre-ville, la ville de Montreuil a installé en 2018 un compteur place Croix-de-Chavaux et [publie en open-data les résultats](https://data.montreuil.fr/explore/dataset/compter-le-passage-des-velos-a-la-croix-de-chavaux/information/?sort=-jour_heure) toutes les semaines. Voici ce qu'il peut nous apprendre sur le trafic cycliste en ville, le code pour générer ce qui suit est [ici]().
+
+<br>
+
+
+## Evolution depuis 2018
+
+```{r evol_temp_jour, echo=F, message=F, warning=F,fig.height=5.5,fig.width=10}
+
+
+l_jours <- c('Lundi','Mardi','Mercredi','Jeudi','Vendredi', 'Samedi','Dimanche')
+l_mois <- c('janvier','février','mars','avril','mai', 'juin','juillet','août', 'septembre', 'octobre', 'novembre', 'décembre')
+
+
+data_cdc.df.jour <-
+  data_cdc.df.jfv %>%
+  mutate(date_fmt_h=floor_date(date_fmt_2, "1 day")) %>%
+  group_by(date_fmt_h, jour_semaine, type_vacs, type_ferie, type_jour) %>%
+  summarise(total_croix_de_chavaux=sum(total_croix_de_chavaux), 
+            cdc_vers_mairie=sum(cdc_vers_mairie),
+            cdc_vers_paris=sum(cdc_vers_paris)) %>%
+  mutate(jour = as.Date(date_fmt_h)) %>%
+  ungroup() %>%
+  mutate(annee = year(jour),
+         date_2020 = paste0("2020-",
+                            str_pad(month(jour),side = "left",width = 2, pad = "0" ),
+                            "-",
+                            str_pad(day(jour),side = "left",width = 2, pad = "0" )) ,
+         #t = str_pad(month(jour),side = "left",width = 2, pad = "0" ),
+         #tt = str_pad(day(jour),side = "left",width = 2, pad = "0" ))
+         date_2020_fmt = as.Date(date_2020, "%Y-%m-%d",
+                                 tz = "UTC")) %>%
+  mutate(semaine_n = week(jour)) %>%
+  mutate(mois = months(jour)) %>%
+  mutate(annee = year(jour)) %>%
+  mutate(jour_semaine.f = as.factor(jour_semaine),
+         jour_semaine.f = factor(jour_semaine.f, levels = rev(l_jours))) %>%
+  mutate(mois.f = as.factor(mois),
+         mois.f = factor(mois.f, levels = rev(l_mois)))
+
+data_cdc.df.jour$yearmonth <- as.yearmon(data_cdc.df.jour$jour)
+data_cdc.df.jour$yearmonthf <- factor(data_cdc.df.jour$yearmonth)
+data_cdc.df.jour$semaine_annee <- as.numeric(format(data_cdc.df.jour$jour,"%W"))
+
+data_cdc.df.jour <- ddply(data_cdc.df.jour,
+                          .(yearmonthf),
+                          transform,
+                          semaine_mois=1+semaine_annee-min(semaine_annee))
+
+data_cdc.df.jour <- data_cdc.df.jour %>%
+  mutate(jour_semaine.f = factor(jour_semaine.f, levels = rev(l_jours))) %>%
+  mutate(mois.f = factor(mois.f, levels = l_mois))
+
+# heatmap trafic par jour
+
+
+ggplot() + 
+  geom_tile(data = data_cdc.df.jour %>%
+              filter(between(jour, as.Date("2018-07-01"), as.Date("2020-06-07"))), 
+            aes(x=semaine_mois,
+                y= jour_semaine.f,
+                fill=total_croix_de_chavaux)) +
+  # jour férié
+  # geom_tile(data = data_cdc.df.jour %>%
+  #             filter(!is.na(type_ferie)),
+  #             aes(x=jour_semaine.f,y=semaine_n),
+  #           fill = "red",
+  #           alpha = 0.5) +
+  geom_tile_pattern(data = data_cdc.df.jour %>%
+                      filter(between(jour, as.Date("2018-07-01"), as.Date("2020-06-07"))) %>%
+                                 filter(type_ferie %in% 'férié'),
+                               aes(x=semaine_mois,y=jour_semaine.f),
+                    pattern = 'stripe',
+                    # pattern_angle = level,
+                    # pattern_spacing = level,
+                    fill            = NA,
+                    colour          = 'darkgreen',
+                    pattern_density = 0.01,
+                    pattern_fill    = NA,
+                    pattern_colour  = 'darkgreen') +
+  facet_grid(annee ~ mois.f) +
+  #scale_x_discrete(limits = rev(levels(l_jours))) +
+  #coord_flip() +
+  #scale_fill_viridis(direction = 1, option = "magma") +
+  scale_fill_distiller(name = "Nombre quotidien de passages vélo", 
+                       direction = 1,
+                       palette = "RdPu") +
+  scale_x_continuous( name = "") +
+  scale_y_discrete(name = "") +
+labs(
+  title = "Fréquentation cycliste à Croix de Chavaux *à Montreuil*  
+    <span style='font-size:11pt'>Nombre de passages par jour (jours fériés hachurés) </span>",
+  x = "", y = "",
+  caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018."
+) +
+  theme_ipsum() +
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        panel.spacing.x=unit(0.2, "lines"),
+        panel.spacing.y=unit(0.2, "lines"),
+        plot.title = element_markdown(lineheight = 1.1),
+        #legend.text = element_markdown(size = 11),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 8),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_line(color = "grey90")) 
+
+
+
+```
+
+
+La croissance était assez linéaire : à la rentrée de septembre 2019 on voyait déjà une augmentation importante avec un pic le vendredi 13 septembre. On a changé de braquet en décembre avec les grêves des transports pour dépasser régulièrement les 3 000 passages par jour. Et puis la chute avec le confinement.
+
+
+La version sismomêtre, sur une excellente idée de [Jonathan Spring](https://twitter.com/JustTheSpring) :
+
+<!-- 
+<img src="./gifs/anim_18052020_v1.gif" width="900" height="600" />
+--> 
+
+```{r sismometre, include=TRUE, echo=F, message=F, warning=F,fig.height=9,fig.width=10}
+
+# cf https://github.com/jonspring/cylinder_plot
+
+data_cdc.df.jour <-
+  data_cdc.df.jfv %>%
+  mutate(date_fmt_h=floor_date(date_fmt_2, "1 day")) %>%
+  group_by(date_fmt_h, type_vacs, type_ferie, type_jour) %>%
+  summarise(total_croix_de_chavaux=sum(total_croix_de_chavaux), 
+            cdc_vers_mairie=sum(cdc_vers_mairie),
+            cdc_vers_paris=sum(cdc_vers_paris)) %>%
+  mutate(jour = as.Date(date_fmt_h)) %>%
+  ungroup() %>%
+  mutate(annee = year(jour),
+         date_2020 = paste0("2020-",
+                    str_pad(month(jour),side = "left",width = 2, pad = "0" ),
+                    "-",
+                    str_pad(day(jour),side = "left",width = 2, pad = "0" )) ,
+         #t = str_pad(month(jour),side = "left",width = 2, pad = "0" ),
+         #tt = str_pad(day(jour),side = "left",width = 2, pad = "0" ))
+         date_2020_fmt = as.Date(date_2020, "%Y-%m-%d",
+                             tz = "UTC"))
+
+sample <- data_cdc.df.jour %>% select(total_croix_de_chavaux, jour) %>% as.data.frame()
+colnames(sample) <- c("value","date")
+
+frame_count <- (max(sample$date)- min(sample$date))/lubridate::ddays(1)
+cycle_length <- 365
+
+sample3 <- map_df(seq_len(frame_count),~sample,.id = "id")%>%
+  mutate(id = as.integer(id)) %>%
+  # view date is the 'camera' date
+  mutate(view_date=min(sample$date)+id-1)%>%
+  filter(date <= view_date)
+
+sample3 <- sample3 %>%
+  mutate(days_ago=(view_date - date)/ddays(1),
+         phase_dif = (days_ago %% cycle_length)/ cycle_length,
+         x_pos = -sin(2*pi * phase_dif),
+         nearness= cos(2*pi * phase_dif),
+         rowname=row.names(sample3),
+         month.year=paste(month(date,label = T,abbr = T),year(date),sep="-"))
+
+#On rajoute les dates dans la rotation /!\ sans les superposées
+
+tmp <- sample3 %>% 
+  group_by(id,month.year) %>% 
+  summarise(min = min(nearness),rowname=max(rowname)) %>%
+  group_by(id)%>%
+  mutate(test = case_when(max(as.numeric(rowname)) >= as.numeric(rowname)+cycle_length ~ 1, TRUE ~ 2 ))%>%
+  filter(test == 2)
+
+sample3$month.year <-  left_join(sample3,tmp, by = "rowname")[,12]
+sample3$month.year <- ifelse(sample3$nearness!=1,sample3$month.year,NA)
+
+#Puis on plot et on anime
+
+
+bit.anim <- ggplot(sample3) +
+  geom_path(aes(x_pos, value, alpha=nearness,color=days_ago))+
+  geom_text(aes(x_pos, -500,label=month.year,alpha=nearness), size = 4.6, fontface = "bold")+
+  scale_size(range = c(0,2))+
+  #scale_color_distiller(palette = "RdPu") +
+  scale_color_viridis_c(option = "inferno") +
+  transition_manual(id) +
+  scale_y_continuous(limits = c(-500,3800),
+                     name = "",
+                     breaks = seq(0,3500,500)) +
+  #theme_void()+
+  theme_ipsum() +
+  theme(panel.grid.major = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(
+    title = "Nombre de passages vélos quotidien à Croix de Chavaux - Montreuil",
+    #subtitle = "et localisation en France",
+    caption = "Source : Ville de Montreuil. Script R : Jonathan Spring @justthespring"  ) +
+  guides(size="none",alpha="none",color="none")
+
+#animate(bit.anim , fps=30, duration=60, width=600, height=400)
+
+animate(bit.anim,
+        fps = 10, 
+        duration = 60,
+        end_pause = 50,
+        width = 900, 
+        height = 600)
+
+```
+<br>
+
+
+## Profil d'une semaine type
+
+
+```{r profil_semaine_jour, echo=F, message=F, warning=F,fig.height=5,fig.width=6}
+
+data_cdc.df.joursemaine <-
+  data_cdc.df.jfv %>%
+  filter(!type_vacs %in% 'vacances') %>%
+  filter(!type_ferie %in% 'férié') %>%
+  filter(type_confinement %in% 'nonconfinement') %>%
+  mutate(jour_semaine = weekdays(date_fmt_2)) %>%
+  mutate(heure_fmt = format(strptime(date_fmt_2, "%Y-%m-%d %H:%M:%S"), "%H:%M")) %>%
+  group_by(jour_semaine) %>%
+  summarise(total_croix_de_chavaux=sum(total_croix_de_chavaux), 
+            cdc_vers_mairie=sum(cdc_vers_mairie),
+            cdc_vers_paris=sum(cdc_vers_paris),
+            nb_jour = n_distinct(jour)) %>%
+  mutate(total_croix_de_chavaux = total_croix_de_chavaux/nb_jour,
+         cdc_vers_mairie = cdc_vers_mairie/nb_jour,
+         cdc_vers_paris = cdc_vers_paris/nb_jour) %>%
+  # mutate_at(.vars = c("total_croix_de_chavaux", "cdc_vers_mairie","cdc_vers_paris") ,
+  #           .funs = (. = ./"nb_jour")) %>%
+  mutate(jour_semaine.f = as.factor(jour_semaine),
+         jour_semaine.f = factor(jour_semaine.f, levels = c('Lundi','Mardi','Mercredi','Jeudi','Vendredi', 'Samedi','Dimanche')))
+
+
+data_cdc.df.joursemaine.tr <- 
+  data_cdc.df.joursemaine %>%
+  select(-jour_semaine, - nb_jour) %>%
+  pivot_longer(-jour_semaine.f, names_to = "type", values_to = "nb")
+
+
+
+
+ggplot() +
+  geom_col(data = data_cdc.df.joursemaine.tr %>%
+             filter(!type %in% "total_croix_de_chavaux"),
+           aes(x = jour_semaine.f, y = nb, fill = type),
+           position = "dodge") +
+  scale_fill_manual(name = "",
+                     values = c("#453c85", "#9d92e8"),
+                     labels = c(
+                                "Paris vers Montreuil",
+                       "Montreuil vers Paris")) +
+  scale_y_continuous(limits = c(0,1100),
+                     breaks = seq(0,1000,100)) +
+  # scale_x_datetime(breaks = date_breaks("1 hour"), 
+  #                  labels = date_format("%Hh"), 
+  #                  expand = c(0,0)) +
+  labs(
+    title = "Fréquentation cycliste à Croix de Chavaux *à Montreuil*  
+    <span style='font-size:11pt'>Nombre moyen de passages quotidien.</span>",
+    x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors période de confinement, jours fériés et vacances scolaires."
+  ) +
+  theme_ipsum() +
+  theme(legend.position = c(0.9,0.95),
+        plot.title = element_markdown(lineheight = 1.1, size = 14),
+        legend.text = element_markdown(size = 11),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 13, face = "bold"),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_blank()) 
+
+```
+
+
+Sur une semaine classique (hors vacances) c'est le vendredi qu'on prend le plus le vélo, c'est bientôt le week-end ça fait plaisir.
+Avec le compteur de passages on peut différencier le sens de circulation : à Croix de Chavaux, il est installé au Nord de la place ce qui favorise la prise en compte du trafic qui se fait vers Paris plutôt que celui qui part vers la mairie de Montreuil.
+
+Soyons plus précis encore puisqu'on connait le trafic par quart d'heure :
+
+```{r profil_semaine_heure, echo=F, message=F, warning=F,fig.height=6,fig.width=10}
+
+
+data_cdc.df.quartheuresemaine <-
+  data_cdc.df.jfv %>%
+  filter(!type_vacs %in% 'vacances') %>%
+  filter(!type_ferie %in% 'férié') %>%
+  filter(type_confinement %in% 'nonconfinement') %>%
+  mutate(jour_semaine = weekdays(date_fmt_2)) %>%
+  mutate(heure_fmt = format(strptime(date_fmt_2, "%Y-%m-%d %H:%M:%S"), "%H:%M")) %>%
+  mutate(time_20200101 = ymd_hms(paste("2020-01-01", strftime(date_fmt_2, format="%H:%M:%S",tz = "UTC")))) %>%
+  group_by(jour_semaine,time_20200101) %>%
+  summarise(total_croix_de_chavaux=mean(total_croix_de_chavaux), 
+            cdc_vers_mairie=mean(cdc_vers_mairie),
+            cdc_vers_paris=mean(cdc_vers_paris)) %>%
+  mutate(jour_semaine.f = as.factor(jour_semaine),
+         jour_semaine.f = factor(jour_semaine.f, levels = c('Lundi','Mardi','Mercredi','Jeudi','Vendredi', 'Samedi','Dimanche')))
+
+ggplot() +
+  geom_smooth(data = data_cdc.df.quartheuresemaine ,
+              aes(x=time_20200101, 
+                  #y=total_croix_de_chavaux,
+                  y=cdc_vers_paris,
+                  color=jour_semaine.f,
+                  group=jour_semaine.f),
+              span = 0.08, 
+              alpha = 0.8,
+              se = FALSE,
+              size = 0.5
+  ) +
+  scale_color_manual(name = "",
+                     values = c("#3B9AB2", "#78B7C5", "#EBCC2A", "#E1AF00", "#F21A00","grey","black"),
+                     labels = c(
+                       Lundi = "<p style='color:#3B9AB2;font-size:9pt'>Lundi</p>",
+                       Mardi = "<p style='color:#78B7C5;font-size:9pt'>Mardi</p>",
+                       Mercredi = "<p style='color:#EBCC2A;font-size:9pt'>Mercredi</p>",
+                       Jeudi = "<p style='color:#E1AF00;font-size:9pt'>Jeudi</p>",
+                       Vendredi = "<p style='color:#F21A00;font-size:9pt'>Vendredi</p>",
+                       Samedi = "<p style='color:grey;font-size:9pt'>Samedi</p>",
+                       Dimanche = "<p style='color:black;font-size:9pt'>Dimanche</p>")) +
+  scale_x_datetime(breaks = date_breaks("1 hour"), 
+                   labels = date_format("%Hh"), 
+                   expand = c(0,0)) +
+  labs(
+    title = "Fréquentation cycliste à Croix de Chavaux *à Montreuil*  
+    <span style='font-size:11pt'>Nombre de passages par quart d'heure.</span>",
+    x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors période de confinement, jours fériés et vacances scolaires."
+  ) +
+  theme_ipsum() +
+  theme(legend.position = c(0.95,0.7),
+        plot.title = element_markdown(lineheight = 1.1),
+        legend.text = element_markdown(size = 11),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_blank()) 
+
+
+
+```
+
+
+En semaine le pic de circulation est à 9h du matin avec 40 passages en 15 minutes, soit quasiment 1 vélo toutes les 20 secondes.
+Phénomène qui se remarque pour tous les modes de transports, le vendredi on démarre plus tard : la courbe rouge est décalée d'environ 15 minutes par rapport aux autres jours de la semaine. Ce décalage semble d'ailleurs assez progressif : c'est de plus en plus dur de se réveiller !
+
+La majorité des cyclistes sont des montreuillois partant travailler à Paris mais le compteur ne repère tous les retours en soirée vu sa localisation en haut de la place : on peut tout de même voir que du lundi au jeudi le pic du soir a lieu vers 18h30. Le vendredi par contre la croix de Chavaux est fréquentée toute l'après-midi, on débauche plus tôt.
+
+Entre minuit et 2 heures du matin c'est bien sûr le vendredi soir et samedi soir que les choses se passent.
+
+<br>
+<br>
+
+## Avant / pendant le confinement
+
+
+
+Le profil horaire du trafic pendant le confinement a aussi des particularités : plus tôt le matin avec un pic à 8h30, moins d'afflux le midi (pas de retour à la maison pour manger ?), un pic de soirée à 18h et un trafic quasi nul passé 23h. Le plus notable reste un trafic beaucoup plus stable tout au long de la journée avec une variabilité faible.
+
+
+```{r profil_semaine_heure_confinement, echo=F, message=F, warning=F,fig.height=5,fig.width=10}
+
+
+data_cdc.df.quartheuresemaine.confinement <-
+  data_cdc.df.jfv %>%
+  filter(!type_vacs %in% 'vacances') %>%
+  filter(!type_ferie %in% 'férié') %>%
+  mutate(jour_semaine = weekdays(date_fmt_2)) %>%
+  mutate(heure_fmt = format(strptime(date_fmt_2, "%Y-%m-%d %H:%M:%S"), "%H:%M")) %>%
+  # mutate(hour = strftime(date_fmt_2, format="%H:%M:%S",tz = "UTC") ) %>% 
+  # mutate(time_20200101 = ymd_hms(paste("2020-01-01", hour))) %>%
+  mutate(time_20200101 = ymd_hms(paste("2020-01-01", strftime(date_fmt_2, format="%H:%M:%S",tz = "UTC")))) %>%
+  filter(jour_semaine %in% c('Lundi','Mardi','Mercredi','Jeudi','Vendredi')) %>%
+  group_by(type_confinement,time_20200101) %>%
+  summarise(total_croix_de_chavaux=mean(total_croix_de_chavaux), 
+            cdc_vers_mairie=mean(cdc_vers_mairie),
+            cdc_vers_paris=mean(cdc_vers_paris)) 
+
+
+
+
+ggplot() +
+  geom_smooth(data = data_cdc.df.quartheuresemaine.confinement ,
+              aes(x=time_20200101, 
+                  #y=total_croix_de_chavaux,
+                  y=cdc_vers_paris,
+                  color=type_confinement,
+                  group=type_confinement),
+              span = 0.08, 
+              alpha = 0.8,
+              se = FALSE,
+              size = 0.5
+  ) +
+  scale_color_manual(name = "",
+                     values = c(nonconfinement = "#cda7b6", confinement = "#4f162c"),
+                     labels = c(
+                       nonconfinement = "<p style='color:#cda7b6;font-size:9pt'>Hors confinement</p>",
+                     confinement = "<p style='color:#4f162c;font-size:9pt'>Pendant le confinement</p>") ) +
+  scale_x_datetime(breaks = date_breaks("1 hour"), 
+                   labels = date_format("%Hh"), 
+                   expand = c(0,0)) +
+  labs(
+    title = "Fréquentation cycliste à Croix de Chavaux *à Montreuil*  
+    <span style='font-size:11pt'>Nombre de passages par quart d'heure. </span>",
+    x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors jours fériés et vacances scolaires."
+  ) +
+  theme_ipsum() +
+  theme(legend.position = c(0.9,0.8),
+        plot.title = element_markdown(lineheight = 1.1),
+        legend.text = element_markdown(size = 11),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_line(color = "grey90")) 
+
+```
+
+
+
+## L'influence de la météo
+
+
+Impossible de parler vélo sans évoquer la météo. Si les averses et les bourrasques ne décourageront pas les vrais vélotaffeurs équipés, elle peut tout de même refroidir les cyclistes moins avertis. Mais à quel point peut-elle jouer dans leur décision ?
+
+Une [sympathique étude](http://documents.irevues.inist.fr/bitstream/handle/2042/70560/meteo_2019_107_64.pdf) a montré que les trajets mouillés à vélo étaient finalement assez rares. Les données du [réseau Radome](https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=93&id_rubrique=32) de Météo-France utilisées pour cette étude auraient été parfaites (infos sur les précipitations actualisées toutes les 6 minutes), mais malheureusement pas en open data (80 000€ tout de même). 
+On va donc prendre l'option gratuite avec ces [données en open-data de Meteo France](https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=90&id_rubrique=32) qui informent sur les conditions (précipitations, nébulosité, état du sol...) par tranche de 3 heures et les comparer nombre de passages vélo à Croix de Chavaux pendant ce même créneau. Ici on analyse les données météo de la station de l'aéroport d'Orly puisque c'est la plus proche de Montreuil. 
+
+
+```{r diag_precipitations, echo=F, message=F, warning=F,fig.height=3,fig.width=9}
+
+# précipitations
+cpt_precip <-
+data_cdc.df.3h.meteo %>%
+  filter(!is.na(rr3)) %>%
+  mutate(rr3.cl = case_when(rr3 == 0 ~ "Pas de pluie",
+                            between(rr3,0,2) ~ "Un peu de pluie",
+                            TRUE ~ "Beaucoup de pluie")) %>%
+  mutate(rr3.cl = as.factor(rr3.cl),
+         rr3.cl = factor(rr3.cl, levels = rev(c("Pas de pluie","Un peu de pluie","Beaucoup de pluie")))) %>%
+  group_by(rr3.cl) %>%
+  summarise(nb_creneaux = n(),
+            total_passages = sum(total_croix_de_chavaux),
+            moyenne_passages=mean(total_croix_de_chavaux)) %>%
+  mutate(pct_creneaux = nb_creneaux/ sum(nb_creneaux),
+         pct_passages = total_passages/sum(total_passages)) %>%
+  mutate(moyenne_passages = moyenne_passages / 3)
+
+# diagramme barres cumulé
+ggplot(data = cpt_precip %>%
+         select(rr3.cl, pct_creneaux, pct_passages) %>%
+         pivot_longer(-rr3.cl, names_to = "type", values_to = "pct") %>%
+         mutate(type = case_when(type %in% 'pct_creneaux' ~ "Temps", TRUE ~ "Passages vélos")),
+       aes(x = type,
+           y = pct, fill = rr3.cl)) + 
+  geom_col( ) +
+  geom_text(aes(label = percent(pct,1)),
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  coord_flip() +
+  scale_fill_manual(name = "",
+                    breaks = rev(levels(cpt_precip$rr3.cl)),
+                     values = c( "#78B7C5", "#3B9AB2","#132e2d")) +
+  scale_y_continuous(breaks = seq(0,1,0.1), 
+                   labels = scales::percent_format(accuracy = 1), 
+                   name = "",
+                   expand = c(0,0)) +
+  #scale_x_discrete(limits =  rev(levels(cpt_precip$rr3.cl.f))) +
+  labs(
+    title = "Répartition du temps et des passages vélos <br>
+    <span style='font-size:11pt'>selon le type de précipitations.</span>",
+      x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors période de confinement. / Meteo France, données SYNOP essentielles OMM station Orly"
+  ) +
+  theme_ipsum() +
+  theme(legend.position = "top",
+        legend.direction = "horizontal",
+        plot.title = element_markdown(lineheight = 1.1),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 12),
+        #axis.text.x = element_text(size = 8),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_blank()) 
+
+
+```
+
+
+
+Donc 86% du temps il ne pleut pas une goutte. Voilà ce que ça représente depuis un an, jour par jour. Finalement un cycliste a peu de chances de se faire mouiller (traits en bleu) et encore moins d'être trempé (traits en noir).
+
+
+```{r timeline_precipitations, echo=F, message=F, warning=F,fig.height=9,fig.width=10}
+l_mois <- c('juillet','août', 'septembre', 'octobre', 'novembre', 'décembre', 'janvier','février','mars','avril','mai','juin')
+
+
+data_cdc.df.3h.meteo.timeline <-
+  data_cdc.df.3h.meteo %>%
+  mutate(mois = months(jour)) %>%
+  mutate(mois.f = as.factor(mois),
+         mois.f = factor(mois.f, levels = l_mois)) %>%
+  mutate(date_moisunique = ymd_hms(paste("2020-01-",str_pad(day(jour),side = "left",width = 2, pad = "0" ), strftime(date_fmt_3h, format="%H:%M:%S",tz = "UTC")))) %>%
+  filter( jour >= as.Date("2019-07-01") & jour < as.Date("2020-07-01")) %>%
+  mutate(rr3.cl = case_when(rr3 == 0 ~ "Pas de pluie",
+                            between(rr3,0,2) ~ "Un peu de pluie",
+                            TRUE ~ "Beaucoup de pluie")) %>% 
+  mutate(rr3.cl = as.factor(rr3.cl),
+         rr3.cl = factor(rr3.cl, levels = rev(c("Pas de pluie","Un peu de pluie","Beaucoup de pluie")))) %>%
+  identity()
+
+
+ggplot() +
+  geom_col(data = data_cdc.df.3h.meteo.timeline ,
+           aes(x=date_moisunique ,
+               y=1,
+               fill = rr3.cl),
+           size = 0,
+           linetype = "blank",
+           colour = NA,) +
+  facet_wrap(~ mois.f, ncol = 1) +
+  theme_ipsum() +
+    scale_x_datetime(breaks = date_breaks("1 day"),
+                   labels = date_format("%d", tz="CET"),
+                   expand = c(0,0)) +
+  # précipitations rr3
+  scale_fill_manual(name = "",
+                    breaks = rev(levels(data_cdc.df.3h.meteo.timeline$rr3.cl)),
+                    values = c( "#bbdbe2", "#3B9AB2","#132e2d")) +
+  # nébulosité n
+  # scale_fill_manual(name = "",
+  #                   breaks = rev(levels(data_cdc.df.3h.meteo.timeline$n.cl)),
+  #                   values = c( "#c8b0d1", "#9262a3","#493151")) +
+  theme(axis.text.y = element_blank(),
+        #axis.text.x = element_blank(),
+        legend.position = "top",
+        legend.direction = "horizontal",
+        axis.title.y = element_blank(),
+        # panel.grid.major  = element_blank(),
+        panel.grid.major.y  = element_blank(),
+        panel.grid.minor.y  = element_blank(),
+        panel.grid.major.x  = element_line(color = "red"),
+        panel.grid.minor.x  = element_blank(),
+        panel.ontop = TRUE,
+        # panel.grid.minor  = element_blank(),
+        panel.spacing.x=unit(0.02, "lines"),
+        panel.spacing.y=unit(0.02, "lines"),
+        strip.text.x = element_text(size = 11),
+        axis.title.x = element_blank()) +
+   labs(
+    title = "Type de précipitations par créneau horaire de 3 heures depuis un an",
+    subtitle = "précipitations = 0 mm : Pas de pluie   /   0 mm > précipitations < 2 mm : Un peu de pluie   /   précipitations > 2 mm : Beaucoup de pluie.",
+    caption = "Source : Meteo France, données SYNOP essentielles OMM, station Orly"
+  ) %>%
+  identity()
+
+```
+
+
+
+2% des passages de vélo à Croix de Chavaux ont donc été effectué dans un créneau de 3 heures où il a beaucoup plu : désolé pour ceux qui se trouvaient sous l'averse ! Voyons maintenant quelles sont les stats moyennes de fréquentation selon l'intensité de la pluie :
+
+<p style="color:#78B7C5">`r round(cpt_precip %>% filter( rr3.cl %in% "Pas de pluie") %>% pull(moyenne_passages), 0)` passages de vélos par heure quand il ne pleut pas</p>
+<p style="color:#3B9AB2;fontface:bold">`r round(cpt_precip %>% filter( rr3.cl %in% "Un peu de pluie") %>% pull(moyenne_passages), 0)` passages de vélos quand il pleut un peu (entre 0 et 2 mm sur un créneau de 3 heures)</p>
+<p style="color:#132e2d">`r round(cpt_precip %>% filter( rr3.cl %in% "Beaucoup de pluie") %>% pull(moyenne_passages), 0)` passages de vélos quand il pleut beaucoup (plus de 2 mm sur un créneau de 3 heures) </p>
+
+
+<br>
+<br>
+
+```{r diag_vent, include=F, echo=F, message=F, warning=F,fig.height=3,fig.width=9}
+
+# vent
+cpt_vent <-
+  data_cdc.df.3h.meteo %>%
+  filter(!is.na(ff)) %>%
+  mutate(ff.cl = case_when(ff <= 6 ~ "Pas venteux",
+                           TRUE ~ "Venteux")) %>%
+  mutate(ff.cl = as.factor(ff.cl),
+         ff.cl = factor(ff.cl, levels = rev(c("Pas venteux","Venteux")))) %>%
+  group_by(ff.cl) %>%
+  summarise(nb_creneaux = n(),
+            total_passages = sum(total_croix_de_chavaux),
+            moyenne_passages=mean(total_croix_de_chavaux)) %>%
+  mutate(pct_creneaux = nb_creneaux/ sum(nb_creneaux),
+         pct_passages = total_passages/sum(total_passages)) %>%
+  mutate(moyenne_passages = moyenne_passages / 3)
+
+# diagramme barres cumulé
+ggplot(data = cpt_vent %>%
+         select(ff.cl, pct_creneaux, pct_passages) %>%
+         pivot_longer(-ff.cl, names_to = "type", values_to = "pct") %>%
+         mutate(type = case_when(type %in% 'pct_creneaux' ~ "Temps", TRUE ~ "Passages vélos")),
+       aes(x = type,
+           y = pct, fill = ff.cl)) + 
+  geom_col( ) +
+  geom_text(aes(label = percent(pct,1)),
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  coord_flip() +
+  scale_fill_manual(name = "",
+                    breaks = rev(levels(cpt_vent$ff.cl)),
+                    values = rev(c( "#a1352a", "#ee8176"))) +
+  scale_y_continuous(breaks = seq(0,1,0.1), 
+                     labels = scales::percent_format(accuracy = 1), 
+                     name = "",
+                     expand = c(0,0)) +
+  #scale_x_discrete(limits =  rev(levels(cpt_precip$rr3.cl.f))) +
+  labs(
+    title = "Répartition du temps et des passages vélos <br>
+    <span style='font-size:11pt'>selon la vitesse moyenne du vent</span>",
+    x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors période de confinement. / Meteo France, données SYNOP essentielles OMM station Orly"
+  ) +
+  theme_ipsum() +
+  theme(legend.position = "top",
+        legend.direction = "horizontal",
+        plot.title = element_markdown(lineheight = 1.1),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 12),
+        #axis.text.x = element_text(size = 8),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_blank()) 
+
+
+```
+
+
+<br>
+
+Qu'en est il de l'ensoleillement ?
+
+```{r diag_nebulosite, echo=F, message=F, warning=F,fig.height=3,fig.width=9}
+
+# nébulosité
+cpt_nebulosite <-
+  data_cdc.df.3h.meteo %>%
+  filter(!is.na(n)) %>%
+  mutate(n.cl = case_when(n == 0 ~ "Grand bleu",
+                          between(n,1,95) ~ "Nuages",
+                          TRUE ~ "Gris")) %>%
+  mutate(n.cl = as.factor(n.cl),
+         n.cl = factor(n.cl, levels = rev(c("Grand bleu","Nuages","Gris")))) %>%
+  group_by(n.cl) %>%
+  summarise(nb_creneaux = n(),
+            total_passages = sum(total_croix_de_chavaux),
+            moyenne_passages=mean(total_croix_de_chavaux)) %>%
+  mutate(pct_creneaux = nb_creneaux/ sum(nb_creneaux),
+         pct_passages = total_passages/sum(total_passages)) %>%
+  mutate(moyenne_passages = moyenne_passages / 3)
+
+# diagramme barres cumulé
+ggplot(data = cpt_nebulosite %>%
+         select(n.cl, pct_creneaux, pct_passages) %>%
+         pivot_longer(-n.cl, names_to = "type", values_to = "pct") %>%
+         mutate(type = case_when(type %in% 'pct_creneaux' ~ "Temps", TRUE ~ "Passages vélos")),
+       aes(x = type,
+           y = pct, fill = n.cl)) + 
+  geom_col( ) +
+  geom_text(aes(label = percent(pct,1)),
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  coord_flip() +
+  scale_fill_manual(name = "",
+                    breaks = rev(levels(cpt_nebulosite$n.cl)),
+                    values = c( "#c8b0d1", "#9262a3","#493151")) +
+  scale_y_continuous(breaks = seq(0,1,0.1), 
+                     labels = scales::percent_format(accuracy = 1), 
+                     name = "",
+                     expand = c(0,0)) +
+  #scale_x_discrete(limits =  rev(levels(cpt_precip$rr3.cl.f))) +
+  labs(
+    title = "Répartition du temps et des passages vélos <br>
+    <span style='font-size:11pt'>selon la nébulosité</span>",
+    x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors période de confinement. / Meteo France, données SYNOP essentielles OMM station Orly"
+  ) +
+  theme_ipsum() +
+  theme(legend.position = "top",
+        plot.title = element_markdown(lineheight = 1.1),
+        legend.direction = "horizontal",
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 12),
+        #axis.text.x = element_text(size = 8),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_blank()) 
+
+```
+
+
+21% du temps il fait grand beau, 21% il fait bien gris. Et c'est entre les deux, c'est à dire quand il y a des nuages, que le trafic cycliste est le plus dense :
+
+<p style="color:#c8b0d1;fontface:bold">`r round(cpt_nebulosite %>% filter( n.cl %in% "Grand bleu") %>% pull(moyenne_passages), 0)` passages de vélos par heure quand le ciel est dégagé</p>
+<p style="color:#9262a3;fontface:bold">`r round(cpt_nebulosite %>% filter( n.cl %in% "Nuages") %>% pull(moyenne_passages), 0)` passages de vélos quand il y a des nuages.</p>
+<p style="color:#493151;fontface:bold">`r round(cpt_nebulosite %>% filter( n.cl %in% "Gris") %>% pull(moyenne_passages), 0)` passages de vélos quand il fait gris.</p>
+
+<br>
+
+Et la température alors ?
+
+
+```{r diag_temperature, echo=F, message=F, warning=F,fig.height=3,fig.width=9}
+
+cpt_temperature <-
+  data_cdc.df.3h.meteo %>%
+  filter(!is.na(temp)) %>%
+  mutate(temp.cl = case_when(temp <= 2 ~ "Froid",
+                             between(temp,3,10) ~ "Un peu froid",
+                             between(temp,10,18) ~ "Doux",
+                             between(temp,18,26) ~ "Chaud",
+                             TRUE ~ "Très chaud")) %>%
+  mutate(temp.cl = as.factor(temp.cl),
+         temp.cl = factor(temp.cl, levels = rev(c("Froid","Un peu froid","Doux","Chaud","Très chaud")))) %>%
+  group_by(temp.cl) %>%
+  summarise(nb_creneaux = n(),
+            total_passages = sum(total_croix_de_chavaux),
+            moyenne_passages=mean(total_croix_de_chavaux)) %>%
+  mutate(pct_creneaux = nb_creneaux/ sum(nb_creneaux),
+         pct_passages = total_passages/sum(total_passages)) %>%
+  mutate(moyenne_passages = moyenne_passages / 3)
+
+# diagramme barres cumulé
+ggplot(data = cpt_temperature %>%
+         select(temp.cl, pct_creneaux, pct_passages) %>%
+         pivot_longer(-temp.cl, names_to = "type", values_to = "pct") %>%
+         mutate(type = case_when(type %in% 'pct_creneaux' ~ "Temps", TRUE ~ "Passages vélos")),
+       aes(x = type,
+           y = pct, fill = temp.cl)) + 
+  geom_col( ) +
+  geom_text(aes(label = percent(pct,1)),
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  coord_flip() +
+  scale_fill_manual(name = "",
+                    breaks = rev(levels(cpt_temperature$temp.cl)),
+                    values = c( "#fdd49e", "#fdbb84","#fc8d59","#e34a33","#b30000")) +
+  scale_y_continuous(breaks = seq(0,1,0.1), 
+                     labels = scales::percent_format(accuracy = 1), 
+                     name = "",
+                     expand = c(0,0)) +
+  #scale_x_discrete(limits =  rev(levels(cpt_precip$rr3.cl.f))) +
+  labs(
+    title = "Répartition du temps et des passages vélos <br>
+    <span style='font-size:11pt'>selon la température</span>",
+    x = "", y = "",
+    caption = "Source : Ville de Montreuil. Données depuis le 1er juillet 2018, hors période de confinement. / Meteo France, données SYNOP essentielles OMM station Orly"
+  ) +
+  theme_ipsum() +
+  theme(legend.position = "top",
+        legend.direction = "horizontal",
+        plot.title = element_markdown(lineheight = 1.1),
+        strip.text.x = element_text(size = 9, face = "bold"),
+        axis.text.y = element_text(size = 12),
+        #axis.text.x = element_text(size = 8),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 8),
+        legend.background = element_rect(fill = "white", color = "grey85", size = 0.2),
+        #legend.text = element_text(size = 9),
+        panel.grid.minor = element_blank()) 
+
+```
+
+
+Plus il fait chaud et plus ça roule !
+
+
+<p style="color:#fdd49e;fontface:bold">`r round(cpt_temperature %>% filter( temp.cl %in% "Froid") %>% pull(moyenne_passages), 0)` passages de vélos quand il fait froid (moins de 2 degrès)</p>
+<p style="color:#fdbb84;fontface:bold">`r round(cpt_temperature %>% filter( temp.cl %in% "Un peu froid") %>% pull(moyenne_passages), 0)` passages de vélos quand il fait frisquet (2 à 10 degrès)</p>
+<p style="color:#fc8d59;fontface:bold">`r round(cpt_temperature %>% filter( temp.cl %in% "Doux") %>% pull(moyenne_passages), 0)` passages de vélos quand il fait doux (10 à 18 degrès)</p>
+<p style="color:#e34a33;fontface:bold">`r round(cpt_temperature %>% filter( temp.cl %in% "Chaud") %>% pull(moyenne_passages), 0)` passages de vélos quand il fait chaud (18 à 26 degrès)</p>
+<p style="color:#b30000;fontface:bold">`r round(cpt_temperature %>% filter( temp.cl %in% "Très chaud") %>% pull(moyenne_passages), 0)` passages de vélos quand il fait très chaud (plus de 26 degrès)</p>
+
+
+<br>
+<br>
+
+## Modélisation
+
+Pour comprendre quels facteurs influencent le plus la fréquentation, on procède à l'ajustement d'un modèle de régression linéaire. Après plusieurs tentatives on atterrit sur un r2 de 0,7, un pouvoir explicatif correct, et voilà ce qu'on peut en retirer (évidemment on a exclu la période de confinement).
+
+```{r model, echo=F, message=F, warning=F,fig.height=5,fig.width=8}
+
+data_cdc.df.3h.meteo.model <-
+  data_cdc.df.3h.meteo %>%
+  mutate(saison =  case_when( jour >= as.Date("2018-03-21") & jour < as.Date("2018-06-21") | 
+                                jour >= as.Date("2019-03-21") & jour < as.Date("2019-06-21") | 
+                                jour >= as.Date("2020-03-21") & jour < as.Date("2020-06-21") ~ "Printemps",
+                              jour >= as.Date("2018-06-21") & jour < as.Date("2018-09-21") | 
+                                jour >= as.Date("2019-06-21") & jour < as.Date("2019-09-21") | 
+                                jour >= as.Date("2020-06-21") & jour < as.Date("2020-09-21") ~ "Eté",
+                              jour >= as.Date("2018-09-21") & jour < as.Date("2018-12-21") | 
+                                jour >= as.Date("2019-09-21") & jour < as.Date("2019-12-21",) | 
+                                jour >= as.Date("2020-09-21") & jour < as.Date("2020-12-21") ~ "Automne",
+                              jour >= as.Date("2018-12-21") & jour < as.Date("2019-03-21") | 
+                                jour >= as.Date("2019-12-21") & jour < as.Date("2020-03-21") ~ "Hiver",
+                              TRUE ~"NOK")) %>%
+  filter(type_confinement %in% 'nonconfinement') %>%
+  #filter(is.na(type_vacs)) %>%
+  select(-jour, - type_jour, - type_confinement) %>%
+  #filter(between(jour,as.Date("2019-01-01"),as.Date("2020-01-01") )) %>%
+  filter(!is.na(temp)) %>%
+  mutate(temp.cl = case_when(temp <= 2 ~ "Froid",
+                             between(temp,3,10) ~ "Un peu froid",
+                             between(temp,10,18) ~ "Doux",
+                             between(temp,18,26) ~ "Chaud",
+                             TRUE ~ "Très chaud")) %>%
+  # filter(!is.na(etat_sol)) %>%
+  # mutate(etatsol.cl = case_when(etat_sol == 0 ~ "Sec",
+  #                               etat_sol == 1 ~ "Humide",
+  #                               between(etat_sol,2,3) ~ "Mouillé",
+  #                               TRUE ~ "Gelé ou enneigé")) %>%
+  filter(!is.na(etat_sol)) %>%
+  mutate(etatsol.cl = case_when(etat_sol %in% c(0,1,2,3) ~ "Non gelé",
+                                TRUE ~ "Gelé ou enneigé")) %>%
+  filter(!is.na(n)) %>%
+  mutate(n.cl = case_when(n == 0 ~ "Grand bleu",
+                          between(n,1,95) ~ "Nuages",
+                          TRUE ~ "Gris")) %>%
+  filter(!is.na(ff)) %>%
+  mutate(ff.cl = case_when(ff <= 9 ~ "Pas venteux",
+                           TRUE ~ "Venteux")) %>%
+  filter(!is.na(rr3)) %>%
+  mutate(rr3.cl = case_when(rr3 == 0 ~ "Pas de pluie",
+                            between(rr3,0,2) ~ "Un peu de pluie",
+                            TRUE ~ "Beaucoup de pluie")) %>%
+  #mutate(jour_semaine = weekdays(date.ok)) %>%
+  mutate(jour_semaine.f = as.factor(jour_semaine),
+         jour_semaine.f = factor(jour_semaine.f, levels = c('Lundi','Mardi','Mercredi','Jeudi','Vendredi', 'Samedi','Dimanche'))) %>%
+  mutate(type_ferie = replace_na(type_ferie, "non férié")) %>%
+  mutate(type_vacances = replace_na(type_vacs, "non vacances")) %>%
+  mutate(rr3.cl = factor(rr3.cl, levels = c("Pas de pluie","Un peu de pluie","Beaucoup de pluie")),
+         ff.cl = factor(ff.cl, levels = c("Pas venteux","Venteux")),
+         n.cl = factor(n.cl, levels = c("Grand bleu","Nuages", "Gris")),
+         # etatsol.cl = factor(etatsol.cl, levels = c("Sec","Humide","Mouillé","Gelé ou enneigé")),
+         etatsol.cl = factor(etatsol.cl, levels = c("Non gelé","Gelé ou enneigé")),
+         temp.cl = factor(temp.cl, levels = c("Froid","Un peu froid","Doux","Chaud","Très chaud")),
+         saison = factor(saison, levels = c("Hiver","Printemps","Eté","Automne")),
+         type_ferie = factor(type_ferie, levels = c("non férié","férié")),
+         type_vacances = factor(type_vacances, levels = c("non vacances","vacances"))) %>%
+  mutate(jour_semaine.f = relevel(jour_semaine.f, ref = "Lundi"),
+         n.cl = relevel(n.cl, ref = "Nuages"),
+         temp.cl = relevel(temp.cl, ref = "Doux")) %>%
+  mutate(saison.f = relevel(saison, ref = "Hiver")) %>%
+  mutate(type_ferie = relevel(type_ferie, ref = "non férié")) %>%
+  mutate(type_vacances = relevel(type_vacances, ref = "non vacances")) %>%
+  #filter(type_vacances %in% 'non vacances') %>%
+  select(nb_passages = total_croix_de_chavaux,
+         date_fmt_3h,
+         rr3.cl, 
+         etatsol.cl,
+         jour_semaine.f, 
+         ff.cl,
+         n.cl,
+         #temp.cl,
+         temp,
+         saison.f,
+         type_vacances,
+         type_ferie) %>%
+  rename( Passages = nb_passages,
+          précipitations = rr3.cl, 
+         etat_sol = etatsol.cl,
+         jour_semaine = jour_semaine.f, 
+         vent = ff.cl,
+         nébulosité = n.cl,
+         #température = temp.cl,
+         température = temp,
+         saison = saison.f,
+         période_vacances = type_vacances,
+         jour_férié = type_ferie)
+
+# temperature relative numérique par heure de la journée
+cpt_saison_temp_n <- data_cdc.df.3h.meteo.model %>%
+  mutate(heure = hour(date_fmt_3h)) %>%
+  group_by(saison, heure) %>%
+  summarise(temp_moy = mean(température))
+
+data_cdc.df.3h.meteo.model.2 <-
+  data_cdc.df.3h.meteo.model %>%
+  mutate(heure = hour(date_fmt_3h)) %>%
+  left_join(cpt_saison_temp_n, by = c("saison", "heure")) %>%
+  mutate(température_relative_n = température - temp_moy) %>%
+  select(-heure, -temp_moy)
+
+
+## jour / nuit
+
+library(RchivalTag)
+
+
+data_cdc.df.3h.meteo.model.3 <-
+  data_cdc.df.3h.meteo.model.2 %>%
+  cbind.data.frame(data_cdc.df.3h.meteo.model.2 %>%
+              #slice(1:10) %>%
+              mutate(date = as.Date(date_fmt_3h, format = "Y%-%m-%d")) %>%
+              select(datetime = date) %>% mutate(Lat=48.8534, Lon=2.3488) %>%
+              mutate(lever = get_DayTimeLimits(.) %>% select(sunrise) %>% pull(),
+                     coucher = get_DayTimeLimits(.) %>% select(sunset) %>% pull()) ) %>%
+  # milieu de créneau -> binaire jour / nuit
+  mutate(date_fmt_3h_midcreneau = date_fmt_3h + 1.5*60*60) %>%
+  mutate(type_jour_nuit = case_when(date_fmt_3h_midcreneau >= lever & date_fmt_3h_midcreneau < coucher ~ "jour", TRUE ~ "nuit")) %>%
+  select(-c("datetime" ,"Lat" ,  "Lon" ,"lever",  "coucher" , "date_fmt_3h_midcreneau"))
+
+mod_lm <- lm(Passages ~ 0 + 
+             saison +
+             jour_semaine + 
+             période_vacances +
+             jour_férié +
+             type_jour_nuit +
+             #température_relative_précipitations +
+             température_relative_n + 
+             précipitations +
+             etat_sol +
+             vent +
+            #nébulosité + 
+             
+             .,
+           data = data_cdc.df.3h.meteo.model.3 %>%
+             select(-date_fmt_3h,
+                    -nébulosité,
+                    -température))
+
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+
+plot_model(mod_lm, 
+           show.values = TRUE, 
+           value.offset = .4,
+           value.size = 3,
+           digits = 1,
+           colors = c( "#f15664", "#5472c0"),
+           title = "Régression linéaire expliquant le nombre de passages vélos")
+
+```
+
+Voici comment interpréter le graphique de bas en haut :
+
+* Moins de vélos en été (probablement moins de Montreuillois présents aussi), mais ça reste assez équivalent pendant les autres saisons.
+* Si on prend comme référence le lundi, le vendredi compte 19 cyclistes de plus par créneau de 3 heures, le samedi 19 de moins et surtout le dimanche on compte presque 50 cyclistes de moins.
+* Un dimanche, un jour férié ou un jour de vacances scolaires c'est quasiment le même effet : - 50 cyclistes. Waou tout ça pour en arriver là ! C'est rassurant.
+* La nuit c'est 85 cyclistes de moins que le jour. Il faut aussi avouer qu'on a plutôt tendance à dormir la nuit qu'à faire du vélo, mais le jour étant plus long en été qu'en hiver ça contrebalance les niveaux de passage par saison.
+* 1 degré de plus c'est 1,5 passages supplémentaires. Là ça commence à être intéressant puisque la température calculée par créneau ici est relative, comparée à la température moyenne de la saison et le créneau horaire : qu'elle que soit la saison, plus il fait relativement doux/chaud, plus le trafic cycliste est important.
+* Lorsqu'il pleut beaucoup, c'est comme si c'était dimanche ! 51 cyclistes ont disparu, et lorsqu'il pleutine (< 2 mm en 3 heures) c'est 31 cyclistes en moins.
+* Un sol gelé ou enneigé freine plus les ardeurs des cyclistes qui seront 68 de moins, là encore c'est assez logique.
+* Enfin a priori pas d'effet remarqué du débit moyen du vent sur le trafic.
+
+

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.179">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mathieu">
+<meta name="dcterms.date" content="2020-06-10">
+<meta name="description" content="Circulation de vélos à Montreuil">
+
+<title>datamix - Vélo vs météo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<meta property="og:title" content="datamix - Vélo vs météo">
+<meta property="og:description" content="Circulation de vélos à Montreuil">
+<meta property="og:image" content="https://mtmx.netlify.app/posts/velo_montreuil/img/img_velo_meteo_montreuil.png">
+<meta property="og:site-name" content="datamix">
+<meta property="og:image:height" content="626">
+<meta property="og:image:width" content="940">
+<meta name="twitter:title" content="datamix - Vélo vs météo">
+<meta name="twitter:description" content="Circulation de vélos à Montreuil">
+<meta name="twitter:image" content="https://mtmx.netlify.app/posts/velo_montreuil/img/img_velo_meteo_montreuil.png">
+<meta name="twitter:creator" content="@matamix">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="626">
+<meta name="twitter:image-width" content="940">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">datamix</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">A propos</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matamix"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#evolution-depuis-2018" id="toc-evolution-depuis-2018" class="nav-link active" data-scroll-target="#evolution-depuis-2018">Evolution depuis 2018</a></li>
+  <li><a href="#profil-dune-semaine-type" id="toc-profil-dune-semaine-type" class="nav-link" data-scroll-target="#profil-dune-semaine-type">Profil d’une semaine type</a></li>
+  <li><a href="#avant-pendant-le-confinement" id="toc-avant-pendant-le-confinement" class="nav-link" data-scroll-target="#avant-pendant-le-confinement">Avant / pendant le confinement</a></li>
+  <li><a href="#linfluence-de-la-météo" id="toc-linfluence-de-la-météo" class="nav-link" data-scroll-target="#linfluence-de-la-météo">L’influence de la météo</a></li>
+  <li><a href="#modélisation" id="toc-modélisation" class="nav-link" data-scroll-target="#modélisation">Modélisation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Vélo vs météo</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">montreuil</div>
+    <div class="quarto-category">vélo</div>
+    <div class="quarto-category">pluie</div>
+    <div class="quarto-category">météo</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Circulation de vélos à Montreuil
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mathieu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 10, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Pour accompagner son <a href="https://www.montreuil.fr/fileadmin/user_upload/01_La_ville/10_Venir_et_se_deplacer/montreuil-plan-velo-juin-2018.pdf">plan vélo</a> et quantifier le trafic cycliste dans le centre-ville, la ville de Montreuil a installé en 2018 un compteur place Croix-de-Chavaux et <a href="https://data.montreuil.fr/explore/dataset/compter-le-passage-des-velos-a-la-croix-de-chavaux/information/?sort=-jour_heure">publie en open-data les résultats</a> toutes les semaines. Voici ce qu’il peut nous apprendre sur le trafic cycliste en ville, le code pour générer ce qui suit est <a href="">ici</a>.</p>
+<p><br></p>
+<section id="evolution-depuis-2018" class="level2">
+<h2 class="anchored" data-anchor-id="evolution-depuis-2018">Evolution depuis 2018</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/evol_temp_jour-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>La croissance était assez linéaire : à la rentrée de septembre 2019 on voyait déjà une augmentation importante avec un pic le vendredi 13 septembre. On a changé de braquet en décembre avec les grêves des transports pour dépasser régulièrement les 3 000 passages par jour. Et puis la chute avec le confinement.</p>
+<p>La version sismomêtre, sur une excellente idée de <a href="https://twitter.com/JustTheSpring">Jonathan Spring</a> :</p>
+<!-- 
+<img src="./gifs/anim_18052020_v1.gif" width="900" height="600" />
+-->
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/sismometre-1.gif" class="img-fluid"></p>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="profil-dune-semaine-type" class="level2">
+<h2 class="anchored" data-anchor-id="profil-dune-semaine-type">Profil d’une semaine type</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/profil_semaine_jour-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+<p>Sur une semaine classique (hors vacances) c’est le vendredi qu’on prend le plus le vélo, c’est bientôt le week-end ça fait plaisir. Avec le compteur de passages on peut différencier le sens de circulation : à Croix de Chavaux, il est installé au Nord de la place ce qui favorise la prise en compte du trafic qui se fait vers Paris plutôt que celui qui part vers la mairie de Montreuil.</p>
+<p>Soyons plus précis encore puisqu’on connait le trafic par quart d’heure :</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/profil_semaine_heure-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>En semaine le pic de circulation est à 9h du matin avec 40 passages en 15 minutes, soit quasiment 1 vélo toutes les 20 secondes. Phénomène qui se remarque pour tous les modes de transports, le vendredi on démarre plus tard : la courbe rouge est décalée d’environ 15 minutes par rapport aux autres jours de la semaine. Ce décalage semble d’ailleurs assez progressif : c’est de plus en plus dur de se réveiller !</p>
+<p>La majorité des cyclistes sont des montreuillois partant travailler à Paris mais le compteur ne repère tous les retours en soirée vu sa localisation en haut de la place : on peut tout de même voir que du lundi au jeudi le pic du soir a lieu vers 18h30. Le vendredi par contre la croix de Chavaux est fréquentée toute l’après-midi, on débauche plus tôt.</p>
+<p>Entre minuit et 2 heures du matin c’est bien sûr le vendredi soir et samedi soir que les choses se passent.</p>
+<p><br> <br></p>
+</section>
+<section id="avant-pendant-le-confinement" class="level2">
+<h2 class="anchored" data-anchor-id="avant-pendant-le-confinement">Avant / pendant le confinement</h2>
+<p>Le profil horaire du trafic pendant le confinement a aussi des particularités : plus tôt le matin avec un pic à 8h30, moins d’afflux le midi (pas de retour à la maison pour manger ?), un pic de soirée à 18h et un trafic quasi nul passé 23h. Le plus notable reste un trafic beaucoup plus stable tout au long de la journée avec une variabilité faible.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/profil_semaine_heure_confinement-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+</section>
+<section id="linfluence-de-la-météo" class="level2">
+<h2 class="anchored" data-anchor-id="linfluence-de-la-météo">L’influence de la météo</h2>
+<p>Impossible de parler vélo sans évoquer la météo. Si les averses et les bourrasques ne décourageront pas les vrais vélotaffeurs équipés, elle peut tout de même refroidir les cyclistes moins avertis. Mais à quel point peut-elle jouer dans leur décision ?</p>
+<p>Une <a href="http://documents.irevues.inist.fr/bitstream/handle/2042/70560/meteo_2019_107_64.pdf">sympathique étude</a> a montré que les trajets mouillés à vélo étaient finalement assez rares. Les données du <a href="https://donneespubliques.meteofrance.fr/?fond=produit&amp;id_produit=93&amp;id_rubrique=32">réseau Radome</a> de Météo-France utilisées pour cette étude auraient été parfaites (infos sur les précipitations actualisées toutes les 6 minutes), mais malheureusement pas en open data (80 000€ tout de même). On va donc prendre l’option gratuite avec ces <a href="https://donneespubliques.meteofrance.fr/?fond=produit&amp;id_produit=90&amp;id_rubrique=32">données en open-data de Meteo France</a> qui informent sur les conditions (précipitations, nébulosité, état du sol…) par tranche de 3 heures et les comparer nombre de passages vélo à Croix de Chavaux pendant ce même créneau. Ici on analyse les données météo de la station de l’aéroport d’Orly puisque c’est la plus proche de Montreuil.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/diag_precipitations-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Donc 86% du temps il ne pleut pas une goutte. Voilà ce que ça représente depuis un an, jour par jour. Finalement un cycliste a peu de chances de se faire mouiller (traits en bleu) et encore moins d’être trempé (traits en noir).</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/timeline_precipitations-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>2% des passages de vélo à Croix de Chavaux ont donc été effectué dans un créneau de 3 heures où il a beaucoup plu : désolé pour ceux qui se trouvaient sous l’averse ! Voyons maintenant quelles sont les stats moyennes de fréquentation selon l’intensité de la pluie :</p>
+<p style="color:#78B7C5">
+56 passages de vélos par heure quand il ne pleut pas
+</p>
+<p style="color:#3B9AB2;fontface:bold">
+49 passages de vélos quand il pleut un peu (entre 0 et 2 mm sur un créneau de 3 heures)
+</p>
+<p style="color:#132e2d">
+41 passages de vélos quand il pleut beaucoup (plus de 2 mm sur un créneau de 3 heures)
+</p>
+<p><br> <br></p>
+<p><br></p>
+<p>Qu’en est il de l’ensoleillement ?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/diag_nebulosite-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>21% du temps il fait grand beau, 21% il fait bien gris. Et c’est entre les deux, c’est à dire quand il y a des nuages, que le trafic cycliste est le plus dense :</p>
+<p style="color:#c8b0d1;fontface:bold">
+49 passages de vélos par heure quand le ciel est dégagé
+</p>
+<p style="color:#9262a3;fontface:bold">
+60 passages de vélos quand il y a des nuages.
+</p>
+<p style="color:#493151;fontface:bold">
+49 passages de vélos quand il fait gris.
+</p>
+<p><br></p>
+<p>Et la température alors ?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/diag_temperature-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Plus il fait chaud et plus ça roule !</p>
+<p style="color:#fdd49e;fontface:bold">
+41 passages de vélos quand il fait froid (moins de 2 degrès)
+</p>
+<p style="color:#fdbb84;fontface:bold">
+50 passages de vélos quand il fait frisquet (2 à 10 degrès)
+</p>
+<p style="color:#fc8d59;fontface:bold">
+54 passages de vélos quand il fait doux (10 à 18 degrès)
+</p>
+<p style="color:#e34a33;fontface:bold">
+66 passages de vélos quand il fait chaud (18 à 26 degrès)
+</p>
+<p style="color:#b30000;fontface:bold">
+64 passages de vélos quand il fait très chaud (plus de 26 degrès)
+</p>
+<p><br> <br></p>
+</section>
+<section id="modélisation" class="level2">
+<h2 class="anchored" data-anchor-id="modélisation">Modélisation</h2>
+<p>Pour comprendre quels facteurs influencent le plus la fréquentation, on procède à l’ajustement d’un modèle de régression linéaire. Après plusieurs tentatives on atterrit sur un r2 de 0,7, un pouvoir explicatif correct, et voilà ce qu’on peut en retirer (évidemment on a exclu la période de confinement).</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/model-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>Voici comment interpréter le graphique de bas en haut :</p>
+<ul>
+<li>Moins de vélos en été (probablement moins de Montreuillois présents aussi), mais ça reste assez équivalent pendant les autres saisons.</li>
+<li>Si on prend comme référence le lundi, le vendredi compte 19 cyclistes de plus par créneau de 3 heures, le samedi 19 de moins et surtout le dimanche on compte presque 50 cyclistes de moins.</li>
+<li>Un dimanche, un jour férié ou un jour de vacances scolaires c’est quasiment le même effet : - 50 cyclistes. Waou tout ça pour en arriver là ! C’est rassurant.</li>
+<li>La nuit c’est 85 cyclistes de moins que le jour. Il faut aussi avouer qu’on a plutôt tendance à dormir la nuit qu’à faire du vélo, mais le jour étant plus long en été qu’en hiver ça contrebalance les niveaux de passage par saison.</li>
+<li>1 degré de plus c’est 1,5 passages supplémentaires. Là ça commence à être intéressant puisque la température calculée par créneau ici est relative, comparée à la température moyenne de la saison et le créneau horaire : qu’elle que soit la saison, plus il fait relativement doux/chaud, plus le trafic cycliste est important.</li>
+<li>Lorsqu’il pleut beaucoup, c’est comme si c’était dimanche ! 51 cyclistes ont disparu, et lorsqu’il pleutine (&lt; 2 mm en 3 heures) c’est 31 cyclistes en moins.</li>
+<li>Un sol gelé ou enneigé freine plus les ardeurs des cyclistes qui seront 68 de moins, là encore c’est assez logique.</li>
+<li>Enfin a priori pas d’effet remarqué du débit moyen du vent sur le trafic.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

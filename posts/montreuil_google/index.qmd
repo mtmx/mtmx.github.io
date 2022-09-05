@@ -1,0 +1,742 @@
+---
+title: "Montreuil by Google"
+author: "Mathieu"
+date: "2018-04-15"
+showonlyimage: false
+draft: false
+image: img/img_montreuilgoogle.png
+weight: 0
+type: "post"
+description: "Analyse des lieux selon leurs notes sur Google Places"
+categories: ["montreuil", "google","notation","avis"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+# import données
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(ggrepel)
+library(hrbrthemes)
+library(lubridate)
+library(plotly)
+library(scales)
+library(RColorBrewer)
+
+
+# import df
+df_goopl.infos.POI.s <- fread( "./data/df_goopl.infos.POI.s.csv" )
+
+
+  
+```
+
+ 
+```{r recup_data_google, eval=FALSE, include=FALSE}
+
+library(googleway)
+library(tidyverse)
+library(sf)
+library(magrittr)
+library(data.table)
+
+#https://github.com/SymbolixAU/googleway/blob/master/vignettes/googleway-vignette.Rmd
+
+apiKey <- 'XXX'
+
+
+#########################
+
+#définition de la zone d'interet
+zone <- google_geocode(address = "93100 montreuil", key = apiKey)
+
+# bbox :
+
+bbox_zone <- tribble(
+  ~ id, ~ lat, ~ lng,
+  1,zone$results$geometry$bounds$southwest$lat, zone$results$geometry$bounds$southwest$lng,
+  1, zone$results$geometry$bounds$southwest$lat,  zone$results$geometry$bounds$northeast$lng,
+  1, zone$results$geometry$bounds$northeast$lat,  zone$results$geometry$bounds$northeast$lng,
+  1, zone$results$geometry$bounds$northeast$lat,  zone$results$geometry$bounds$southwest$lng,
+  1, zone$results$geometry$bounds$southwest$lat,  zone$results$geometry$bounds$southwest$lng)
+
+bbox_zone.T <- tribble(
+  ~ id, ~ lat, ~ lng,
+  1,zone$results$geometry$bounds$northeast$lat, zone$results$geometry$bounds$northeast$lng,
+  1, zone$results$geometry$bounds$southwest$lat,  zone$results$geometry$bounds$northeast$lng)
+
+
+# centroides et radius des zones à chercher
+
+# distance en metres
+library(geosphere)
+#longueur
+bbox_zone.hauteur_metres <-
+  distm(c(zone$results$geometry$bounds$northeast$lat,
+          zone$results$geometry$bounds$northeast$lng),
+        c(zone$results$geometry$bounds$southwest$lat,
+          zone$results$geometry$bounds$northeast$lng), fun = distHaversine) %>% as.numeric()
+# différence de latitude
+diff_lat <- zone$results$geometry$bounds$northeast$lat - zone$results$geometry$bounds$southwest$lat %>% as.numeric()
+
+#1 metre =
+ratio_hauteur_lat_metre <- diff_lat /bbox_zone.hauteur_metres %>% as.numeric()
+
+# largeur
+bbox_zone.largeur_metres <-
+  distm(c(zone$results$geometry$bounds$northeast$lat,
+          zone$results$geometry$bounds$northeast$lng),
+        c(zone$results$geometry$bounds$northeast$lat,
+          zone$results$geometry$bounds$southwest$lng), fun = distHaversine) %>% as.numeric()
+
+# différence de longitude
+diff_lng <- zone$results$geometry$bounds$northeast$lng - zone$results$geometry$bounds$southwest$lng  %>% as.numeric()
+
+#1 metre =
+ratio_largeur_lng_metre <- diff_lng /bbox_zone.largeur_metres %>% as.numeric()
+
+# générer les coordonnées de x centres
+
+# X = LNG
+# Y = LAT
+
+# définition du rayon de recherche en mètres
+r <- 200
+
+# combien de cercles pour arriver à longitude maximale
+nb_cercles_largeur <- floor ( bbox_zone.largeur_metres / (r*1.5) %>% as.numeric() )
+nb_cercles_hauteur <- floor ( bbox_zone.hauteur_metres / (r*1.5) %>% as.numeric() )
+
+
+# générer tous les cercles de recherche
+f_lnglat_ctr <- function(lnglat,ratio, r,n) as.numeric(lnglat + ratio * (r*(1.5 *n)))
+
+
+df_cercles.liste <- f_lnglat_ctr(zone$results$geometry$bounds$southwest$lng,ratio_largeur_lng_metre, r,0:nb_cercles_largeur) %>%
+  cbind(f_lnglat_ctr(zone$results$geometry$bounds$northeast$lat,ratio_hauteur_lat_metre, r,0:-nb_cercles_hauteur)) %>%
+  as.data.frame() %>%
+  set_colnames(c("lng_ctr", "lat_ctr")) %>%
+  complete(lng_ctr, lat_ctr) %>%
+  mutate(r_ctr =r)
+
+
+# visulisation des cercles avec ggmap
+
+google_map(key = apiKey) %>%
+  add_polygons(data = bbox_zone, lat = 'lat', lon = 'lng', id = 'id', pathId = 'id') %>%
+  add_circles(data = df_cercles.liste, lon = "lng_ctr", lat = "lat_ctr", stroke_weight = 2, radius = "r_ctr")
+
+# conserver uniquement les cercles dans la zone précise
+#library(rnaturalearth)
+library(CARTElette)
+COMM_sf <- loadMap(COG=2017,nivsupra="COM")
+
+# ou avec IGN (cf. 'source_carto')
+COMM_sf <- comm %>% select(INSEE_COM = CODGEO,NOM_COM = NOM_COMM) %>% mutate(CODE_DEPT = substr(INSEE_COM,1,2))
+
+# contours zone d'interet
+COMM_zone <- COMM_sf %>% filter(toupper( NOM_COM) %in% 'MONTREUIL'& CODE_DEPT %in% '93' ) %>% 
+  # marge de 200 mètres autour du contour
+  st_buffer(dist = 100) %>%
+  # projection wgs 1984
+  st_transform(4326)
+# jointure spatiale points/polygones  
+df_cercles.liste.geo = st_as_sf(df_cercles.liste , coords = c("lng_ctr", "lat_ctr"), crs = 4326, agr = "constant")
+# filtre sur les points inclus dans la zone d'interet
+df_cercles.liste <- df_cercles.liste.geo %>%
+  st_join(COMM_zone %>% select(INSEE_COM)) %>%
+  filter(!is.na(INSEE_COM)) %>% 
+  # recalcul des coordonnées
+  mutate(lng_ctr = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+         lat_ctr = map_dbl(geometry, ~st_centroid(.x)[[2]])) %>%
+  as.data.frame() %>% select(-geometry)
+
+
+# référentiel de place_type google
+
+library(rvest)
+liste.type_places <-
+read_html("https://developers.google.com/places/supported_types") %>%
+  html_nodes( ".column code") %>%
+  html_text() %>%
+  as.data.frame() %>%
+  set_colnames("lib") %>%
+  mutate(lib_en = gsub("_"," ", lib))
+
+# traduction
+#https://github.com/mukul13/RYandexTranslate
+library(RYandexTranslate)
+
+api_key="XX"
+
+# https://github.com/mukul13/RYandexTranslate/issues/2
+
+translate = function (api_key, text = "", lang = "") 
+{
+  url = "https://translate.yandex.net/api/v1.5/tr.json/translate?"
+  url = paste(url, "key=", api_key, sep = "")
+  if (text != "") {
+    url = paste(url, "&text=", text, sep = "")
+  }
+  if (lang != "") {
+    url = paste(url, "&lang=", lang, sep = "")
+  }
+  url = gsub(pattern = " ", replacement = "%20", x = url)
+  d = RCurl::getURL(url, ssl.verifyhost = 0L, ssl.verifypeer = 0L)
+  d = jsonlite::fromJSON(d)
+  d$code = NULL
+  d
+}
+
+f_trad <- function(mot) {
+df <- translate(api_key,text=mot,lang="en-fr"  )
+}
+liste.type_places.fr <- map_df(liste.type_places$lib_en, f_trad) %>% cbind.data.frame(liste.type_places)
+
+# modifs des libellés, suppression des articles
+liste.type_places.fr <- liste.type_places.fr %>%
+  mutate(lib_fr = str_replace(text, "^de ", "")) %>%
+  mutate(lib_fr = str_replace(lib_fr, "^du ", "")) %>%
+  mutate(lib_fr = str_replace(lib_fr, "^la ", "")) %>%
+  mutate(lib_fr = str_replace(lib_fr, "^le ", "")) %>%
+  mutate(lib_fr = str_replace(lib_fr, "^l'", "")) %>%
+  mutate(lib_fr = str_replace(lib_fr, "^les ", "")) %>%
+  mutate(lib_fr =  case_when(lib_fr %in% 'atm' ~ 'distributeur', TRUE ~ as.character(lib_fr))) %>%
+  mutate(lib_fr =  case_when(lib_fr %in% 'station de gaz' ~ 'station-essence', TRUE ~ as.character(lib_fr))) %>%
+  mutate(lib_fr =  case_when(lib_en %in% 'department store' ~ 'grand magasin', TRUE ~ as.character(lib_fr))) %>%
+  mutate(lib_fr =  case_when(lib_en %in% 'premise' ~ 'locaux', TRUE ~ as.character(lib_fr))) %>%
+  add_row(lang = "en-fr",  text = "university", lib ="university",lib_en = "university", lib_fr = "université") %>%
+  add_row(lang = "en-fr",  text = "grocery_or_supermarket", lib ="grocery_or_supermarket",lib_en = "grocery_or_supermarket", lib_fr = "épicerie")
+
+
+# recherche sur tous les lieux de type 'points d'intérêt'
+liste.type_places.extr <- "point_of_interest"
+
+# df avec toutes les combinaisons cercle/place type
+zones_recherche_typeplaces <- df_cercles.liste %>% expand(tp = liste.type_places.extr, lng_ctr, lat_ctr, r_ctr)
+
+# fonction pour rechercher les lieux googles dans chaque zone selon le place_type
+
+f_gooplaces <- function(lng, lat, rrr,type.place) {
+  infos <- google_places(location = c(lat,lng),
+                      radius = rrr,
+                      key = apiKey,
+                      place_type = type.place,
+                      language = "fr",
+                      simplify = T,
+                      radar = T
+  )
+}
+
+# joue fonction pour générer liste
+df_goopl.infos <- pmap(list( zones_recherche_typeplaces$lng_ctr, 
+                             zones_recherche_typeplaces$lat_ctr, 
+                             zones_recherche_typeplaces$r_ctr,
+                             zones_recherche_typeplaces$tp),
+                       f_gooplaces)
+
+  # transformation en dataframe
+  # par info attribut
+  df_goopl.lat <- df_goopl.infos %>% map("results") %>% map("geometry") %>% map("location") %>% map("lat") %>% extract() %>% unlist() %>% as.numeric()
+  df_goopl.lng <- df_goopl.infos %>% map("results") %>% map("geometry") %>% map("location") %>% map("lng") %>% extract() %>% unlist() %>% as.numeric()
+  df_goopl.id <- df_goopl.infos %>% map("results")  %>% map("id") %>% extract() %>% unlist() %>% as.character()
+  df_goopl.place_id <- df_goopl.infos %>% map("results")  %>% map("place_id") %>% extract() %>% unlist() %>% as.character()
+  df_goopl.reference <- df_goopl.infos %>% map("results")  %>% map("reference") %>% extract() %>% unlist() %>% as.character()
+  
+  # concaténation et déduplication
+  df_goopl.infos <- cbind.data.frame(df_goopl.id,df_goopl.lat,df_goopl.lng,df_goopl.place_id,df_goopl.reference ) %>%
+    as.data.frame() %>%
+    mutate_if(is.factor,as.character) %>%
+    distinct(df_goopl.id, .keep_all = T)
+
+
+# nouveau filtre géographique d'apres lat/long des places
+
+# jointure spatiale points/polygones  
+  df_goopl.infos.POI.geo = st_as_sf(df_goopl.infos.POI , coords = c("df_goopl.lng", "df_goopl.lat"), crs = 4326, agr = "constant")
+# filtre sur les points inclus dans la zone d'interet
+  df_goopl.infos.POI <- df_goopl.infos.POI.geo %>%
+  st_join(COMM_zone %>% select(INSEE_COM)) %>%
+  filter(!is.na(INSEE_COM)) %>% 
+  # recalcul des coordonnées
+  mutate(df_goopl.lng = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+         df_goopl.lat = map_dbl(geometry, ~st_centroid(.x)[[2]])) %>%
+  as.data.frame() %>% select(-geometry)
+  
+
+#####################################
+# recupération des infos de détail (nom, note, avis...) sur les lieux identifiés
+
+f_gooplaces.avis.fr <- function(plid) {
+  
+  infos <-  google_place_details(place_id = plid, key = apiKey, language = "fr")
+  
+  # par info attribut
+  df_goopldet.place_id <- infos %>% map("place_id") %>% extract("result")   %>% as.character()
+  df_goopldet.id <- infos %>% map("id") %>% extract("result")   %>% as.character()
+  df_goopldet.nom <- infos %>% map("name") %>% extract("result")   %>% as.character()
+  df_goopldet.telephone <- infos %>% map("international_phone_number") %>% extract("result")   %>% as.character()
+  df_goopldet.url <- infos %>% map("url") %>% extract("result")   %>% as.character()
+  df_goopldet.types <- infos %>% map("types") %>% extract("result")  %>% as.character()
+  #type principal hors "point d'interet"
+  df_goopldet.type.princ <-   infos %>% map("types") %>% extract("result")  %>% unlist() %>% .[. != "point_of_interest"] %>% head(n=1) %>% as.character()
+  df_goopldet.note_globale <- infos %>% map("rating") %>% extract("result")  
+  df_goopldet.adresse <- infos %>% map("formatted_address") %>% extract("result") %>% unlist()  %>% as.character()
+  df_goopldet.icone <- infos %>% map("icon") %>% extract("result") %>% unlist()  %>% as.character()
+  
+  # avis
+  df_goopldet.avis.nom_auteur <- infos %>% map("reviews") %>% map("author_name") %>% extract("result")  %>% unlist() %>% extract()
+  df_goopldet.avis.language <- infos %>% map("reviews") %>% map("language") %>% extract("result")  %>% unlist() %>% extract()
+  df_goopldet.avis.auteur_url <- infos %>% map("reviews") %>% map("author_url") %>% extract("result")  %>% unlist() %>% extract()
+  df_goopldet.avis.note <- infos %>% map("reviews") %>% map("rating") %>% extract("result")  %>% unlist() %>% extract()
+  df_goopldet.avis.texte <- infos %>% map("reviews") %>% map("text") %>% extract("result")  %>% unlist() %>% extract()
+  df_goopldet.avis.datetime <- infos %>% map("reviews") %>% map("time") %>% extract("result")  %>% unlist() %>% extract()
+  df_goopldet.avis.delai_datetime <- infos %>% map("reviews") %>% map("relative_time_description") %>% extract("result")  %>% unlist() %>% extract()
+  
+  # concaténation et déduplication
+  cbind(df_goopldet.place_id,
+        df_goopldet.id,
+        df_goopldet.nom,
+        df_goopldet.telephone,
+        df_goopldet.url,
+        df_goopldet.adresse,
+        df_goopldet.icone,
+        df_goopldet.types,
+        df_goopldet.type.princ,
+        df_goopldet.note_globale,
+        df_goopldet.avis.nom_auteur,
+        df_goopldet.avis.language,
+        df_goopldet.avis.note,
+        df_goopldet.avis.texte,
+        df_goopldet.avis.datetime,
+        df_goopldet.avis.delai_datetime) %>%
+    as.data.frame() %>%
+    mutate_if(is.factor,as.character)  
+  
+}
+  
+  
+# requete séquencée par jour pour passer sous le seuil de requêtes maximal de l'API
+
+df_goopl.infos.POI.1001_2000 <- df_goopl.infos.POI %>% slice(1001:2000)
+df_goopl.infos.POI.2001_3000 <- df_goopl.infos.POI %>% slice(2001:3000)
+df_goopl.infos.POI.3001_4000 <- df_goopl.infos.POI %>% slice(3001:4000)
+df_goopl.infos.POI.4001_5000 <- df_goopl.infos.POI %>% slice(4001:5000)
+df_goopl.infos.POI.5001_6000 <- df_goopl.infos.POI %>% slice(5001:6000)
+df_goopl.infos.POI.6001_fin <- df_goopl.infos.POI %>% slice(6001:7171)
+
+
+# récupération des infos de détail
+df_goopl.infos.POI.detail.1_1000 <- map_df(df_goopl.infos.POI.1_1000$df_goopl.place_id, f_gooplaces.avis.fr)
+df_goopl.infos.POI.detail.1001_2000 <- map_df(df_goopl.infos.POI.1001_2000$df_goopl.place_id, f_gooplaces.avis.fr)
+df_goopl.infos.POI.detail.2001_3000 <- map_df(df_goopl.infos.POI.2001_3000$df_goopl.place_id, f_gooplaces.avis.fr)
+df_goopl.infos.POI.detail.3001_4000 <- map_df(df_goopl.infos.POI.3001_4000$df_goopl.place_id, f_gooplaces.avis.fr)
+df_goopl.infos.POI.detail.4001_5000 <- map_df(df_goopl.infos.POI.4001_5000$df_goopl.place_id, f_gooplaces.avis.fr)
+df_goopl.infos.POI.detail.5001_6000 <- map_df(df_goopl.infos.POI.5001_6000$df_goopl.place_id, f_gooplaces.avis.fr)
+df_goopl.infos.POI.detail.6001_fin <- map_df(df_goopl.infos.POI.6001_fin$df_goopl.place_id, f_gooplaces.avis.fr)
+
+# agrégation des infos dans un df unique
+df_goopl.infos.POI.TOT <-  df_goopl.infos.POI.1_1000 %>%
+  rbind.data.frame(df_goopl.infos.POI.1001_2000) %>%
+  rbind.data.frame(df_goopl.infos.POI.2001_3000) %>%
+  rbind.data.frame(df_goopl.infos.POI.3001_4000) %>%
+  rbind.data.frame(df_goopl.infos.POI.4001_5000) %>%
+  rbind.data.frame(df_goopl.infos.POI.5001_6000) %>%
+  rbind.data.frame(df_goopl.infos.POI.6001_fin) %>%
+  rbind.data.frame(df_goopl.infos.POI.delta)
+
+# agrégation des infos de détail dans un df unique
+df_goopl.infos.POI.detail.TOT <- 
+  df_goopl.infos.POI.detail.1_1000 %>% mutate(date_requete = as.Date("2018-03-29")) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.1001_2000 %>% mutate(date_requete = as.Date("2018-03-30")) ) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.2001_3000 %>% mutate(date_requete = as.Date("2018-04-03")) ) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.3001_4000 %>% mutate(date_requete = as.Date("2018-04-04")) ) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.4001_5000 %>% mutate(date_requete = as.Date("2018-04-05")) ) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.5001_6000 %>% mutate(date_requete = as.Date("2018-04-07")) ) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.6001_fin %>% mutate(date_requete = as.Date("2018-04-08")) ) %>%
+  rbind.data.frame(df_goopl.infos.POI.detail.delta %>% mutate(date_requete = as.Date("2018-04-09")) ) %>%
+  mutate_all(as.character) %>%
+  mutate(df_goopldet.note_globale =  as.numeric(df_goopldet.note_globale)) %>%
+# conversion date format epoch
+  mutate(df_goopldet.avis.datetime.d = as.Date(as.POSIXct(as.numeric(df_goopldet.avis.datetime), origin="1970-01-01")) ) %>%
+  mutate(df_goopldet.avis.nbjours_ancien =  abs(round(difftime(date_requete ,df_goopldet.avis.datetime.d , units = c("days"))))   )
+
+
+# note moyenne et proxy nombre d'avis
+df_goopl.infos.POI.s <- df_goopl.infos.POI.detail.TOT %>%
+  mutate(n=1) %>%
+  group_by(df_goopldet.place_id) %>%
+  summarise(df_goopldet.adresse =  first(df_goopldet.adresse),
+            df_goopldet.nom =  first(df_goopldet.nom),
+            df_goopldet.telephone =  first(df_goopldet.telephone),
+            df_goopldet.url =  first(df_goopldet.url),
+            df_goopldet.types = first(df_goopldet.types),
+            df_goopldet.type.princ = first(df_goopldet.type.princ),
+            df_goopldet.note_globale =  first(df_goopldet.note_globale),
+            df_goopldet.nb_notes = sum(n[!df_goopldet.avis.note %in% 'NULL' ]),
+            df_goopldet.moy_anciennete_avis =  mean(df_goopldet.avis.nbjours_ancien) %>% as.numeric(),
+            df_goopldet.med_anciennete_avis =  median(df_goopldet.avis.nbjours_ancien, na.rm = F)
+            ) %>%
+  mutate(df_goopldet.nb_notes.s = case_when(df_goopldet.nb_notes == 0 ~ "0",
+                                            df_goopldet.nb_notes >= 1 & df_goopldet.nb_notes < 5 ~ "1_4",
+                                            df_goopldet.nb_notes >= 5 ~ "5" )) %>%
+  # type en français
+  left_join(liste.type_places.fr %>% select( lib, df_goopldet.type.princ.fr = lib_fr), by = c('df_goopldet.type.princ' = 'lib')) %>% 
+  left_join(df_goopl.infos.POI.TOT, by = c('df_goopldet.place_id' = 'df_goopl.place_id')) %>%
+  filter(!df_goopldet.place_id %in% 'NULL') 
+
+# calcul du rang de récence des avis (uniquement pour les lieux avec 5 avis ou plus)
+df_goopl.infos.POI.s5 <- df_goopl.infos.POI.s %>% filter(df_goopldet.nb_notes >=5) %>% as.data.frame() %>%
+  mutate(df_goopldet.moy_anciennete_avis.rang = dense_rank(df_goopldet.moy_anciennete_avis)) %>%
+  select(df_goopldet.place_id,df_goopldet.moy_anciennete_avis.rang )
+
+df_goopl.infos.POI.s <- df_goopl.infos.POI.s %>% left_join(df_goopl.infos.POI.s5, by = 'df_goopldet.place_id')
+
+
+
+```
+
+La multiplication des traces numériques déposées sur les internets et le besoin compulsif d'objectiver chaque expérience, favorisé par l'usage des smartphones et des outils cartographiques, a permis l'émergence de sources de données potentiellement éclairantes pour comprendre les lieux de la ville. Les possibilités de l'outil Google Places, sur lequel toute personne peut déposer une note et un avis sur n'importe quel lieu public, a été joliment décrit par Jean-Laurent Cassely dans cet [article sur le phénomène ](http://www.slate.fr/story/135794/guide-google-societe-francaise-2). Encouragée par Google qui récompensera les gros contributeurs d'un [statut de guide local](https://support.google.com/local-guides/answer/6225851) et d'[avantages sur les produits de la marque ou de ses partenaires](https://support.google.com/local-guides/answer/6281793), on peut utiliser cette notation systématique des lieux pour réaliser une **cartographie subjective quantifiée**.
+
+Pour récupérer l'ensemble des lieux d'une commune et leur description par google (avis, notes, types...), les traitements suivants sont réalisés et le script est disponible [ici](https://github.com/mtmx/blgdwn/blob/master/content/blog/montreuil_google.Rmd) pour répliquer l'analyse sur votre territoire :
+
+* définition de la zone de recherche (en l'occurence la commune de Montreuil)
+* création des cercles de recherche à l'intérieur de cette zone
+* liste des types de lieux google à rechercher (scraping avec [rvest](https://cran.r-project.org/web/packages/rvest/))
+* traduction en français (avec le package [RYandexTranslate](https://cran.r-project.org/web/packages/RYandexTranslate/index.html))
+* récupération des lieux google à l'intérieur de chaque cercle grâce au package [googleway](https://cran.r-project.org/web/packages/googleway/) basé sur l'API Google Place, puis récupération de leurs caractéristiques (nom, type, note globale et les 5 avis les plus utiles)
+
+
+La limite la plus évidente est l'absence d'info sur le nombre total d'avis émis pour chaque lieu : pourtant il nous faut différencier les lieux très connus et ceux plutôt confidentiels. On calcule donc la date moyenne des 5 avis les plus utiles, et leur classement des plus récents aux plus anciens nous permet d'obtenir un proxy de l'importance de chaque lieu. Seul bémol : les lieux nouvellement ouverts, dont le propriétaire a demandé à ses potes de 'liker' sur google, apparaitront dans les plus connus (i.e. avec un rang de récence faible). Autre limite : la classification détaillée des lieux en langue française (celle indiquée sur google maps) n'est pas accessible via l'API : on se retrouve donc une classification plus grossière (notamment une catégorie "établissement" fourre-tout) traduite de l'anglais au français.
+
+
+Une première visualisation des notes selon le type de lieux montre les lieux de plaisir et les lieux de souffrance à Montreuil : cinémas, galeries d'art, salles de sport récoltent souvent de bonnes notes, on y va de son plein gré en souhaitant passer un moment agréable. Plus étonnant, les plombiers et les serruriers s'en sortent généralement avec une bonne note globale, peut-être parce qu'ils sortent leurs clients de situations facheuses.
+De l'autre côté du spectre se trouvent la plupart des services publics (postes, hopital, commissariat de police), sanctionnés de mauvaises notes : on se défoule sur ses lieux pourtant indispensables à la vie de la cité. Les banquiers, assureurs et dépanneurs, qui trustent régulièrement le palmarès des professions les plus détestées, se retrouvent également dans le bas du classement.
+
+
+
+```{r graphique_categories, echo=F, message=F, warning=F ,fig.height=7,fig.width=9.5}
+
+
+stats_google_categories <- df_goopl.infos.POI.s %>% 
+  filter(df_goopldet.nb_notes.s %in% '5') %>%
+  group_by(df_goopldet.type.princ.fr) %>%
+  summarise(df_goopldet.moy_anciennete_avis.rang =  mean(df_goopldet.moy_anciennete_avis.rang),
+            df_goopldet.note_globale =  mean(df_goopldet.note_globale),
+            nb =n())
+
+
+
+ggplot() +
+
+  geom_text_repel(data = stats_google_categories,
+                  aes(x= df_goopldet.moy_anciennete_avis.rang, y =df_goopldet.note_globale  ,
+                      label = df_goopldet.type.princ.fr, color = df_goopldet.type.princ.fr, 
+                      fontface="bold", size =nb),
+                  angle = 0,  nudge_y = 0, segment.color = NA, 
+                  box.padding = unit(0.05, "lines"), point.padding = unit(0.05, "lines")) +
+  theme_ipsum() +
+  scale_size(range = c(2,4), name = "Nombre de lieux") +
+  scale_x_continuous(name = "Rang des lieux selon la récence des avis", limits = c(-20,700)) +
+  scale_y_continuous(name = "Note globale moyenne", limits = c(0.5,5.2), breaks = seq(from = 0.5, to = 5, by = 0.5)) +
+  scale_color_manual(name = "Type", values = colorRampPalette(brewer.pal(12, "Paired"))(df_goopl.infos.POI.s %>% distinct(df_goopldet.type.princ.fr) %>% count() %>% as.numeric()) ,guide =F) +
+  # annotations récence avis
+  annotate("text", x = -10, y=0.7, label = "avis récents",fontface="bold", family="Calibri", size =3.5, color ="black") +
+  annotate("text", x = 640, y=0.7, label = "avis anciens",fontface="bold", family="Calibri", size =3.5, color ="black") +
+  geom_segment(aes(x = 10, y = 0.6, xend = 640, yend = 0.6), colour='black', size=0.6,arrow = arrow(length = unit(0.4, "cm"))) +
+  # annotations note globale
+  annotate("text", x = -10, y=1, label = "avis négatifs",fontface="bold", family="Calibri", size =3.5, color ="#b20000") +
+  annotate("text", x = -10, y=5.2, label = "avis positifs",fontface="bold", family="Calibri", size =3.5, color ="#478f76") +
+  geom_segment(aes(x = -10, y = 1.1, xend = -10, yend = 5.1), colour='black', size=0.6,arrow = arrow(length = unit(0.4, "cm"))) +
+  
+  labs(title="Notation des lieux selon leur type",
+       subtitle="points d'interêt localisés à Montreuil",
+       caption="source : Google places API") 
+
+```
+ 
+
+On rentre dans le détail avec l'infographie suivante qui permet de voir les 1000 lieux de la ville notés au moins 5 fois. En haut à gauche les lieux les plus aimés et populaires, en bas à gauche les plus détestés. A droite se trouvent théoriquement les lieux qui font l'objet de moins de débat (cf. proxy expliqué avant). 
+Un double-clic sur une catégorie dans le menu à droite permettra d'afficher uniquement les lieux correspondants.
+
+
+```{r  graphique_lieux, echo=F, message=F, warning=F ,fig.height=7,fig.width=9.5}
+
+
+p <- ggplot(data = df_goopl.infos.POI.s %>% filter(df_goopldet.nb_notes.s %in% '5'),
+            aes(x = df_goopldet.moy_anciennete_avis.rang,
+                y = df_goopldet.note_globale, 
+                text =      paste0("<b>", df_goopldet.nom,"</b>", "<br>",
+                                  "score : ", df_goopldet.note_globale, "/5","<br>",
+                                  "adresse : ", df_goopldet.adresse),
+                color = as.factor(df_goopldet.type.princ.fr))) +
+  geom_point() +
+  scale_color_manual(name = "Types de lieux", values = colorRampPalette(brewer.pal(12, "Paired"))(df_goopl.infos.POI.s %>% distinct(df_goopldet.type.princ.fr) %>% count() %>% as.numeric()) ) +
+  theme_ipsum() +
+  scale_size(range = c(4,6), name = "Nombre de lieux") +
+  scale_x_continuous(name = "Rang des lieux selon la récence des avis", limits = c(-20,700)) +
+  scale_y_continuous(name = "Note globale moyenne", limits = c(0.5,5.2), breaks = seq(from = 0.5, to = 5, by = 0.5)) +
+  # annotations récence avis
+  annotate("text", x = -10, y=0.7, label = "avis récents",fontface="bold", family="Calibri", size =4, color ="black") +
+  annotate("text", x = 640, y=0.7, label = "avis anciens",fontface="bold", family="Calibri", size =4, color ="black") +
+  geom_segment(aes(x = 10, y = 0.6, xend = 640, yend = 0.6), colour='black', size=0.6,arrow = arrow(length = unit(0.4, "cm"))) +
+  # annotations note globale
+  annotate("text", x = -10, y=1, label = "avis négatifs",fontface="bold", family="Calibri", size =3.5, color ="#b20000") +
+  annotate("text", x = -10, y=5.2, label = "avis positifs",fontface="bold", family="Calibri", size =3.5, color ="#478f76") +
+  geom_segment(aes(x = -10, y = 1.1, xend = -10, yend = 5.1), colour='black', size=0.6,arrow = arrow(length = unit(0.4, "cm"))) +
+  
+  labs(title="Notation des lieux de Montreuil",
+       subtitle="points d'interêt localisés à Montreuil",
+       caption="source : Google places API") +
+  theme(legend.position="right", axis.text.x = element_text(angle = 60, hjust = 1),
+        legend.title=element_text(size=13), 
+        legend.text=element_text(size=9),
+        legend.key.height=unit(3,"line"),
+        legend.key = element_rect(size = 1),
+        legend.key.size = unit(0.5, 'lines')
+  )
+ 
+ggplotly(p, tooltip = c( "text")) 
+
+
+```
+
+
+
+
+## Un petit tour de la ville
+
+
+Théoriquement les conditions d'utilisation de l'API imposent l'affichage des fonds de carte Google Maps mais il ne mettait pas en valeur les infos notamment à cause des publicités intégrées, les fonds de CartoDb 'Positron' en noir et blanc fait au contraire très bien l'affaire.
+
+Seul le nom du lieu s'affiche au survol mais l'ensemble des infos (dont le lien vers Google Maps avec tous les avis) sont disponibles en cliquant sur le point. 
+Sur Google Maps je vous invite à scroller dans les commentaires et surtout ceux négatifs dispensés par des rageux, certains touchent parfois au génie.
+
+
+```{r carte_leaflet, echo=F, message=F, warning=F ,fig.height=6,fig.width=8}
+
+
+library(leaflet)
+library(RColorBrewer)
+
+pal.pct <- colorBin(palette = "RdYlGn",domain = ~df_goopldet.note_globale , bins = c(1, 2.5, 3, 3.5, 4, 4.3,4.6,5), pretty = F)
+
+popup = ~paste0("<style> div.leaflet-popup-content {width:25 !important;}</style>",
+                "<b>","<font size=3 color=black>" , df_goopldet.nom,"</b>","</font>", "<br>",
+                "note globale :", df_goopldet.note_globale, "/5","<br>",
+                "adresse :", df_goopldet.adresse,"<br>",
+                "<a href=" , df_goopldet.url," target=\"_blank\">lien google maps</a>")
+
+# legende pour taille points
+addLegendCustom <- function(map, colors, labels, sizes, opacity = 0.5){
+  colorAdditions <- paste0(colors, "; width:", sizes, "px; height:", sizes, "px")
+  labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labels, "</div>")
+  
+  return(addLegend(map, colors = colorAdditions, labels = labelAdditions, opacity = opacity))
+}
+
+m <-
+  leaflet(padding = 0, 
+          options = leafletOptions(zoomControl = FALSE,minZoom = 14, maxZoom =17)) %>%
+    # addWMSTiles("Stamen.Toner", options=tileOptions(minZoom=14,maxZoom=17),attribution = "© Google") %>%
+  addProviderTiles(providers$CartoDB.Positron, options=tileOptions(minZoom=14,maxZoom=17)) %>%
+  #addTiles(urlTemplate = "http://mts1.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = '© Google') %>%
+  # tip tuiles google https://stackoverflow.com/questions/23017766/google-maps-tile-url-for-hybrid-maptype-tiles
+  setView(lng = 2.435658,lat= 48.859581, zoom = 15) %>%
+  # lieux sans avis
+  addCircleMarkers(data = subset(df_goopl.infos.POI.s, df_goopldet.nb_notes.s %in% '0'),
+                   lng = ~df_goopl.lng, 
+                   lat = ~df_goopl.lat, 
+                   radius =  2,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 1,
+                   fill = T, 
+                   fillColor = "grey", 
+                   fillOpacity = 0.7,
+                   group = "Lieux sans avis",
+                   color = NA,
+                   popup = ~paste0("<style> div.leaflet-popup-content {width:25 !important;}</style>",
+                                   "<b>","<font size=3 color=black>" , df_goopldet.nom,"</b>","</font>", "<br>",
+                                   "type : ", df_goopldet.type.princ.fr,"<br>",
+                                   "pas de note","<br>",
+                                   "adresse : ", df_goopldet.adresse,"<br>",
+                                   "<a href=" , df_goopldet.url," target=\"_blank\">lien google maps</a>"),
+                   label =  ~paste0(df_goopldet.nom),
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  # lieux avec 1 à 4 avis
+  addCircleMarkers(data = subset(df_goopl.infos.POI.s, df_goopldet.nb_notes.s %in% '1_4'),
+                   lng = ~df_goopl.lng, 
+                   lat = ~df_goopl.lat, 
+                   radius =  2.5,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 1,
+                   fill = T, 
+                   fillColor = ~pal.pct(df_goopldet.note_globale), 
+                   fillOpacity = 0.7,
+                   group = "Lieux avec 1 à 4 avis",
+                   color = NA,
+                   popup = ~paste0("<style> div.leaflet-popup-content {width:25 !important;}</style>",
+                                   "<b>","<font size=3 color=black>" , df_goopldet.nom,"</b>","</font>", "<br>",
+                                   "type : ", df_goopldet.type.princ.fr,"<br>",
+                                   "note globale : ", df_goopldet.note_globale, "/5","<br>",
+                                   "adresse : ", df_goopldet.adresse,"<br>",
+                                   "<a href=" , df_goopldet.url," target=\"_blank\">lien google maps</a>"),
+                   label =  ~paste0(df_goopldet.nom),
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+
+                   labelOptions = labelOptions(noHide = F, textOnly = F)
+  ) %>%
+  # lieux avec plus de 5 avis et rang de récence > 300
+  addCircleMarkers(data = subset(df_goopl.infos.POI.s, df_goopldet.nb_notes.s %in% '5' & df_goopldet.moy_anciennete_avis.rang > 300),
+                   lng = ~df_goopl.lng, 
+                   lat = ~df_goopl.lat, 
+                   radius =  4,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 1,
+                   fill = T, 
+                   fillColor = ~pal.pct(df_goopldet.note_globale), 
+                   fillOpacity = 0.7,
+                   group = "Lieux avec plus de 5 avis et anciens",
+                   color = "black",
+                   popup = ~paste0("<style> div.leaflet-popup-content {width:25 !important;}</style>",
+                                   "<b>","<font size=3 color=black>" , df_goopldet.nom,"</b>","</font>", "<br>",
+                                   "type : ", df_goopldet.type.princ.fr,"<br>",
+                                   "note globale : ", df_goopldet.note_globale, "/5","<br>",
+                                   "adresse : ", df_goopldet.adresse,"<br>",
+                                   "<a href=" , df_goopldet.url," target=\"_blank\">lien google maps</a>"),
+                   label =  ~paste0(df_goopldet.nom),
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  # lieux avec plus de 5 avis et rang de récence > 100 et < 300
+  addCircleMarkers(data = subset(df_goopl.infos.POI.s, df_goopldet.nb_notes.s %in% '5' & df_goopldet.moy_anciennete_avis.rang > 100 & df_goopldet.moy_anciennete_avis.rang <= 300),
+                   lng = ~df_goopl.lng, 
+                   lat = ~df_goopl.lat, 
+                   radius =  6,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 1,
+                   fill = T, 
+                   fillColor = ~pal.pct(df_goopldet.note_globale), 
+                   fillOpacity = 0.7,
+                   group = "Lieux avec plus de 5 avis et moins récents",
+                   color = "black",
+                   popup = ~paste0("<style> div.leaflet-popup-content {width:25 !important;}</style>",
+                                   "<b>","<font size=3 color=black>" , df_goopldet.nom,"</b>","</font>", "<br>",
+                                   "type : ", df_goopldet.type.princ.fr,"<br>",
+                                   "note globale : ", df_goopldet.note_globale, "/5","<br>",
+                                   "adresse : ", df_goopldet.adresse,"<br>",
+                                   "<a href=" , df_goopldet.url," target=\"_blank\">lien google maps</a>"),
+                   label =  ~paste0(df_goopldet.nom),
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  
+  # lieux avec plus de 5 avis et rang de récence < 100
+  addCircleMarkers(data = subset(df_goopl.infos.POI.s, df_goopldet.nb_notes.s %in% '5' & df_goopldet.moy_anciennete_avis.rang <= 100),
+                   lng = ~df_goopl.lng, 
+                   lat = ~df_goopl.lat, 
+                   radius =  8,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 1,
+                   fill = T, 
+                   fillColor = ~pal.pct(df_goopldet.note_globale), 
+                   fillOpacity = 0.7,
+                   group = "Lieux avec plus de 5 avis et récents",
+                   color = "black",
+                   popup = ~paste0("<style> div.leaflet-popup-content {width:25 !important;}</style>",
+                                   "<b>","<font size=3 color=black>" , df_goopldet.nom,"</b>","</font>", "<br>",
+                                   "type : ", df_goopldet.type.princ.fr,"<br>",
+                                   "note globale : ", df_goopldet.note_globale, "/5","<br>",
+                                   "adresse : ", df_goopldet.adresse,"<br>",
+                                   "<a href=" , df_goopldet.url," target=\"_blank\">lien google maps</a>"),
+                   label =  ~paste0(df_goopldet.nom),
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)
+                   ) %>%
+
+  addLegendCustom(colors = c("grey", "grey", "grey", "grey", "grey"), labels = c("Lieux avec plus de 5 avis et récents", "Lieux avec plus de 5 avis et moins récents", "Lieux avec plus de 5 avis et anciens","Lieux avec 1 à 4 avis", "Lieux sans avis"), sizes = c(8,6,4, 2.5, 2)+2.5) %>%
+  addLegend("topright", 
+            colors = brewer.pal(7,"RdYlGn"),
+            labels = c("1 à 2.5","2.5 à 3","3 à 3.5","3.5 à 4","4 à 4.3","4.3 à 4.6", "4.6 à 5"),
+            title = "Note globale",
+            opacity = 1) 
+
+m$width <- 1000
+m$height <- 700
+
+m
+
+
+```
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div style= "float:right;position: relative; top: -10px;">
+```{r fig.width=4, fig.height=2.5,echo=FALSE, align = 'right'}
+library(png)
+library(grid)
+img <- readPNG("./img/img_portedemontreuil.png")
+ grid.raster(img)
+```
+
+</div>
+
+Porte de montreuil, c'est le western : aucun lieu ne trouve grâce aux yeux des contributeurs de google, même le siège de la CGT ne relève pas le niveau. La Poste et la station-service du Carrefour sont particulièrement critiqués. Pas étonnant que la porte d'entrée principale de la ville soit l'objet d'un [projet de renouvellement de grande ampleur](https://www.paris.fr/actualites/une-nouvelle-dynamique-urbaine-pour-la-porte-de-montreuil-5352). Sur la rue de Paris les notes des lieux commencent à monter à partir de la station Robespierre.
+
+<br>
+<br>
+<br>
+
+<div style= "float:left;position: relative; top: -10px;">
+```{r fig.width=4, fig.height=2.5,echo=FALSE, align = 'left'}
+img <- readPNG("./img/img_croixdechavaux.png")
+ grid.raster(img)
+```
+</div>
+
+A Croix de Chavaux, les commerces du centre commercial sont plutôt bien notés mais le Bricorama est de notoriété publique un endroit qu'on aimerait éviter. Dans le quartier résidentiel des buttes à Morel au Nord de la place centrale, la boulangerie anarchiste est une centralité reconnue et appréciée alors que les points de frustation sont à trouver au centre des impôts et sur l'usine SNEM [accusée d'intoxiquer le quartier](http://www.liberation.fr/futurs/2017/10/06/l-usine-de-quartier-alarme-montreuil-et-ses-ecoles_1601470).
+
+
+<br>
+<br>
+
+
+<div style= "float:right;position: relative; top: -10px;">
+```{r fig.width=4, fig.height=2.5,echo=FALSE, align = 'right'}
+img <- readPNG("./img/img_mairie.png")
+ grid.raster(img)
+```
+</div>
+
+On trouve un maximum de lieux autour de la place de la mairie et de la rue de l'Eglise : l'agence bancaire de la BNP, la caisse d'assurance maladie CAMIEG, le commissariat de police et le McDo sont les points noirs du coin. Un grand nombre d'équipements sont tout de même appréciés dont le cinéma Méliès et le théatre, fruits de la longue rénovation de la place qui semble être un succès. Rue de l'église, la librairie BD Storybulle et Beers & Records ont trouvé leurs fans.
+
+<br>
+<br>
+
+
+<div style= "float:left;position: relative; top: -20px;">
+```{r fig.width=4, fig.height=2,echo=FALSE, align = 'left'}
+img <- readPNG("./img/img_boissiere.png")
+ grid.raster(img)
+```
+</div>
+
+Dans le haut Montreuil, le boulevard de la Boissière fait office de centralité commerciale dont l'offre évoluera peut-être avec l'arrivée de la ligne 11 du métro en 2022. La poste et l'hôpital sont encore une fois les lieux les plus irritants selon les contributeurs de Google Places.
+
+<br>
+
+Au final, un peu de déception dans l'utilisation de cet API Google Places puisque l'accès à l'intégralité des avis, impossible en tant qu'utilisateur lambda, aurait permis d'envisager des analyses encore plus folles (pour mesurer précisément le volume des avis postés par lieu, mais encore dans l'analyse textuelle). L'exercice montre tout de même des tendances dans l'appréciation des lieux publics ou des commerces par la "communauté" des contributeurs aux services de Google.
+

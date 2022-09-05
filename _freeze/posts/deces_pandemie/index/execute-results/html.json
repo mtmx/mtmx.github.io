@@ -1,0 +1,16 @@
+{
+  "hash": "486e1e0a78b02ab4b193e4baa44b2b80",
+  "result": {
+    "markdown": "---\ntitle: \"Décès pendant la pandémie\"\nauthor: \"Mathieu\"\ndate: \"2020-04-21\"\nshowonlyimage: false\ndraft: false\nimage: img/img_pandemie_carto.png\nweight: 0\ntype: \"post\"\ndescription: \"Excédent de décès pendant la pandémie\"\ncategories: [\"pandémie\", \"covid19\"]\n---\n\n\n\n\n#### Méthodo\n\n* [Analyse de l'Insee](https://www.insee.fr/fr/information/4470857)\n* [Fichier de données individuelles](https://www.insee.fr/fr/statistiques/fichier/4470857/2020-04-17_detail.zip)\n* [Modélisation de l'excédent de décès](https://statisfaction.wordpress.com/2020/04/12/a-quick-preliminary-study-of-covid-death-under-reporting-in-france/)\n* [Code des graphiques et stats](https://github.com/mtmx)\n\n<blockquote class=\"twitter-tweet\">\n  <a href=\"https://twitter.com/coulmont/status/1252220000666103808\">\n  </a>\n</blockquote>\n<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\">\n</script>\n\n\n#### Profil age/sexe\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/pyramide_1-1.png){width=768}\n:::\n:::\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/evol_agesexe-1.png){width=768}\n:::\n:::\n\n\n\n#### Localisation département\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/carte_dep-1.png){width=960}\n:::\n:::\n\n\n\n#### Localisation plus précise\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/carte_grid-1.png){width=960}\n:::\n:::\n\n\n\n#### Stats par commune\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/palmares_communes-1.png){width=768}\n:::\n:::",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
