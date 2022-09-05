@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.179">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mathieu">
+<meta name="dcterms.date" content="2017-10-21">
+<meta name="description" content="Application pour un coin de campagne idéal">
+
+<title>datamix - La campagne au poil</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<meta property="og:title" content="datamix - La campagne au poil">
+<meta property="og:description" content="Application pour un coin de campagne idéal">
+<meta property="og:image" content="https://mtmx.netlify.app/posts/appli_campagnes/img/img_campagne.jpg">
+<meta property="og:site-name" content="datamix">
+<meta name="twitter:title" content="datamix - La campagne au poil">
+<meta name="twitter:description" content="Application pour un coin de campagne idéal">
+<meta name="twitter:image" content="https://mtmx.netlify.app/posts/appli_campagnes/img/img_campagne.jpg">
+<meta name="twitter:creator" content="@matamix">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">datamix</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">A propos</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matamix"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#méthode-et-passage-en-revue-des-indicateurs" id="toc-méthode-et-passage-en-revue-des-indicateurs" class="nav-link active" data-scroll-target="#méthode-et-passage-en-revue-des-indicateurs">Méthode et passage en revue des indicateurs</a></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application">application</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">La campagne au poil</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">campagne</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Application pour un coin de campagne idéal
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mathieu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 21, 2017</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Parce que les ballades à la campagne sont cools mais que certains coins sont plus jolis que d’autres, j’ai essayé de quantifier cet intérêt purement esthétique à l’aide de plusieurs sources. On avait regardé :</p>
+<ul>
+<li><a href="https://mtmx.netlify.app/posts/carto_meteo/">ici</a> où il pleut le plus, <br></li>
+<li><a href="https://mtmx.netlify.app/posts/carto_cheptels/">là</a> où les animaux d’élevage sont les plus nombreux,<br></li>
+<li>ou encore <a href="https://mtmx.netlify.app/posts/carto_alti/">ici</a> où le relief est plat.<br></li>
+</ul>
+<p>On ajoute trois indicateurs complémentaires :</p>
+<ul>
+<li>la présence de vieilles pierres <br></li>
+<li>l’importance des forêts <br></li>
+<li>et des surfaces en eau<br> <br></li>
+</ul>
+<p>Pour accéder directement à l’application, c’est en <a href="https://mtmx.netlify.app/posts/appli_campagnes/#application">bas de page</a>.</p>
+<section id="méthode-et-passage-en-revue-des-indicateurs" class="level3">
+<h3 class="anchored" data-anchor-id="méthode-et-passage-en-revue-des-indicateurs">Méthode et passage en revue des indicateurs</h3>
+<p>Les scripts pour produire les indicateurs et l’appli shiny sont dispos sur la page github du projet <a href="https://github.com/mtmx/quanticampagnes">quanticampagnes</a> (notamment le script ‘appli_data.R’ qui rassemble les données utilisées ici).</p>
+<p>La maille choisie est le canton : il fleure bon le comice agricole et le tournoi de football des pupilles, bref ça sent la campagne. Logiquement on a sorti du périmètre de l’analyse les cantons densément peuplés d’après la grille de densité de l’Insee :</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_grille_densite-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<p>Pour chacun des 6 indicateurs, on répartit les 1700 cantons non-denses de France métropolitaine en 5 quantiles (les 20% de cantons avec le niveau le plus faible, les 20% suivants, etc…) pour les classer en 5 catégories (“très peu”, “peu”, etc…).</p>
+<ul>
+<li>Pour la densité de “belles bêtes”, j’ai simplifié l’analyse produite <a href="https://mtmx.netlify.app/posts/carto_cheptels/">ici</a> à partir des données du <a href="https://stats.agriculture.gouv.fr/cartostat/#l=fr;i=stru1.saumoy10;v=map2">ministère de l’agriculture</a> en totalisant le nombre de bovins, d’équidés, de caprins et d’ovins (ces deux-là avec un coefficient de 0,3 vue leur taille) et en le rapportant à la superficie du canton :</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_betes-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<ul>
+<li>Sous le terme de “vieilles pierres” on rassemble les logements construits avant 1919 d’après le <a href="https://www.insee.fr/fr/statistiques/2863604?sommaire=2867813">fichier des logements</a> du dernier recensement de l’Insee, et on le rapporte au nombre total de logements :</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_logements-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<ul>
+<li>Pour quantifier la fréquence de la pluie on repart des données de <a href="http://www.data.gouv.fr/fr/datasets/indices-mensuels-de-precipitations-et-nombre-de-jours-de-precipitations-issus-du-modele-aladin-climat/">Météo-France</a> utilisées <a href="https://mtmx.netlify.app/posts/carto_meteo/">ici</a> pour afficher simplement le nombre de jours de pluie moyen par mois :</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_pluie-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<ul>
+<li>Parce que le plat c’est terriblement emmerdant j’avais regardé <a href="https://mtmx.netlify.app/posts/carto_alti/">ici</a> quels coins éviter grâce à l’exploitation de la <a href="https://www.data.gouv.fr/fr/datasets/bd-alti-r-75-m-250-m-1-000-m/">BD Alti de l’IGN</a>. Ici on cartographie la même information, c’est à dire l’éacrt-type de l’altitude, mais au niveau des cantons :</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_decli-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<ul>
+<li>La présence des forêts est définie grâce à l’exploitation de la <a href="http://osr-cesbio.ups-tlse.fr/~oso/">carte d’occupation des sols OSO</a> réalisée par le Centre d’études spatiales de la biosphère (ça fait un peu rêver…), issues de photos satellites Sentinel-2 et Landsat-8 à 20 mètres de résolution et datant de 2016. Les surfaces couvertes par les catégories “forêts de feuillus” et “forêts de conifères” ont été aggrégées et rapportées à la superficie totale du canton :</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_forets-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+<ul>
+<li>Enfin la présence de l’eau est le résultat des surfaces en eau repérérées d’après cette même carte d’occupation des sols, complétées par la surface située à moins de 50 mètres du <a href="http://www.data.gouv.fr/fr/datasets/trait-de-cote-histolitt/">trait de côte</a> du littoral français produit par le SHOM (aka Service hydrographique et océanographique de la marine) :</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_eau-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+</section>
+<section id="application" class="level3">
+<h3 class="anchored" data-anchor-id="application">application</h3>
+<p>Il suffit de jouer donc de jouer avec les filtres pour trouver son coin de campagne idéal. On peut aussi zoomer à l’aide de la loupe en haut à droite (patience la carte peut mettre quelques secondes à s’afficher)</p>
+<iframe src="https://matai.shinyapps.io/appli_campagnes_v3/" width="850" height="680" style="border: none;">
+</iframe>
+<p>Par défaut ce sont les critéres que j’ai choisi qui s’affichent à l’initialisation : une campagne avec des animaux dans les champs, des vieilles maisons, de la pluie pour de l’herbe bien grasse, des collines et quelques plans d’eau pour aèrer tout ça. Sans surprise je retrouve des coins que j’aime déjà (le Perche, les monts d’Arrée, le Pas-de-Calais, le Périgord, la Bourgogne, la Lorraine…) mais d’autres du même profil ont l’air bien sympas (les Vosges, le Béarn, les Ardennes…)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,241 @@
+---
+title: "La campagne au poil"
+author: "Mathieu"
+date: "2017-10-21"
+showonlyimage: false
+draft: false
+image: img/img_campagne.jpg
+weight: 0
+type: "post"
+description: "Application pour un coin de campagne idéal"
+categories: ["campagne"]
+---
+
+
+```{r setup, echo=F, message=F, warning=F, include = F}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+
+
+library(tidyverse)
+library(magrittr)
+library(data.table)
+library(sf)
+library(ggplot2)
+library(RColorBrewer)
+
+
+  # import shp et data séparement
+  DEP <- st_read("./data/DEP.s.shp" , stringsAsFactors = F, quiet = T) %>% st_transform(crs = 2154) 
+  
+  CV_geo <- st_read("./data/CV_appli.geo.shp" , stringsAsFactors = F, quiet = T) %>% st_transform(crs = 2154) 
+  CV_data_appli <- fread( file = "./data/CV_data_appli.csv", verbose = F)
+  CV_data.geo <- merge(CV_geo,CV_data_appli, by ="CV") #%>% filter(!typo_CV_densite %in% 'TD')
+
+
+# parametrage du thème ggplot
+thm <- 
+  theme(legend.position="right",
+        legend.text=element_text(size=6),
+        legend.title=element_text(size=7),
+        axis.line=element_blank(),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.text.y=element_blank(),#element_text(size=9, color = "black"),
+        axis.title.y=element_blank(), #element_text(size=9, color = "grey",face="italic"),
+        axis.ticks=element_blank(),
+        panel.background=element_blank(),panel.border=element_blank(),
+        panel.grid.major.y=element_line(colour = 'grey80', linetype = 'dotdash', size = 0.1),
+        panel.grid.major.x=element_line(colour = 'grey80', linetype = 'dotdash', size = 0.1),#element_blank(),
+        panel.grid.minor=element_blank(),
+        plot.background=element_blank(),
+        legend.key = element_rect(fill = NA, colour = NA),
+        legend.key.width = unit(0.2, "cm"),
+        strip.text.y = element_text(size = 8, colour = "black", angle = 0),
+        strip.text.x = element_text(size = 8, colour = "black", angle = 0),
+        plot.title=element_text(size=12,face="bold"),
+        plot.subtitle=element_text(size=9,face="italic"),
+        plot.caption=element_text(size=6,colour = "grey20")) 
+
+```
+
+
+
+Parce que les ballades à la campagne sont cools mais que certains coins sont plus jolis que d'autres, j'ai essayé de quantifier cet intérêt purement esthétique à l'aide de plusieurs sources. 
+On avait regardé :
+
++ [ici](https://mtmx.netlify.app/posts/carto_meteo/) où il pleut le plus, <br />
++ [là](https://mtmx.netlify.app/posts/carto_cheptels/) où les animaux d'élevage sont les plus nombreux,<br />
++  ou encore [ici](https://mtmx.netlify.app/posts/carto_alti/) où le relief est plat.<br />
+
+
+On ajoute trois indicateurs complémentaires :
+
++ la présence de vieilles pierres <br />
++ l'importance des forêts <br />
++ et des surfaces en eau<br />
+<br />
+
+Pour accéder directement à l'application, c'est en [bas de page](https://mtmx.netlify.app/posts/appli_campagnes/#application). 
+
+### Méthode et passage en revue des indicateurs
+
+Les scripts pour produire les indicateurs et l'appli shiny sont dispos sur la page github du projet [quanticampagnes](https://github.com/mtmx/quanticampagnes) (notamment le script 'appli_data.R' qui rassemble les données utilisées ici).
+
+La maille choisie est le canton : il fleure bon le comice agricole et le tournoi de football des pupilles, bref ça sent la campagne.
+Logiquement on a sorti du périmètre de l'analyse les cantons densément peuplés d'après la grille de densité de l'Insee :
+
+```{r carte_grille_densite,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+# type de densité 
+ggplot() +
+  geom_sf(data = CV_data.geo %>% filter(!is.na(typo_CV_densite)) %>%
+            mutate(typo_CV_densite_2 = recode(typo_CV_densite, 'TD' = "Espaces densément peuplés", 'D' = "Espaces de densité intermédiaire", 'PD' = "Espaces peu denses", 'TPD' = "Espaces très peu denses")) %>%
+            mutate(typo_CV_densite_2 = factor(typo_CV_densite_2, levels = c("Espaces densément peuplés", "Espaces de densité intermédiaire", "Espaces peu denses", "Espaces très peu denses"))),
+          aes( fill=typo_CV_densite_2), color = NA) +
+  scale_fill_manual( name = "", values = c("#FF4040", "#FF9090","#90F000","#008000")) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Types d'espaces selon la grille de densité",
+    subtitle = "Maille canton",
+    caption = "Source : Insee, grille de densité 2016"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
+Pour chacun des 6 indicateurs, on répartit les 1700 cantons non-denses de France métropolitaine en 5 quantiles (les 20% de cantons avec le niveau le plus faible, les 20% suivants, etc...) pour les classer en 5 catégories ("très peu", "peu", etc...).
+
+
++ Pour la densité de "belles bêtes", j'ai simplifié l'analyse produite [ici](https://mtmx.netlify.app/posts/carto_cheptels/) à partir des données du [ministère de l'agriculture](https://stats.agriculture.gouv.fr/cartostat/#l=fr;i=stru1.saumoy10;v=map2) en totalisant le nombre de bovins, d'équidés, de caprins et d'ovins (ces deux-là avec un coefficient de 0,3 vue leur taille) et en le rapportant à la superficie du canton :
+
+```{r carte_betes,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+ggplot() +
+  geom_sf(data = CV_data.geo %>% 
+            mutate(densite_grossesbetes.cl = cut(densite_grossesbetes, breaks = c(-1,5,10,20,50,100,500))) %>%
+            mutate(densite_grossesbetes.cl = recode(densite_grossesbetes.cl, "(-1,5]" = "< 5", "(5,10]" = "5 à 10","(10,20]" = "10 à 20", "(20,50]" = "20 à 50",  "(50,100]" = "50 à 100","(100,500]" = "> 100" )),
+          aes( fill=densite_grossesbetes.cl), color = NA) +
+  scale_fill_manual( name = "", values = colorRampPalette(brewer.pal(6, "BuPu") )(6)) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Densité de belles bêtes par km2",
+    subtitle = "Bovins + équidés + caprins *0.3 + ovins *0.3",
+    caption = "Source : Ministère de l'agriculture / Recensement agricole 2010"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
++ Sous le terme de "vieilles pierres" on rassemble les logements construits avant 1919 d'après le [fichier des logements](https://www.insee.fr/fr/statistiques/2863604?sommaire=2867813) du dernier recensement de l'Insee, et on le rapporte au nombre total de logements :
+
+```{r carte_logements,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+ggplot() +
+  geom_sf(data = CV_data.geo %>% 
+            mutate(pct_LOGS_LOGS_ACHL16111.cl = cut(pct_LOGS_LOGS_ACHL16111 *100, breaks = c(-1,6,10,15,30,40,100))) %>%
+            filter(!is.na(pct_LOGS_LOGS_ACHL16111.cl)) %>%
+            mutate(pct_LOGS_LOGS_ACHL16111.cl = recode(pct_LOGS_LOGS_ACHL16111.cl, "(-1,6]" = "< 6%", "(6,10]" = "6% à 10%","(10,15]" = "10% à 15%", "(15,30]" = "15% à 30%",  "(30,40]" = "30% à 40%","(40,100]" = "> 40%" )),
+          aes( fill=pct_LOGS_LOGS_ACHL16111.cl), color = NA) +
+  scale_fill_manual( name = "", values = colorRampPalette(brewer.pal(6, "Greys") )(6)) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Part des vieux logements dans l'ensemble des logements",
+    subtitle = "Logements dont l'année d'achèvement de la construction est inférieure 1919",
+    caption = "Source : Insee, RP 2014"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
++ Pour quantifier la fréquence de la pluie on repart des données de [Météo-France](http://www.data.gouv.fr/fr/datasets/indices-mensuels-de-precipitations-et-nombre-de-jours-de-precipitations-issus-du-modele-aladin-climat/) utilisées [ici](https://mtmx.netlify.app/posts/carto_meteo/) pour afficher simplement le nombre de jours de pluie moyen par mois :
+
+```{r carte_pluie,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+ggplot() +
+  geom_sf(data = CV_data.geo %>% 
+            mutate(val_NORRR1MM_TOT_m.cl = cut(val_NORRR1MM_TOT_m, breaks = c(0,6,8,10,12,14,20))) %>%
+            filter(!is.na(val_NORRR1MM_TOT_m.cl)) %>%
+            mutate(val_NORRR1MM_TOT_m.cl = recode(val_NORRR1MM_TOT_m.cl, "(0,6]" = "< 6", "(6,8]" = "6 à 8","(8,10]" = "8 à 10", "(10,12]" = "10 à 12",  "(12,14]" = "12 à 14","(14,20]" = "> 14" )),
+          aes( fill=val_NORRR1MM_TOT_m.cl), color = NA) +
+  scale_fill_manual( name = "", values = colorRampPalette(brewer.pal(6, "RdPu") )(6)) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Nombre de jours de pluie par mois",
+    subtitle = "Moyenne sur période de référence : 1976-2005",
+    caption = "Source : Meteo France, modèle Aladin-Climat / data.gouv.fr"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
++ Parce que le plat c'est terriblement emmerdant j'avais regardé [ici](https://mtmx.netlify.app/posts/carto_alti/) quels coins éviter grâce à l'exploitation de la [BD Alti de l'IGN](https://www.data.gouv.fr/fr/datasets/bd-alti-r-75-m-250-m-1-000-m/). Ici on cartographie la même information, c'est à dire l'éacrt-type de l'altitude, mais au niveau des cantons :
+
+```{r carte_decli,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+ggplot() +
+  geom_sf(data = CV_data.geo %>% 
+            mutate(ecart_type.cl = cut(ecart_type, breaks = c(-1,12,25,40,100,300,800))) %>%
+            filter(!is.na(ecart_type.cl)) %>%
+            mutate(ecart_type.cl = recode(ecart_type.cl, "(-1,12]" = "< 12", "(12,25]" = "12 à 25","(25,40]" = "25 à 40", "(40,80]" = "40 à 100",  "(10,300]" = "100 à 300","(300,800]" = "> 300" )),
+          aes( fill=ecart_type.cl), color = NA) +
+  scale_fill_manual( name = "", values = colorRampPalette(brewer.pal(6, "YlOrRd") )(6)) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Déclivité du relief",
+    subtitle = "Ecart-type des points d'altitude par canton",
+    caption = "Source : IGN BD ALTI / GEOFLA"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
++ La présence des forêts est définie grâce à l'exploitation de la [carte d'occupation des sols OSO](http://osr-cesbio.ups-tlse.fr/~oso/) réalisée par le Centre d'études spatiales de la biosphère (ça fait un peu rêver...), issues de photos satellites Sentinel-2 et Landsat-8 à 20 mètres de résolution et datant de 2016. Les surfaces couvertes par les catégories "forêts de feuillus" et "forêts de conifères" ont été aggrégées et rapportées à la superficie totale du canton :
+
+```{r carte_forets,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+ggplot() +
+  geom_sf(data = CV_data.geo %>% 
+            mutate(pct_FORETS.cl = cut(pct_FORETS *100, breaks = c(-1,10,20,30,40,50,100))) %>%
+            filter(!is.na(pct_FORETS.cl)) %>%
+            mutate(pct_FORETS.cl = recode(pct_FORETS.cl, "(-1,10]" = "< 10%", "(10,20]" = "10% à 20%","(20,30]" = "20% à 30%", "(30,40]" = "30% à 40%",  "(40,50]" = "40% à 50%","(50,100]" = "> 50%" )),
+          aes( fill=pct_FORETS.cl), color = NA) +
+  scale_fill_manual( name = "", values = colorRampPalette(brewer.pal(6, "Greens") )(6)) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Part des forêts dans la superficie totale du canton",
+    subtitle = "Forêts de feuillus et de conifères",
+    caption = "Source : Carte d'occupation des sols OSO, CESBIO"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
++ Enfin la présence de l'eau est le résultat des surfaces en eau repérérées d'après cette même carte d'occupation des sols, complétées par la surface située à moins de 50 mètres du [trait de côte](http://www.data.gouv.fr/fr/datasets/trait-de-cote-histolitt/) du littoral français produit par le SHOM (aka Service hydrographique et océanographique de la marine) :
+
+```{r carte_eau,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+ggplot() +
+  geom_sf(data = CV_data.geo %>% 
+            mutate(pct_EAU.cl = cut(pct_EAU *100, breaks = c(-1,0.2,0.5,1,2,3,100))) %>%
+            filter(!is.na(pct_EAU.cl)) %>%
+            mutate(pct_EAU.cl = recode(pct_EAU.cl, "(-1,0.2]" = "< 0.2%", "(0.2,0.5]" = "0.2% à 0.5%","(0.5,1]" = "0.5% à 1%", "(1,2]" = "1% à 2%",  "(2,3]" = "2% à 3%","(3,100]" = "> 3%" )),
+          aes( fill=pct_EAU.cl), color = NA) +
+  scale_fill_manual( name = "", values = colorRampPalette(brewer.pal(6, "Blues") )(6)) +
+  geom_sf(data =DEP, color = "grey65", fill = NA ,size = 0.2) +
+  labs(
+    title = "Part des surfaces en eau et/ou proches du trait de côte",
+    subtitle = "Surfaces en eau + surfaces à moins de 50 mètres du trait de côte",
+    caption = "Source : Carte d'occupation des sols OSO, CESBIO / Histolitt, SHOM"
+  ) +   
+  thm +            
+  coord_sf(crs = st_crs(2154)) 
+```
+
+
+### application
+
+Il suffit de jouer donc de jouer avec les filtres pour trouver son coin de campagne idéal. On peut aussi zoomer à l'aide de la loupe en haut à droite (patience la carte peut mettre quelques secondes à s'afficher)
+
+<iframe src="https://matai.shinyapps.io/appli_campagnes_v3/" width="850" height="680" style="border: none;"></iframe>
+
+Par défaut ce sont les critéres que j'ai choisi qui s'affichent à l'initialisation : une campagne avec des animaux dans les champs, des vieilles maisons, de la pluie pour de l'herbe bien grasse, des collines et quelques plans d'eau pour aèrer tout ça. Sans surprise je retrouve des coins que j'aime déjà (le Perche, les monts d'Arrée, le Pas-de-Calais, le Périgord, la Bourgogne, la Lorraine...) mais d'autres du même profil ont l'air bien sympas (les Vosges, le Béarn, les Ardennes...)

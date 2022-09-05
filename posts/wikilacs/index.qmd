@@ -1,0 +1,488 @@
+---
+title: "Wikilacs"
+author: "Mathieu"
+date: "2017-06-14"
+showonlyimage: false
+draft: false
+image: img/img_wikilacs.png
+weight: 0
+type: "post"
+description: "Popularité des lacs en France d'après wikipedia"
+categories: ["lacs", "baignades", "chill"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+
+
+library(tidyverse)
+library(rvest)
+library(lazyeval)
+library(janitor)
+library(urltools)
+library(stringr)
+library(sp)
+library(rgeos)
+library(data.table)
+library(sf)
+
+###################
+# ensemble des lacs
+
+
+if (file.exists("./data/ref_lacs.csv")) 
+{
+ ref_lacs <- fread( file = "./data/ref_lacs.csv")
+} else {
+url_liste_tot = "https://fr.wikipedia.org/wiki/Liste_des_lacs_de_France"
+
+# recuperation de tous les liens url du tableau
+liens_tableau_tot <- 
+  url_liste_tot %>%
+  read_html( encoding = "UTF-8") %>%
+  html_nodes("a") %>%
+  html_attr("href") %>%
+  grep("wiki", ., value = T) 
+
+# modif encodage
+liens_tableau_tot = urltools::url_decode(liens_tableau_tot)
+Encoding(liens_tableau_tot) = "UTF-8"
+
+liens_tableau_tot <-
+  liens_tableau_tot  %>% grep("Lac|Lacs|Grand lac|Gour|Étang|Étangs|Etang|Réservoir|Grand réservoir|Barrage|Grand et petit|Plan d'eau|Petit étang|Marais", ., value = T) %>%
+  paste0("http://fr.wikipedia.org",.)
+
+#repair_encoding(liens_tableau_tot)
+#liens_tableau_tot2 <- iconv(liens_tableau_tot, from = "ISO-8859-1", to = "latin1")
+# iconv("c3 a9", from = "UTF-8", to = "latin1")
+
+# idem pour la page des lacs de Corse
+
+liens_tableau_tot_corse <- 
+  "https://fr.wikipedia.org/wiki/Liste_des_lacs_de_Corse" %>%
+  read_html( encoding = "UTF-8") %>%
+  html_nodes("a") %>%
+  html_attr("href") %>%
+  grep("wiki", ., value = T) 
+
+# modif encodage
+liens_tableau_tot_corse = urltools::url_decode(liens_tableau_tot_corse)
+Encoding(liens_tableau_tot_corse) = "UTF-8"
+
+liens_tableau_tot_corse <-
+  liens_tableau_tot_corse  %>% grep("Lac|Lacs|Grand lac|Petit lac|Gour|Étang|Étangs|Etang|Réservoir|Grand réservoir|Barrage|Grand et petit|Plan d'eau|Petit étang|Marais|Mare", ., value = T) %>%
+  paste0("http://fr.wikipedia.org",.)
+
+liens_tableau_tot_fr <- c(liens_tableau_tot,liens_tableau_tot_corse)
+
+
+#récupération des coordonnées
+ExtractGeoCoords <- function(url) {
+  url %>%
+    read_html() %>%
+    html_nodes("#coordinates") %>%
+    html_text()
+}
+
+# extraction des coordonnées
+geos.coords <- sapply(1:length(liens_tableau_tot_fr), function(x) try(ExtractGeoCoords(liens_tableau_tot_fr[x]), silent = T))
+geos.clean.coords <- sapply(1:length(geos.coords), function(x) geos.coords[[x]][1])
+
+ExtractGeoCoords("https://fr.wikipedia.org/wiki/Parc_du_H%C3%A9ron")
+
+liens_tableau_tot_fr_t <- liens_tableau_tot_fr %>% grep("Héron", ., value = T)
+geos.coords <- sapply(1:length(liens_tableau_tot_fr_t), function(x) try(ExtractGeoCoords(liens_tableau_tot_fr_t[x]), silent = T))
+
+
+#récupération des liens urls
+ExtractLienUrl <- function(url) {
+  url 
+}
+
+liens_url <- sapply(1:length(liens_tableau_tot_fr), function(x) try(ExtractLienUrl(liens_tableau_tot_fr[x]), silent = T))
+
+# type de lac
+ExtrType <- function(url) {
+  url %>%
+    read_html() %>%
+    html_nodes(".infobox_v2") %>%
+    html_nodes("td td td") # %>%
+  #.[[1]] %>%
+  # html_text()
+  #html_attr('src')
+}
+#test
+ExtrType("https://fr.wikipedia.org/wiki/Lac_Daumesnil")
+
+#extraction de l'url de l'image
+ExtrImg <- function(url) {
+  url %>%
+    read_html() %>%
+    html_nodes(".infobox_v2 .image") %>%
+    .[[1]] %>%
+    html_nodes("img") %>%
+    html_attr("src")
+}
+
+imgs <- sapply(1:length(liens_tableau_tot_fr), function(x) try(ExtrImg(liens_tableau_tot_fr[x]), silent = T))
+imgs.p <- sapply(1:length(imgs), function(x) imgs[[x]][1])
+
+# extraction des titres
+ExtrTitre <- function(url) {
+  url %>%
+    html() %>%
+    html_nodes("div h1") %>%
+    html_text()
+}
+
+titres <- sapply(1:length(liens_tableau_tot_fr), function(x) try(ExtrTitre(liens_tableau_tot_fr[x]), silent = T))
+titres.p <- sapply(1:length(titres), function(x) titres[[x]][1])
+
+# conversion des coordonnées en wgs84 décimaux
+
+cleanlatlong <- function(x) {
+  x1 <- as.character(x)
+  x2 <- sub('°', 'd', x1)
+  x3 <- gsub("\\s", "", x2)
+  x4 <- sub("′", "'", x3)
+  x5 <- sub('″', '\" ', x4)
+  x6 <- as.numeric(char2dms(x5))
+  x_dir_EONS = str_sub(x,-1,-1)
+  x7 <- ifelse(x_dir_EONS %in% c('O','S'),-x6,x6)
+  print(x7)
+}
+
+#cleanlatlong("45° 27′ N")
+
+# assemblage dans une table commune et déduplication
+
+ref_lacs <- cbind( titres.p, geos.clean.coords, imgs.p, liens_url) %>% data.frame() %>%
+  # déduplication (certains lacs ont deux dénominations)
+  distinct(titres.p, geos.clean.coords,.keep_all = TRUE) %>%
+  mutate(titres.p = gsub(" *\\(.*?\\) *", "", titres.p)) %>%
+  mutate(geos.clean.coords = gsub("nord","N", geos.clean.coords),
+         geos.clean.coords = gsub("sud","S", geos.clean.coords),
+         geos.clean.coords = gsub("ouest","O", geos.clean.coords),
+         geos.clean.coords = gsub("est","E", geos.clean.coords)) %>%
+  # enlever les décimales de coordonnées si il y en a
+  mutate(geos.clean.coords = gsub(",.[00-99]″", "″", geos.clean.coords, perl=T, fixed = F)) %>%
+  mutate(geos.clean.coords = gsub(",[1-9]″", "″", geos.clean.coords, perl=T, fixed = F)) %>%
+  # separer lat et long  
+  separate(geos.clean.coords, c("geos.clean.lat", "geos.clean.long"), ",") %>%
+  filter(!is.na(geos.clean.lat)) %>%
+  mutate(lat.wgs84 =  tryCatch(cleanlatlong(geos.clean.lat), error=function(e) NA)) %>%
+  mutate(lon.wgs84 =  tryCatch(cleanlatlong(geos.clean.long), error=function(e) NA)) %>% 
+  #modif pour le cas Lacs_Amance_et_du_Temple
+  mutate(liens_url = ifelse(liens_url %in% "http://fr.wikipedia.org/wiki/Lac_du_Temple" ,"http://fr.wikipedia.org/wiki/Lacs_Amance_et_du_Temple", as.character(liens_url))) %>%
+  #completer url
+  mutate(liens_url_titre = gsub( "http://fr.wikipedia.org/wiki/" ,"", liens_url)) %>%
+  mutate(liens_img = paste0( "https:" , imgs.p)) %>%
+  mutate(liens_img=ifelse(grepl('Flag_of_France',liens_img), NA, as.character(liens_img))) %>%
+  #mutate(liens_img = ifelse(grep("Flag_of_France", liens_img), NA, as.character(liens_img))) %>%
+  # supprimer les objets non lacs
+  filter(!liens_url_titre %in% c("Sainte-Hélène-du-Lac","Puttelange-aux-Lacs","Barrage_de_Cambeyrac","Lac_des_Escarcets")) %>%
+  mutate(liens_url_titre = ifelse(liens_url_titre %in% "Étang_de_la_Brienne","Lac_de_la_Brienne",liens_url_titre)) %>%
+  mutate(liens_url_titre = ifelse(liens_url_titre %in% "Lac_des_Partias","Réserve_naturelle_régionale_des_Partias",liens_url_titre))
+
+
+#########
+## popularité API wikimedia
+library(pageviews)
+
+# fonction
+extr_wiki <-  function(x){
+  article_pageviews(project = c("fr.wikipedia"),
+                      article = x,
+                      start = as.Date('2014-06-01'), end = as.Date("2017-06-01"),
+                      user_type = "all", platform = "all")  %>%
+    group_by(article) %>%
+    summarise(views=sum(views)) %>%
+    as.data.frame()
+}
+s_extr_wiki <- safely(extr_wiki)
+liste_wiki <- map(ref_lacs$liens_url_titre, s_extr_wiki)
+liste_wiki_res <- liste_wiki %>%   map_df("result")
+ 
+
+ref_lacs <- ref_lacs %>%
+  left_join(liste_wiki_res, by = c('liens_url_titre'= 'article'))%>%
+  mutate(views = ifelse(is.na(views),0,views)) %>%
+  # rang de popularité
+  arrange(desc(views)) %>%
+  mutate(num_vueswiki = row_number())
+
+
+fwrite(ref_lacs, file = "./data/ref_lacs.csv", verbose = F)
+}
+
+############
+### création du spatial points dataframe à partir des coordonnées en WGS84
+
+ref_lacs.geo <- SpatialPointsDataFrame(coords = subset(ref_lacs, select = c(lon.wgs84, lat.wgs84)),
+                                       data = ref_lacs,
+                                       proj4string = CRS("+init=epsg:4326"))    
+# projection en Lambert carto
+ref_lacs.geoL <- ref_lacs.geo %>%
+  st_as_sf() %>%
+  st_transform(2154) %>%
+  as(., "Spatial")
+  spTransform(ref_lacs.geo, CRS("+init=epsg:2154"))
+
+
+######################
+##### palmares et classement par région
+
+# carte région
+library(COGugaison)
+library(rgdal)
+library(tmap)
+library(tmaptools)
+library(spdplyr)
+library(magrittr)
+
+
+
+# Contours communes
+
+# importer shape des communes France métro
+comm <- st_read("./data/ADMIN-EXPRESS-COG_1-0__SHP__FRA_2017-06-19/ADMIN-EXPRESS-COG/1_DONNEES_LIVRAISON_2017-06-19/ADE-COG_1-0_SHP_LAMB93_FR/COMMUNE_carto.shp" , stringsAsFactors = F, quiet = T) %>% as(., "Spatial")
+
+# créer contours des régions
+comm_supra <- left_join(comm, table_supracom_2017, by = c("INSEE_COM" = "CODGEO"))
+REG_spdf <- gUnaryUnion(comm_supra, comm_supra$INSEE_REG)
+REG_spdf$id <- row.names(REG_spdf)
+
+# récupération de la région d'appartenance des lacs
+ref_lacs.geoLG <- over(ref_lacs.geoL, REG_spdf)
+ref_lacs.geoL@data <- ref_lacs.geoL@data %>% cbind(ref_lacs.geoLG %>% as.data.frame() %>% set_colnames("INSEE_REG")) %>%
+  mutate( INSEE_REG = ifelse(liens_url_titre %in% "Lac_de_Chaillexon", 3, 
+                             ifelse(liens_url_titre %in% "Lac_de_la_Vecchia", 11,
+                                    ifelse(liens_url_titre %in% "Lac_Léman", 11,
+                                           ifelse(liens_url_titre %in% "Étang_de_Berre", 12,INSEE_REG))))) %>%
+  left_join(
+    comm %>% as.data.frame() %>% distinct(INSEE_REG, NOM_REG) %>%
+      # mutate(INSEE_REG = as.numeric(INSEE_REG)) %>%
+      identity(),
+    by = c("INSEE_REG" = "INSEE_REG")
+  ) %>%
+  mutate(NOM_REG = ifelse(is.na(NOM_REG), "OUTRE-MER", as.character(NOM_REG))) %>%
+  group_by(NOM_REG) %>%
+  mutate(num_vueswiki_reg = row_number() ) %>%
+  #dénominations lacs/étangs/autres
+  mutate(type = ifelse(grepl('Lac|Lacs|Grand lac|Petit lac|Léman',liens_url_titre), "lac",
+                       ifelse(grepl('Étang|Étangs|Etang|étang',liens_url_titre), "étang", "autre")))
+
+
+# fonction pour gérer accents
+conv_accents <- function(x) {
+  x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+  
+  x <- gsub(pattern = "è", replacement = "&Egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&Eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&Ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&Euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&Icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&Iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&Ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&Uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&Ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&Agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&Acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&Ccedil;", x = x)
+  x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+  
+  return(x)
+}
+
+# classement par lacs par région et dataframe
+ref_lacs.df <-
+  ref_lacs.geoL %>%
+  as.data.frame() %>%
+  select(titres.p, imgs.p, liens_url, lat.wgs84, lon.wgs84, liens_img, views, num_vueswiki, num_vueswiki_reg, INSEE_REG, NOM_REG, type) %>%
+  mutate(titres.p = conv_accents(titres.p)) %>%
+  left_join(
+    ref_lacs.geoL@data %>%
+      group_by(NOM_REG) %>%
+      summarise(nb_lacs_reg =n()),
+    by = c("NOM_REG"= "NOM_REG")) %>%
+  mutate(NOM_REG =  as.factor(NOM_REG)) %>%
+  mutate(NOM_REG_f = reorder(NOM_REG,desc(nb_lacs_reg) ))
+
+
+```
+
+
+
+L'été revient et avec lui l'époque des baignades. On peut aller chercher l'eau salée à l'océan ou à la mer mais les lacs ont un charme incomparable, même quand un [inconnu](https://fr.wikipedia.org/wiki/L%27Inconnu_du_lac) s'y baigne... Comme ça serait dommage de rater un bon spot je me suis mis en tête de réaliser une cartographie des lacs remarquables et wikipedia est venu à ma rescousse grâce à cette [page](https://fr.wikipedia.org/wiki/Liste_des_lacs_de_France) les référençant. La méthode (scripts dispos [ici](https://github.com/mtmx/mtmx.github.io/blob/master/post/wikilacs.Rmd)) est la suivante : identifier les liens url vers des pages wikipedia décrivant des lacs, récupérer les titres, les images de vignettes et les coordonnées géographiques puis les convertir dans le bon système de projection, et récupérer la localisation par région grâce aux fonds cartographiques classiques de l'IGN.
+
+Circonscrire notre liste aux lacs disposant d'une page wikipedia a deux avantages : conserver uniquement ceux considérés comme "dignes d'intérêt" (dans l'esprit des wikipédiens en tout cas) et estimer leur popularité en quantifiant le nombre de vues de chaque page grâce à l'API [wikimedia](https://cran.r-project.org/web/packages/pageviews/index.html) . Ici on se limite au nombre de consultations sur la page francophone des lacs, et cela entre juin 2014 et juin 2017.
+On remarquera que la page des lacs recense également des étangs, la limite entre les deux étant parfois floue : [grosso modo](https://education.toutcomment.com/article/quelle-est-la-difference-entre-un-lac-et-un-etang-8288.html) un lac est plus profond qu'un étang, ses eaux sont soumises à des courants et elles s'évacuent dans un cours d'eau émissaire. On conserve néanmoins les étangs parce qu'on peut parfois s'y baigner ou pratiquer des activités nautiques.
+
+Au final on recense 536 lacs et étangs remarquables en France métropolitaine et dans les Outre-mer, dont une bonne centaine rien que pour la nouvelle région Auvergne Rhône-Alpes (survolez les points pour afficher le nom et une photo de chaque lac) :
+
+```{r graphique, echo=F, message=F, warning=F}
+
+# graphique ggplot
+library(ggplot2)
+library(ggiraph)
+
+# style du popup
+tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white"
+
+# graphique interactif
+p <- ggplot()
+p <- p + geom_point_interactive(data = ref_lacs.df,
+                                aes( x = views,y=num_vueswiki_reg, fill=views,
+                                     #tooltip = paste("<strong>", titres.p,"</strong><br />"),
+                                     tooltip = paste0("<style> div.leaflet-popup-content {width:auto!important;}</style>",
+                                                      "<b>","<font size=2.5 color=black>" , titres.p,"</b>","</font>", "<br>",
+                                                      "<img src = ", conv_accents(liens_img), " height=\"90\"width=\"120\">"),
+                                     data_id = titres.p, size = views),
+                                shape = 21, stroke=0.05,colour = "grey")
+
+p <- p + scale_fill_distiller(palette = "Reds", direction = 1, name="Popularité sur wikipedia (en nombre de vues)")
+p <- p + scale_size_continuous(range = c(0.7,2.2),name = "Nombre de vues", guide = FALSE)
+p <- p + scale_x_continuous( limits = c(0,200000), expand = c(0,0),breaks = seq(0 , 200000, 20000),"", labels=function(x) format(x, big.mark = " ", scientific = FALSE))
+#p <- p + coord_flip()
+p <- p + theme(legend.position="bottom",
+               legend.text=element_text(size=5),
+               legend.title=element_text(size=6),
+               axis.line=element_blank(),
+               axis.text.y=element_blank(),
+               axis.title.y=element_blank(),
+               axis.text.x=element_text(size=6, color = "black"),
+               axis.title.x=element_text(size=9, color = "grey",face="italic"),
+               axis.ticks=element_blank(),
+               panel.background=element_blank(),panel.border=element_blank(),
+               panel.grid.major.x=element_line(colour = 'grey80', linetype = 'twodash', size = 0.1),
+               panel.grid.major.y=element_blank(),
+               panel.grid.minor=element_blank(),
+               plot.background=element_blank(),
+               legend.key = element_rect(fill = NA, colour = NA),
+               legend.key.width = unit(0.8, "cm"),
+               strip.text.y = element_text(size = 5, colour = "black", angle = 0),
+               plot.title=element_text(size=12,face="bold"),
+               plot.subtitle=element_text(size=9,face="italic"),
+               plot.caption=element_text(size=6,colour = "grey"))
+
+p <- p +   labs(
+  title = "Lacs et étangs remarquables sur wikipedia",
+  subtitle = "Par région",
+  caption = "Source : Wikipedia"
+)
+p <- p + facet_grid( NOM_REG_f ~ .,  space = "free_y", scales = "free_y", switch = "y")
+#p
+
+# ggiraph
+ggiraph(code = {print(p)},
+        width = 1,# height = 10,
+        tooltip_extra_css = tooltip_css,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+
+Le très beau lac d'Annecy arrive en tête des lacs les plus populaires devant le Léman et deux lacs artificiels crées dans les années 1960-70 suite à l'édification de barrages sur la Durance et le Verdon, les lacs de Serre-Ponçon et de Sainte-Croix. La mise en eau du barrage de Sainte Croix avait provoqué [l'engloutissement d'un village](http://www.ina.fr/video/RAF04026941), comme ce fut souvent le cas dans d'autres lieux : le livre d'André Besson 'Le village englouti' et la [série télévisée éponyme](http://www.ina.fr/video/CPA76053628) avait raconté ces événements où le progrés technologique et la volonté de l'Etat se heurte au mode de vie traditionnel des habitants. 
+
+Ces lacs de barrage (Der-Chantecoq, Vassivière, Pierre-Percée, Guerlédan...) permettent de produire de l'électricité grâce à l'énergie hydraulique et se prêtent bien aux loisirs nautiques mais perturbent le cycle de l'eau en aval et en amont. Les plus beaux lacs, les vrais restent pour moi ceux de haute montagne, parfois d'origine glaciaire. Mention spéciale à ceux des Pyrénées, superbes ! Voici la carte qui me permettra de tous les voir, avec les liens pour retrouver leur page wikipedia :
+
+
+```{r carte, echo=F, message=F, warning=F}
+
+
+library(leaflet)
+library(RColorBrewer)
+
+pal.pct <- colorBin(palette = "Reds",domain = ~num_vueswiki , bins = c(0, 3, 10, 25, 50, 100,200,max(ref_lacs.df$num_vueswiki)), pretty = F, reverse = T)
+
+popup = ~paste0("<style> div.leaflet-popup-content {width:auto !important;}</style>",
+                "<b>","<font size=4 color=black>" , titres.p,"</b>","</font>", "<br>",
+                #'<a href="https://www.r-project.org/">page wikipedia</a>',
+                paste0("<a href=" , liens_url," target=\"_blank\">page wikipedia</a>"),
+                "<img src = ", liens_img, " height=\"200\" width=\"200\">")
+
+m <-
+  leaflet(padding = 0) %>%
+  # addWMSTiles("Stamen.Toner", options=tileOptions(minZoom=6,maxZoom=13),attribution = "Wikipedia") %>%
+  # basemaps http://leaflet-extras.github.io/leaflet-providers/preview/
+  addProviderTiles( "CartoDB.Positron", options=providerTileOptions(minZoom=6,maxZoom=13)) %>%
+  
+  setView(2.3, 46.1, zoom = 6) %>%
+  addCircleMarkers(data = subset(ref_lacs.df, type %in% 'lac'),
+                   lng = ~lon.wgs84, 
+                   lat = ~lat.wgs84, 
+                   radius =  ~(views /30000) + 3,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 50,
+                   fill = T, 
+                   fillColor = ~pal.pct(num_vueswiki), 
+                   fillOpacity = 1,
+                   group = "Lacs",
+                   color = "black",
+                   popup = popup,
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  addCircleMarkers(data = subset(ref_lacs.df, type %in% 'étang'),
+                   lng = ~lon.wgs84, 
+                   lat = ~lat.wgs84, 
+                   radius =  ~(views /30000) + 3,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 50,
+                   fill = T, 
+                   fillColor = ~pal.pct(num_vueswiki), 
+                   fillOpacity = 1,
+                   group = "Etangs",
+                   color = "black",
+                   popup = popup,
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  addCircleMarkers(data = subset(ref_lacs.df, type %in% 'autre'),
+                   lng = ~lon.wgs84, 
+                   lat = ~lat.wgs84, 
+                   radius =  ~(views /30000) + 3,
+                   weight = 0.5, 
+                   stroke = T,
+                   opacity = 50,
+                   fill = T, 
+                   fillColor = ~pal.pct(num_vueswiki), 
+                   fillOpacity = 1,
+                   group = "Autres\ndénominations",
+                   color = "black",
+                   popup = popup,
+                   options=popupOptions(keepInView = FALSE, closeButton = TRUE,zoomAnimation = TRUE),
+                   labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  addLegend("topright", 
+            colors = rev(brewer.pal(7,"Reds")),
+            labels = c("1 à 3","4 à 10","11 à 25","26 à 50","51 à 100","101 à 200", "plus de 200"),
+            title = "Rang de popularité",
+            opacity = 1) %>% 
+  addLayersControl( overlayGroups = c("Lacs","Etangs", "Autres\ndénominations"), options = layersControlOptions(collapsed = F, autoZIndex = TRUE), position =  "topright") 
+
+m$width <- 1000
+m$height <- 1000
+
+m
+
+```
+
+
+
+Plouf.
+
+Et [merci](https://donate.wikimedia.org/w/index.php?title=Special:FundraiserLandingPage&country=FR&uselang=fr&utm_medium=sidebar&utm_source=donate&utm_campaign=C13_fr.wikipedia.org#) à wikipedia et à ses contributeurs.
