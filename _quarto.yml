@@ -10,7 +10,7 @@ website:
     creator: "@matamix"
     card-style: summary_large_image
   navbar:
-    background: "#eeeeee"
+    background: "#d0d1e6"
     right:
       - about.qmd
       - icon: github
@@ -19,8 +19,6 @@ website:
         href: https://twitter.com/matamix
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme: minty
 
-editor: visual
 

@@ -13,5 +13,53 @@
   },
   "posts/jojographie/index.qmd": {
     "index.html": "d3e6f8e6"
+  },
+  "posts/carto_alti/index.qmd": {
+    "index.html": "29e284f4"
+  },
+  "posts/bistrographie/index.qmd": {
+    "index.html": "81cfeba4"
+  },
+  "posts/bistrographie/data/deps/leaflet-providers-1.0.27/license.md": {
+    "license.html": "2c7f14d8"
+  },
+  "posts/bistrographie/data/deps/leaflet-providers-1.0.27/CONTRIBUTING.md": {
+    "CONTRIBUTING.html": "0fda39b9"
+  },
+  "posts/metrololo_diplomes/index.qmd": {
+    "index.html": "80e6ec90"
+  },
+  "posts/cheptels/index.qmd": {
+    "index.html": "8c956508"
+  },
+  "posts/metrololo_logements/index.qmd": {
+    "index.html": "a9a58c66"
+  },
+  "posts/metrololo_mamies/index.qmd": {
+    "index.html": "54298d19"
+  },
+  "posts/metrololo_poussettes/index.qmd": {
+    "index.html": "931dc14d"
+  },
+  "posts/appli_campagnes/index.qmd": {
+    "index.html": "2da57274"
+  },
+  "posts/paroles_chansonfr/index.qmd": {
+    "index.html": "c4594149"
+  },
+  "posts/carto_meteo/index.qmd": {
+    "index.html": "b4eedea9"
+  },
+  "posts/deces_pandemie/index.qmd": {
+    "index.html": "246fc8ed"
+  },
+  "posts/montreuil_google/index.qmd": {
+    "index.html": "147a8ccd"
+  },
+  "posts/velo_montreuil/index.qmd": {
+    "index.html": "9e91114e"
+  },
+  "posts/wikilacs/index.qmd": {
+    "index.html": "ad854c3d"
   }
 }
