@@ -1,0 +1,373 @@
+---
+title: "Gentrification résidentielle"
+author: "Mathieu"
+date: "2017-06-25"
+showonlyimage: false
+draft: false
+image: img/img_metrololo_diplomes.png
+weight: 0
+type: "post"
+description: "[Metrololo #3] Analyse infra-urbaine par station de métro"
+categories: ["metros", "ville", "diplômés","gentrification"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Après deux épisodes consacrés aux [enfants](https://mtmx.netlify.app/posts/metrololo_poussettes/) et aux [mamies](https://mtmx.netlify.app/posts/metrololo_mamies/), on rentre dans le tas en abordant un sujet sensible : la gentrification. Parce qu'il semble que tout le monde peut prétendre avoir un avis sur le sujet, je m'y mets aussi.
+Mon postulat de départ veut que les gentrifieurs soient jeunes et diplômés, donc que les quartiers ayant vu une arrivée de diplomés plus rapide qu'ailleurs depuis les années 1990 sont davantage susceptibles d'être soumis à un processus de gentrification. On parle ici de gentrification résidentielle puisqu'on étudie les caractéristiques de la population résidente et non les types de commerces, d'équipements ou d'associations qui permettent eux de cerner les processus de gentrification d'une autre manière.
+ 
+D'abord un rapide cadrage national qui ne surprendra personne : les territoires les plus diplômés d'après les dernières données de l'Insee (RP 2013) sont les grandes villes dotées des centres universitaires majeurs et de fonctions métropolitaintes, Paris étant bien sûr la première d'entre elles.
+
+```{r france,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+
+library(rgdal)
+library(cartography)
+library(rgeos)
+library(maptools)
+
+CV_RP1990_2013 <- read.csv2( "./data/CV_RP1990_2013.csv")
+CV_spdf.s <- readShapeSpatial("./data/CV_spdf.s.shp" ,proj4string=CRS("+init=epsg:2154"))
+dep.s <- readShapeSpatial("./data/dep.s.shp" ,proj4string=CRS("+init=epsg:2154"))
+
+# palette
+cols <- carto.pal(pal1 = "green.pal", n1 = 7)
+bks <- c(0, 0.15, 0.2, 0.25, 0.3,0.35,0.4,1)
+
+opar <- par(mar = c(0,0,1.2,0))
+plot(dep.s, col = "grey60",border = "white", lwd=0.4, add=F)
+
+# choroplèthe
+choroLayer(spdf = CV_spdf.s, 
+           df = CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CV", 
+           var = "pct_P13_NSCOL15P_SUP",
+           col = cols,
+           breaks = bks * 100, 
+           #method = "quantile", nclass = 6,
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 1, 
+           legend.title.txt = "%", 
+           add = TRUE) 
+
+plot(dep.s, col = NA,border = "white", lwd=0.3, add=T)
+
+titre <- "Part des diplomés (>= bac +2) dans la population non scolarisée, par canton"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Insee, RP 2013",
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+
+## Des quartiers aux trajectoires divergentes
+
+Pour comprendre les phénomènes socio-démographiques qui se jouent à l'échelle du quartier, on se base toujours sur les zones entourant les stations de transports en commun (métro, tram, RER et transilien) de la région Ile de France. La station (ou la gare) fait en effet souvent office de lieu de centralité dans la vie quotidienne des habitants et c'est principalement à elle qu'on fait référence pour évoquer son quartier. Toute la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.netlify.app/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
+
+Quantifier la part des diplômés (on parle ici des diplomés supérieur ou égaux à bac +2, indicateurs fournis dans les recensements de l'Insee de 1990 et 2013) et son évolution depuis les années 1990 permet de montrer que des quartiers/stations ayant le même profil en 1990 ont des situations complètement différentes aujourd'hui.
+
+```{r exemple_evolution, echo=F, message=F, warning=F, fig.width=8,fig.height=5.5}
+library(ggplot2)
+library(ggiraph)
+library(dplyr)
+library(scales)
+library(ggalt)
+
+STATIONS_data_indics.f <- read.csv2( "./data/data_stations.csv") %>%
+  select(-X)
+
+
+STATIONS_data_indics.f.extr <-
+  STATIONS_data_indics.f %>%
+  filter(substr(INSEE_COM,1,2) %in% c('75')) %>%
+  filter(pct_AF90TSUP > 0.18 & pct_AF90TSUP < 0.22) %>%
+  arrange(pct_P13_NSCOL15P_SUP) %>%
+  mutate(nom_station_f = factor(nom_station,levels = nom_station[order(pct_P13_NSCOL15P_SUP)] ))
+
+
+ggplot(STATIONS_data_indics.f.extr, aes(y=nom_station_f, x=pct_AF90TSUP, xend=pct_P13_NSCOL15P_SUP)) + 
+  geom_dumbbell(size=1, color="#e3e2e1", 
+                colour_x = "#5b8124", colour_xend = "#bad744",
+                dot_guide=TRUE, dot_guide_size=0) +
+  labs(x=NULL, y=NULL, title="ggplot2 geom_dumbbell with dot guide") +
+  scale_x_continuous(labels = percent, limits = c(0.1,0.7), expand = c(0,0),breaks = seq(0.1 , 0.7, 0.1)) +  
+  theme(legend.position="right",
+                 legend.text=element_text(size=8),
+                 plot.title=element_text(size=12,face="bold"),
+                 plot.subtitle=element_text(size=9,face="italic"),
+                 plot.caption=element_text(size=8,colour = "#4f4f4f"),
+                 legend.key.size = unit(0.5, "cm"),
+                 axis.title=element_text(size=10,face="bold"),
+                 axis.text = element_text(size=7,face = "italic", hjust = 1),
+                 #axis.text.y = element_text(size=8, color="black", face = "bold"),
+                 panel.grid.major = element_line(colour = "white", size=0.01),
+                # panel.grid.major.y=element_line(size=0.01) ,
+                 panel.background = element_rect(fill = "white")) +
+  labs(
+  title = "Stations de Paris intra-muros avec environ 20% de diplômés en 1990",
+  subtitle = "Evolution de la part des diplômés (>= bac +2) dans la population, 1990 - 2013",
+  caption = "Sources : Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia"
+) + geom_text(data=STATIONS_data_indics.f.extr, aes(x=0.18, y= "Richelieu Drouot", label="1990"),
+                   color="#5b8124", hjust=0, size=3, nudge_x=-0.02) +
+  geom_text(data=STATIONS_data_indics.f.extr, aes(x=0.65, y= "Richelieu Drouot", label="2013"),
+                   color="#bad744", hjust=0, size=3, nudge_x=+0.02)
+```
+
+
+Autant des quartiers du Nord-Est (Place des Fêtes, Porte de Pantin) ou du 13ème (Olympiades, Nationale) n'ont vu leur part de diplômés multipliée "seulement" par 2, autant cette part a carrément triplé dans certains quartiers plus centraux (Richelieu-Drouot, Bonne-Nouvelle) ou du 11ème arrondissement (Oberkampf, Voltaire).
+
+Pour quantifier cette différenciation des quartiers par le profil diplômé de leur population, on procède à une régression locale entre les valeurs en 1990 et en 2013. Les stations en rouge ci-dessous ont donc "sur-performé" en termes de diplomification (allons-y) depuis les années 1990 alors que les stations en bleu ont évolué moins vite que ce à quoi à n'aurait pu s'attendre d'après leur niveau en 1990. En passant le curseur sur les points les noms et caractéristiques des stations s'affichent :
+
+```{r graphique, echo=F, message=F, warning=F, fig.width=8,fig.height=4}
+
+
+  STATIONS_data_indics.f <-
+  STATIONS_data_indics.f %>%
+  mutate(res_log_dipl_cl = cut(res_log_dipl *100, breaks = c(-40,-12,-8,-4, 0,4,8,12,40))) %>%
+  mutate(zone_IDF = ifelse(substr(INSEE_COM,1,2) %in% c('77','78','91','95'),"Grande couronne",
+                           ifelse(substr(INSEE_COM,1,2) %in% c('92','93','94'),"Petite couronne", "Paris"))) %>%
+    mutate(zone_IDF_f = factor(zone_IDF,levels = c( 'Grande couronne','Petite couronne',   'Paris' )) ) %>%
+    arrange(zone_IDF_f)
+
+  
+# fonction pour gérer accents
+conv_accents <- function(x) {
+  x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+  x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+  
+  return(x)
+}
+
+
+
+p <- ggplot(data =  STATIONS_data_indics.f,
+            aes( pct_AF90TSUP,pct_P13_NSCOL15P_SUP,size = P13_POP, fill=res_log_dipl_cl,
+                 tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                 "2013 :", sprintf("%1.1f%%", 100*pct_P13_NSCOL15P_SUP), "de dipômés<br />",
+                                 "1990 :", sprintf("%1.1f%%", 100*pct_AF90TSUP), "de dipômés<br />"),
+                 data_id = id, colour = zone_IDF_f, aplha = zone_IDF_f))
+p <- p + geom_point_interactive(shape = 21, stroke =0.2)
+p <- p + scale_size_continuous(range = c(0.5,2.5), name = "Population")
+p <- p + scale_colour_manual(values = c("grey95", "grey90", "black"), name = "Zone")
+p <- p + scale_alpha_manual(values = c(0.01, 0.02,1))
+ p <- p + scale_fill_manual(values = rev(c("#CB181D", "#FB6A4A", "#FCAE91", "#FEE5D9", "#EFF3FF", "#BDD7E7", "#6BAED6", "#2171B5")),
+                               #high = "red",mid="white", low= "blue", name="écart", 
+                     labels = rev(c("< -12 pts","-12/-8 pts","-8/-4 pts","-4/0 pts","0/+4 pts","+4/+8 pts","+8/+12 pts","> +12 pts" )),
+                      name = "Résidus de la\nrégression locale")
+
+p <- p + scale_x_continuous(labels = percent, limits = c(0,0.5),breaks = seq(0 , 0.5, 0.1), expand = c(0,0), name = "Part des diplômés en 1990")
+p <- p + scale_y_continuous(labels = percent, limits = c(0,0.8),breaks = seq(0 , 0.8, 0.1), expand = c(0,0), name = "Part des diplômés en 2013")
+p <- p +   theme(legend.position="right",
+        legend.text=element_text(size=8),
+        plot.title=element_text(size=12,face="bold"),
+        plot.subtitle=element_text(size=9,face="italic"),
+        plot.caption=element_text(size=8,colour = "#4f4f4f"),
+        legend.key.size = unit(0.5, "cm"),
+        axis.title=element_text(size=10,face="bold"),
+        axis.text = element_text(size=7,face = "italic", hjust = 1),
+        #axis.text.y = element_text(size=8, color="black", face = "bold"),
+        panel.grid.major = element_line(colour = "white"),
+        panel.background = element_rect(fill = "#f4f4f4")) 
+
+
+p <- p +   labs(
+  title = "Part des diplômés dans la population, par station",
+  subtitle = "Par arrondissement (diplome >= bac +2)",
+  caption = "Sources : Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia"
+)
+
+# ggiraph
+ggiraph(code = {print(p)},
+        width = 1,
+        height = 5,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+Les stations de Paris intra-muros cerclées en noir sont plus présentes dans la partie supérieure du graphique, preuve de l'accélération d'une sur-diplomification de leur population, mais on en trouve aussi plusieurs situées dans le 19ème arrondissment dans le bas de classement. Pour l'anecdote la station la plus diplômée en 1990 était Port-Royal mais elle est dorénvant détronée par Jussieu.
+
+La carte qui suit montre les mêmes indicateurs mais la localisation spatiale permet de mieux cerner les zones symptomatiques. Les résidus positifs de la régression locale en rouge, signe d'une diplomification rapide, sont essentiellement sur la rive droite mais rarement sur les arrondissements extérieurs. La population de certaines communes de banlieue (Montreuil, Les Lilas, Issy-les-Moulineaux pour d'autres raisons) a également plus rapidement changé que dans le reste de la région.
+
+```{r carto_leaflet,echo=F, message=F, warning=F}
+
+library(leaflet)
+library(RColorBrewer)
+library(maptools)
+
+REF_stations.ZT.wgs84 <- readShapeSpatial("./data/REF_stations.ZT.wgs84.shp" ,proj4string=CRS("+init=epsg:4326"))
+REF_stations.Z.contig.wgs84 <- readShapeSpatial("./data/REF_stations.Z.contig.wgs84.shp" ,proj4string=CRS("+init=epsg:4326"))
+
+# calcul de la différence du taux de diplomes de part et d'autre des frontières entre stations
+REF_stations.Z.contig.wgs84@data <-
+  REF_stations.Z.contig.wgs84@data %>% 
+  #mutate(id1 = as.numeric(id1), id2 = as.numeric(id2)) %>%
+    mutate(id1 = as.numeric(as.character(id1))) %>%
+     mutate(id2 = as.numeric(as.character(id2))) %>%
+  left_join(STATIONS_data_indics.f %>%
+              select(id,pct_P13_NSCOL15P_SUP ) %>%
+              rename(id_a = id, pct_P13_NSCOL15P_SUP_a = pct_P13_NSCOL15P_SUP),
+            by = c("id1" = "id_a")) %>%
+  left_join(STATIONS_data_indics.f %>%
+              select(id,pct_P13_NSCOL15P_SUP ) %>%
+              rename(id_b = id, pct_P13_NSCOL15P_SUP_b = pct_P13_NSCOL15P_SUP),
+            by = c("id2" = "id_b")) %>%
+  mutate(diff_pct_P13_NSCOL15P_SUP = abs(pct_P13_NSCOL15P_SUP_b - pct_P13_NSCOL15P_SUP_a)) %>%
+  mutate(diff_pct_P13_NSCOL15P_SUP_cl = cut(diff_pct_P13_NSCOL15P_SUP, breaks = seq(0,0.4,0.05))) %>%
+  mutate(diff_pct_P13_NSCOL15P_SUP_cl = gsub("\\,.*","",diff_pct_P13_NSCOL15P_SUP_cl) ,
+         diff_pct_P13_NSCOL15P_SUP_cl = as.numeric(gsub("\\(","",diff_pct_P13_NSCOL15P_SUP_cl)))
+
+
+
+## Initialisation 
+m <- leaflet(padding = 0)
+# tuiles et crédits
+# m <- addWMSTiles(map = m, "Stamen.Toner", options=tileOptions(minZoom=11,maxZoom=13),attribution = "Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia")
+m <- addProviderTiles(map = m, "CartoDB.Positron", options=providerTileOptions(minZoom=11,maxZoom=13))
+# coordonnées du centre de l'affichage
+m <- setView(map = m,2.345899, 48.859467, zoom = 12)
+
+# frontières
+m <- addPolylines(map = m,
+                  data = REF_stations.Z.contig.wgs84,
+                  color = "red",
+                  stroke = T,
+                  weight = ~(diff_pct_P13_NSCOL15P_SUP_cl)^2 * 60,
+                  group = "Discontinuités")
+
+
+pal.pct <- colorBin(palette = "Greens",domain = ~pct_P13_NSCOL15P_SUP * 100, bins = c(0, 20, 30, 40, 50, 60, 70, 100), pretty = F, reverse = F)
+
+popup <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% de diplômés en 2013 : ", sprintf("%.1f%%",pct_P13_NSCOL15P_SUP * 100), "</b>", "<br>",
+                 "% de diplômés en 1990 : ", sprintf("%.1f%%",pct_AF90TSUP * 100), "<br>")
+
+# couche stat actuelle
+m <- addCircleMarkers(map = m, 
+                      data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(P13_NSCOL15P_SUP) / 9,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct(pct_P13_NSCOL15P_SUP * 100), 
+                      fillOpacity = 1,
+                      group = "Part de diplômés",
+                      color = "black",
+                      popup = popup,
+                      labelOptions = labelOptions(noHide = F, textOnly = F))
+# et sa légende
+m <- addLegend(map = m ,"topright", 
+               #values = sprintf("%.1f%%",~pct_P13_F65P_P13_POP * 100),
+              # values = sprintf("%.1f%%",~pct_P13_F65P_P13_POP * 100),
+              #colors = c("#edf8e9","#c7e9c0","#a1d99b","#74c476","#31a354","#006d2c"),
+              colors = rev(brewer.pal(7,"Greens")),
+              labels = rev(c("< 20%","20% - 30%","30% - 40%","40% - 50%","50% - 60%","60% - 70%","> 70%")),
+               title = "Part de diplômés",
+              # labFormat = labelFormat(suffix = "%"),
+              #labFormat = myLabelFormat(reverse_order = T),
+               opacity = 1)
+
+pal.evol.pct <- colorBin(palette = c(rev(brewer.pal(4,"Reds")), brewer.pal(4,"Blues")),domain = ~res_log_dipl * 100,
+                         bins = c(-40,-12,-8,-4, 0,4,8,12,40), pretty = F, reverse = T)
+
+# couche stat évolution
+m <- addCircleMarkers(map = m, 
+                      data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(P13_NSCOL15P_SUP) / 9,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.evol.pct(res_log_dipl *100), 
+                      fillOpacity = 1,
+                      group = "Résidus",
+                      popup = popup,
+                      color = "black")
+
+# et sa légende 
+m <- addLegend(map = m ,"bottomright", #pal = pal.evol.pct, 
+               #values = sprintf("%.0f%%",~diff_pct_P13_F65P_P13_POP_pct_DP90F65P_DP90T * 100),
+               #values = ~diff_pct_P13_F65P_P13_POP_pct_DP90F65P_DP90T * 100,
+               #colors = c("#edf8e9","#c7e9c0","#a1d99b","#74c476","#31a354","#006d2c"),
+               #colors = brewer.pal(12,"RdBu"),
+               colors = c(rev(brewer.pal(4,"Reds")), brewer.pal(4,"Blues")),
+               labels = rev(c("< -12 pts","-12/-8 pts","-8/-4 pts","-4/0 pts","0/+4 pts","+4/+8 pts","+8/+12 pts","> +12 pts" )),
+               title = "Résidus de la<br>régression locale",
+               # labFormat = labelFormat(suffix = "%"),
+               labFormat = myLabelFormat(reverse_order = T),
+               opacity = 1)
+
+
+m <- addPolygons(map = m, 
+                      data = REF_stations.ZT.wgs84,
+                      stroke = T,
+                      weight = 0.5,
+                      opacity = 90,
+                      fill = F, 
+                      color = "silver")
+
+# bornes maximales de l'affichage correspondant aux limites du fichier affiché
+m <- setMaxBounds(map = m, 
+                  lng1 = min(STATIONS_data_indics.f$lon),
+                  lat1 = min(STATIONS_data_indics.f$lat),
+                  lng2 = max(STATIONS_data_indics.f$lon), 
+                  lat2 = max(STATIONS_data_indics.f$lat))
+# contrôle des couches
+m <- addLayersControl(map = m,  
+                      baseGroups = c("Résidus", "Part de diplômés" ), 
+                      overlayGroups = c("Discontinuités"),
+                      options = layersControlOptions(collapsed = F, autoZIndex = TRUE), 
+                      position =  "bottomright")
+m <- hideGroup(map = m, "Discontinuités")
+
+# version xxl
+m$width <- 800
+m$height <- 700
+
+m
+
+
+```
+
+Je trouve que ça se rapproche plutôt bien de l'idée que je me faisais des quartiers gentrifiées récemment, même si réduire ce phénomène à un simple indicateur est bien sûr une gageure.
+
+En basculant sur l'indicateur de la part de diplômés (menu à droite) on se remet tout de même les idées en place : les quartiers les plus diplômés restent sur la rive gauche, surtout les 5ème, 6ème et le nord du 15ème arrondissement. 
+Y-a-t-il des "frontières" invisibles dans la capitale qui nous feraient passer d'un quartier diplômé à un autre qui l'est beaucoup moins ? Afficher la couche correspondant aux discontinuités permet de mesurer cette impression, la largeur des lignes étant proportionnelle à la différence du taux de diplômés de part et d'autre de la ligne (en 2013). Ci-dessous une capture d'écran du Nord-Est de Paris :
+
+```{r discontinuites_NE, fig.width=4.2, fig.height=4.2,echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("./img/ecran_discontinuites_NE.png")
+ grid.raster(img)
+ 
+```
+
+Les principales "frontières" sont à signaler dans le nord de Paris entre ses "Portes" et les stations plus intra-muros, mais également dans l'Est entre le 11ème et le 20ème. Deux cas vraiment particuliers : Cité Universitaire et Porte de la Villette (avec plusieurs foyers étudiants) ont logiquement beaucoup plus de diplômés que les quartiers qui leur sont contigus.
+
+Voilà ce qu'on pouvait (trop) dire sur la localisation des populations diplômées à Paris. Le prochain épisode portera probablement sur les différents types de colocation et de partage de logement, toujours grâce à des données Insee.

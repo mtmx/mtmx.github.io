@@ -1,0 +1,862 @@
+---
+title: "Colocs en stock"
+author: "Mathieu"
+date: "2017-07-08"
+showonlyimage: false
+draft: false
+image: img/img_metrololo_colocs.png
+weight: 0
+type: "post"
+description: "[Metrololo #4] Analyse infra-urbaine par station de métro"
+categories: ["metros", "ville", "logement","colocation"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Quatrième épisode de notre série sur l'analyse urbaine de l'agglomération parisienne, cette fois on se penche sur les compositions des ménages et les différentes stratégies de partage de l'habitat. Le mêtre carré est cher, on en vient donc à le partager pour pouvoir rester à proximité des pôles d'emploi et des universités, bref, de là où les choses se passent et les connexions se font.
+ 
+
+Pour connaitre les status des individus au sein d'un ménage (terme qui désigne l'ensemble des occupants d'un même logement), on utilise le fichier "Individus localisés au canton-ville" de l'Insee qui contient les infos au quartier IRIS dans le meilleur des cas, mais très souvent au canton : étant donné qu'on en a besoin sur l'ensemble des quartiers d'Ile de France, on procède à une estimation à l'IRIS grâce au script dispo sur [metrololo](https://github.com/mtmx/metrololo/blob/master/exploitation_fichier_INDCVI_INSEE.R).
+
+
+Chaque ménage a un "référent" (grosso modo le chef de famille, si ce terme a encore un sens) et les autres individus vivant sous le même toit se positionnent par rapport à lui. Evidemment les statuts les plus courants sont le "référent du ménage" et son "conjoint", mais ici on ne s'intéresse qu'aux individus qui se définissent en tant qu'enfant, petit-enfant, ami, etc... On limite l'analyse aux adultes, c'est à dire la population âgée de 20 ans ou plus. Voilà donc la répartition de ces statuts en France (à gauche) et à Paris (à droite) :
+
+```{r stats_france_paris,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
+
+library(rgdal)
+library(cartography)
+library(rgeos)
+library(maptools)
+library(tidyverse)
+library(scales)
+library(tmap)
+library(tmaptools)
+
+FR_RP2013_COLOCATION <- read.csv2( "./data/FR_RP2013_COLOCATION.csv")
+CV_RP2013_COLOCATION <- read.csv2( "./data/CV_RP2013_COLOCATION.csv")
+CV2015_spdf.s <- readOGR( dsn = "./data",  "CV2015_spdf.s", verbose = FALSE) 
+dep.s <- readOGR( dsn = "./data",  "dep.s", verbose = FALSE) 
+dep <- readOGR( dsn = "./data",  "dep", verbose = FALSE) 
+COMM2015_FRMET <- readOGR( dsn = "./data",  "COMM2015_FRMET", verbose = FALSE) 
+REF_stations.geo <- readOGR( dsn = "./data",  "REF_stations.geo", verbose = FALSE) 
+
+
+INDICS_RP2013_COLOCATION <- FR_RP2013_COLOCATION %>% select(-X) %>% mutate(zone = "FRANCE") %>%
+  rbind(CV_RP2013_COLOCATION %>% ungroup() %>% filter(substr(CANTVILLE,1,2) %in% '75') %>%
+          select(starts_with("LPRM"), -ends_with("POP_sup20")) %>%
+  summarise_each(funs(sum)) %>% gather(type, val, starts_with("LPRM")) %>%
+  mutate(freq = val / sum(val)) %>%
+    mutate(zone = "PARIS")) %>%
+  mutate(TYPE = ifelse(type %in% 'LPRM_1', 'Référent du ménage', 
+                       ifelse(type %in% 'LPRM_2', 'Conjoint',
+                              ifelse(type %in% 'LPRM_3', 'Enfant',
+                                     ifelse(type %in% 'LPRM_4', 'Petit-enfant',
+                                            ifelse(type %in% 'LPRM_5', 'Ascendant',
+                                                   ifelse(type %in% 'LPRM_6', 'Autre parent',
+                                                          ifelse(type %in% 'LPRM_7', 'Ami',
+                                                                 ifelse(type %in% 'LPRM_8', 'Pensionnaire ou sous-locataire',
+                                                                        ifelse(type %in% 'LPRM_9', 'Domestique ou salarié logé',"Hors logement ordinaire")))))))))) %>%
+mutate(TYPE_2 = ifelse(type %in% 'LPRM_1', 'Référent du ménage', 
+                         ifelse(type %in% 'LPRM_2', 'Conjoint',
+                                ifelse(type %in% 'LPRM_3', "Adultes hébergés en tant qu\'enfant",
+                                       ifelse(type %in% 'LPRM_4', 'Adultes hébergés en tant que petit-enfant',
+                                       ifelse(type %in% 'LPRM_5', "Adultes hébergés en tant qu\'ascendant",
+                                       ifelse(type %in% 'LPRM_6', "Adultes hébergés en tant qu\'autre parent",
+                                              ifelse(type %in% 'LPRM_7', "Adultes hébergés en tant qu\'ami",
+                                              ifelse(type %in% 'LPRM_8', 'Adultes hébergés en tant que pensionnaire ou sous-locataire',
+                                                     ifelse(type %in% 'LPRM_9', 'Adultes hébergés en tant que domestique ou salarié logé',"Hors logement ordinaire"))))))))))
+
+
+INDICS_RP2013_COLOCATION$TYPE_ordre <- factor(INDICS_RP2013_COLOCATION$TYPE, levels=rev(c("Référent du ménage", "Conjoint", "Enfant","Petit-enfant","Ascendant", "Autre parent","Ami","Pensionnaire ou sous-locataire", 'Domestique ou salarié logé',"Hors logement ordinaire")))
+
+INDICS_RP2013_COLOCATION$TYPE_ordre_2 <- factor(INDICS_RP2013_COLOCATION$TYPE_2, levels=rev(c('Référent du ménage', 'Conjoint', "Adultes hébergés en tant qu\'enfant",'Adultes hébergés en tant que petit-enfant',"Adultes hébergés en tant qu\'ascendant", "Adultes hébergés en tant qu\'autre parent","Adultes hébergés en tant qu\'ami","Adultes hébergés en tant que pensionnaire ou sous-locataire", 'Adultes hébergés en tant que domestique ou salarié logé',"Hors logement ordinaire")))
+
+library(ggiraph)
+
+p <- ggplot(INDICS_RP2013_COLOCATION %>% filter(!TYPE_ordre_2 %in% c("Référent du ménage", "Conjoint", "Hors logement ordinaire")), aes(x= TYPE_ordre_2, y = freq, fill = TYPE_ordre_2, tooltip =  paste(
+                                 "% de la population >= 20 ans:", sprintf("%1.1f%%", 100*freq), "<br />",
+                                 "nombre :", format(round(as.numeric(val), 0), nsmall=0, big.mark=" "), "<br />"))) +
+  geom_bar_interactive(stat="identity") +
+  coord_flip() +
+  scale_fill_manual(values = rev(c( "#DE2D26", "#E34A33","#3182BD", "#756BB1", "#2CA25F", "#636363","#C51B8A")), name ="") +
+  scale_y_continuous(labels = percent, name ="") +
+  scale_x_discrete(name = "") +
+  facet_grid( . ~ zone, scales = "free_y") +
+  theme(legend.position="none",
+           legend.text=element_text(size=5),
+           legend.title=element_text(size=6),
+           axis.line=element_blank(),
+           axis.text.x=element_blank(),
+           axis.title.x=element_blank(),
+           axis.text.y=element_text(size=6, color = "black"),
+           axis.title.y=element_text(size=9, color = "grey",face="italic"),
+           axis.ticks=element_blank(),
+          panel.background=element_blank(),panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour = 'grey80', linetype = 'dotdash', size = 0.1),
+          panel.grid.major.x=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          legend.key = element_rect(fill = NA, colour = NA),
+          legend.key.width = unit(0.4, "cm"),
+          strip.text.y = element_text(size = 5, colour = "black", angle = 180),
+          plot.title=element_text(size=8,face="bold"),
+          plot.subtitle=element_text(size=5,face="italic"),
+          plot.caption=element_text(size=5,colour = "grey"))
+p <- p +   labs(
+  title = "Répartition des individus selon la position au sein du ménage",
+  subtitle = "au sein de la population agée de 20 ans ou plus (référents du ménage et conjoints non indiqués)",
+  caption = "Sources : Insee, RP 2013"
+)
+ggiraph(code = print(p), width = 1, height = 3,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}" )
+
+```
+
+A Paris, 6% des adultes logent chez leurs parents et se définissent donc en tant qu'enfant du référent du ménage. En clair, ce sont les Tanguys. On voit aussi que les gens logeant chez un autre parent (cousin, oncle, etc...) ou chez un ami sont nombreux, mais aussi que 450 personnes sont domestiques et logés en tant que tel chez leur employeur (3 300 au total dans l'ensemble du pays).
+
+## Localisation des différents statuts, en France et à Paris
+Rappel : la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.netlify.app/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
+
+
+#### Adultes hébergés en tant qu'enfant
+
+En France, plus de 3 millions d'adultes (20 ans ou plus) logent donc chez leurs parents. Où se trouve les Tanguys ? Evidemment je ne juge pas, c'est d'ailleurs rarement une situation désirée. Les cas les plus fréquents se trouvent en Ile de France, banlieue Est principalement, ainsi que dans le Nord-Pas de Calais, l'Alsace-Lorraine, la Corse, et dans une moindre mesure le littoral méditerranéenne et les Pyrénées-Atlantiques. La difficulté de trouver un logement à un prix abordable pour les jeunes apparait comme un frein évident à la "décohabitation".
+Sur la droite la carte des stations parisiennes avec la même discrétisation : le 19ème, les portes du 13ème, et une bonne partie de la Seine-Saint-Denis voient plus de 12% des adultes habiter chez leurs parents.
+
+```{r carte_LPRM3, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+library(ggplot2)
+library(ggiraph)
+library(dplyr)
+library(scales)
+library(ggalt)
+library(cartography)
+library(RColorBrewer)
+
+STATIONS_data_indics.f <- read.csv2( "./data/data_stations.csv") %>%
+  select(-X)
+
+# discrétisation maison
+bks_LPRM_3 <- c(0,4, 6, 8, 10, 12,21)
+bks_LPRM_4 <- c(0,0.025, 0.05, 0.075, 0.1, 0.15,0.5)
+bks_LPRM_5 <- c(0,0.25, 0.5, 0.75, 1, 1.25,4)
+bks_LPRM_6 <- c(0,1, 2, 3, 4, 5,7)
+bks_LPRM_7 <- c(0,0.5, 1, 1.8, 2.5, 3.5,5)
+bks_LPRM_8 <- c(0,0.2, 0.4, 0.6, 0.8, 1,2)
+bks_LPRM_9 <- c(0,0.02, 0.05, 0.1, 0.2, 0.3,0.6)
+bks_LPRM_Z <- c(0,2, 4, 8, 12, 20,40)
+
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"Reds")
+#opar <- par(mar = c(0,0,1.2,0))
+#text(x = 1017863, y = 7051189, labels = "1990", cex = 1.8, adj = 0,col = "grey40")
+#plot(dep.s, xlim = c(-1047404.82 , 1307859.13), ylim = c(6015583, 7171612),  col = "grey60",border = "white", lwd=0.4, add=F)
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_3_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_3 , 
+           #method = "quantile", nclass = 8,
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = enfant", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+# Plot symbols with choropleth coloration
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_3", #  field in df to plot the symbols sizes
+                      fixmax = max(STATIONS_data_indics.f$LPRM_3), # set the symbols sizes
+                      inches = 0.15,
+                      var2 = "LPRM_3_pct_POP_sup20",
+                      col = cols, # symbols colors
+                      breaks = bks_LPRM_3, # breaks
+                      border = "white",  # border colors of the symbols
+                      lwd = 0.5, # symbols width
+                      legend.var.pos = "topright", # size legend position
+                      legend.var.values.rnd = -1, # size legend value roundinf
+                      legend.var.title.txt = "Nombre", # size legend title
+                      legend.var.style = "c", # size legend type
+                      legend.var2.pos = "none", # color legend position
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+
+titre <- "loger en tant qu\'enfant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+#### Adultes hébergés en tant que petit-enfant
+
+Beaucoup plus rares, on trouve tout de même des adultes logeant chez leurs grands-parents dans un quart Sud-Ouest, dans le Nord mais surtout en Corse. A Paris on en trouve quelques-uns à Riquet et Stalingrad mais aussi dans les quartiers chics du Nord du 16ème ou du 6ème.
+
+```{r carte_LPRM4, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"OrRd")
+#opar <- par(mar = c(0,0,1.2,0))
+#plot(dep.s, col = NA,border = NA, lwd=0.4, add=F)
+#text(x = 1017863, y = 7051189, labels = "1990", cex = 1.8, adj = 0,col = "grey40")
+#plot(dep.s, xlim = c(-1047404.82 , 1307859.13), ylim = c(6015583, 7171612),  col = "grey60",border = "white", lwd=0.4, add=F)
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_4_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_4 , 
+           #method = "quantile", nclass = 8,
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = petit-enfant", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+# Plot symbols with choropleth coloration
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_4", #  field in df to plot the symbols sizes
+                      fixmax = max(STATIONS_data_indics.f$LPRM_4), # set the symbols sizes
+                      inches = 0.15,
+                      var2 = "LPRM_4_pct_POP_sup20",
+                      col = cols, # symbols colors
+                      breaks = bks_LPRM_4, # breaks
+                      #  col=cols,
+                      #method ="fisher-jenks", n = 6,
+                      border = NA,  # border colors of the symbols
+                      lwd = 0.2, # symbols width
+                      legend.var.pos = "topright", # size legend position
+                      legend.var.values.rnd = -1, # size legend value roundinf
+                      legend.var.title.txt = "Nombre", # size legend title
+                      legend.var.style = "c", # size legend type
+                      legend.var2.pos = "none", # color legend position
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+titre <- "loger en tant que petit-enfant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+```
+
+
+#### Adultes hébergés en tant qu'ascendant
+
+Le cas inverse, c'est à dire des seniors vivant chez leur enfant, est déjà plus fréquent : 300 000 personnes en France sont dans cette situation, principalement dans le Sud-Ouest, la Corse et l'Alsace-Lorraine. Le concept de "famille souche" chère à Emmanuel Todd, où plusieurs générations cohabitent au sein du même logement, semble se dessiner sur la carte de gauche. En région parisienne on retrouve les mêmes secteurs que sur la première carte avec le 19ème, le 93 et le sud du 13ème en tête : des quartiers peuplés en partie d'immigrés de première, deuxième ou troisième génération dont la structure pourrait également se rapprocher du concept de famille-souche.
+
+```{r carte_LPRM5, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"Blues")
+#opar <- par(mar = c(0,0,1.2,0))
+#plot(dep.s, col = NA,border = NA, lwd=0.4, add=F)
+#text(x = 1017863, y = 7051189, labels = "1990", cex = 1.8, adj = 0,col = "grey40")
+#plot(dep.s, xlim = c(-1047404.82 , 1307859.13), ylim = c(6015583, 7171612),  col = "grey60",border = "white", lwd=0.4, add=F)
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_5_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_5 , 
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = ascendant", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_5", 
+                      fixmax = max(STATIONS_data_indics.f$LPRM_5), 
+                      inches = 0.15,
+                      var2 = "LPRM_5_pct_POP_sup20",
+                      col = cols, 
+                      breaks = bks_LPRM_5, 
+                      border = "white",  
+                      lwd = 0.5, 
+                      legend.var.pos = "topright", 
+                      legend.var.values.rnd = -1, 
+                      legend.var.title.txt = "Nombre", 
+                      legend.var.style = "c", 
+                      legend.var2.pos = "none", 
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+titre <- "loger en tant qu\'ascendant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+```
+
+
+#### Adultes hébergés en tant qu'autre parent
+
+Les personnes logeant chez un autre parent (on imagine leur oncle, cousin, frère, soeur, etc...) se trouvent surtout en Corse, dans quelques cantons du Sud-Ouest et en région parisienne. Encore une fois l'Ouest intérieur, très peu portés sur ce type de colocation comme sur les précédentes, fait figure de parangon de la "famille nucléaire". A Paris c'est surtout dans l'Est du 18ème (métro Marx Dormoy) et à Aubervilliers que ces situations sont nombreuses, probablement en lien avec le fait que ces quartiers soient des plateformes reconnues pour l'installation des primo-arrivants venus notamment d'Afrique.
+
+```{r carte_LPRM6, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"Purples")
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_6_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_6 , 
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = autre parent", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_6", #  field in df to plot the symbols sizes
+                      fixmax = max(STATIONS_data_indics.f$LPRM_6), # set the symbols sizes
+                      inches = 0.15,
+                      var2 = "LPRM_6_pct_POP_sup20",
+                      col = cols, # symbols colors
+                      breaks = bks_LPRM_6, # breaks
+                      border = "white",  # border colors of the symbols
+                      lwd = 0.5, # symbols width
+                      legend.var.pos = "topright", # size legend position
+                      legend.var.values.rnd = -1, # size legend value roundinf
+                      legend.var.title.txt = "Nombre", # size legend title
+                      legend.var.style = "c", # size legend type
+                      legend.var2.pos = "none", # color legend position
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+titre <- "loger en tant qu\'autre parent"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+
+#### Adultes hébergés en tant qu'ami
+
+Plus de 30 000 parisiens déclarent habiter chez un ami, principalement dans les arrondissements centraux et sur la ligne 4 de Etienne Marcel à Gare de l'Est. Ils sont également nombreux à Aubervilliers et près du stade de France. En France c'est surtout dans les grandes villes étudiantes (Rennes, Nantes, Bordeaux, Toulouse...) qu'on trouve ce type de colocations.
+
+
+```{r carte_LPRM7, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"BuGn")
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_7_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_7 , 
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = ami", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_7", #  field in df to plot the symbols sizes
+                      fixmax = max(STATIONS_data_indics.f$LPRM_7), # set the symbols sizes
+                      inches = 0.12,
+                      var2 = "LPRM_7_pct_POP_sup20",
+                      col = cols, # symbols colors
+                      breaks = bks_LPRM_7, # breaks
+                      border = "white",  # border colors of the symbols
+                      lwd = 0.5, # symbols width
+                      legend.var.pos = "topright", # size legend position
+                      legend.var.values.rnd = -1, # size legend value roundinf
+                      legend.var.title.txt = "Nombre", # size legend title
+                      legend.var.style = "c", # size legend type
+                      legend.var2.pos = "none", # color legend position
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+titre <- "loger en tant qu\'ami"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+#### Adultes hébergés en tant que pensionnaire ou sous-locataire
+
+Leur profil me paraît plus difficile à cerner, toujours est-il que 47 000 adultes vivent en tant que pensionnaire en France : surtout près de Bordeaux, dans l'Allier ou encore en Bourgogne. En région parisienne ces foyers sont logiquement localisées très sporadiquement : St-Philippe du Roule et Argentine dans l'ouest, quelques stations des 17ème ou 18ème, ou encore Aubervilliers et La Plaine-Stade de France dans le Nord.
+
+```{r carte_LPRM8, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"Greys")
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_8_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_8 , 
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = pensionnaire ou sous-locataire", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_8", #  field in df to plot the symbols sizes
+                      fixmax = max(STATIONS_data_indics.f$LPRM_8), # set the symbols sizes
+                      inches = 0.15,
+                      var2 = "LPRM_8_pct_POP_sup20",
+                      col = cols, # symbols colors
+                      breaks = bks_LPRM_8, # breaks
+                      border = "white",  # border colors of the symbols
+                      lwd = 0.5, # symbols width
+                      legend.var.pos = "topright", # size legend position
+                      legend.var.values.rnd = -1, # size legend value roundinf
+                      legend.var.title.txt = "Nombre", # size legend title
+                      legend.var.style = "c", # size legend type
+                      legend.var2.pos = "none", # color legend position
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+titre <- "loger en tant que pensionnaire ou sous-locataire"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+
+#### Adultes hébergés en tant que domestique ou salarié logé
+
+Enfin une situation qui pourrait paraître anachronique mais qui concerne tout de même 3 300 personnes en France, surtout dans des zones rurales mais également dans le Genevois français ou l'ouest parisien : les domestiques hébérgés chez leurs patrons. Sans grande surprise c'est dans le nord du 16ème arrondissement (Porte Dauphine, Rue de la Pompe, Victor Hugo) et dans le 7ème (Pont de l'Alma, Varenne) qu'ils sont les plus nombreux. On trouve aussi beaucoup dans les Hauts de Seine (Pont de Neuilly, Boulogne-Jean Jaurès) et des communes plus excentrées de la banlieue Ouest.
+
+```{r carte_LPRM9, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7, results=F}
+par(mfrow=c(1,2), mar = c(0,0,1.2,0))
+
+# carto cantons france
+cols <- brewer.pal(6,"RdPu")
+
+# choroplèthe
+choroLayer(spdf = CV2015_spdf.s, #CV_spdf.s, 
+           df = CV_RP2013_COLOCATION, #CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CANTVILLE", #"CV", 
+           var = "LPRM_9_pct_POP_sup20",
+           col = cols,
+           breaks = bks_LPRM_9 , 
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 3, 
+           legend.title.txt = "%", 
+           add = F) 
+
+plot(dep.s, col = NA,border = "grey60", lwd=0.4, add=T)
+
+titre <- "Part de la population agée de plus de 20 ans déclarant"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Lien avec le référent du ménage = petit-enfant", 
+             author = "Sources : Insee, RP 2013",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+# carte stations paris
+#opar <- par(mar = c(0,0,1.2,0))
+plot(gBuffer(subset(dep, id %in% '75'), width = 2000), border = NA, col = NA)
+plot(dep, border = "#cccccc", col = NA, add=T)
+plot(COMM2015_FRMET , border = "grey80", col = NA, add=T)
+
+propSymbolsChoroLayer(spdf = REF_stations.geo, 
+                      df = STATIONS_data_indics.f, 
+                      spdfid = "id", 
+                      dfid = "id", 
+                      var = "LPRM_9", #  field in df to plot the symbols sizes
+                      fixmax = max(STATIONS_data_indics.f$LPRM_9), # set the symbols sizes
+                      inches = 0.1,
+                      var2 = "LPRM_9_pct_POP_sup20",
+                      col = cols, # symbols colors
+                      breaks = bks_LPRM_9, # breaks
+                      border = "white",  # border colors of the symbols
+                      lwd = 0.5, # symbols width
+                      legend.var.pos = "topright", # size legend position
+                      legend.var.values.rnd = -1, # size legend value roundinf
+                      legend.var.title.txt = "Nombre", # size legend title
+                      legend.var.style = "c", # size legend type
+                      legend.var2.pos = "none", # color legend position
+                      legend.var2.title.txt = "Pourcentage",
+                      add = TRUE) # legend title
+
+plot(dep, border = "grey40", col = NA, add=T)
+
+titre <- "loger en tant que domestique ou salarié logé"
+
+layoutLayer(title = titre,
+            col = "#949494",
+             sources = "", 
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+```
+
+Pour retrouver toutes ces stats sur votre station préférée, la carte intéractive reprend les mêmes indicateurs (bien sûr les volumes sont très différents entre les différents statuts) :
+
+```{r carte_leaflet, echo=F, message=F, warning=F, fig.height=6, fig.width=10.7}
+
+library(leaflet)
+library(RColorBrewer)
+library(maptools)
+REF_stations.ZT.wgs84 <- readShapeSpatial("./data/REF_stations.ZT.wgs84.shp" ,proj4string=CRS("+init=epsg:4326"))
+
+## Initialisation 
+pal.pct_LPRM_3 <- colorBin(palette = "Reds",domain = ~LPRM_3_pct_POP_sup20 * 100 , bins = bks_LPRM_3 *100, pretty = F, reverse = F)
+pal.pct_LPRM_4 <- colorBin(palette = "OrRd",domain = ~LPRM_4_pct_POP_sup20 *100, bins = bks_LPRM_4 *100, pretty = F, reverse = F)
+pal.pct_LPRM_5 <- colorBin(palette = "Blues",domain = ~LPRM_5_pct_POP_sup20 *100, bins = bks_LPRM_5 *100, pretty = F, reverse = F)
+pal.pct_LPRM_6 <- colorBin(palette = "Purples",domain = ~LPRM_6_pct_POP_sup20 *100, bins = bks_LPRM_6 *100, pretty = F, reverse = F)
+pal.pct_LPRM_7 <- colorBin(palette = "BuGn",domain = ~LPRM_7_pct_POP_sup20 *100, bins = bks_LPRM_7 *100, pretty = F, reverse = F)
+pal.pct_LPRM_8 <- colorBin(palette = "Greys",domain = ~LPRM_8_pct_POP_sup20 *100, bins = bks_LPRM_8 *100, pretty = F, reverse = F)
+pal.pct_LPRM_9 <- colorBin(palette = "RdPu",domain = ~LPRM_9_pct_POP_sup20 *100, bins = bks_LPRM_9 *100, pretty = F, reverse = F)
+
+popup_LPRM_3 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_3_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_3), "<br>")
+popup_LPRM_4 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_4_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_4), "<br>")
+popup_LPRM_5 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_5_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_5), "<br>")
+popup_LPRM_6 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_6_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_6), "<br>")
+popup_LPRM_7 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_7_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_7), "<br>")
+popup_LPRM_8 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_8_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_8), "<br>")
+popup_LPRM_9 <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% : ", sprintf("%.1f%%",LPRM_9_pct_POP_sup20 ), "</b>", "<br>",
+                 "nb : ", round(LPRM_9), "<br>")
+
+m <-
+leaflet(padding = 0) %>%
+# addWMSTiles("Stamen.Toner", options=tileOptions(minZoom=11,maxZoom=13),attribution = "Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia") %>%
+addProviderTiles( "CartoDB.Positron", options=providerTileOptions(minZoom=11,maxZoom=13)) %>%
+setView(2.345899, 48.859467, zoom = 12) %>%
+addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_3) /3,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_3(LPRM_3_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Enfant",
+                      color = "black",
+                      popup = popup_LPRM_3,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  # addLegend("topright", 
+  #             colors = brewer.pal(6,"Greens"),
+  #             labels = c("< 6%","6% - 8%","8% - 10%","10% - 12%","12% - 14%","> 14%"),
+  #              title = "Part de mamies",
+  #              opacity = 1) %>%
+  addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_4) *2,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_4(LPRM_4_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Petit-enfant",
+                      color = "black",
+                      popup = popup_LPRM_4,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+   addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_5) /1.5,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_5(LPRM_5_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Ascendant",
+                      color = "black",
+                      popup = popup_LPRM_5,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+     addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_6) /2.5,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_6(LPRM_6_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Autre parent",
+                      color = "black",
+                      popup = popup_LPRM_6,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+       addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_7) /2.5,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_7(LPRM_7_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Ami",
+                      color = "black",
+                      popup = popup_LPRM_7,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+        addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_8) *1.5,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_8(LPRM_8_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Pensionnaire ou sous-locataire",
+                      color = "black",
+                      popup = popup_LPRM_8,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+          addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(LPRM_9) *3,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct_LPRM_9(LPRM_9_pct_POP_sup20 * 100), 
+                      fillOpacity = 1,
+                      group = "Domestique ou salarié logé",
+                      color = "black",
+                      popup = popup_LPRM_9,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  
+  setMaxBounds( lng1 = min(STATIONS_data_indics.f$lon),
+                  lat1 = min(STATIONS_data_indics.f$lat),
+                  lng2 = max(STATIONS_data_indics.f$lon), 
+                  lat2 = max(STATIONS_data_indics.f$lat)) %>%
+addLayersControl( baseGroups = c("Enfant", "Petit-enfant","Ascendant", "Autre parent","Ami","Pensionnaire ou sous-locataire","Domestique ou salarié logé"), options = layersControlOptions(collapsed = F, autoZIndex = TRUE), position =  "topright") %>%
+addPolygons(data = REF_stations.ZT.wgs84,
+                      stroke = T,
+                      weight = 0.5,
+                      opacity = 50,
+                      fill = F, 
+                      color = "grey")
+
+m$width <- 800
+m$height <- 700
+
+m
+
+```

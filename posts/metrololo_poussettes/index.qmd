@@ -1,0 +1,469 @@
+---
+title: "Des poussettes dans la ville"
+author: "Mathieu"
+date: "2017-06-07"
+showonlyimage: false
+draft: false
+image: img/img_metrololo_poussettes.png
+weight: 0
+type: "post"
+description: "[Metrololo #2] Analyse infra-urbaine par station de métro"
+categories: ["metros", "ville", "enfants"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+library(emo)
+```
+
+
+
+Après un [premier épisode](https://mtmx.netlify.app/posts/metrololo_mamies/) consacré aux `r emo::ji("older_woman")`, venons-en aux `r emo::ji("baby")`
+
+On parle des enfants âgés de 0 à 5 ans, au nombre de 4.6 millions dans tout le pays soit plus de 7% de la population totale. Un peu de contextuale national : les mouflets sont sur-représentés dans l'Ouest intérieur et le Nord du pays, aux abords des métropoles et près de le frontière suisse :
+ 
+
+```{r france 1990,echo=F, message=F, warning=F, fig.width=4.15,fig.height=4,out.extra='style="float:left"'}
+
+library(rgdal)
+library(cartography)
+library(rgeos)
+library(maptools)
+library(RColorBrewer)
+
+CV_RP1990_2013 <- read.csv2( "./data/CV_RP1990_2013.csv")
+CV_spdf.s <- readShapeSpatial("./data/CV_spdf.s.shp" ,proj4string=CRS("+init=epsg:2154"))
+dep.s <- readShapeSpatial("./data/dep.s.shp" ,proj4string=CRS("+init=epsg:2154"))
+
+cols <- carto.pal(pal1 = "pink.pal", n1 = 8)
+cols <- colorRampPalette(brewer.pal(8,"PuRd"))(8)
+bks <- c(0, 0.04, 0.05,0.06,0.07, 0.08,0.09, 0.1, 1)
+
+opar <- par(mar = c(0,0,1.2,0))
+plot(dep.s, col = "grey60",border = "white", lwd=0.4, add=F)
+
+# choroplèthe
+choroLayer(spdf = CV_spdf.s, 
+           df = CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CV", 
+           var = "pct_DA90T0_5_DP90T",
+           col = cols,
+           breaks = bks * 100, 
+           #method = "quantile", nclass = 6,
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 1, 
+           legend.title.txt = "%", 
+           add = TRUE) 
+
+plot(dep.s, col = NA,border = "white", lwd=0.3, add=T)
+text(x = 1017863, y = 7051189, labels = "1990", cex = 1.8, adj = 0,col = "grey40")
+titre <- "Part des enfants (moins de 5 ans) dans la population, par canton"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Insee, RGP 1990",
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+```{r france 2013,echo=F, message=F, warning=F, fig.width=4.15,fig.height=4, out.extra='style="float:left"'}
+
+cols <- carto.pal(pal1 = "pink.pal", n1 = 8)
+cols <- colorRampPalette(brewer.pal(8,"PuRd"))(8)
+bks <- c(0, 0.04, 0.05,0.06,0.07, 0.08,0.09, 0.1, 1)
+
+opar <- par(mar = c(0,0,1.2,0))
+plot(dep.s, col = "grey60",border = "white", lwd=0.4, add=F)
+
+# choroplèthe
+choroLayer(spdf = CV_spdf.s, 
+           df = CV_RP1990_2013, 
+           spdfid = "id", 
+           dfid = "CV", 
+           var = "pct_P13_POP0_5_P13_POP",
+           col = cols,
+           breaks = bks * 100, 
+           #method = "quantile", nclass = 6,
+           border = NA,  
+           lwd = 0.2, 
+           legend.pos = "right",
+           legend.values.rnd = 1, 
+           legend.title.txt = "%", 
+           add = TRUE) 
+
+plot(dep.s, col = NA,border = "white", lwd=0.3, add=T)
+text(x = 1017863, y = 7051189, labels = "2013", cex = 1.8, adj = 0,col = "grey40")
+titre <- "Part des enfants (moins de 5 ans) dans la population, par canton"
+
+layoutLayer(title = titre,
+            col = "#949494",
+            sources = "Insee, RP 2013",
+            author = "",
+            scale = NULL,
+            frame = T, south = F, north = F)
+
+```
+
+ 
+
+ 
+
+## L'analyse infra-urbaine par station
+
+Rappel : pour comprendre les phénomènes socio-démographiques qui se jouent à l'échelle du quartier, on va se baser sur les zones entourant les stations de transports en commun (métro, tram, RER et transilien) de la région Ile de France. La station (ou la gare) fait en effet souvent office de lieu de centralité dans la vie quotidienne des habitants et c'est principalement à elle qu'on fait référence pour évoquer son quartier. Toute la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.netlify.app/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
+
+
+Contraiement aux [mamies](https://mtmx.netlify.app/posts/metrololo_mamies/) qui se dispersaient dans des quartiers bien spécifiques et principalement rive gauche, la proportion d'enfants est d'autant plus faible qu'on se rapproche du coeur de la capitale (le 6ème arrondissement en l'occurence).  Voici donc la carte des stations selon la part des enfants dans la population d'après les données 2013 :
+
+
+```{r carto,echo=F, message=F, warning=F}
+
+
+library(leaflet)
+library(RColorBrewer)
+library(maptools)
+STATIONS_data_indics.f <- read.csv2( "./data/data_stations.csv")
+REF_stations.ZT.wgs84 <- readShapeSpatial("./data/REF_stations.ZT.wgs84.shp" ,proj4string=CRS("+init=epsg:4326"))
+
+## Initialisation 
+pal.pct <- colorBin(palette = "PuRd",domain = ~pct_P13_POP0_5_P13_POP * 100, bins = c(0, 4, 6, 8, 10, 12, 100), pretty = F, reverse = F)
+pal.evol.pct <- colorBin(palette = "RdBu",domain = ~diff_pct_P13_POP0_5_P13_POP_pct_DA90T0_5_DP90T * 100,
+                         bins = c(-7,-4,-3,-2,-1, 0,1,2,3,4 ,10), pretty = F, reverse = T)
+popup <- ~paste0("<b>","<font size=4 color=black>" , nom_station,"</b>","</font>", "<br>",
+                 "<b>", "% d'enfants en 2013 : ", sprintf("%.1f%%",pct_P13_POP0_5_P13_POP * 100), "</b>", "<br>",
+                 "% d'enfants en 1990 : ", sprintf("%.1f%%",pct_DA90T0_5_DP90T * 100), "<br>")
+m <-
+leaflet(padding = 0) %>%
+# addWMSTiles("Stamen.Toner", options=tileOptions(minZoom=11,maxZoom=13),attribution = "Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia") %>%
+addProviderTiles( "CartoDB.Positron", options=providerTileOptions(minZoom=11,maxZoom=13)) %>%
+setView(2.345899, 48.859467, zoom = 12) %>%
+addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(P13_POP0_5) / 4,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.pct(pct_P13_POP0_5_P13_POP * 100), 
+                      fillOpacity = 1,
+                      group = "Part des enfants",
+                      color = "black",
+                      popup = popup,
+                      labelOptions = labelOptions(noHide = F, textOnly = F)) %>%
+  addLegend("topright", 
+              colors = brewer.pal(6,"PuRd"),
+              labels = c("< 4%","4% - 6%","6% - 8%","8% - 10%","10% - 12%","> 12%"),
+               title = "Part des enfants",
+               opacity = 1) %>%
+  addCircleMarkers(data = STATIONS_data_indics.f,
+                      lng = ~lon, 
+                      lat = ~lat, 
+                      radius = ~sqrt(P13_POP0_5) / 4,
+                      weight = 0.5, 
+                      stroke = T,
+                      opacity = 50,
+                      fill = T, 
+                      fillColor = ~pal.evol.pct(diff_pct_P13_POP0_5_P13_POP_pct_DA90T0_5_DP90T *100), 
+                      fillOpacity = 1,
+                      group = "Evolution 1990-2013",
+                      popup = popup,
+                      color = "black") %>%
+ addLegend("bottomright",
+               colors = c(rev(brewer.pal(5,"Reds")), brewer.pal(5,"Blues")),
+               labels = rev(c("< -4 pts","-4/-3 pts","-3/-2 pts","-2/-1 pts","-1/0 pt","0/+1 pt","+1/+2 pts","+2/+3 pts","+3/+4 pts","> +4 pts" )),
+               title = "Evolution 1990-2013",
+               opacity = 1) %>%
+  setMaxBounds( lng1 = min(STATIONS_data_indics.f$lon),
+                  lat1 = min(STATIONS_data_indics.f$lat),
+                  lng2 = max(STATIONS_data_indics.f$lon), 
+                  lat2 = max(STATIONS_data_indics.f$lat)) %>%
+addLayersControl( baseGroups = c("Part des enfants", "Evolution 1990-2013"), options = layersControlOptions(collapsed = F, autoZIndex = TRUE), position =  "topright") %>%
+addPolygons(data = REF_stations.ZT.wgs84,
+                      stroke = T,
+                      weight = 0.5,
+                      opacity = 50,
+                      fill = F, 
+                      color = "grey")
+
+m$width <- 800
+m$height <- 700
+
+m
+
+```
+
+ 
+ 
+Intra-muros, c'est dans le Nord-Est de Paris qu'on trouve le plus d'enfants. L'autre côté du périphérique est beaucoup plus accueillant pour les mouflets avec un coût du logement plus abordable pour les familles. Le paroxysme est atteint à Saint-Denis et Aubervilliers avec plus de 12% d'enfants.
+
+Sur le graphique qui suit, chaque station est symbolisée par un point dont la position est fonction de son taux d'enfants en ordonnée (plus c'est haut, plus il y en a) et sa position en abscisse selon son arrondissement. Un trait vertical permet aussi de voir l'évolution de son taux depuis 1990, le code couleur bleu/rouge montrant également cette information.
+
+
+```{r stations_paris, echo=F, message=F, warning=F}
+library(ggplot2)
+library(ggiraph)
+library(dplyr)
+library(scales)
+
+# fonction pour gérer accents
+conv_accents <- function(x) {
+  x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+  x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+  
+  return(x)
+}
+
+# dataframe des stations de paris
+STATIONS_data_indics.f.paris <-
+  STATIONS_data_indics.f %>%
+  filter(substr(INSEE_COM,1,2) %in% c('75')) %>%
+  as.data.frame() %>%
+  mutate(zone = gsub("Paris ", "",NOM_COM),
+         zone = gsub("e Arrondissement", "",zone),
+         zone = gsub("er Arrondissement", "",zone)) %>%
+  mutate(zone = as.numeric(zone)) %>%
+  arrange(zone, pct_P13_POP0_5_P13_POP) %>%
+  group_by(zone) %>%
+  mutate(n = row_number() )
+
+# graphique interactif
+p <- ggplot()
+p <- p + geom_segment_interactive(data = STATIONS_data_indics.f.paris, aes(x =pct_P13_POP0_5_P13_POP, y=n, xend=pct_DA90T0_5_DP90T, yend=n,
+                           colour = diff_pct_P13_POP0_5_P13_POP_pct_DA90T0_5_DP90T, 
+                           tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                           "1990 :", sprintf("%1.1f%%", 100*pct_DA90T0_5_DP90T), "denfants<br />",
+                                           "2013 :", sprintf("%1.1f%%", 100*pct_P13_POP0_5_P13_POP), "denfants<br />"),
+                           data_id = id),
+                      size=0.3)
+p <- p + scale_color_distiller(palette = "RdBu", direction = -1, labels = percent,name="Evolution du taux\nentre 1990 et 2013" )
+p <- p + geom_point_interactive(data = STATIONS_data_indics.f.paris,
+             aes( x = pct_P13_POP0_5_P13_POP,size = P13_F65P,y=n, fill=pct_P13_POP0_5_P13_POP,
+                 tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                 "1990 :", sprintf("%1.1f%%", 100*pct_DA90T0_5_DP90T), "denfants<br />",
+                                 "2013 :", sprintf("%1.1f%%", 100*pct_P13_POP0_5_P13_POP), "denfants<br />"),
+                 data_id = id),
+            shape = 21, stroke=0.2, colour = "grey")
+
+p <- p + scale_fill_distiller(palette = "Greens", direction = 1,labels = percent, name="Part des enfants\ndans la population")
+p <- p + scale_size_continuous(range = c(1,3),name = "Nombre\nd'enfants")
+p <- p + scale_x_continuous(labels = percent, limits = c(0,0.1), expand = c(0,0),breaks = seq(0 , 0.1, 0.01),"Part des enfants dans la population")
+p <- p + coord_flip()
+p <- p + theme(legend.position="bottom",
+               legend.text=element_text(size=5),
+               legend.title=element_text(size=6),
+               axis.line=element_blank(),
+           axis.text.x=element_blank(),
+           axis.title.x=element_blank(),
+           axis.text.y=element_text(size=6, color = "black"),
+           axis.title.y=element_text(size=9, color = "grey",face="italic"),
+           axis.ticks=element_blank(),
+          panel.background=element_blank(),panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour = 'grey80', linetype = 'dotdash', size = 0.1),
+          panel.grid.major.x=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          legend.key = element_rect(fill = NA, colour = NA),
+          legend.key.width = unit(0.4, "cm"),
+          strip.text.y = element_text(size = 5, colour = "black", angle = 180),
+          plot.title=element_text(size=12,face="bold"),
+          plot.subtitle=element_text(size=9,face="italic"),
+          plot.caption=element_text(size=6,colour = "grey"))
+
+p <- p +   labs(
+  title = "Part des enfants dans la population, par station à Paris",
+  subtitle = "Par arrondissement",
+  caption = "Sources : Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia"
+)
+p <- p + facet_grid(~ zone , scales = "free_y", switch = "y")
+
+# ggiraph
+ggiraph(code = {print(p)},
+        width = 1,# height = 10,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+Les station Canal-Saint-Denis, Porte de la Chapelle et Colette-Besson sont les quartiers à Paris où on trouve le plus d'enfants. Des quartiers souvent rénovés récemment et où les crèches sont en effet nombreuses. On repère également de nombreuses stations de la ligne de tramway T3 dans le haut du classement.
+De façon générale on ne voit quasiment que des traits verticaux rouges, signe que la part des enfants dans la population a progressé. Mais c'est le contraire dans certains quartiers du 11ème, 12ème et 20ème arrondissements, ainsi que dans certaines zones sur la rive gauche également. Avec un taux inférieur à 3% les enfants sont quasiment absents près de la station Pont-Neuf et pas beaucoup mieux représentés à Duroc et Cluny-La Sorbonne.
+
+Passons à la banlieue avec les stations des 3 départements de petite couronne :
+
+```{r stations_pc, echo=F, message=F, warning=F}
+
+# dataframe des stations de petite couronne
+
+STATIONS_data_indics.f.petitecouronne <-
+  STATIONS_data_indics.f %>%
+  filter(substr(INSEE_COM,1,2) %in% c('92','93','94')) %>%
+  as.data.frame() %>%
+ mutate(zone = ifelse(substr(INSEE_COM,1,2) %in% '92', "HAUTS DE SEINE", 
+               ifelse(substr(INSEE_COM,1,2) %in% '93', "SEINE SAINT DENIS", 
+              ifelse(substr(INSEE_COM,1,2) %in% '94', "VAL DE MARNE",INSEE_COM)))) %>%
+  arrange(zone, pct_P13_POP0_5_P13_POP) %>%
+  group_by(zone) %>%
+  mutate(n = row_number() )
+
+# graphique interactif
+p <- ggplot()
+p <- p + geom_segment_interactive(data = STATIONS_data_indics.f.petitecouronne, aes(x =pct_P13_POP0_5_P13_POP, y=n, xend=pct_DA90T0_5_DP90T, yend=n,
+                           colour = diff_pct_P13_POP0_5_P13_POP_pct_DA90T0_5_DP90T, 
+                           tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                           "1990 :", sprintf("%1.1f%%", 100*pct_DA90T0_5_DP90T), "denfants<br />",
+                                           "2013 :", sprintf("%1.1f%%", 100*pct_P13_POP0_5_P13_POP), "denfants<br />"),
+                           data_id = id),
+                      size=0.3)
+p <- p + scale_color_distiller(palette = "RdBu", direction = -1, labels = percent,name="Evolution du taux\nentre 1990 et 2013" )
+p <- p + geom_point_interactive(data = STATIONS_data_indics.f.petitecouronne,
+             aes( x = pct_P13_POP0_5_P13_POP,size = P13_F65P,y=n, fill=pct_P13_POP0_5_P13_POP,
+                 tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                 "1990 :", sprintf("%1.1f%%", 100*pct_DA90T0_5_DP90T), "denfants<br />",
+                                 "2013 :", sprintf("%1.1f%%", 100*pct_P13_POP0_5_P13_POP), "denfants<br />"),
+                 data_id = id),
+            shape = 21, stroke=0.2, colour = "grey")
+
+p <- p + scale_fill_distiller(palette = "Greens", direction = 1,labels = percent, name="Part des enfants\ndans la population")
+p <- p + scale_size_continuous(range = c(1,3),name = "Nombre\nd'enfants")
+p <- p + scale_x_continuous(labels = percent, limits = c(0,0.2), expand = c(0,0),breaks = seq(0 , 0.17, 0.02),"Part des enfants dans la population")
+p <- p + coord_flip()
+p <- p + theme(legend.position="bottom",
+               legend.text=element_text(size=5),
+               legend.title=element_text(size=6),
+               axis.line=element_blank(),
+           axis.text.x=element_blank(),
+           axis.title.x=element_blank(),
+           axis.text.y=element_text(size=6, color = "black"),
+           axis.title.y=element_text(size=9, color = "grey",face="italic"),
+           axis.ticks=element_blank(),
+          panel.background=element_blank(),panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour = 'grey80', linetype = 'dotdash', size = 0.1),
+          panel.grid.major.x=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          legend.key = element_rect(fill = NA, colour = NA),
+          legend.key.width = unit(0.4, "cm"),
+          strip.text.y = element_text(size = 5, colour = "black", angle = 180),
+          plot.title=element_text(size=12,face="bold"),
+          plot.subtitle=element_text(size=9,face="italic"),
+          plot.caption=element_text(size=6,colour = "grey"))
+
+p <- p +   labs(
+  title = "Part des enfants dans la population, par station en petite couronne",
+  subtitle = "Par département",
+  caption = "Sources : Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia"
+)
+p <- p + facet_grid(~ zone , scales = "free", switch = "y")
+
+# ggiraph
+ggiraph(code = {print(p)},
+        width = 1,# height = 10,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+
+```
+
+
+Près de 15% d'enfants à la station Front Populaire, on atteint quasiment un record. La quasi totalité de la petite couronne accueille davantage d'enfants qu'en 1990, seules Villepinte, Roissy ou Noisy-le-Grand ont une dynamique franchement inverse.
+
+Enfin les 4 départements de grande couronne de la région Ile-de-France :
+
+
+```{r stations_gc, echo=F, message=F}
+
+# dataframe des stations de grande couronne
+
+STATIONS_data_indics.f.grandecouronne <-
+  STATIONS_data_indics.f %>%
+  filter(substr(INSEE_COM,1,2) %in% c('77','78','91','95')) %>%
+  as.data.frame() %>%
+  mutate(zone = ifelse(substr(INSEE_COM,1,2) %in% '77', "SEINE ET MARNE",
+                       ifelse(substr(INSEE_COM,1,2) %in% '78', "YVELINES",  
+                              ifelse(substr(INSEE_COM,1,2) %in% '91', "ESSONNE",
+                                     ifelse(substr(INSEE_COM,1,2) %in% '95', "VAL D'OISE",INSEE_COM))))) %>%
+  arrange(zone, pct_P13_POP0_5_P13_POP) %>%
+  group_by(zone) %>%
+  mutate(n = row_number() )
+
+# graphique interactif
+p <- ggplot()
+p <- p + geom_segment_interactive(data = STATIONS_data_indics.f.grandecouronne, aes(x =pct_P13_POP0_5_P13_POP, y=n, xend=pct_DA90T0_5_DP90T, yend=n,
+                           colour = diff_pct_P13_POP0_5_P13_POP_pct_DA90T0_5_DP90T, 
+                           tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                           "1990 :", sprintf("%1.1f%%", 100*pct_DA90T0_5_DP90T), "denfants<br />",
+                                           "2013 :", sprintf("%1.1f%%", 100*pct_P13_POP0_5_P13_POP), "denfants<br />"),
+                           data_id = id),
+                      size=0.3)
+p <- p + scale_color_distiller(palette = "RdBu", direction = -1, labels = percent,name="Evolution du taux\nentre 1990 et 2013" )
+p <- p + geom_point_interactive(data = STATIONS_data_indics.f.grandecouronne,
+             aes( x = pct_P13_POP0_5_P13_POP,size = P13_F65P,y=n, fill=pct_P13_POP0_5_P13_POP,
+                 tooltip = paste("<strong>", conv_accents(nom_station),"</strong><br />", 
+                                 "1990 :", sprintf("%1.1f%%", 100*pct_DA90T0_5_DP90T), "denfants<br />",
+                                 "2013 :", sprintf("%1.1f%%", 100*pct_P13_POP0_5_P13_POP), "denfants<br />"),
+                 data_id = id),
+            shape = 21, stroke=0.2, colour = "grey")
+
+p <- p + scale_fill_distiller(palette = "Greens", direction = 1,labels = percent, name="Part des enfants\ndans la population")
+p <- p + scale_size_continuous(range = c(1,3),name = "Nombre\nd'enfants")
+p <- p + scale_x_continuous(labels = percent, limits = c(0,0.2), expand = c(0,0),breaks = seq(0 , 0.17, 0.02),"Part des enfants dans la population")
+p <- p + coord_flip()
+p <- p + theme(legend.position="bottom",
+               legend.text=element_text(size=5),
+               legend.title=element_text(size=6),
+               axis.line=element_blank(),
+           axis.text.x=element_blank(),
+           axis.title.x=element_blank(),
+           axis.text.y=element_text(size=6, color = "black"),
+           axis.title.y=element_text(size=9, color = "grey",face="italic"),
+           axis.ticks=element_blank(),
+          panel.background=element_blank(),panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour = 'grey80', linetype = 'dotdash', size = 0.1),
+          panel.grid.major.x=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          legend.key = element_rect(fill = NA, colour = NA),
+          legend.key.width = unit(0.4, "cm"),
+          strip.text.y = element_text(size = 5, colour = "black", angle = 180),
+          plot.title=element_text(size=12,face="bold"),
+          plot.subtitle=element_text(size=9,face="italic"),
+          plot.caption=element_text(size=6,colour = "grey"))
+
+p <- p +   labs(
+  title = "Part des enfants dans la population, par station en grande couronne",
+  subtitle = "Par département",
+  caption = "Sources : Insee (RP 1990 et 2013) / RATP-SNCF-Open Street Map-Wikipedia"
+)
+p <- p + facet_grid(~ zone , scales = "free", switch = "y")
+
+# ggiraph
+ggiraph(code = {print(p)},
+        width = 1,# height = 10,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+
+```
+
+
+Contrairement à la petite couronne, les stations plus éloignées encore du centre de l'agglomération parisienne ont davantage tendance à voir baisser la part des enfants dans leur population. Dans les zones excentrées de Seine-et-Marne notamment, c'est flagrant. Par contre à Grigny ou à Saint-Ouen l'Aumone c'est l'inverse !
+
+Un porbable troisième épisode tentera d'analyser l'évolution du profil des habitants sous l'angle de leur niveau de diplôme, on repéra probablement les mouvements récents de gentrification.
