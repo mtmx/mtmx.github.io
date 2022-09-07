@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "datamix"
+  title: "mtmx"
   site-url: https://mtmx.netlify.app/
   repo-url: https://github.com/mtmx/mtmx
   open-graph: true
@@ -10,8 +10,9 @@ website:
     creator: "@matamix"
     card-style: summary_large_image
   navbar:
-    background: "#d0d1e6"
+    background: "#bacdcb"
     right:
+      - bots.qmd
       - about.qmd
       - icon: github
         href: https://github.com/mtmx
@@ -20,5 +21,11 @@ website:
 format:
   html:
     theme: minty
+    highlight-style: arrow
+    fig-dpi: 600
+    fig-align: center
+    fig-width: 8
+    fig-asp: 0.618 # 1 / pi
+    fig-format: png
 
 

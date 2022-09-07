@@ -1,0 +1,39 @@
+---
+title: Des bots
+subtitle: Deux robots perdus dans l'internet
+comments: false
+from: markdown+emoji
+---
+
+## pluiff
+
+Un bot qui tweete les prévisions de précipitations pour le lendemain.
+
+:arrow_right: source [API Meteo-France](https://donneespubliques.meteofrance.fr/).
+
+:alarm_clock: Tous les soirs.
+
+:hammer: [github](https://github.com/mtmx/pluiff)
+
+
+![](images/echantillon_pluiff.png){fig-alt="Pluiff" fig-align="center" width="500"}
+
+<!-- badges: start -->
+[![](https://img.shields.io/twitter/url/https/twitter.com/pluiff.svg?style=social&label=Follow%20%40pluiff)](https://twitter.com/pluiff)
+
+## orthophotobot
+
+Un bot qui tweete une image aérienne d'un lieu en France au hasard, hier vs aujourd'hui.
+
+:arrow_right: source [API IGN (BD ORTHO® / BD ORTHO® Historique)](https://geoservices.ign.fr/services-web-experts).
+
+:alarm_clock: Tous les matins, midis, soirs.
+
+:hammer: [github](https://github.com/mtmx/orthophotobot)
+
+
+![](images/orthophoto_poi.gif){fig-alt="orthophoto" fig-align="center" width="500"}
+
+[![](https://img.shields.io/twitter/url/https/twitter.com/orthophotobot.svg?style=social&label=Follow%20%40orthophotobot)](https://twitter.com/orthophotobot)
+
+

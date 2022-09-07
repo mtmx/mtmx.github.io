@@ -1,0 +1,46 @@
+---
+title: "Altitude de la population française"
+author: "Mathieu"
+date: "2015-09-22"
+showonlyimage: false
+draft: false
+image: img/img_altipop.png
+weight: 0
+type: "post"
+description: "0ù sont les plus perchés"
+categories: ["altitude"]
+---
+
+A quel point les français sont-ils perchés ? Autrement dit, à quelle altitude les français habitent-ils ? Une question que je pensais être le seul à me poser mais si même François Hollande s’intéresse [au problème](https://web.archive.org/web/20170711165641/https://twitter.com/pierrebrt/status/643900928194691072), essayons d’y répondre.
+
+Les [carreaux](https://www.insee.fr/fr/statistiques/6215138?sommaire=6215217) de 200 mètres de côté de l’Insee permettent de localiser précisément la population sur le territoire national. Pour chacun des 2 millions de carreaux habités de France métropolitaine, on estime l’altitude de son centroïde à l’aide de la [BD ALTI](https://www.data.gouv.fr/fr/datasets/referentiel-a-grande-echelle-rge/) de l’IGN.
+
+Résultat : en France métropolitaine, la population habite en moyenne à 148 mètres d’altitude (trait rouge sur l’histogramme ci-dessous) mais la moitié de la population habite à moins de 93 mètres (trait noir), et seulement 268 000 personnes vivent au-dessus de la barre symbolique des 1000 mètres.
+
+![](img/fr_alti_v1.png){fig-alt="fr_alti_v1"}
+
+
+2,6 millions d’habitants habitent entre 30 et 35 mètres d’altitude. Toujours d’après cette source *, le point habité le plus haut du pays est situé à 2 680 mètres dans la station de Val Thorens sur la commune de St Martin de Belleville (Savoie).
+
+Les Hautes-Alpes (05, indiqué à droite) arrivent en tête du palmarès des départements où la population est la plus perchée avec une altitude moyenne de la population égale à 950 mètres (trait rouge) et une altitude médiane de 862 mètres (trait noir). La zone bleue indique le nombre d’habitants par tranche de 5 mètres (échelle à gauche, variable selon la population du département) mais certains altitudes sont tellement peu peuplées qu’elles n’apparaissent pas sur le graphique.
+
+![](img/dep_alti_v1.png){fig-alt="dep_alti_v1"}
+
+La Haute Savoie abrite certes le Mont-Blanc mais n’arrive qu’en 6ème position, devancée notamment par trois départements du Massif Central (Lozère, Haute-Loire et Cantal). Dans la suite du classement on trouve des départements avec une forte amplitude comme la Corrèze et l’Ardèche :
+
+![](img/dep_alti_v2.png){fig-alt="dep_alti_v2"}
+
+Tout en bas du classement, on trouve uniquement des départements littoraux ainsi que Paris : la Charente-Maritime ferme la marche avec une altitude moyenne de seulement 23 mètres :
+
+![](img/dep_alti_v3.png){fig-alt="dep_alti_v3"}
+
+Avec cette carte de l’altitude moyenne de la population par commune, on peut voir que les zones habitées les plus hautes du pays sont situés dans les massifs de la Vanoise, du Queyras et des Pyrénées Catalanes près d’Andorre.
+
+
+![](img/comm_alti_v2.png){fig-alt="comm_alti_v2"}
+
+Petit bonus complémentaire : l’altitude moyenne du territoire français est de 344 mètres.
+
+![](img/alti_superficie_2b.png){fig-alt="alti_superficie_2b"}
+
+* *Petite subtilité : les données carroyées localisent uniquement les 62 millions de personnes composant les ménages fiscaux (personnes inscrites sur les déclarations de revenus qui le composent), les contribuables vivant en collectivité et les sans-abri en sont notamment exclus.*

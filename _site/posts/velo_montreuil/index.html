@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-06-10">
 <meta name="description" content="Circulation de vélos à Montreuil">
 
-<title>datamix - Vélo vs météo</title>
+<title>mtmx - Vélo vs météo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,15 +61,20 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #e8eeed;
+    }
+    </style>
 
 
-<meta property="og:title" content="datamix - Vélo vs météo">
+<meta property="og:title" content="mtmx - Vélo vs météo">
 <meta property="og:description" content="Circulation de vélos à Montreuil">
 <meta property="og:image" content="https://mtmx.netlify.app/posts/velo_montreuil/img/img_velo_meteo_montreuil.png">
-<meta property="og:site-name" content="datamix">
+<meta property="og:site-name" content="mtmx">
 <meta property="og:image:height" content="626">
 <meta property="og:image:width" content="940">
-<meta name="twitter:title" content="datamix - Vélo vs météo">
+<meta name="twitter:title" content="mtmx - Vélo vs météo">
 <meta name="twitter:description" content="Circulation de vélos à Montreuil">
 <meta name="twitter:image" content="https://mtmx.netlify.app/posts/velo_montreuil/img/img_velo_meteo_montreuil.png">
 <meta name="twitter:creator" content="@matamix">
@@ -78,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:image-width" content="940">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -86,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">datamix</span>
+    <span class="navbar-title">mtmx</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -95,7 +100,10 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">A propos</a>
+    <a class="nav-link" href="../../bots.html">Des bots</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Et sinon</a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
@@ -114,12 +122,49 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Vélo vs météo</h1>
+                  <div>
+        <div class="description">
+          Circulation de vélos à Montreuil
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">montreuil</div>
+                <div class="quarto-category">vélo</div>
+                <div class="quarto-category">pluie</div>
+                <div class="quarto-category">météo</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Mathieu </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 10, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sommaire</h2>
    
   <ul>
   <li><a href="#evolution-depuis-2018" id="toc-evolution-depuis-2018" class="nav-link active" data-scroll-target="#evolution-depuis-2018">Evolution depuis 2018</a></li>
@@ -129,48 +174,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#modélisation" id="toc-modélisation" class="nav-link" data-scroll-target="#modélisation">Modélisation</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Vélo vs météo</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">montreuil</div>
-    <div class="quarto-category">vélo</div>
-    <div class="quarto-category">pluie</div>
-    <div class="quarto-category">météo</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    Circulation de vélos à Montreuil
-  </div>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mathieu </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 10, 2020</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-</header>
 
 <p>Pour accompagner son <a href="https://www.montreuil.fr/fileadmin/user_upload/01_La_ville/10_Venir_et_se_deplacer/montreuil-plan-velo-juin-2018.pdf">plan vélo</a> et quantifier le trafic cycliste dans le centre-ville, la ville de Montreuil a installé en 2018 un compteur place Croix-de-Chavaux et <a href="https://data.montreuil.fr/explore/dataset/compter-le-passage-des-velos-a-la-croix-de-chavaux/information/?sort=-jour_heure">publie en open-data les résultats</a> toutes les semaines. Voici ce qu’il peut nous apprendre sur le trafic cycliste en ville, le code pour générer ce qui suit est <a href="">ici</a>.</p>
 <p><br></p>

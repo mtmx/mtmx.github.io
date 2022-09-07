@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2017-06-07">
 <meta name="description" content="[Metrololo #2] Analyse infra-urbaine par station de métro">
 
-<title>datamix - Des poussettes dans la ville</title>
+<title>mtmx - Des poussettes dans la ville</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,6 +61,11 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #e8eeed;
+    }
+    </style>
 <script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="../../site_libs/jquery-1.12.4/jquery.min.js"></script>
 <link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
@@ -80,13 +85,13 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/girafe-binding-0.8.2/girafe.js"></script>
 
 
-<meta property="og:title" content="datamix - Des poussettes dans la ville">
+<meta property="og:title" content="mtmx - Des poussettes dans la ville">
 <meta property="og:description" content="[Metrololo #2] Analyse infra-urbaine par station de métro">
 <meta property="og:image" content="https://mtmx.netlify.app/posts/metrololo_poussettes/img/img_metrololo_poussettes.png">
-<meta property="og:site-name" content="datamix">
+<meta property="og:site-name" content="mtmx">
 <meta property="og:image:height" content="862">
 <meta property="og:image:width" content="1190">
-<meta name="twitter:title" content="datamix - Des poussettes dans la ville">
+<meta name="twitter:title" content="mtmx - Des poussettes dans la ville">
 <meta name="twitter:description" content="[Metrololo #2] Analyse infra-urbaine par station de métro">
 <meta name="twitter:image" content="https://mtmx.netlify.app/posts/metrololo_poussettes/img/img_metrololo_poussettes.png">
 <meta name="twitter:creator" content="@matamix">
@@ -95,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:image-width" content="1190">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -103,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">datamix</span>
+    <span class="navbar-title">mtmx</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -112,7 +117,10 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">A propos</a>
+    <a class="nav-link" href="../../bots.html">Des bots</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Et sinon</a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
@@ -131,58 +139,62 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Des poussettes dans la ville</h1>
+                  <div>
+        <div class="description">
+          [Metrololo #2] Analyse infra-urbaine par station de métro
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">metros</div>
+                <div class="quarto-category">ville</div>
+                <div class="quarto-category">enfants</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Mathieu </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 7, 2017</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sommaire</h2>
    
   <ul>
   <li><a href="#lanalyse-infra-urbaine-par-station" id="toc-lanalyse-infra-urbaine-par-station" class="nav-link active" data-scroll-target="#lanalyse-infra-urbaine-par-station">L’analyse infra-urbaine par station</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Des poussettes dans la ville</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">metros</div>
-    <div class="quarto-category">ville</div>
-    <div class="quarto-category">enfants</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    [Metrololo #2] Analyse infra-urbaine par station de métro
-  </div>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mathieu </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 7, 2017</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-</header>
 
 <p>Après un <a href="https://mtmx.netlify.app/posts/metrololo_mamies/">premier épisode</a> consacré aux 👵, venons-en aux 👶</p>
 <p>On parle des enfants âgés de 0 à 5 ans, au nombre de 4.6 millions dans tout le pays soit plus de 7% de la population totale. Un peu de contextuale national : les mouflets sont sur-représentés dans l’Ouest intérieur et le Nord du pays, aux abords des métropoles et près de le frontière suisse :</p>

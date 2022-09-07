@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2017-06-25">
 <meta name="description" content="[Metrololo #3] Analyse infra-urbaine par station de métro">
 
-<title>datamix - Gentrification résidentielle</title>
+<title>mtmx - Gentrification résidentielle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,6 +61,11 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #e8eeed;
+    }
+    </style>
 <script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="../../site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
 <script src="../../site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
@@ -80,13 +85,13 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
 
 
-<meta property="og:title" content="datamix - Gentrification résidentielle">
+<meta property="og:title" content="mtmx - Gentrification résidentielle">
 <meta property="og:description" content="[Metrololo #3] Analyse infra-urbaine par station de métro">
 <meta property="og:image" content="https://mtmx.netlify.app/posts/metrololo_diplomes/img/img_metrololo_diplomes.png">
-<meta property="og:site-name" content="datamix">
+<meta property="og:site-name" content="mtmx">
 <meta property="og:image:height" content="738">
 <meta property="og:image:width" content="976">
-<meta name="twitter:title" content="datamix - Gentrification résidentielle">
+<meta name="twitter:title" content="mtmx - Gentrification résidentielle">
 <meta name="twitter:description" content="[Metrololo #3] Analyse infra-urbaine par station de métro">
 <meta name="twitter:image" content="https://mtmx.netlify.app/posts/metrololo_diplomes/img/img_metrololo_diplomes.png">
 <meta name="twitter:creator" content="@matamix">
@@ -95,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:image-width" content="976">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -103,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">datamix</span>
+    <span class="navbar-title">mtmx</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -112,7 +117,10 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">A propos</a>
+    <a class="nav-link" href="../../bots.html">Des bots</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Et sinon</a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
@@ -131,59 +139,63 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Gentrification résidentielle</h1>
+                  <div>
+        <div class="description">
+          [Metrololo #3] Analyse infra-urbaine par station de métro
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">metros</div>
+                <div class="quarto-category">ville</div>
+                <div class="quarto-category">diplômés</div>
+                <div class="quarto-category">gentrification</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Mathieu </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 25, 2017</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sommaire</h2>
    
   <ul>
   <li><a href="#des-quartiers-aux-trajectoires-divergentes" id="toc-des-quartiers-aux-trajectoires-divergentes" class="nav-link active" data-scroll-target="#des-quartiers-aux-trajectoires-divergentes">Des quartiers aux trajectoires divergentes</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Gentrification résidentielle</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">metros</div>
-    <div class="quarto-category">ville</div>
-    <div class="quarto-category">diplômés</div>
-    <div class="quarto-category">gentrification</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    [Metrololo #3] Analyse infra-urbaine par station de métro
-  </div>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mathieu </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 25, 2017</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-</header>
 
 <p>Après deux épisodes consacrés aux <a href="https://mtmx.netlify.app/posts/metrololo_poussettes/">enfants</a> et aux <a href="https://mtmx.netlify.app/posts/metrololo_mamies/">mamies</a>, on rentre dans le tas en abordant un sujet sensible : la gentrification. Parce qu’il semble que tout le monde peut prétendre avoir un avis sur le sujet, je m’y mets aussi. Mon postulat de départ veut que les gentrifieurs soient jeunes et diplômés, donc que les quartiers ayant vu une arrivée de diplomés plus rapide qu’ailleurs depuis les années 1990 sont davantage susceptibles d’être soumis à un processus de gentrification. On parle ici de gentrification résidentielle puisqu’on étudie les caractéristiques de la population résidente et non les types de commerces, d’équipements ou d’associations qui permettent eux de cerner les processus de gentrification d’une autre manière.</p>
 <p>D’abord un rapide cadrage national qui ne surprendra personne : les territoires les plus diplômés d’après les dernières données de l’Insee (RP 2013) sont les grandes villes dotées des centres universitaires majeurs et de fonctions métropolitaintes, Paris étant bien sûr la première d’entre elles.</p>

@@ -4,11 +4,13 @@
 freeze: true
 
 # Enable banner style title blocks
-title-block-banner: false
+title-block-banner: "#e8eeed"
 
 
 # Table of content settings
 toc: true
+toc-title: Sommaire
+toc-location: left
 toc-depth: 4
 
 page-layout: article

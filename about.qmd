@@ -1,6 +1,6 @@
 ---
-title: "A propos"
-image: img_campagne.jpg
+title: "Et sinon"
+image: images/img_campagne.jpg
 about:
   template: jolla
   links:
@@ -12,4 +12,4 @@ about:
       href: https://github.com/mtmx
 ---
 
-A propos de ce blog
+Non, rien.

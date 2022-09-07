@@ -1,0 +1,17 @@
+---
+title: "Petit poney"
+author: "Mathieu"
+date: "2014-12-03"
+showonlyimage: false
+draft: false
+image: img/img_poneys.png
+weight: 0
+type: "post"
+description: ""
+categories: ["animaux"]
+---
+
+C’est une question qui me taraudait depuis longtemps, et ce fichier de l’Institut français du cheval et de l’équitation est arrivé par miracle. On sait maintenant comment s’appellent les poneys de France et de Navarre :
+
+![](img/nuage_poneys.png){fig-alt="nuage_poneys"}
+
