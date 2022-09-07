@@ -6,12 +6,17 @@ website:
   site-url: https://mtmx.netlify.app/
   repo-url: https://github.com/mtmx/mtmx
   open-graph: true
+  favicon: images/img_campagne_rond.png
   twitter-card:
     creator: "@matamix"
     card-style: summary_large_image
   navbar:
+    logo: images/img_campagne_rond.png
+    href: https://mtmx.netlify.app/
     background: "#bacdcb"
     right:
+      - text: "Des posts"
+        file: index.qmd
       - bots.qmd
       - about.qmd
       - icon: github
