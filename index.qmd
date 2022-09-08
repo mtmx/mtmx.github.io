@@ -1,5 +1,4 @@
 ---
-title: "Divagations quantifiées"
 listing:
   feed: true
   contents: posts
@@ -11,5 +10,5 @@ listing:
   categories: cloud
 page-layout: full
 title-block-banner: true
-image: images/img_campagne.jpg
+image: images/img_ban.png
 ---

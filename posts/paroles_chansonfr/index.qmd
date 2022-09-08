@@ -269,7 +269,7 @@ ggiraph(code = {print(ggi)},
 ```
 
 Plutôt cohérent de trouver Brigitte Fontaine, Boby Lapointe, Georges Brassens ou Léo Ferré dans les plus créatifs des chanteurs : ils sont là les "chanteurs à textes".
-A l'inverse Michel Berger, Claude François ou encore Véronique Sanson utilisent un registre plus restreint de mots : Johnny aussi, on voit d'ailleurs qu'il est l'artiste le plus prolixe en chansons (plus de 600 référencées sur le site [paroles2chansons.lemonde.fr](http://paroles2chansons.lemonde.fr/)) comme en nombre de [concerts donnés à son public](https://mtmx.netlify.app/posts/jojographie/).
+A l'inverse Michel Berger, Claude François ou encore Véronique Sanson utilisent un registre plus restreint de mots : Johnny aussi, on voit d'ailleurs qu'il est l'artiste le plus prolixe en chansons (plus de 600 référencées sur le site [paroles2chansons.lemonde.fr](http://paroles2chansons.lemonde.fr/)) comme en nombre de [concerts donnés à son public](https://mtmx.github.io/posts/jojographie/).
 
 On peut ensuite tenter de déceler l'humeur des interprètes à partir des mots employés dans leur chansons : chaque mot est associé à un type de sentiment (exemples : 'accuser' est négatif, 'actif' est positif) grâce au lexique de sentiments issu du package ['proustr'](https://cran.r-project.org/web/packages/proustr/index.html). A ce jeu-là les chanteurs les moins négatifs sont Laurent Voulzy et Joe Dassin, Michel Berger étant au contraire celui qui utilise le plus de mots à connotation négative. L'emploi de mots positifs n'est pas forcément inversement proportionnel : Serge Gainsbourg est celui qui emploie un minimum de termes positifs et Yves Duteil un maximum.
 

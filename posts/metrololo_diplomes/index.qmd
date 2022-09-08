@@ -17,7 +17,7 @@ options(width = 999)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Après deux épisodes consacrés aux [enfants](https://mtmx.netlify.app/posts/metrololo_poussettes/) et aux [mamies](https://mtmx.netlify.app/posts/metrololo_mamies/), on rentre dans le tas en abordant un sujet sensible : la gentrification. Parce qu'il semble que tout le monde peut prétendre avoir un avis sur le sujet, je m'y mets aussi.
+Après deux épisodes consacrés aux [enfants](https://mtmx.github.io/posts/metrololo_poussettes/) et aux [mamies](https://mtmx.github.io/posts/metrololo_mamies/), on rentre dans le tas en abordant un sujet sensible : la gentrification. Parce qu'il semble que tout le monde peut prétendre avoir un avis sur le sujet, je m'y mets aussi.
 Mon postulat de départ veut que les gentrifieurs soient jeunes et diplômés, donc que les quartiers ayant vu une arrivée de diplomés plus rapide qu'ailleurs depuis les années 1990 sont davantage susceptibles d'être soumis à un processus de gentrification. On parle ici de gentrification résidentielle puisqu'on étudie les caractéristiques de la population résidente et non les types de commerces, d'équipements ou d'associations qui permettent eux de cerner les processus de gentrification d'une autre manière.
  
 D'abord un rapide cadrage national qui ne surprendra personne : les territoires les plus diplômés d'après les dernières données de l'Insee (RP 2013) sont les grandes villes dotées des centres universitaires majeurs et de fonctions métropolitaintes, Paris étant bien sûr la première d'entre elles.
@@ -72,7 +72,7 @@ layoutLayer(title = titre,
 
 ## Des quartiers aux trajectoires divergentes
 
-Pour comprendre les phénomènes socio-démographiques qui se jouent à l'échelle du quartier, on se base toujours sur les zones entourant les stations de transports en commun (métro, tram, RER et transilien) de la région Ile de France. La station (ou la gare) fait en effet souvent office de lieu de centralité dans la vie quotidienne des habitants et c'est principalement à elle qu'on fait référence pour évoquer son quartier. Toute la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.netlify.app/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
+Pour comprendre les phénomènes socio-démographiques qui se jouent à l'échelle du quartier, on se base toujours sur les zones entourant les stations de transports en commun (métro, tram, RER et transilien) de la région Ile de France. La station (ou la gare) fait en effet souvent office de lieu de centralité dans la vie quotidienne des habitants et c'est principalement à elle qu'on fait référence pour évoquer son quartier. Toute la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.github.io/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
 
 Quantifier la part des diplômés (on parle ici des diplomés supérieur ou égaux à bac +2, indicateurs fournis dans les recensements de l'Insee de 1990 et 2013) et son évolution depuis les années 1990 permet de montrer que des quartiers/stations ayant le même profil en 1990 ont des situations complètement différentes aujourd'hui.
 

@@ -120,7 +120,7 @@ ggiraph(code = print(p), width = 1, height = 3,
 A Paris, 6% des adultes logent chez leurs parents et se définissent donc en tant qu'enfant du référent du ménage. En clair, ce sont les Tanguys. On voit aussi que les gens logeant chez un autre parent (cousin, oncle, etc...) ou chez un ami sont nombreux, mais aussi que 450 personnes sont domestiques et logés en tant que tel chez leur employeur (3 300 au total dans l'ensemble du pays).
 
 ## Localisation des différents statuts, en France et à Paris
-Rappel : la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.netlify.app/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
+Rappel : la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.github.io/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
 
 
 #### Adultes hébergés en tant qu'enfant

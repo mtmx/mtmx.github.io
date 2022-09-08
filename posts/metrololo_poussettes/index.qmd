@@ -20,7 +20,7 @@ library(emo)
 
 
 
-Après un [premier épisode](https://mtmx.netlify.app/posts/metrololo_mamies/) consacré aux `r emo::ji("older_woman")`, venons-en aux `r emo::ji("baby")`
+Après un [premier épisode](https://mtmx.github.io/posts/metrololo_mamies/) consacré aux `r emo::ji("older_woman")`, venons-en aux `r emo::ji("baby")`
 
 On parle des enfants âgés de 0 à 5 ans, au nombre de 4.6 millions dans tout le pays soit plus de 7% de la population totale. Un peu de contextuale national : les mouflets sont sur-représentés dans l'Ouest intérieur et le Nord du pays, aux abords des métropoles et près de le frontière suisse :
  
@@ -117,10 +117,10 @@ layoutLayer(title = titre,
 
 ## L'analyse infra-urbaine par station
 
-Rappel : pour comprendre les phénomènes socio-démographiques qui se jouent à l'échelle du quartier, on va se baser sur les zones entourant les stations de transports en commun (métro, tram, RER et transilien) de la région Ile de France. La station (ou la gare) fait en effet souvent office de lieu de centralité dans la vie quotidienne des habitants et c'est principalement à elle qu'on fait référence pour évoquer son quartier. Toute la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.netlify.app/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
+Rappel : pour comprendre les phénomènes socio-démographiques qui se jouent à l'échelle du quartier, on va se baser sur les zones entourant les stations de transports en commun (métro, tram, RER et transilien) de la région Ile de France. La station (ou la gare) fait en effet souvent office de lieu de centralité dans la vie quotidienne des habitants et c'est principalement à elle qu'on fait référence pour évoquer son quartier. Toute la méthodologie pour arriver à ses résultats est détaillée dans la [méthodo](https://mtmx.github.io/posts/metrololo_mamies/#methodologie) et sur la page github du projet [metrololo](https://github.com/mtmx/metrololo).
 
 
-Contraiement aux [mamies](https://mtmx.netlify.app/posts/metrololo_mamies/) qui se dispersaient dans des quartiers bien spécifiques et principalement rive gauche, la proportion d'enfants est d'autant plus faible qu'on se rapproche du coeur de la capitale (le 6ème arrondissement en l'occurence).  Voici donc la carte des stations selon la part des enfants dans la population d'après les données 2013 :
+Contraiement aux [mamies](https://mtmx.github.io/posts/metrololo_mamies/) qui se dispersaient dans des quartiers bien spécifiques et principalement rive gauche, la proportion d'enfants est d'autant plus faible qu'on se rapproche du coeur de la capitale (le 6ème arrondissement en l'occurence).  Voici donc la carte des stations selon la part des enfants dans la population d'après les données 2013 :
 
 
 ```{r carto,echo=F, message=F, warning=F}

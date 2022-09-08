@@ -1,9 +1,10 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "mtmx"
-  site-url: https://mtmx.netlify.app/
+  site-url: https://mtmx.github.io/
   repo-url: https://github.com/mtmx/mtmx
   open-graph: true
   favicon: images/img_campagne_rond.png
@@ -12,7 +13,7 @@ website:
     card-style: summary_large_image
   navbar:
     logo: images/img_campagne_rond.png
-    href: https://mtmx.netlify.app/
+    href: https://mtmx.github.io/
     background: "#bacdcb"
     right:
       - text: "Des posts"

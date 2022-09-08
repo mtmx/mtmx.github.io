@@ -64,9 +64,9 @@ thm <-
 Parce que les ballades à la campagne sont cools mais que certains coins sont plus jolis que d'autres, j'ai essayé de quantifier cet intérêt purement esthétique à l'aide de plusieurs sources. 
 On avait regardé :
 
-+ [ici](https://mtmx.netlify.app/posts/carto_meteo/) où il pleut le plus, <br />
-+ [là](https://mtmx.netlify.app/posts/carto_cheptels/) où les animaux d'élevage sont les plus nombreux,<br />
-+  ou encore [ici](https://mtmx.netlify.app/posts/carto_alti/) où le relief est plat.<br />
++ [ici](https://mtmx.github.io/posts/carto_meteo/) où il pleut le plus, <br />
++ [là](https://mtmx.github.io/posts/carto_cheptels/) où les animaux d'élevage sont les plus nombreux,<br />
++  ou encore [ici](https://mtmx.github.io/posts/carto_alti/) où le relief est plat.<br />
 
 
 On ajoute trois indicateurs complémentaires :
@@ -76,7 +76,7 @@ On ajoute trois indicateurs complémentaires :
 + et des surfaces en eau<br />
 <br />
 
-Pour accéder directement à l'application, c'est en [bas de page](https://mtmx.netlify.app/posts/appli_campagnes/#application). 
+Pour accéder directement à l'application, c'est en [bas de page](https://mtmx.github.io/posts/appli_campagnes/#application). 
 
 ### Méthode et passage en revue des indicateurs
 
@@ -107,7 +107,7 @@ ggplot() +
 Pour chacun des 6 indicateurs, on répartit les 1700 cantons non-denses de France métropolitaine en 5 quantiles (les 20% de cantons avec le niveau le plus faible, les 20% suivants, etc...) pour les classer en 5 catégories ("très peu", "peu", etc...).
 
 
-+ Pour la densité de "belles bêtes", j'ai simplifié l'analyse produite [ici](https://mtmx.netlify.app/posts/carto_cheptels/) à partir des données du [ministère de l'agriculture](https://stats.agriculture.gouv.fr/cartostat/#l=fr;i=stru1.saumoy10;v=map2) en totalisant le nombre de bovins, d'équidés, de caprins et d'ovins (ces deux-là avec un coefficient de 0,3 vue leur taille) et en le rapportant à la superficie du canton :
++ Pour la densité de "belles bêtes", j'ai simplifié l'analyse produite [ici](https://mtmx.github.io/posts/carto_cheptels/) à partir des données du [ministère de l'agriculture](https://stats.agriculture.gouv.fr/cartostat/#l=fr;i=stru1.saumoy10;v=map2) en totalisant le nombre de bovins, d'équidés, de caprins et d'ovins (ces deux-là avec un coefficient de 0,3 vue leur taille) et en le rapportant à la superficie du canton :
 
 ```{r carte_betes,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
 ggplot() +
@@ -148,7 +148,7 @@ ggplot() +
 ```
 
 
-+ Pour quantifier la fréquence de la pluie on repart des données de [Météo-France](http://www.data.gouv.fr/fr/datasets/indices-mensuels-de-precipitations-et-nombre-de-jours-de-precipitations-issus-du-modele-aladin-climat/) utilisées [ici](https://mtmx.netlify.app/posts/carto_meteo/) pour afficher simplement le nombre de jours de pluie moyen par mois :
++ Pour quantifier la fréquence de la pluie on repart des données de [Météo-France](http://www.data.gouv.fr/fr/datasets/indices-mensuels-de-precipitations-et-nombre-de-jours-de-precipitations-issus-du-modele-aladin-climat/) utilisées [ici](https://mtmx.github.io/posts/carto_meteo/) pour afficher simplement le nombre de jours de pluie moyen par mois :
 
 ```{r carte_pluie,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
 ggplot() +
@@ -169,7 +169,7 @@ ggplot() +
 ```
 
 
-+ Parce que le plat c'est terriblement emmerdant j'avais regardé [ici](https://mtmx.netlify.app/posts/carto_alti/) quels coins éviter grâce à l'exploitation de la [BD Alti de l'IGN](https://www.data.gouv.fr/fr/datasets/bd-alti-r-75-m-250-m-1-000-m/). Ici on cartographie la même information, c'est à dire l'éacrt-type de l'altitude, mais au niveau des cantons :
++ Parce que le plat c'est terriblement emmerdant j'avais regardé [ici](https://mtmx.github.io/posts/carto_alti/) quels coins éviter grâce à l'exploitation de la [BD Alti de l'IGN](https://www.data.gouv.fr/fr/datasets/bd-alti-r-75-m-250-m-1-000-m/). Ici on cartographie la même information, c'est à dire l'éacrt-type de l'altitude, mais au niveau des cantons :
 
 ```{r carte_decli,echo=F, message=F, warning=F, fig.width=5,fig.height=4}
 ggplot() +

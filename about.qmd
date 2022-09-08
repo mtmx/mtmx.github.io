@@ -1,6 +1,6 @@
 ---
 title: "Et sinon"
-image: images/img_campagne.jpg
+image: images/tete.jpg
 about:
   template: jolla
   links:
