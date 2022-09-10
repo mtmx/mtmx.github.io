@@ -2,6 +2,8 @@
 title: "Décès pendant la pandémie"
 author: "Mathieu"
 date: "2020-04-21"
+aliases: 
+  - ../../blog/deces_pandemie/
 showonlyimage: false
 draft: false
 image: img/img_pandemie_carto.png

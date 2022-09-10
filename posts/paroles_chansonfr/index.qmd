@@ -2,6 +2,8 @@
 title: "Paroles, paroles et paroles"
 author: "Mathieu"
 date: "2017-12-31"
+aliases: 
+  - ../../blog/paroles_chansonfr/
 showonlyimage: false
 draft: false
 image: img/img_paroles_chansonsfr.png

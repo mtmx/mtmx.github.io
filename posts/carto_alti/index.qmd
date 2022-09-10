@@ -2,6 +2,8 @@
 title: "La platitude"
 author: "Mathieu"
 date: "2017-10-08"
+aliases: 
+  - ../../blog/carto_alti/
 showonlyimage: false
 draft: false
 image: img/img_declivite.png

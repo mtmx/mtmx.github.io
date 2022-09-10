@@ -2,6 +2,8 @@
 title: "Gentrification résidentielle"
 author: "Mathieu"
 date: "2017-06-25"
+aliases: 
+  - ../../blog/metrololo_diplomes/
 showonlyimage: false
 draft: false
 image: img/img_metrololo_diplomes.png

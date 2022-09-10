@@ -2,6 +2,8 @@
 title: "Des poussettes dans la ville"
 author: "Mathieu"
 date: "2017-06-07"
+aliases: 
+  - ../../blog/metrololo_poussettes/
 showonlyimage: false
 draft: false
 image: img/img_metrololo_poussettes.png

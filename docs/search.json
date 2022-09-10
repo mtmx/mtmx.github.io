@@ -193,27 +193,20 @@
     "href": "bots.html",
     "title": "Des bots",
     "section": "",
-    "text": "Un bot qui tweete les prévisions de précipitations pour le lendemain.\n➡️ source API Meteo-France.\n⏰ Tous les soirs.\n🔨 github"
-  },
-  {
-    "objectID": "bots.html#orthophotobot",
-    "href": "bots.html#orthophotobot",
-    "title": "Des bots",
-    "section": "orthophotobot",
-    "text": "orthophotobot\nUn bot qui tweete une image aérienne d’un lieu en France au hasard, hier vs aujourd’hui.\n➡️ source API IGN (BD ORTHO® / BD ORTHO® Historique).\n⏰ Tous les matins, midis, soirs.\n🔨 github"
+    "text": "- orthophotobot\nUn bot qui tweete une image aérienne d’un lieu en France au hasard, hier vs aujourd’hui.\n➡️ source API IGN (BD ORTHO® / BD ORTHO® Historique). - ⏰ Tous les matins, midis, soirs. - 🔨 github"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "mtmx",
     "section": "",
-    "text": "montreuil\n\n\nvélo\n\n\npluie\n\n\nmétéo\n\n\n\nCirculation de vélos à Montreuil\n\n\n\nMathieu\n\n\nJun 10, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npandémie\n\n\ncovid19\n\n\n\nExcédent de décès pendant la pandémie\n\n\n\nMathieu\n\n\nApr 21, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmontreuil\n\n\ngoogle\n\n\nnotation\n\n\navis\n\n\n\nAnalyse des lieux selon leurs notes sur Google Places\n\n\n\nMathieu\n\n\nApr 15, 2018\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nparoles\n\n\ntextes\n\n\nchanson\n\n\nvariétés\n\n\n\nAnalyse textuelle\n\n\n\nMathieu\n\n\nDec 31, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njohnny\n\n\nconcerts\n\n\n\nBête de scène\n\n\n\nMathieu\n\n\nDec 10, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncampagne\n\n\n\nApplication pour un coin de campagne idéal\n\n\n\nMathieu\n\n\nOct 21, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\naltitude\n\n\nrelief\n\n\n\nAltitude ≠ relief\n\n\n\nMathieu\n\n\nOct 8, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncampagne\n\n\npluie\n\n\nmétéo\n\n\n\nExploration des données de Météo-France en bottes et ciré\n\n\n\nMathieu\n\n\nSep 23, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncampagne\n\n\nanimaux\n\n\ncheptels\n\n\n\nLocalisation des principaux cheptels et lieux d’élevage\n\n\n\nMathieu\n\n\nAug 23, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\nlogement\n\n\ncolocation\n\n\n\n[Metrololo #4] Analyse infra-urbaine par station de métro\n\n\n\nMathieu\n\n\nJul 8, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\ndiplômés\n\n\ngentrification\n\n\n\n[Metrololo #3] Analyse infra-urbaine par station de métro\n\n\n\nMathieu\n\n\nJun 25, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlacs\n\n\nbaignades\n\n\nchill\n\n\n\nPopularité des lacs en France d’après wikipedia\n\n\n\nMathieu\n\n\nJun 14, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\nenfants\n\n\n\n[Metrololo #2] Analyse infra-urbaine par station de métro\n\n\n\nMathieu\n\n\nJun 7, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\nmamies\n\n\n\n[Metrololo #1] Analyse infra-urbaine par station de métro\n\n\n\nMathieu\n\n\nMay 26, 2017\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\naltitude\n\n\n\n0ù sont les plus perchés\n\n\n\nMathieu\n\n\nSep 22, 2015\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nanimaux\n\n\n\n\n\n\n\nMathieu\n\n\nDec 3, 2014\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "montreuil\n\n\nvélo\n\n\npluie\n\n\nmétéo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npandémie\n\n\ncovid19\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmontreuil\n\n\ngoogle\n\n\nnotation\n\n\navis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nparoles\n\n\ntextes\n\n\nchanson\n\n\nvariétés\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njohnny\n\n\nconcerts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncampagne\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\naltitude\n\n\nrelief\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncampagne\n\n\npluie\n\n\nmétéo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncampagne\n\n\nanimaux\n\n\ncheptels\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\nlogement\n\n\ncolocation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\ndiplômés\n\n\ngentrification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlacs\n\n\nbaignades\n\n\nchill\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\nenfants\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmetros\n\n\nville\n\n\nmamies\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\naltitude\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nanimaux\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Et sinon",
     "section": "",
-    "text": "Non, rien."
+    "text": "De la carto, des stats, des idées tordues que les données viennent redresser."
   }
 ]

@@ -2,6 +2,8 @@
 title: "Colocs en stock"
 author: "Mathieu"
 date: "2017-07-08"
+aliases: 
+  - ../../blog/metrololo_logement/
 showonlyimage: false
 draft: false
 image: img/img_metrololo_colocs.png

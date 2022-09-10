@@ -2,6 +2,8 @@
 title: "Wikilacs"
 author: "Mathieu"
 date: "2017-06-14"
+aliases: 
+  - ../../blog/wikilacs/
 showonlyimage: false
 draft: false
 image: img/img_wikilacs.png

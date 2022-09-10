@@ -2,6 +2,8 @@
 title: "Jojographie"
 author: "Mathieu"
 date: "2017-12-10"
+aliases: 
+  - ../../blog/jojographie/
 showonlyimage: false
 draft: false
 image: img/img_jojographie.png

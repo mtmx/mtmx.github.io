@@ -38,10 +38,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-title','listing-subtitle','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
@@ -145,6 +147,9 @@ ul.task-list li input[type="checkbox"] {
  </a>
   </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -167,12 +172,12 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="montreuil,vélo,pluie,météo" data-listing-date-sort="1591740000000" data-listing-file-modified-sort="1662305003306" data-listing-reading-time-sort="53.28">
+<div class="list grid quarto-listing-cols-4">
+<div class="g-col-1" data-index="0" data-categories="montreuil,vélo,pluie,météo" data-listing-date-sort="1591740000000" data-listing-file-modified-sort="1662800419641" data-listing-reading-time-sort="53.28">
 <a href="./posts/velo_montreuil/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/velo_montreuil/img/img_velo_meteo_montreuil.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/velo_montreuil/img/img_velo_meteo_montreuil.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -192,26 +197,15 @@ pluie
 météo
 </div>
 </div>
-<div class="card-text listing-description">
-Circulation de vélos à Montreuil
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Jun 10, 2020
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="pandémie,covid19" data-listing-date-sort="1587420000000" data-listing-file-modified-sort="1662297403246" data-listing-reading-time-sort="37.635">
+<div class="g-col-1" data-index="1" data-categories="pandémie,covid19" data-listing-date-sort="1587420000000" data-listing-file-modified-sort="1662800419220" data-listing-reading-time-sort="37.635">
 <a href="./posts/deces_pandemie/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/deces_pandemie/img/img_pandemie_carto.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/deces_pandemie/img/img_pandemie_carto.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -225,26 +219,15 @@ pandémie
 covid19
 </div>
 </div>
-<div class="card-text listing-description">
-Excédent de décès pendant la pandémie
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Apr 21, 2020
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="montreuil,google,notation,avis" data-listing-date-sort="1523743200000" data-listing-file-modified-sort="1662298540305" data-listing-reading-time-sort="36.545">
+<div class="g-col-1" data-index="2" data-categories="montreuil,google,notation,avis" data-listing-date-sort="1523743200000" data-listing-file-modified-sort="1662800419784" data-listing-reading-time-sort="36.545">
 <a href="./posts/montreuil_google/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/montreuil_google/img/img_montreuilgoogle.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/montreuil_google/img/img_montreuilgoogle.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -264,26 +247,15 @@ notation
 avis
 </div>
 </div>
-<div class="card-text listing-description">
-Analyse des lieux selon leurs notes sur Google Places
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Apr 15, 2018
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="paroles,textes,chanson,variétés" data-listing-date-sort="1514674800000" data-listing-file-modified-sort="1662658557089" data-listing-reading-time-sort="19.265">
+<div class="g-col-1" data-index="3" data-categories="paroles,textes,chanson,variétés" data-listing-date-sort="1514674800000" data-listing-file-modified-sort="1662800419556" data-listing-reading-time-sort="19.265">
 <a href="./posts/paroles_chansonfr/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/paroles_chansonfr/img/img_paroles_chansonsfr.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/paroles_chansonfr/img/img_paroles_chansonsfr.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -303,26 +275,15 @@ chanson
 variétés
 </div>
 </div>
-<div class="card-text listing-description">
-Analyse textuelle
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Dec 31, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="johnny,concerts" data-listing-date-sort="1512860400000" data-listing-file-modified-sort="1662227547627" data-listing-reading-time-sort="10.65">
+<div class="g-col-1" data-index="4" data-categories="johnny,concerts" data-listing-date-sort="1512860400000" data-listing-file-modified-sort="1662800419174" data-listing-reading-time-sort="10.65">
 <a href="./posts/jojographie/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/jojographie/img/img_jojographie.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/jojographie/img/img_jojographie.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -336,26 +297,15 @@ johnny
 concerts
 </div>
 </div>
-<div class="card-text listing-description">
-Bête de scène
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Dec 10, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="5" data-categories="campagne" data-listing-date-sort="1508536800000" data-listing-file-modified-sort="1662658020713" data-listing-reading-time-sort="11.055">
+<div class="g-col-1" data-index="5" data-categories="campagne" data-listing-date-sort="1508536800000" data-listing-file-modified-sort="1662800419403" data-listing-reading-time-sort="11.055">
 <a href="./posts/appli_campagnes/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/appli_campagnes/img/img_campagne.jpg" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/appli_campagnes/img/img_campagne.jpg" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -366,26 +316,15 @@ La campagne au poil
 campagne
 </div>
 </div>
-<div class="card-text listing-description">
-Application pour un coin de campagne idéal
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Oct 21, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="6" data-categories="altitude,relief" data-listing-date-sort="1507413600000" data-listing-file-modified-sort="1662229902919" data-listing-reading-time-sort="10.35">
+<div class="g-col-1" data-index="6" data-categories="altitude,relief" data-listing-date-sort="1507413600000" data-listing-file-modified-sort="1662800419300" data-listing-reading-time-sort="10.35">
 <a href="./posts/carto_alti/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/carto_alti/img/img_declivite.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/carto_alti/img/img_declivite.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -399,26 +338,15 @@ altitude
 relief
 </div>
 </div>
-<div class="card-text listing-description">
-Altitude ≠ relief
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Oct 8, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="7" data-categories="campagne,pluie,météo" data-listing-date-sort="1506117600000" data-listing-file-modified-sort="1662658142042" data-listing-reading-time-sort="16.19">
+<div class="g-col-1" data-index="7" data-categories="campagne,pluie,météo" data-listing-date-sort="1506117600000" data-listing-file-modified-sort="1662756884591" data-listing-reading-time-sort="16.19">
 <a href="./posts/carto_meteo/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/carto_meteo/img/img_pluie.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/carto_meteo/img/img_pluie.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -435,26 +363,15 @@ pluie
 météo
 </div>
 </div>
-<div class="card-text listing-description">
-Exploration des données de Météo-France en bottes et ciré
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Sep 23, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="8" data-categories="campagne,animaux,cheptels" data-listing-date-sort="1503439200000" data-listing-file-modified-sort="1662277455671" data-listing-reading-time-sort="8.185">
+<div class="g-col-1" data-index="8" data-categories="campagne,animaux,cheptels" data-listing-date-sort="1503439200000" data-listing-file-modified-sort="1662799810266" data-listing-reading-time-sort="11.04">
 <a href="./posts/cheptels/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/cheptels/img/img_cheptels.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/cheptels/img/img_cheptels.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -471,26 +388,15 @@ animaux
 cheptels
 </div>
 </div>
-<div class="card-text listing-description">
-Localisation des principaux cheptels et lieux d’élevage
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Aug 23, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="9" data-categories="metros,ville,logement,colocation" data-listing-date-sort="1499464800000" data-listing-file-modified-sort="1662658356723" data-listing-reading-time-sort="61.35">
+<div class="g-col-1" data-index="9" data-categories="metros,ville,logement,colocation" data-listing-date-sort="1499464800000" data-listing-file-modified-sort="1662800419049" data-listing-reading-time-sort="61.35">
 <a href="./posts/metrololo_logements/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/metrololo_logements/img/img_metrololo_colocs.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/metrololo_logements/img/img_metrololo_colocs.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -510,26 +416,15 @@ logement
 colocation
 </div>
 </div>
-<div class="card-text listing-description">
-[Metrololo #4] Analyse infra-urbaine par station de métro
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Jul 8, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="10" data-categories="metros,ville,diplômés,gentrification" data-listing-date-sort="1498341600000" data-listing-file-modified-sort="1662658284851" data-listing-reading-time-sort="21.37">
+<div class="g-col-1" data-index="10" data-categories="metros,ville,diplômés,gentrification" data-listing-date-sort="1498341600000" data-listing-file-modified-sort="1662800419107" data-listing-reading-time-sort="21.37">
 <a href="./posts/metrololo_diplomes/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/metrololo_diplomes/img/img_metrololo_diplomes.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/metrololo_diplomes/img/img_metrololo_diplomes.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -549,26 +444,15 @@ diplômés
 gentrification
 </div>
 </div>
-<div class="card-text listing-description">
-[Metrololo #3] Analyse infra-urbaine par station de métro
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Jun 25, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="11" data-categories="lacs,baignades,chill" data-listing-date-sort="1497391200000" data-listing-file-modified-sort="1662414224646" data-listing-reading-time-sort="20.2">
+<div class="g-col-1" data-index="11" data-categories="lacs,baignades,chill" data-listing-date-sort="1497391200000" data-listing-file-modified-sort="1662800419705" data-listing-reading-time-sort="20.2">
 <a href="./posts/wikilacs/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/wikilacs/img/img_wikilacs.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/wikilacs/img/img_wikilacs.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -585,26 +469,15 @@ baignades
 chill
 </div>
 </div>
-<div class="card-text listing-description">
-Popularité des lacs en France d’après wikipedia
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Jun 14, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="12" data-categories="metros,ville,enfants" data-listing-date-sort="1496786400000" data-listing-file-modified-sort="1662658488488" data-listing-reading-time-sort="26.365">
+<div class="g-col-1" data-index="12" data-categories="metros,ville,enfants" data-listing-date-sort="1496786400000" data-listing-file-modified-sort="1662800419463" data-listing-reading-time-sort="26.365">
 <a href="./posts/metrololo_poussettes/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/metrololo_poussettes/img/img_metrololo_poussettes.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/metrololo_poussettes/img/img_metrololo_poussettes.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -621,26 +494,15 @@ ville
 enfants
 </div>
 </div>
-<div class="card-text listing-description">
-[Metrololo #2] Analyse infra-urbaine par station de métro
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Jun 7, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="13" data-categories="metros,ville,mamies" data-listing-date-sort="1495749600000" data-listing-file-modified-sort="1662283129307" data-listing-reading-time-sort="27.49">
+<div class="g-col-1" data-index="13" data-categories="metros,ville,mamies" data-listing-date-sort="1495749600000" data-listing-file-modified-sort="1662800419502" data-listing-reading-time-sort="27.49">
 <a href="./posts/metrololo_mamies/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/metrololo_mamies/img/img_metrololo_mamies.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/metrololo_mamies/img/img_metrololo_mamies.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -657,17 +519,6 @@ ville
 mamies
 </div>
 </div>
-<div class="card-text listing-description">
-[Metrololo #1] Analyse infra-urbaine par station de métro
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-May 26, 2017
-</div>
-</div>
 </div>
 </div>
 </a>
@@ -676,7 +527,7 @@ May 26, 2017
 <a href="./posts/alti_pop/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/alti_pop/img/img_altipop.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/alti_pop/img/img_altipop.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -687,17 +538,6 @@ Altitude de la population française
 altitude
 </div>
 </div>
-<div class="card-text listing-description">
-0ù sont les plus perchés
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Sep 22, 2015
-</div>
-</div>
 </div>
 </div>
 </a>
@@ -706,7 +546,7 @@ Sep 22, 2015
 <a href="./posts/poneys/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./posts/poneys/img/img_poneys.png" class="thumbnail-image card-img" style="height: 250px;">
+<img src="./posts/poneys/img/img_poneys.png" class="thumbnail-image card-img" style="height: 180px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -715,17 +555,6 @@ Petit poney
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('animaux'); return false;">
 animaux
-</div>
-</div>
-<div class="card-text listing-description">
-C’est une question qui me taraudait depuis longtemps, et ce fichier de l’Institut français du cheval et de l’équitation est arrivé par miracle. On sait maintenant comment s’appellent les poneys de France et de Navarre :
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Mathieu
-</div>
-<div class="listing-date">
-Dec 3, 2014
 </div>
 </div>
 </div>
@@ -757,6 +586,119 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

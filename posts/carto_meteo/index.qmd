@@ -1,5 +1,7 @@
 ---
 title: "De la pluie : en fréquence et en quantité"
+aliases: 
+  - ../../../blog/carto_meteo/
 author: "Mathieu"
 date: "2017-09-23"
 showonlyimage: false

@@ -5,7 +5,7 @@ project:
 website:
   title: "mtmx"
   site-url: https://mtmx.github.io/
-  repo-url: https://github.com/mtmx/mtmx
+  repo-url: https://github.com/mtmx/mtmx.github.io
   open-graph: true
   favicon: images/img_campagne_rond.png
   twitter-card:
@@ -26,7 +26,9 @@ website:
         href: https://twitter.com/matamix
 format:
   html:
-    theme: minty
+    theme: 
+      light: minty
+      dark: darkly
     highlight-style: arrow
     fig-dpi: 600
     fig-align: center

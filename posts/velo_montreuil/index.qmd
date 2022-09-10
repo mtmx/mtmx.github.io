@@ -2,6 +2,8 @@
 title: "Vélo vs météo"
 author: "Mathieu"
 date: "2020-06-10"
+aliases: 
+  - ../../blog/velo_meteo_montreuil/
 showonlyimage: false
 draft: false
 image: img/img_velo_meteo_montreuil.png

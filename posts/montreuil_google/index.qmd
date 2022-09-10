@@ -2,6 +2,8 @@
 title: "Montreuil by Google"
 author: "Mathieu"
 date: "2018-04-15"
+aliases: 
+  - ../../blog/montreuil_google/
 showonlyimage: false
 draft: false
 image: img/img_montreuilgoogle.png

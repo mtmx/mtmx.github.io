@@ -1,5 +1,7 @@
 ---
 title: "Cartes à points pour bêtes à poils"
+aliases: 
+  - ../../blog/carto_cheptels/
 author: "Mathieu"
 date: "2017-08-23"
 showonlyimage: false
@@ -160,3 +162,77 @@ Si on peut trouver des bovins et des équidés (certes en moins grand nombre et 
 A part quelques vaches et quelques brebis dans les Bouches-du-Rhône, le littoral méditerranéen reste désespérement inhospitalier pour nos amies les bêtes.
 
 La frontière entre la campagne et la ville pourrait se formaliser avec un simple indicateur : on y trouve plus de vaches que d'habitants. Reprenant l'idée de cette excellente [carte](http://ssz.fr/vaches/), voici donc une carte où est représentée le type d'animaux le plus présent. Si le cochon est champion en Bretagne, les brebis sont reines dans les Pyrénées et le sud du massif central. Les vaches sont les plus nombreuses en Normandie et en Bourgogne. En plus du cheptel le plus nombreux est indiqué quel type de cheptel est supérieur en nombre aux humains (un indice en cas de rébellion animale). Il est également possible de zoomer sur votre région grâce à la fonction loupe (deuxième icone) en haut à droite de la carte.
+
+
+```{r cheptels_image_interactif,eval=F,echo=F, message=F, warning=F, fig.width=10,fig.height=10}
+
+
+# fonction pour gérer accents
+conv_accents <- function(x) {
+  x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+  
+  x <- gsub(pattern = "è", replacement = "&Egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&Eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&Ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&Euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&Icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&Iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&Ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&Uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&Ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&Agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&Acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&Ccedil;", x = x)
+  x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+  
+  return(x)
+}
+
+# style du popup
+tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0.2"
+
+my_gg <-
+  ggplot() +
+  geom_sf(data = DEP.s, color = "grey65", fill = NA ,size = 0.2) +
+
+  geom_image(data = grd_data_ctr_img ,aes(x= lon, y = lat,image=img), size=.014) +
+  geom_point_interactive(data = grd_data_ctr_img,
+                         aes(x= lon, y = lat,
+                             tooltip = tip,
+                             data_id = id),shape = 15,colour = "white", alpha =0.1, size =5) + 
+    coord_sf( datum = NA) +
+  thm +
+  labs(
+    title = "Type de cheptel le plus nombreux",
+    subtitle = "(humains, porcins, bovins, caprins ou ovins)",
+    caption = "Source : Ministère de l'agriculture / Recensement agricole 2010"
+  )
+
+
+girafe(
+  ggobj = my_gg, #width_svg = 6, height_svg = 6,
+  options = list(
+    # opts_sizing(rescale = FALSE),
+    opts_zoom(max = 3),
+    opts_tooltip(
+      offx = -40, offy = -30,
+      css = tooltip_css
+    ),
+    opts_hover(css = "fill:orange;r:6px;")
+  )
+)
+
+
+```
+

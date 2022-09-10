@@ -2,7 +2,7 @@
 title: "Et sinon"
 image: images/tete.jpg
 about:
-  template: jolla
+  template: trestles
   links:
     - icon: twitter
       text: Twitter
@@ -10,6 +10,14 @@ about:
     - icon: github
       text: Github
       href: https://github.com/mtmx
+    - icon: envelope
+      text: Email
+      href: mailto:matai.data@gmail.com
 ---
 
-Non, rien.
+Mathieu Garnier.
+
+
+De la carto, des stats,
+des idées tordues 
+que les données viennent redresser.

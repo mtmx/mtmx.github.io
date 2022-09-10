@@ -2,10 +2,12 @@
 listing:
   feed: true
   contents: posts
+  fields: [image, title, subtitle, categories]
   sort: "date desc"
   type: grid
-  grid-columns: 3
-  image-height: 250px
+  grid-columns: 4
+  image-height: 180px
+  date-format: short
   page-size: 100
   categories: cloud
 page-layout: full

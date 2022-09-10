@@ -2,6 +2,8 @@
 title: "La campagne au poil"
 author: "Mathieu"
 date: "2017-10-21"
+aliases: 
+  - ../../blog/appli_campagnes/
 showonlyimage: false
 draft: false
 image: img/img_campagne.jpg
