@@ -76,5 +76,11 @@
   },
   "posts/cheptels/index.rmarkdown": {
     "index.html": "a13b854c"
+  },
+  "posts/bistrographie/deps/leaflet-providers-1.0.27/license.md": {
+    "license.html": "9f03be9b"
+  },
+  "posts/bistrographie/deps/leaflet-providers-1.0.27/CONTRIBUTING.md": {
+    "CONTRIBUTING.html": "b995caf3"
   }
 }

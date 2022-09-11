@@ -1,0 +1,122 @@
+---
+title: "Bistrographie"
+author: "Mathieu"
+date: "2017-04-07"
+aliases: 
+  - ../../blog/bistrographie/
+showonlyimage: false
+draft: false
+image: img/img_bistrographie.png
+weight: 0
+type: "post"
+description: "Cartographie des débits de boissons"
+categories: ["bistrot", "carto"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+
+
+```
+
+Le bistrot, égérie du mode de vie français, est-il en voie de disparition ? 15% d’entre eux ont disparu entre 2003 et 2011 d’après [une étude de l’Insee](http://www.bistrotdepays.com/wp-content/uploads/2013/06/INSEE-18-03-PDF.pdf), une baisse encore plus rapide dans les banlieues et les zones périurbaines que dans les espaces ruraux. C’est pourtant un lieu où se tisse du lien, parfois dans des communes où il est devenu le seul espace d’échanges ouvert : échanger les dernières nouvelles autour d’un ballon de rouge, refaire le monde entre deux Suzes… La baisse du nombre de bistrots est notamment sensible en Bretagne où le Télégramme de Brest a consacré quelques articles sur le sujet.
+
+Grâce à la publication de la base [Sirene](https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/) et de sa version [géocodée par Etalab](http://212.47.238.202/geo_sirene/last/), on peut connaitre les caractéristiques des établissements classés dans la catégorie « débit de boissons » (bars, cafés, discothèques, vendeurs de boissons itinérants) : nom, localisation, effectif, date de création, etc…
+Voici donc en rouge les territoires où on trouve un maximum de bistrots pour 10 000 habitants :
+
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/carto_db_fr.html')
+```
+````
+
+Les zones montagneuses (Corse, Massif Central, Pyrénées et Alpes) arrivent en tête devant le centre Bretagne, le Morvan, le Pas de Calais ainsi que quelques zones touristiques (littoral Atlantique, golfe de St-Tropez…). Il est plus difficile de trouver un bistrot ouvert dans le quart Nord-Est du pays, Ile de France incluse, ainsi qu’en Gironde où les vignobles sont nombreux.
+Relativement à leur population, les villes sont logiquement moins bien équipées : Lorient arrive tout de même en tête du palmarès avec 18 bistrots pour 10 000 habitants devant Lille et Rouen.
+Pour quantifier l’équipement des territoires en bistrots, on pourrait également regarder le temps d’accès (en voiturette sans permis) au débit de boissons le plus proche ou encore la part des communes équipées d’un bistrot comme vu dans l’étude de l’Insee.
+
+### Où se désaltérer dans les grandes villes françaises ? 
+
+
+A Paris c’est sur la rive droite que les choses se passent et que les connexions se font. Le sud de Pigalle est le quartier le mieux pourvu avec près de 50 bars accessibles dans un rayon de 200 mètres (cochez la case « densité » pour visualiser l’indicateur) : Châtelet, les quartiers de la porte St-Denis, de la Folie-Méricourt et de la Roquette ne sont pas en reste. Côté rive gauche, les quartiers historiques du 6ème arrondissement résistent. Pour voir l’adresse et l’enseigne de chaque bistrot (s’il a été renseigné par le propriétaire), il suffit de cliquer sur les points rouges.
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_paris_1.html')
+```
+````
+
+A Lyon on cherchera en bordure de Saône, au pied de la colline de Fourvière ainsi que dans le 1er arrondissement :
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_lyon_1.html')
+```
+````
+
+Et à Marseille, surtout dans le quartier de l’Opéra derrière le vieux port :
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_marseille_1.html')
+```
+````
+
+### Rues de la soif 
+
+Les quartiers festifs sont souvent regroupés dans des zones bien spécifiques de nos villes et certaines rues se sont donc fait une réputation dans la concentration impressionnante de bistrots. Le concept de la rue de la soif étant plutôt flou, j’ai tenté de l’objectiver en sélectionnant les rues accueillant plus de 10 bistrots, puis en calculant dans celles-ci la distance à parcourir pour entrer dans chacun des débits de boissons. On suppose que les déplacements entre chaque bar se font en ligne droite (distance euclidienne) mais il est probable que le « zig-zag » (que la distance de Manhattan pourrait approximer) inhérent à un parcours éthylique soit plus proche de la réalité.
+
+Résultat : une cinquantaine de rues en France comptent au moins 10 débits de boissons. La rue de Bourgogne à Orléans en compte 24, un record, mais elle mesure plus d’1 kilomètre de long. Avec un bistrot tous les 7 mètres, la rue Saint-Michel à Rennes est la plus dense du pays, devançant même la rue de Lappe à Paris.
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/palmares_rues_soif.html')
+```
+````
+
+Exemple du calcul de l’itinéraire optimal pour rentrer dans les 17 bars de la rue de Lappe à Paris : un parcours éthylique de 250 mètres, soit un bistrot tous les 15 mètres en moyenne. Rude.
+
+![](./img/anim_rue_lappe.gif)
+
+### Enseignes 
+
+Enfin voici une brève analyse lexicologique : les noms de bistrots les plus courants. La taille du nom est proportionnelle au nombre d’occurrences : 
+
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/wc_noms_bars.html')
+```
+````
+
+Si le « café des sports » reste indétrônable, les paris hippiques restent une référence ancrée sur les enseignes de nos bars : le Vincennes, le Longchamp, le Sulky… Les marques de cigarettes aujourd’hui disparues ont aussi légué leurs noms à nos bistrots : le Balto, le Maryland, le Narval, le Marigny…
+
+NB : L’ensemble des traitements ont été réalisés grâce au logiciel R et sont disponibles sur github.
+
+Bonus : les cartes des bistrots sur Lille, Rennes, Bordeaux et Nice :
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_lille_1.html')
+```
+````
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_rennes_1.html')
+```
+````
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_bordeaux_1.html')
+```
+````
+
+````{=html}
+```{r, echo=FALSE, results='asis'}
+xfun::file_string('./data/cartomicro_bars_nice_1.html')
+```
+````
+
+
