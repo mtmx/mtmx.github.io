@@ -1,0 +1,37 @@
+---
+title: "Graphiques linéaires géospatiaux"
+author: "Mathieu"
+date: "2015-12-30"
+aliases: 
+  - ../../blog/carto_lignes/
+showonlyimage: false
+draft: false
+image: img/img_joydiv.png
+weight: 0
+type: "post"
+description: "Unknown cartographic pleasures"
+categories: ["population", "altitude"]
+---
+
+Autant que l’album en lui-même, pierre angulaire de la cold wave, la couverture de Unknown Pleasures est restée dans les mémoires : un [article](https://web.archive.org/web/20170711165641/http://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-8217-s-unknown-pleasures-album-cover-video/) de début 2015 revenait sur la genèse du visuel utilisé sur la pochette de Joy Division. Issue d’une revue d’astronomie, l’image représente les ondes du premier pulsar découvert dans les années 1970.
+
+![](img/pochette_up.jpg){fig-alt="cover" fig-align="left" width="200"}
+
+Le cartographe anglais James Cheshire a édité une [carte](https://web.archive.org/web/20170711165641/http://spatial.ly/2014/08/population-lines/) de la population mondiale en s’inspirant de ce mode de réprésentation et Ryan Brideau a eu la bonne idée de rechercher et de [publier](https://web.archive.org/web/20170711165641/http://www.whackdata.com/page2/) le processus permettant de jouer avec ces lignes.
+
+*Depuis, Timothée Giraud a proposé une [librairie](https://github.com/riatelab/linemap) parfaite pour réaliser ce genre de cartes facilement* 
+
+Voilà le résultat pour la population de France métropolitaine : chaque ligne approxime la population située sur la latitude correspondante :
+
+![](img/joydiv_pop_fr.png){fig-alt="pop" fig-align="left" width="1000"}
+
+Sans aucune délimitation des coutours administratifs, on reconnait immédiatement les pôles denses (oui, les villes) et les territoires structurés autour d’eux.
+Cette visualisation à mi chemin entre le diagramme en ligne et la carte, entre l’isoplèthe et la 3D, n’est peut-être pas la meilleure pour rendre compte précisément des masses de population, mais elle est assez inhabituelle pour nous faire porter un regard neuf sur ces données mille fois vues et revues.
+
+Et pour l’altitude, le résultat est également troublant : on y voit de façon très claire les barrières naturelles des Alpes et des Pyrénées, mais aussi le couloir Rhodanien ou les massifs de moindre envergure (le Perche, les monts d’Arrée…).
+
+![](img/joydiv_alti_fr.png){fig-alt="alti" fig-align="left" width="1000"}
+
+En bonus, une animation créée à partir de la localisation des populations aux recensements successifs de 1968, 1975, 1982, 1990, 1999, 2007 et 2012 : la population des villes françaises s’est largement accrue mais ce n’est pas avec cette visualisation qu’on pourra en faire une analyse détaillée. Par contre, avec un peu d’imagination, on y voit battre le pouls du pays.
+
+![](img/joydiv_pop_anim_fr.gif){fig-alt="anim" fig-align="left" width="1000"}
