@@ -11,6 +11,7 @@ website:
   twitter-card:
     creator: "@matamix"
     card-style: summary_large_image
+    image: images/img_campagne_rond.png
   navbar:
     logo: images/img_campagne_rond.png
     href: https://mtmx.github.io/

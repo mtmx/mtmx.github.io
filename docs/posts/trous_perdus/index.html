@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.179">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mathieu">
+<meta name="dcterms.date" content="2016-08-25">
+<meta name="description" content="Localisation des zones inhabitées">
+
+<title>mtmx - Trous perdus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/img_campagne_rond.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #e8eeed;
+    }
+    </style>
+
+
+<meta property="og:title" content="mtmx - Trous perdus">
+<meta property="og:description" content="Localisation des zones inhabitées">
+<meta property="og:image" content="https://mtmx.github.io/posts/trous_perdus/img/v3_73.png">
+<meta property="og:site-name" content="mtmx">
+<meta property="og:image:height" content="944">
+<meta property="og:image:width" content="1447">
+<meta name="twitter:title" content="mtmx - Trous perdus">
+<meta name="twitter:description" content="Localisation des zones inhabitées">
+<meta name="twitter:image" content="https://mtmx.github.io/images/img_campagne_rond.png">
+<meta name="twitter:creator" content="@matamix">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="200">
+<meta name="twitter:image-width" content="200">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/img_campagne_rond.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">mtmx</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Des posts</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bots.html">Des bots</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Et sinon</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matamix"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Trous perdus</h1>
+                  <div>
+        <div class="description">
+          Localisation des zones inhabitées
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">population</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Mathieu </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 25, 2016</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sommaire</h2>
+   
+  <ul>
+  <li><a href="#les-plus-beaux-spécimens" id="toc-les-plus-beaux-spécimens" class="nav-link active" data-scroll-target="#les-plus-beaux-spécimens">Les plus beaux spécimens</a></li>
+  <li><a href="#un-peu-de-méthodo" id="toc-un-peu-de-méthodo" class="nav-link" data-scroll-target="#un-peu-de-méthodo">Un peu de méthodo</a></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>En déambulant dans les campagnes de France on peut vite se retrouver dans un trou perdu isolé de tout. Mais au juste, où sont ces trous perdus ? Autrement dit : où sont les points les plus éloignés de tout lieu habité ? On s’était déjà servi des données carroyées de l’Insee pour visualiser la france du vide : grâce à elles on connait la population dans chaque carreau de 200 mètres de côté sur tout le territoire de France métropolitaine. On peut les réutiliser pour identifier les plus grands cercles ne comprenant aucun lieu habité, et ici on ne conserve que le plus grand cercle inhabité pour chacun des 96 départements (pour la méthodo, un petit schéma explicatif en fin de post, le tout réalisé comme d’habitude avec R).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/palm_1.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<section id="les-plus-beaux-spécimens" class="level3">
+<h3 class="anchored" data-anchor-id="les-plus-beaux-spécimens">Les plus beaux spécimens</h3>
+<p>C’est donc la Savoie (département 73) qui remporte la palme du plus gros trou perdu : situé au beau milieu du parc de la Vanoise entre deux glaciers, la croix rouge se trouve à 9,5 kilomètres à vol d’oiseau d’un lieu habité (les carreaux habités sont coloriés en noir). Une petite carte en haut à gauche permet de localiser le cercle au sein du département.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_73.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p>On retrouve ensuite très logiquement des lieux situés en zone de montagne comme le Monte Cinto en Haute-Corse, les environs d’Ax-les-Thermes en Ariège, le massif de Néouvielle dans les Hautes-Pyrénées ou encore le sud du parc des Ecrins dans les Hautes-Alpes. Des endroits parfaits pour être bien peinard.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_2B.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_09.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_65.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_05.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p>Des cas particuliers apparaissent rapidement : dans de nombreux départements les plus grands cercles inhabités sont en fait des camps militaires pas si paisibles que ça, et surtout inaccessibles aux civils (Canjuers dans le Var, Suippes dans la Marne, St Cyr Coëtquidan pour le Morbihan, Souge en Gironde, etc…)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_83.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_51.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p>On trouve aussi des zones difficilement accessibles pour d’autres raisons : ce sont des marais ou des espaces en eaux comme la Camargue ou le lac de Grand-Lieu près de Nantes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_13.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_44.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p>Dans un grand nombre de cas, on retrouve plutôt des zones de forêt comme dans le Jura (forêt de Chaux) ou en Ille et Vilaine (Brocéliande).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_39.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_73.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p>Un cas un peu particulier : dans la Meuse, six villages ont été détruits durant la bataille de Verdun en 1916 et n’ont jamais été reconstruits. La zone regroupant ces communes dites « mortes pour la France » constitue le plus grand cercle inhabité du département ; le camp de Suippes (cf.&nbsp;plus haut) dans la Marne a été implanté sur le territoire de communes également détruites durant la Première Guerre mondiale.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_55.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p>Enfin voici les trois départements ayant les plus petits cercles inhabités avec évidemment Paris avec le bois de Vincennes et les Hauts de Seine avec le port de Gennevilliers ; beaucoup plus surprenant, le Gers dispose d’un trou perdu de seulement 1 343 mètres de rayon puisque on trouve dans ce département de très nombreux hameaux peu éloignés les uns des autres maillant finement le territoire.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/v3_lasts.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+</section>
+<section id="un-peu-de-méthodo" class="level3">
+<h3 class="anchored" data-anchor-id="un-peu-de-méthodo">Un peu de méthodo</h3>
+<p>Le package R <a href="https://github.com/mtmx/nemo">nemo</a> permet de réaliser ce genre de calculs.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/explic.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+<p><em>Source : données carroyées disponibles sur le site de l’Insee. Sont localisées uniquement les 62 millions de personnes composant les ménages fiscaux (personnes inscrites sur les déclarations de revenus qui le composent) au lieu de la résidence principale, les contribuables vivant en collectivité et les sans-abri en sont notamment exclus.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="mtmx/blog_comm" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
