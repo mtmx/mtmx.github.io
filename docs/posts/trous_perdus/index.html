@@ -78,11 +78,11 @@ ul.task-list li input[type="checkbox"] {
 <meta property="og:image:width" content="1447">
 <meta name="twitter:title" content="mtmx - Trous perdus">
 <meta name="twitter:description" content="Localisation des zones inhabitées">
-<meta name="twitter:image" content="https://mtmx.github.io/images/img_campagne_rond.png">
+<meta name="twitter:image" content="https://mtmx.github.io/images/img_mosaique.png">
 <meta name="twitter:creator" content="@matamix">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image-height" content="200">
-<meta name="twitter:image-width" content="200">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="638">
+<meta name="twitter:image-width" content="1279">
 </head>
 
 <body class="floating nav-fixed">
@@ -378,7 +378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.mtmx\.github\.io\/**/);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/\.mtmx\.github\.io\/**/);
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }

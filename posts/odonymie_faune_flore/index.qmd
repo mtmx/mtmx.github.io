@@ -1,0 +1,414 @@
+---
+title: "Odonymie sur la faune et la flore"
+author: "Mathieu"
+showonlyimage: false
+draft: false
+date: "2022-09-21"
+image: img/img_odo_florefaune.png
+weight: 0
+type: "post"
+description: "Les animaux et les plantes dans nos rues"
+categories: ["odonymie", "rues"]
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(data.table)
+library(sf)
+library(hrbrthemes)
+library(ggthemes)
+library(ggiraph)
+library(ggimage)
+library(COGugaison)
+library(ggrepel)
+library(RColorBrewer)
+library(knitr)
+
+# sorties
+
+COMM_nbvoies_ANIM_1 <- fread( file = "./data/COMM_nbvoies_ANIM_1.csv", verbose = F)
+COMM_nbvoies_FA_1 <- fread( file = "./data/COMM_nbvoies_FA_1.csv", verbose = F)
+
+COMM_nbvoies_ANIM_1.tr <- COMM_nbvoies_ANIM_1 %>% gather(nom_voie, nb, - CODE_DEPCOM) %>% mutate( nb =as.numeric(nb))
+COMM_nbvoies_FA_1.tr <- COMM_nbvoies_FA_1 %>% gather(nom_voie, nb, - CODE_DEPCOM) %>% mutate( nb =as.numeric(nb))
+
+# carto
+dep <- st_read( "./data/dep.shp")
+# centroides
+dep.ctr <- dep %>% st_centroid(of_largest_polygon = FALSE) %>%
+  mutate(x_ctr = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+         y_ctr = map_dbl(geometry, ~st_centroid(.x)[[2]])) 
+
+
+# fonction pour gérer accents
+conv_accents <- function(x) {
+  x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+  
+  x <- gsub(pattern = "è", replacement = "&Egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&Eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&Ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&Euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&Icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&Iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&Ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&Uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&Ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&Agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&Acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&Ccedil;", x = x)
+  x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+  
+  return(x)
+}
+
+```
+
+
+On s’était intéressé aux noms de voies dans une série d’articles, un premier sur les [personnalités les plus fréquemment affichées](https://www.slate.fr/story/115683/noms-rues-les-plus-courants) , un deuxième sur les [femmes](https://www.slate.fr/story/116419/noms-rues-femmes-etrangers) et un troisième sur les [particularités géographiques](https://www.slate.fr/story/116421/rues-departements-heros-regionaux). Continuons l’exploration des odonymes, toujours grâce au fichier [fantoir](https://www.data.gouv.fr/fr/datasets/fichier-fantoir-des-voies-et-lieux-dits/) de la DGFiP, mais cette fois en détaillant ceux faisant référence à la faune et à la flore.
+
+
+### Les noms de rues relatifs à la faune
+
+
+Les oiseaux sont les animaux les plus plébiscités sur nos panneaux de rues, particulièrement dans les lotissements construits depuis les années 1970/80. Les mésanges arrivent devant les alouettes et les hirondelles.
+Les écureuils, chevreuils et castors sont les seuls mammifères à se faire une place dans le haut du classement :
+
+```{r carte_ANIM_dep_graphique,echo=F, message=F, warning=F ,fig.height=6,fig.width=9, include=TRUE}
+
+TOT_nbvoies_ANIM_1.tr <-
+  COMM_nbvoies_ANIM_1.tr %>%
+  group_by(nom_voie) %>%
+  summarise(nb = sum(nb)) %>%
+  filter(!nom_voie %in% 'nb_voies') %>%
+  mutate(nom_voie = str_replace_all(nom_voie,"nb_voies_","")) %>%
+  mutate(type_ANIM =  case_when(nom_voie %in% c('CASTORS','CHEVREUILS','ECUREUILS') ~ "Mammifères" ,
+                                nom_voie %in% c('CIGALES','GRILLONS','PAPILLONS') ~ "Insectes",
+                                TRUE ~ "Oiseaux"))
+
+
+
+ggplot() +
+  geom_label_repel(data = TOT_nbvoies_ANIM_1.tr %>% filter(nb > 100), 
+                   aes(y= nb, x = 1, 
+                       label = nom_voie, size =  nb, fill = type_ANIM), 
+                   angle = 0, label.size =  0,
+                   color = "white",
+                   family = "Avenir Heavy",
+                    force  = 0.9,
+                    max.overlaps = Inf,
+                    direction  = "both",
+                   fontface = "bold", 
+                   segment.color = NA, 
+                  label.padding = unit(0.1, "lines")) +
+  scale_y_continuous(name = "",limits = c(100,2110), breaks = c(100,150,250,500,1000,2000)) +
+  scale_x_continuous(name ="",limits = c(0.9,1.2)) +
+  scale_fill_manual( name = "Type d'animaux : ", values = c("#335667", "#B3D2EE","#489be7")) +
+  scale_size_continuous(range = c(1.7,5), guide = FALSE) +
+  theme_ipsum() +
+  labs(    title = "Odonymes les plus courants dans la catégorie 'Faune' ",
+           subtitle = "toute France",
+           caption = "Source : Fantoir, DGFiP.") +
+ theme(legend.position=c(0.9,0.7),
+        text = element_text(family="Avenir Heavy"), 
+        plot.title = element_text(family="Avenir Heavy"),
+       plot.subtitle = element_text(family="Avenir Heavy"),
+        plot.caption = element_text(family="Avenir Heavy"), 
+       panel.grid.major.y = element_line(linetype="dashed"),
+        axis.text.x = element_blank(), 
+       axis.text.y = element_text(size = 7), axis.line.x = element_blank(),axis.ticks.x=element_blank(),
+        panel.grid.minor= element_blank(),panel.grid.major.x= element_blank())
+
+          
+```
+
+
+Si les rues des cigales sont les plus fréquentes sur le pourtour méditerranéen, les mésanges restent les plus communes sur une grande partie du territoire. En Haute-Normanie on fait simple et direct avec des « rues des oiseaux » partout.
+
+
+```{r carte_ANIM_dep_max,echo=F, message=F, warning=F ,fig.height=13,fig.width=14, include=TRUE}
+
+
+DEP_nbvoies_ANIM_1.max <- COMM_nbvoies_ANIM_1.tr %>%
+  mutate(CODGEO =  case_when(substr(CODE_DEPCOM,1,2) %in% '75'~ "75056",
+                             substr(CODE_DEPCOM,1,3) %in% '132'~ "13055",
+                             substr(CODE_DEPCOM,1,4) %in% '6938'~ "69123", TRUE ~ as.character(CODE_DEPCOM)) ) %>%
+  left_join(table_supracom_2016 %>% dplyr::select(CODGEO, DEP), by = "CODGEO")  %>%
+  ungroup() %>%
+  group_by(DEP, nom_voie) %>%
+  summarise(nb = sum(nb)) %>%
+  filter(!nom_voie %in% 'nb_voies') %>%
+  top_n(n=1) %>%
+  distinct(DEP, nb, .keep_all = TRUE) %>%
+  mutate(nom_voie = str_replace_all(nom_voie,"nb_voies_",""))
+
+
+
+ggplot() +
+  # contours departements
+  geom_sf(data = dep %>%
+            filter(!DEP %in% c("75","92","93","94")) %>%
+            left_join(DEP_nbvoies_ANIM_1.max , by = c("DEP") ),
+          # aes(fill = nom_voie),
+          fill = "grey90",
+          color = "white",
+          size = 0.75) +
+    geom_label_repel(data = dep.ctr %>%
+                    filter(!DEP %in% c("75","92","93","94")) %>%
+                left_join(DEP_nbvoies_ANIM_1.max , by = c("DEP") ),
+                   aes(x = x_ctr, y = y_ctr,
+                       label = nom_voie,
+                       fill = nom_voie), 
+                   angle = 0, label.size =  0,
+                  size = 4,
+                   color = "black",
+                   family = "Avenir Heavy",
+                    force             = 1,
+                    max.overlaps = Inf,
+                    # direction         = "both",
+                   fontface = "bold", 
+                   segment.color = NA, 
+                  label.padding = unit(0.1, "lines")) +
+
+  scale_fill_brewer(palette = "Set3",direction = -1, name = "" ,guide=FALSE) +
+    # scale_fill_manual(guide=FALSE, name = "",
+    #                   values =  colorRampPalette(brewer.pal(8, "Blues"))(DEP_nbvoies_ANIM_1.max %>% ungroup() %>% distinct(nom_voie) %>% nrow())) +
+      # scale_color_manual(guide=FALSE, name = "",
+      #                 values =  rev(colorRampPalette(brewer.pal(8, "Blues"))(DEP_nbvoies_ANIM_1.max %>% ungroup() %>% distinct(nom_voie) %>% nrow()))) +
+  scale_x_continuous(name = "") +
+  scale_y_continuous(name = "") +
+  coord_sf(crs = 2154, datum = NA) +
+  theme_ipsum() +
+  theme(axis.text = element_blank(),
+        legend.box = "vertical",
+        legend.position = "right",
+        panel.grid = element_line(size = 0),
+        panel.background = element_rect(fill = NA, colour = NA),
+        plot.background = element_rect(fill = NA, colour = NA),
+        text = element_text(family="Avenir Heavy"), 
+        plot.title = element_text(family="Avenir Heavy"), 
+        plot.subtitle = element_text(family="Avenir Heavy"), 
+        plot.caption = element_text(family="Avenir Heavy")) +
+  labs(
+    title = "Odonyme majoritaire dans la catégorie 'Faune' ",
+    subtitle = "Par département",
+    caption = "Source : Fantoir, DGFiP"
+  ) 
+          
+```
+
+
+<br>
+
+### Cartes minimales : la faune dans nos rues
+
+
+
+Poursuivons avec quelques cartes minimales réalisées avec une méthode d’interpolation basique IDW pour relever les spécificités locales.
+Sur la côte Atlantique les oiseaux marins sont rois : albatros, sternes et cormorans en bretagne,  courlis et aigrettes plus au Sud, mais surtout mouettes et goélands partout.
+
+
+![](img/odo_ff_aigrettes_cormorans.png){fig-align="center" width="1000"}
+![](img/odo_ff_courlis_sternes.png){fig-align="center" width="1000"}
+
+
+Les grands classiques des passereaux sont là , surtout dans les grand Ouest et la région Parisienne où on n’a pas hésité à leur faire de la place dans nos rues et allées.
+
+![](img/odo_ff_fauvettes_pinsons.png){fig-align="center" width="1000"}
+
+
+Dans le Sud-Ouest, les grives, palombes et tourterelles tirent leur épingle du jeu. 
+
+![](img/odo_ff_grives_tourterelles.png){fig-align="center" width="1000"}
+
+Les merles, les perdrix et bien évidemment les cigognes sont emblématiques en Alsace :
+
+![](img/odo_ff_merles_rossignol.png){fig-align="center" width="1000"}
+
+
+Au-delà des oiseaux, les écureuils attirent la sympathie dans tout le pays et les chevreuils préférentiellement en Gascogne ; les grillons mais surtout les cigales font carton plein dans le Midi.
+
+![](img/odo_ff_chevreuils_grillons.png){fig-align="center" width="1000"}
+
+
+
+### Les noms de rues relatifs à la flore
+
+
+
+Encore plus que les oiseaux, les plantes sont largement utilisées dans les odonymes de nos communes. Les vignes arrivent en tête pour faire honneur au pays du vin mais même les arbres fruitiers font recette. 
+
+```{r carte_FA_dep_graphique,echo=F, message=F, warning=F ,fig.height=8,fig.width=10, include=TRUE}
+
+TOT_nbvoies_FA_1.tr <-
+  COMM_nbvoies_FA_1.tr %>%
+  group_by(nom_voie) %>%
+  summarise(nb = sum(nb)) %>%
+  filter(!nom_voie %in% 'nb_voies') %>%
+  mutate(nom_voie = str_replace_all(nom_voie,"nb_voies_","")) 
+
+
+ggplot() +
+  geom_label_repel(data = TOT_nbvoies_FA_1.tr %>% filter(nb > 100), 
+                   aes(y= nb, x = 1, label = nom_voie, size =  nb, fill = nb), 
+                   angle = 0, label.size =  0, color = "white",
+                   family = "Avenir Heavy",
+                    force = 5,
+                   # force_pull = 2,
+                    max.overlaps = Inf,
+                    direction         = "both",
+                   fontface = "bold", 
+                   segment.color = NA, 
+                  label.padding = unit(0.05, "lines"), 
+                  box.padding = unit(0.05, "lines"), 
+                  point.padding = unit(0.05, "lines")) +
+  scale_y_continuous(name = "",limits = c(100,4600), breaks = c(150,250,500,1000,2000,4000)) +
+  scale_x_continuous(name ="",limits = c(0.5,1.5)) +
+  # scale_fill_distiller(palette = "BuGn", direction = 1) +
+  scale_fill_gradient(low = "#66c2a4", high ="#00441b" , name="", guide = F) +
+  scale_size_continuous(range = c(1.8,6), guide = F) +
+  theme_ipsum() +
+  labs(title="Odonymes les plus courants dans la catégorie 'Flore' ",
+       subtitle="Toute France",
+       caption="source : Fantoir, DGFiP") +
+  theme(legend.position=c(0.9,0.7),
+        text = element_text(family="Avenir Heavy"), 
+        plot.title = element_text(family="Avenir Heavy"), 
+        plot.subtitle = element_text(family="Avenir Heavy"),
+        panel.grid.major.y = element_line(linetype="dashed"),
+        plot.caption = element_text(family="Avenir Heavy"), 
+        axis.text.y = element_text(size = 7),
+        axis.text.x = element_blank(), axis.line.x = element_blank(),axis.ticks.x=element_blank(),
+        panel.grid.minor= element_blank(),panel.grid.major.x= element_blank())
+
+
+          
+```
+
+
+
+Les genêts s’imposent en Bretagne quand les pommiers surclassent la concurrence en Normandie, les oliviers sur la côte Sud et souvent les vignes partout ailleurs, même dans des zones par réputées actuellement pour les vignobles.
+
+
+```{r carte_FA_dep_max,echo=F, message=F, warning=F ,fig.height=13,fig.width=14, include=TRUE}
+library(RColorBrewer)
+
+DEP_nbvoies_FA_1.max <- COMM_nbvoies_FA_1.tr %>%
+  mutate(CODGEO =  case_when(substr(CODE_DEPCOM,1,2) %in% '75'~ "75056",
+                             substr(CODE_DEPCOM,1,3) %in% '132'~ "13055",
+                             substr(CODE_DEPCOM,1,4) %in% '6938'~ "69123", TRUE ~ as.character(CODE_DEPCOM)) ) %>%
+  left_join(table_supracom_2016 %>% dplyr::select(CODGEO, DEP), by = "CODGEO")  %>%
+  ungroup() %>%
+  group_by(DEP, nom_voie) %>%
+  summarise(nb = sum(nb)) %>%
+  filter(!nom_voie %in% 'nb_voies') %>%
+  top_n(n=1) %>%
+  distinct(DEP, nb, .keep_all = TRUE) %>%
+  mutate(nom_voie = str_replace_all(nom_voie,"nb_voies_",""))
+
+
+ggplot() +
+  # contours departements
+  geom_sf(data = dep %>%
+            filter(!DEP %in% c("75","92","93","94")) %>%
+            left_join(DEP_nbvoies_FA_1.max , by = c("DEP") ),
+          # aes(fill = nom_voie),
+          fill = "grey90",
+          color = "white",
+          size = 0.75) +
+      geom_label_repel(data = dep.ctr %>%
+                    filter(!DEP %in% c("75","92","93","94")) %>%
+                left_join(DEP_nbvoies_FA_1.max , by = c("DEP") ),
+                   aes(x = x_ctr, y = y_ctr,
+                       label = nom_voie,
+                       fill = nom_voie), 
+                   angle = 0, label.size =  0,
+                   color = "black",
+                    size = 4,
+                   family = "Avenir Heavy",
+                    force             = 1,
+                    max.overlaps = Inf,
+                    # direction         = "both",
+                   fontface = "bold", 
+                   segment.color = NA, 
+                  label.padding = unit(0.1, "lines")) +
+  # scale_fill_manual(guide=FALSE, name = "",values =  colorRampPalette(brewer.pal(8, "Greens"))(DEP_nbvoies_FA_1.max %>% ungroup() %>% distinct(nom_voie) %>% nrow())) +
+    # scale_fill_brewer(palette = "Set3",direction = -1, name = "" ,guide=FALSE) +
+scale_fill_manual(values = c("#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5", "#ffed6f", "#fdbf6f", "#b2df8a", "#ffff99", "#a6cee3", "#8dd3c7"), name = "", guide = F) +
+      # scale_fill_manual(guide=FALSE, name = "",
+      #                 values =  c(colorRampPalette(brewer.pal(9, "Greens"))(DEP_nbvoies_ANIM_1.max %>% ungroup() %>% distinct(nom_voie) %>% nrow()),"#67a9cf", "#02818a", "#016c59")) +
+      # scale_color_manual(guide=FALSE, name = "",
+      #                 values =  rev(c("#016c59", "#02818a","#67a9cf", colorRampPalette(brewer.pal(9, "Greens"))(DEP_nbvoies_ANIM_1.max %>% ungroup() %>% distinct(nom_voie) %>% nrow() )))) +
+  scale_x_continuous(name = "") +
+  scale_y_continuous(name = "") +
+  coord_sf(crs = 2154, datum = NA) +
+  theme_ipsum() +
+  theme(axis.text = element_blank(),
+        legend.box = "vertical",
+        legend.position = "right",
+        panel.grid = element_line(size = 0),
+        panel.background = element_rect(fill = NA, colour = NA),
+        plot.background = element_rect(fill = NA, colour = NA),
+        text = element_text(family="Avenir Heavy"), 
+        plot.title = element_text(family="Avenir Heavy"), 
+        plot.subtitle = element_text(family="Avenir Heavy"), 
+        plot.caption = element_text(family="Avenir Heavy")) +
+  labs(
+    title = "Odonyme majoritaire dans la catégorie 'Flore' ",
+    subtitle = "Par département",
+    caption = "Source : Fantoir, DGFiP"
+  ) 
+
+
+          
+```
+
+
+### Cartes minimales : la flore dans nos rues
+
+
+
+Les bretons semblent très portés sur les espèces sauvages et rustiques (ajoncs, bruyères, genêts…) mais aussi sur les camélias et hortensias qui fleurissent dans leurs jardins. Vendéens, Ligériens et Franciliens font preuve d’une créativité débordantes avec leurs « rues des plantes ».
+
+
+![](img/odo_ff_ajoncs_chataigniers.png){fig-align="center" width="1000"}
+![](img/odo_ff_genets_plantes.png){fig-align="center" width="1000"}
+
+
+Les tilleuls, chênes, charmes et ormes sont bien présents sur une bonne moitié Nord du pays, les rosiers, les ormeaux et le verger plutôt implantés dans le Nord-Ouest, quand les fougères et misomas descendent le long de la côte Altantique.
+
+![](img/odo_ff_pommiers_eglantiers.png){fig-align="center" width="1000"}
+![](img/odo_ff_rosiers_verger.png){fig-align="center" width="1000"}
+![](img/odo_ff_fougeres_ormeaux.png){fig-align="center" width="1000"}
+![](img/odo_ff_acacias_charmes.png){fig-align="center" width="1000"}
+![](img/odo_ff_chenes_chaume.png){fig-align="center" width="1000"}
+
+
+Tulipes, roses et muguet fleurissent en Alsace ; la rue du marronier est une spécialité de Saintonge et les cyclamens en Haute-Savoie.
+
+![](img/odo_ff_tulipes_roses.png){fig-align="center" width="1000"}
+![](img/odo_ff_fleurs_maronnier.png){fig-align="center" width="1000"}
+![](img/odo_ff_sapins_vignes.png){fig-align="center" width="1000"}
+
+
+Enfin les spécifités végétales et arboricoles du Sud remontent plus au moins profondément dans le sillon du Rhône, voire sur le littoral Atlantique.
+
+![](img/odo_ff_amandiers_cypres.png){fig-align="center" width="1000"}
+![](img/odo_ff_chenes_geraniums.png){fig-align="center" width="1000"}
+![](img/odo_ff_jasmins_muriers.png){fig-align="center" width="1000"}
+![](img/odo_ff_oliviers_lauriers.png){fig-align="center" width="1000"}
+![](img/odo_ff_pins_tamaris.png){fig-align="center" width="1000"}
+
+Si des botanistes/ornithologues passent dans le coin et veulent bien nous éclairer de leurs lumières, qu'ils se sentent libres de laisser un commentaire ci-dessous.

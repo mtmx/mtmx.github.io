@@ -10,8 +10,8 @@ website:
   favicon: images/img_campagne_rond.png
   twitter-card:
     creator: "@matamix"
-    card-style: summary_large_image
-    image: images/img_campagne_rond.png
+    card-style: summary
+    image: images/img_mosaique.png
   navbar:
     logo: images/img_campagne_rond.png
     href: https://mtmx.github.io/
@@ -39,7 +39,7 @@ format:
     css: styles.css
     link-external-icon: false
     link-external-newwindow: true
-    link-external-filter: '^(?:http:|https:)\/\/www\.mtmx\.github\.io\/**'
+    link-external-filter: '^(?:http:|https:)\/\/\.mtmx\.github\.io\/**'
 
 language: 
   title-block-author-single: "Auteur"
