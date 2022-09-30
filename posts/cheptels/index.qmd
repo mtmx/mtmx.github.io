@@ -161,10 +161,10 @@ Si on peut trouver des bovins et des équidés (certes en moins grand nombre et 
 
 A part quelques vaches et quelques brebis dans les Bouches-du-Rhône, le littoral méditerranéen reste désespérement inhospitalier pour nos amies les bêtes.
 
-La frontière entre la campagne et la ville pourrait se formaliser avec un simple indicateur : on y trouve plus de vaches que d'habitants. Reprenant l'idée de cette excellente [carte](http://ssz.fr/vaches/), voici donc une carte où est représentée le type d'animaux le plus présent. Si le cochon est champion en Bretagne, les brebis sont reines dans les Pyrénées et le sud du massif central. Les vaches sont les plus nombreuses en Normandie et en Bourgogne. En plus du cheptel le plus nombreux est indiqué quel type de cheptel est supérieur en nombre aux humains (un indice en cas de rébellion animale). Il est également possible de zoomer sur votre région grâce à la fonction loupe (deuxième icone) en haut à droite de la carte.
+La frontière entre la campagne et la ville pourrait se formaliser avec un simple indicateur : on y trouve plus de vaches que d'habitants. Reprenant l'idée de cette excellente [carte](http://ssz.fr/vaches/), voici donc une carte où est représentée le type d'animaux le plus présent. Si le cochon est champion en Bretagne, les brebis sont reines dans les Pyrénées et le sud du massif central. Les vaches sont les plus nombreuses en Normandie et en Bourgogne.
 
 
-```{r cheptels_image_interactif,eval=F,echo=F, message=F, warning=F, fig.width=10,fig.height=10}
+```{r cheptels_image_interactif,eval=T,echo=F, message=F, warning=F, fig.width=10,fig.height=10}
 
 
 # fonction pour gérer accents
@@ -206,11 +206,11 @@ my_gg <-
   ggplot() +
   geom_sf(data = DEP.s, color = "grey65", fill = NA ,size = 0.2) +
 
-  geom_image(data = grd_data_ctr_img ,aes(x= lon, y = lat,image=img), size=.014) +
-  geom_point_interactive(data = grd_data_ctr_img,
-                         aes(x= lon, y = lat,
-                             tooltip = tip,
-                             data_id = id),shape = 15,colour = "white", alpha =0.1, size =5) + 
+  geom_image(data = grd_data_ctr_img ,aes(x= lon, y = lat,image=img), size=.016) +
+  # geom_point_interactive(data = grd_data_ctr_img,
+  #                        aes(x= lon, y = lat,
+  #                            tooltip = tip,
+  #                            data_id = id),shape = 15,colour = "white", alpha =0.1, size =5) + 
     coord_sf( datum = NA) +
   thm +
   labs(
@@ -219,19 +219,19 @@ my_gg <-
     caption = "Source : Ministère de l'agriculture / Recensement agricole 2010"
   )
 
-
-girafe(
-  ggobj = my_gg, #width_svg = 6, height_svg = 6,
-  options = list(
-    # opts_sizing(rescale = FALSE),
-    opts_zoom(max = 3),
-    opts_tooltip(
-      offx = -40, offy = -30,
-      css = tooltip_css
-    ),
-    opts_hover(css = "fill:orange;r:6px;")
-  )
-)
+my_gg
+# girafe(
+#   ggobj = my_gg, #width_svg = 6, height_svg = 6,
+#   options = list(
+#     # opts_sizing(rescale = FALSE),
+#     opts_zoom(max = 3),
+#     opts_tooltip(
+#       offx = -40, offy = -30,
+#       css = tooltip_css
+#     ),
+#     opts_hover(css = "fill:orange;r:6px;")
+#   )
+# )
 
 
 ```
