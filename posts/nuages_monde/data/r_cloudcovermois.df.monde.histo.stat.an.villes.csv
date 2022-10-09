@@ -1,0 +1,1256 @@
+id,id_c,x,y,pct_cloud,date_MM,NAME_FR,ADM0_A3,POP_MAX,RANK_MAX,continent,admin,region_un,region_wb,subregion,name_fr
+613213,1,32.5,0.5,0.738647064476302,AN,Bombo,UGA,75000,8,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+606725,2,30.25,0.75,0.734963511991682,AN,Fort Portal,UGA,42670,7,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+565067,3,15.75,40.75,0.511225101171118,AN,Potenza,ITA,69060,8,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+562186,4,14.75,41.5,0.547667944408728,AN,Campobasso,ITA,50762,8,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+540573,5,7.25,45.75,0.632813721895218,AN,Aoste,ITA,34062,7,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+577401,6,20,60,0.643460079237367,AN,Mariehamn,ALD,10682,6,Europe,Aland,Europe,Europe & Central Asia,Northern Europe,≈land
+621270,7,35.25,32,0.277819323621578,AN,Ramallah,PSX,24599,7,Asia,Palestine,Asia,Middle East & North Africa,Western Asia,Palestine
+555699,8,12.5,42,0.434129838408394,AN,Cit√© du Vatican,VAT,832,2,Europe,Vatican,Europe,Europe & Central Asia,Southern Europe,Vatican
+520388,9,0.25,46.5,0.625783118786234,AN,Poitiers,FRA,85960,8,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+528316,10,3,45.75,0.634925734477513,AN,Clermont-Ferrand,FRA,233050,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+536974,11,6,47.25,0.612860195903164,AN,Besan√ßon,FRA,128426,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+349797,12,-58.75,-62.25,0.838478963709239,AN,base Artigas,ATA,60,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+613877,13,32.75,-13.75,0.479446824527148,AN,Chipata,ZMB,85963,8,Africa,Zambia,Africa,Sub-Saharan Africa,Eastern Africa,Zambie
+615376,14,33.25,0.5,0.72601781559713,AN,Jinja,UGA,301619,10,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+608897,15,31,3,0.662779324998458,AN,Arua,UGA,250000,10,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+618262,16,34.25,1,0.754390840390415,AN,Mbale,UGA,402368,10,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+619710,17,34.75,2.5,0.537280118488001,AN,Moroto,UGA,371,2,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+611047,18,31.75,-0.25,0.714844683015889,AN,Masaka,UGA,65373,8,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+608162,19,30.75,-0.5,0.718734518370845,AN,Mbarara,UGA,83700,8,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+567706,20,16.75,-20.5,0.31413610895988,AN,Otjiwarongo,NAM,24815,7,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+552104,21,11.25,44.5,0.494305993740757,AN,Bologne,ITA,488172,10,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+545594,22,9,39.25,0.423812237483534,AN,Cagliari,ITA,291511,10,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+567223,23,16.5,39,0.455176101320169,AN,Catanzaro,ITA,95251,8,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+567952,24,16.75,41,0.43111455124436,AN,Bari,ITA,500577,11,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+558584,25,13.5,42.25,0.577795267838872,AN,L'Aquila,ITA,68503,8,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+558589,26,13.5,43.5,0.462719202606064,AN,Anc√¥ne,ITA,100507,9,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+555703,27,12.5,43,0.487629696105917,AN,P√©rouse,ITA,149125,9,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+559319,28,13.75,45.75,0.553948149875258,AN,Trieste,ITA,216035,10,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+551389,29,11,46,0.589890921319073,AN,Trente,ITA,107808,9,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+343615,30,-61,14.5,0.479651834759297,AN,Fort-de-France,FRA,253995,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+914010,31,136.75,35.5,0.597463963383978,AN,Gifu,JPN,412895,10,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+363767,32,-54,5.5,0.68197829152147,AN,Saint-Laurent-du-Maroni,FRA,24287,7,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+518957,33,-0.25,49.25,0.663802357559854,AN,Caen,FRA,190099,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+515344,34,-1.5,47.25,0.623028387626012,AN,Nantes,FRA,438537,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+544884,35,8.75,42,0.438360742406186,AN,Ajaccio,FRA,54364,8,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+530470,36,3.75,43.5,0.458681865623503,AN,Montpellier,FRA,327254,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+534090,37,5,47.25,0.631697517565706,AN,Dijon,FRA,169946,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+525441,38,2,48,0.649010406073296,AN,Orl√©ans,FRA,217301,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+522563,39,1,49.5,0.676056899017457,AN,Rouen,FRA,532559,11,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+531214,40,4,49.25,0.654263879878052,AN,Reims,FRA,196565,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+526170,41,2.25,50,0.672991674054753,AN,Amiens,FRA,143086,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+537701,42,6.25,48.75,0.655579025659597,AN,Nancy,FRA,268976,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+341458,43,-61.75,16,0.490605449247541,AN,Basse-Terre,FRA,307,2,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+576621,44,19.75,45.25,0.555826195374583,AN,Novi Sad,SRB,225457,10,Europe,Republic of Serbia,Europe,Europe & Central Asia,Southern Europe,Serbie
+569409,45,17.25,44.75,0.563572226374438,AN,Banja Luka,BIH,221738,10,Europe,Bosnia and Herzegovina,Europe,Europe & Central Asia,Southern Europe,Bosnie-HerzÈgovine
+285233,46,-81.25,19.25,0.449370016089895,AN,George Town,CYM,4268,4,North America,Cayman Islands,Americas,Latin America & Caribbean,Caribbean,Óles CaÔmans
+314082,47,-71.25,21.5,0.433283148502762,AN,Cockburn Town,TCA,5801,5,North America,Turks and Caicos Islands,Americas,Latin America & Caribbean,Caribbean,Óles Turques-et-CaÔques
+506720,48,-4.5,54.25,0.678144925584396,AN,Douglas,IMN,35854,7,Europe,Isle of Man,Europe,Europe & Central Asia,Northern Europe,Óle de Man
+555707,49,12.5,44,0.485387405380607,AN,Saint-Marin,SMR,29579,7,Europe,San Marino,Europe,Europe & Central Asia,Southern Europe,Saint-Marin
+321254,50,-68.75,12,0.565120416495836,AN,Willemstad,CUW,146813,9,North America,CuraÁao,Americas,Latin America & Caribbean,Caribbean,CuraÁao
+317651,51,-70,12.5,0.543785507593191,AN,Oranjestad,ABW,68775,8,North America,Aruba,Americas,Latin America & Caribbean,Caribbean,Aruba
+547068,52,9.5,47.25,0.646055750210177,AN,Vaduz,LIE,36281,7,Europe,Liechtenstein,Europe,Europe & Central Asia,Western Europe,Liechtenstein
+346912,53,-59.75,-62.5,0.837656260665619,AN,base navale Capit√°n Arturo Prat,ATA,41,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+355557,54,-56.75,-64.25,0.732388880555377,AN,station du Vicecomodoro Marambio,ATA,150,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+992880,55,164.25,-74.5,0.451325223188509,AN,Base antarctique Mario-Zucchelli,ATA,80,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+323099,56,-68,-67.5,0.831332590769638,AN,base antarctique Rothera,ATA,130,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+334646,57,-64,-64.75,0.835773880960364,AN,base antarctique Palmer,ATA,46,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+349076,58,-59,-62.25,0.839239706821514,AN,base Presidente Eduardo Frei Montalva,ATA,150,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+349797,59,-58.75,-62.25,0.838478963709239,AN,base antarctique Carlini,ATA,60,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+349797,60,-58.75,-62.25,0.838478963709239,AN,base antarctique du roi Sejong,ATA,90,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+349076,61,-59,-62.25,0.839239706821514,AN,base antarctique Grande Muraille,ATA,40,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+349076,62,-59,-62.25,0.839239706821514,AN,base Profesor Julio Escudero,ATA,20,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+351961,63,-58,-62,0.850510634481907,AN,√éle de l'√âl√©phant,ATA,6,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+1000077,64,166.75,-77.75,0.686249943619425,AN,base antarctique Scott,ATA,85,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+1000077,65,166.75,-77.75,0.686249943619425,AN,base antarctique McMurdo,ATA,1000,2,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+739108,66,76.25,-69.5,0.601179419988484,AN,base antarctique Zhongshan,ATA,60,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+827034,67,106.75,-78.5,0.758805370466276,AN,base antarctique Vostok,ATA,25,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+258204,68,-90.5,-68.75,0.890378324597171,AN,Peter I Island,ATA,1,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+787427,69,93,-66.5,0.645621394682111,AN,base antarctique Mirny,ATA,169,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+700903,70,63,-67.5,0.608703332416939,AN,base antarctique Mawson,ATA,60,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+744879,71,78.25,-68.75,0.636469010997451,AN,base antarctique Davis,ATA,70,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+877519,72,124.25,-74.75,0.770887614425385,AN,base antarctique Concordia,ATA,30,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+837898,73,110.5,-66.25,0.757842505745816,AN,base antarctique Casey,ATA,200,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+1,74,-180,-90,0.704764807822578,AN,Base antarctique Amundsen-Scott,ATA,200,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+480255,75,-13.5,-73,0.570995686067776,AN,Base antarctique Wasa,ATA,10,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+526403,76,2.5,-72,0.52547548146862,AN,base antarctique Troll,ATA,44,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+486738,77,-11.25,-74.5,0.536582897558357,AN,Svea,ATA,10,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+485309,78,-11.75,-71.25,0.829921384088018,AN,Novolazarevskaya Station,ATA,70,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+496846,79,-7.75,-71,0.590745009369019,AN,base antarctique Neumayer,ATA,40,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+553085,80,11.75,-70.75,0.555970634023349,AN,base antarctique Maitri,ATA,65,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+442751,81,-26.5,-76,0.689298060525096,AN,base antarctique Halley,ATA,70,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+419672,82,-34.5,-77.75,0.65534320891355,AN,base antarctique Belgrano II,ATA,100,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+402354,83,-40.5,-81.25,0.478666197508574,AN,Sobral Base,ATA,40,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+480247,84,-13.5,-75,0.536565384742889,AN,Base antarctique Aboa,ATA,18,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+325981,85,-67,-68,0.800014966703726,AN,base antarctique San Mart√≠n,ATA,20,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+351956,86,-58,-63.25,0.787405080190211,AN,base General Bernardo O'Higgins,ATA,44,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+354839,87,-57,-63.5,0.767808749142921,AN,base antarctique Esperanza,ATA,250,2,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+390179,88,-44.75,-60.75,0.891017806575154,AN,base antarctique Orcadas,ATA,45,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+388016,89,-45.5,-60.75,0.888090488811334,AN,Base antarctique Signy,ATA,8,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+922974,90,140,-66.75,0.578721834290208,AN,base antarctique Dumont-d'Urville,ATA,120,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+633844,91,39.75,-69,0.67222093141666,AN,base antarctique Sh≈çwa,ATA,60,1,Antarctica,Antarctica,Antarctica,Antarctica,Antarctica,Antarctique
+504485,92,-5.25,36.25,0.369647351404031,AN,Gibraltar,GIB,187083,9,Europe,Gibraltar,Europe,Europe & Central Asia,Southern Europe,Gibraltar
+609500,93,31.25,-26.5,0.466364087593375,AN,Lobamba,SWZ,9782,5,Africa,eSwatini,Africa,Sub-Saharan Africa,Southern Africa,Swaziland
+510332,94,-3.25,56,0.729208752287157,AN,√âdimbourg,GBR,504966,11,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+510314,95,-3.25,51.5,0.689099695759289,AN,Cardiff,GBR,861400,11,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+564496,96,15.5,78.25,0.852377697599657,AN,Longyearbyen,SJM,1232,3,,,,,,
+537704,97,6.25,49.5,0.673193448194952,AN,Luxembourg,LUX,107260,9,Europe,Luxembourg,Europe,Europe & Central Asia,Western Europe,Luxembourg
+542012,98,7.75,45,0.516169006174261,AN,Turin,ITA,1652000,12,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+999578,99,166.5,-22.25,0.560575608954285,AN,Noum√©a,NCL,93060,8,Oceania,New Caledonia,Oceania,East Asia & Pacific,Melanesia,Nouvelle-CalÈdonie
+902467,100,132.75,33.75,0.604594499550083,AN,Matsuyama,JPN,533541,11,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+514626,101,-1.75,48,0.648407799953764,AN,Rennes,FRA,209375,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+523981,102,1.5,43.5,0.582544738821911,AN,Toulouse,FRA,847000,11,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+523269,103,1.25,45.75,0.62835705652833,AN,Limoges,FRA,152199,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+528336,104,3,50.75,0.668463339521126,AN,Lille,FRA,1044000,12,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+542026,105,7.75,48.5,0.621770982150779,AN,Strasbourg,FRA,439972,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+640054,106,41.75,41.5,0.662690431105368,AN,Batoumi,GEO,155542,9,Asia,Georgia,Asia,Europe & Central Asia,Western Asia,GÈorgie
+470584,107,-17,32.75,0.562352217508085,AN,Funchal,PRT,204767,10,Europe,Portugal,Europe,Europe & Central Asia,Southern Europe,Portugal
+592357,108,25.25,13.75,0.316974762869491,AN,El Fasher,SDN,252609,10,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+572008,109,18.25,-26.5,0.187207720674589,AN,Keetmanshoop,NAM,18039,6,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+561208,110,14.5,-22.75,0.288128831776593,AN,Swakopmund,NAM,29491,7,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+545615,111,9,44.5,0.536640347969351,AN,G√™nes,ITA,647497,11,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+637897,112,41,43,0.550615145796628,AN,Soukhoumi,GEO,81546,8,Asia,Georgia,Asia,Europe & Central Asia,Western Asia,GÈorgie
+975902,113,158.25,7,0.759187359814391,AN,Palikir,FSM,4645,4,Oceania,Federated States of Micronesia,Oceania,East Asia & Pacific,Micronesia,MicronÈsie
+1014115,114,171.5,7,0.729537105244218,AN,Majuro,MHL,25400,7,Oceania,Marshall Islands,Oceania,East Asia & Pacific,Micronesia,Óles Marshall
+936994,115,144.75,13.5,0.638084246127895,AN,Hag√•t√±a,GUM,122411,9,Oceania,Guam,Oceania,East Asia & Pacific,Micronesia,Guam
+1036404,116,179.25,-8.5,0.669062882887595,AN,Funafuti,TUV,4749,4,Oceania,Tuvalu,Oceania,East Asia & Pacific,Polynesia,Tuvalu
+908130,117,134.75,7.5,0.767202270076131,AN,Melekeok,PLW,7026,5,Oceania,Palau,Oceania,East Asia & Pacific,Micronesia,Palaos
+491466,118,-9.75,26,0.224360501802893,AN,Bir Lehlou,SAH,500,2,Africa,Western Sahara,Africa,Middle East & North Africa,Northern Africa,Sahara occidental
+541286,119,7.5,43.75,0.472458009184762,AN,Monaco,MCO,36371,7,Europe,Monaco,Europe,Europe & Central Asia,Western Europe,Monaco
+1018418,120,173,1.25,0.611274090793097,AN,Tarawa-Sud,KIR,28802,7,Oceania,Kiribati,Oceania,East Asia & Pacific,Micronesia,Kiribati
+644167,121,43.25,-11.75,0.515580676270254,AN,Moroni,COM,128698,9,Africa,Comoros,Africa,Sub-Saharan Africa,Eastern Africa,Comores
+846904,122,113.5,22.25,0.632807306775993,AN,Macao,MAC,568700,11,Asia,Macao S.A.R,Asia,East Asia & Pacific,Eastern Asia,Macao
+523977,123,1.5,42.5,0.605687409526471,AN,Andorre-la-Vieille,AND,53998,8,Europe,Andorra,Europe,Europe & Central Asia,Southern Europe,Andorre
+181468,124,-117.25,34,0.313552980057218,AN,San Bernardino,USA,1745000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+308393,125,-73.25,41.25,0.57233707256841,AN,Bridgeport,USA,1018000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+296144,126,-77.5,43.25,0.6455165487573,AN,Rochester,USA,755000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+513206,127,-2.25,53.5,0.731350069018928,AN,Manchester,GBR,2230000,12,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+733747,128,74.25,32.25,0.327718337391023,AN,Gujranwala,PAK,1513000,12,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+885178,129,126.75,37.5,0.535043031767462,AN,Incheon,KOR,2550000,12,Asia,South Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Sud
+535368,130,5.5,6.25,0.794151372304469,AN,Benin City,NGA,1190000,12,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+859891,131,118,24.5,0.604385037765359,AN,Xiamen,CHN,2519000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+826029,132,106.25,30.75,0.731956721481049,AN,Nanchong,CHN,2174000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+822419,133,105,29.5,0.752699080064441,AN,Neijiang,CHN,1466000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+844063,134,112.5,33,0.579762785385053,AN,Nanyang,CHN,1944000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+867887,135,120.75,40.75,0.407264138317921,AN,Lianshan,CHN,2426000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+870037,136,121.5,37.5,0.517175104017511,AN,Yantai,CHN,2116000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+858491,137,117.5,35,0.536341993476857,AN,Zaozhuang,CHN,2145000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+867128,138,120.5,31.25,0.606351977044886,AN,Suzhou,CHN,1650000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+867128,138,120.5,31.25,0.606351977044886,AN,Suzhou,CHN,1964000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857767,139,117.25,34.25,0.556415566440785,AN,Xuzhou,CHN,2091000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+866408,140,120.25,31.5,0.606913662318028,AN,Wuxi,CHN,1749000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+884482,141,126.5,43.75,0.508614691990343,AN,Jilin,CHN,2396000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+740951,142,76.75,30.75,0.331101742837663,AN,Chandigarh,IND,979000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+735191,143,74.75,32.75,0.35759417958219,AN,Jammu,IND,791000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+738736,144,76,17.75,0.499317176710589,AN,Solapur,IND,1057000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+736581,145,75.25,19.75,0.431261127853456,AN,AurangƒÅbƒÅd,IND,1113000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+732256,146,73.75,20,0.443057038835391,AN,Nasik,IND,1473000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+784193,147,91.75,26.25,0.56381388149704,AN,Dispur,IND,16140,6,Asia,India,Asia,South Asia,Southern Asia,Inde
+737348,148,75.5,31.25,0.332246845228259,AN,Jalandhar,IND,855000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+755350,149,81.75,25.5,0.364819736318719,AN,Prayagraj,IND,1201000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+746711,150,78.75,28.75,0.340197657178523,AN,Moradabad,IND,787000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+743106,151,77.5,28.75,0.317070303915181,AN,Ghaziabad,IND,1341000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+744542,152,78,27.25,0.320870782343925,AN,ƒÄgrƒÅ,IND,1592000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+744545,153,78,28,0.319737008144853,AN,Aligarh,IND,805000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+743828,154,77.75,29,0.324669874206214,AN,Meerut,IND,1398000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+769042,155,86.5,23.75,0.442411776363963,AN,Dhanbad,IND,1246000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+745259,156,78.25,26.25,0.332513643128826,AN,Gw√¢lior,IND,978000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+730823,157,73.25,22.25,0.340358047596193,AN,Vadodara,IND,1756000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+723613,158,70.75,22.25,0.340775872686539,AN,Rajkot,IND,1260000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+356401,159,-56.5,-33.5,0.498096878894351,AN,Durazno,URY,34037,7,South America,Uruguay,Americas,Latin America & Caribbean,South America,Uruguay
+250021,160,-93.5,48.5,0.652549463013808,AN,International Falls,USA,15240,6,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+251449,161,-93,45,0.590550980446014,AN,Saint Paul,USA,734854,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+206750,162,-108.5,45.75,0.512796583162113,AN,Billings,USA,104552,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+198826,163,-111.25,47.5,0.532901598648592,AN,Great Falls,USA,66558,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+190892,164,-114,46.75,0.570630226058491,AN,Missoula,USA,72856,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+227669,165,-101.25,48.25,0.564612945711071,AN,Minot,USA,39439,7,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+240642,166,-96.75,47,0.582013630054214,AN,Fargo,USA,162842,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+72540,167,-155,19.75,0.571509282245781,AN,Hilo,USA,52391,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+164937,168,-123,47,0.676632456029907,AN,Olympia,USA,156984,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+180802,169,-117.5,47.75,0.549479983747006,AN,Spokane,USA,347705,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+165653,170,-122.75,45.75,0.629453551757968,AN,Vancouver,USA,525802,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+197335,171,-111.75,35.25,0.365841786405354,AN,Flagstaff,USA,63993,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+199486,172,-111,32.25,0.294126460441586,AN,Tucson,USA,823000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+174260,173,-119.75,34.5,0.277024247852916,AN,Santa Barbara,USA,181632,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+174269,174,-119.75,36.75,0.308841482136455,AN,Fresno,USA,616353,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+161307,175,-124.25,40.75,0.577472926089258,AN,Eureka,USA,42398,7,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+217537,176,-104.75,38.75,0.408853364318158,AN,Colorado Springs,USA,493654,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+174280,177,-119.75,39.5,0.401447246895369,AN,Reno,USA,328585,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+185821,178,-115.75,40.75,0.447606297407412,AN,Elko,USA,19252,6,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+211754,179,-106.75,35,0.324507460675456,AN,Albuquerque,USA,898642,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+164929,180,-123,45,0.593373451381922,AN,Salem,USA,229010,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+213227,181,-106.25,42.75,0.44923679090359,AN,Casper,USA,60791,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+243494,182,-95.75,39,0.497112975258267,AN,Topeka,USA,132091,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+247099,183,-94.5,39,0.517696272581816,AN,Kansas City,USA,1469000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+242761,184,-96,36,0.471299786007766,AN,Tulsa,USA,946962,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+240628,185,-96.75,43.5,0.529427739424688,AN,Sioux Falls,USA,155724,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+249236,186,-93.75,32.5,0.508359743507974,AN,Shreveport,USA,248053,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+256438,187,-91.25,30.5,0.532324480795951,AN,Baton Rouge,USA,422072,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+239143,188,-97.25,32.75,0.454047297155767,AN,Fort Worth,USA,1440454,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+238402,189,-97.5,27.75,0.516433781069337,AN,Corpus Christi,USA,277454,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+237691,190,-97.75,30.25,0.511922439447407,AN,Austin,USA,1161000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+226175,191,-101.75,35.25,0.376177650735234,AN,Amarillo,USA,181766,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+212462,192,-106.5,31.75,0.312189225022766,AN,El Paso,USA,753000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+232633,193,-99.5,27.5,0.452932596883991,AN,Laredo,USA,434768,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+314030,194,-71.25,8.5,0.84514081241055,AN,M√©rida,VEN,345489,10,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+308406,195,-73.25,44.5,0.642741645150113,AN,Burlington,USA,93807,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+270865,196,-86.25,32.25,0.529979597720685,AN,Montgomery,USA,198325,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+276626,197,-84.25,30.5,0.528940092715802,AN,Tallahassee,USA,221222,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+284549,198,-81.5,28.5,0.537091985570662,AN,Orlando,USA,1350000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+283835,199,-81.75,30.25,0.538881830137336,AN,Jacksonville,USA,988000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+286005,200,-81,32,0.52132942533177,AN,Savannah,USA,180187,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+286013,201,-81,34,0.530507702380419,AN,Columbia,USA,398093,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+270895,202,-86.25,39.75,0.59297152145794,AN,Indianapolis,USA,1436000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+294666,203,-78,34.25,0.537158800797029,AN,Wilmington,USA,161560,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+277369,204,-84,36,0.568574740240971,AN,Knoxville,USA,655400,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+296121,205,-77.5,37.5,0.549555237546112,AN,Richmond,USA,912000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+283867,206,-81.75,38.25,0.602965565567667,AN,Charleston,USA,123799,9,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+299012,207,-76.5,39.25,0.560871247879484,AN,Baltimore,USA,2255000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+299748,208,-76.25,43,0.660436176440933,AN,Syracuse,USA,662577,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+324834,209,-67.5,5.75,0.79485102246205,AN,Puerto Ayacucho,VEN,52526,8,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+342158,210,-61.5,10.75,0.569008806438157,AN,Port-d'Espagne,TTO,294934,10,North America,Trinidad and Tobago,Americas,Latin America & Caribbean,Caribbean,TrinitÈ-et-Tobago
+318499,211,-69.75,44.25,0.584835234465021,AN,Augusta,USA,24042,7,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+276690,212,-84.25,46.5,0.64974560272513,AN,Sault Ste. Marie,USA,83805,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+522395,213,1,7.5,0.65972802934773,AN,Atakpam√©,TGO,80683,8,Africa,Togo,Africa,Sub-Saharan Africa,Western Africa,Togo
+550627,214,10.75,35.75,0.337024060007411,AN,Sousse,TUN,327004,10,Africa,Tunisia,Africa,Middle East & North Africa,Northern Africa,Tunisie
+646431,215,44,13.5,0.375381419392811,AN,Ta'izz,YEM,751000,11,Asia,Yemen,Asia,Middle East & North Africa,Western Asia,YÈmen
+129648,216,-135.25,57,0.78687772719246,AN,Sitka,USA,8931,5,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+588896,217,24,49.75,0.652511894590024,AN,Lviv,UKR,803880,11,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+608350,218,30.75,46.5,0.552601446933819,AN,Odessa,UKR,991000,11,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+602597,219,28.75,50.25,0.662686616746765,AN,Jytomyr,UKR,282192,10,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+620615,220,35,48.5,0.609685328196396,AN,Dnipro,UKR,1050000,12,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+628544,221,37.75,48,0.611262474547733,AN,Donetsk,UKR,988000,11,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+624226,222,36.25,50,0.646454963945981,AN,Kharkiv,UKR,1461000,12,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+672493,223,53,40,0.363292586284153,AN,T√ºrkmenba≈üy,TKM,68292,8,Asia,Turkmenistan,Asia,Europe & Central Asia,Central Asia,TurkmÈnistan
+705658,224,64.5,39.75,0.333782261865439,AN,Boukhara,UZB,319476,10,Asia,Uzbekistan,Asia,Europe & Central Asia,Central Asia,OuzbÈkistan
+691249,225,59.5,42.5,0.364412662008721,AN,Noukous,UZB,230006,10,Asia,Uzbekistan,Asia,Europe & Central Asia,Central Asia,OuzbÈkistan
+702771,226,63.5,39,0.314528328641741,AN,T√ºrkmenabat,TKM,234817,10,Asia,Turkmenistan,Asia,Europe & Central Asia,Central Asia,TurkmÈnistan
+697718,227,61.75,37.5,0.29224090209005,AN,Mary,TKM,178708,9,Asia,Turkmenistan,Asia,Europe & Central Asia,Central Asia,TurkmÈnistan
+728013,228,72.25,40.75,0.476444425061345,AN,Andijan,UZB,650000,11,Asia,Uzbekistan,Asia,Europe & Central Asia,Central Asia,OuzbÈkistan
+827431,229,106.75,20.75,0.703527343318318,AN,Ha√Øphong,VNM,1969000,12,Asia,Vietnam,Asia,East Asia & Pacific,South-Eastern Asia,ViÍt Nam
+831738,230,108.25,16,0.7157843699961,AN,ƒê√† N·∫µng,VNM,1000000,11,Asia,Vietnam,Asia,East Asia & Pacific,South-Eastern Asia,ViÍt Nam
+601617,231,28.5,-14.5,0.454694871889484,AN,Kabwe,ZMB,188979,9,Africa,Zambia,Africa,Sub-Saharan Africa,Eastern Africa,Zambie
+600904,232,28.25,-12.5,0.509715117528245,AN,Mufulira,ZMB,153624,9,Africa,Zambia,Africa,Sub-Saharan Africa,Eastern Africa,Zambie
+600903,233,28.25,-12.75,0.503637900293777,AN,Kitwe,ZMB,404901,10,Africa,Zambia,Africa,Sub-Saharan Africa,Eastern Africa,Zambie
+593673,234,25.75,-17.75,0.376645125346399,AN,Livingstone,ZMB,165480,9,Africa,Zambia,Africa,Sub-Saharan Africa,Eastern Africa,Zambie
+608813,235,31,-18,0.412423865164094,AN,Chitungwiza,ZWE,340360,10,Africa,Zimbabwe,Africa,Sub-Saharan Africa,Eastern Africa,Zimbabwe
+547616,236,9.75,4,0.813892488452521,AN,Douala,CMR,1906000,12,Africa,Cameroon,Africa,Sub-Saharan Africa,Middle Africa,Cameroun
+513923,237,-2,52.5,0.708599098929853,AN,Birmingham,GBR,2285000,12,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+502395,238,-6,54.5,0.734275074845011,AN,Belfast,GBR,450406,10,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+598224,239,27.25,38.5,0.342860951730417,AN,Izmir,TUR,2587000,12,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+603278,240,29,40.25,0.463111365298656,AN,Bursa,TUR,1492000,12,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+624191,241,36.25,41.25,0.545388085654739,AN,Samsun,TUR,609339,11,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+613363,242,32.5,38,0.369709485408032,AN,Konya,TUR,919000,11,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+621290,243,35.25,37,0.356888634576039,AN,Adana,TUR,1293000,12,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+612501,244,32.25,2.75,0.650460973946434,AN,Gulu,UGA,146858,9,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+605993,245,30,-2,0.727008596852873,AN,Kigali,RWA,860000,11,Africa,Rwanda,Africa,Sub-Saharan Africa,Eastern Africa,Rwanda
+363039,246,-54.25,3.75,0.703548439863053,AN,Cottica,SUR,29210,7,South America,Suriname,Americas,Latin America & Caribbean,South America,Suriname
+505934,247,-4.75,38,0.384880188669106,AN,Cordoue,ESP,321376,10,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+539723,248,7,13.5,0.398596337361431,AN,Maradi,NER,232555,10,Africa,Niger,Africa,Sub-Saharan Africa,Western Africa,Niger
+534682,249,5.25,15,0.344537164070502,AN,Tahoua,NER,115956,9,Africa,Niger,Africa,Sub-Saharan Africa,Western Africa,Niger
+601852,250,28.5,44.25,0.519543915930571,AN,Constan»õa,ROU,303399,10,Europe,Romania,Europe,Europe & Central Asia,Eastern Europe,Roumanie
+583912,251,22.25,65.5,0.68471412371957,AN,Lule√•,SWE,48638,7,Europe,Sweden,Europe,Europe & Central Asia,Northern Europe,SuËde
+569480,252,17.25,62.5,0.674291676869898,AN,Sundsvall,SWE,73389,8,Europe,Sweden,Europe,Europe & Central Asia,Northern Europe,SuËde
+598980,253,27.5,47.25,0.589035331525586,AN,Ia»ôi,ROU,325914,10,Europe,Romania,Europe,Europe & Central Asia,Eastern Europe,Roumanie
+805755,254,99.25,9.25,0.751787713869955,AN,Surat Thani,THA,157627,9,Asia,Thailand,Asia,East Asia & Pacific,South-Eastern Asia,ThaÔlande
+805072,255,99,18.75,0.564710740423338,AN,Chiang Mai,THA,397211,10,Asia,Thailand,Asia,East Asia & Pacific,South-Eastern Asia,ThaÔlande
+813709,256,102,15,0.65572629598054,AN,Nakhon Ratchasima,THA,334984,10,Asia,Thailand,Asia,East Asia & Pacific,South-Eastern Asia,ThaÔlande
+609501,257,31.25,-26.25,0.480771795084531,AN,Mbabane,SWZ,90138,8,Africa,eSwatini,Africa,Sub-Saharan Africa,Southern Africa,Swaziland
+286577,258,-80.75,-5.25,0.590160783041607,AN,Piura,PER,396932,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+313209,259,-71.5,-16.5,0.518812765268553,AN,Arequipa,PER,815000,11,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+293051,260,-78.5,-9,0.685962916549408,AN,Chimbote,PER,349846,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+304590,261,-74.5,-8.25,0.745354284842809,AN,Pucallpa,PER,310750,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+308213,262,-73.25,-3.75,0.827438016055208,AN,Iquitos,PER,458729,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+302412,263,-75.25,-12,0.792287372729995,AN,Huancayo,PER,412733,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+362201,264,-54.5,-25.5,0.49906413584496,AN,Ciudad del Este,PRY,320872,10,South America,Paraguay,Americas,Latin America & Caribbean,South America,Paraguay
+445369,265,-25.75,37.75,0.602970420298251,AN,Ponta Delgada,PRT,61526,8,Europe,Portugal,Europe,Europe & Central Asia,Southern Europe,Portugal
+494415,266,-8.75,42.25,0.53930283360409,AN,Vigo,ESP,378952,10,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+511002,267,-3,43.25,0.643571225869836,AN,Bilbao,ESP,875552,11,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+473394,268,-16,14.25,0.477123441259292,AN,Kaolack,SEN,277812,10,Africa,Senegal,Africa,Sub-Saharan Africa,Western Africa,SÈnÈgal
+480612,269,-13.5,16.25,0.398636103071498,AN,Ka√©di,SEN,21656,7,Africa,Senegal,Africa,Sub-Saharan Africa,Western Africa,SÈnÈgal
+584425,270,22.5,13.5,0.372193546344837,AN,Al-Gena√Øna,SDN,162981,9,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+633497,271,39.5,24.5,0.180434840932404,AN,M√©dine,SAU,1010000,12,Asia,Saudi Arabia,Asia,Middle East & North Africa,Western Asia,Arabie saoudite
+624861,272,36.5,28.5,0.134850826910803,AN,Tabuk,SAU,547957,11,Asia,Saudi Arabia,Asia,Middle East & North Africa,Western Asia,Arabie saoudite
+610346,273,31.5,4.75,0.604671947996725,AN,Djouba,SSD,111975,9,,,,,,
+611086,274,31.75,9.5,0.510347835888917,AN,Malakal,SSD,160765,9,,,,,,
+613273,275,32.5,15.5,0.242678851245507,AN,Omdourman,SDN,2395159,12,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+606775,276,30.25,13.25,0.337596553829358,AN,El Obeid,SDN,393311,10,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+531946,277,4.25,52,0.664834291194425,AN,La Haye,NLD,1406000,12,Europe,Netherlands,Europe,Europe & Central Asia,Western Europe,Pays-Bas
+542786,278,8,58.25,0.647640063342723,AN,Kristiansand,NOR,63814,8,Europe,Norway,Europe,Europe & Central Asia,Northern Europe,NorvËge
+561483,279,14.5,46,0.62970480130929,AN,Ljubljana,SVN,314807,10,Europe,Slovenia,Europe,Europe & Central Asia,Southern Europe,SlovÈnie
+568702,280,17,48.25,0.604808700016954,AN,Bratislava,SVK,423737,10,Europe,Slovakia,Europe,Europe & Central Asia,Eastern Europe,Slovaquie
+588259,281,23.75,70.75,0.773455310274254,AN,Hammerfest,NOR,10000,5,Europe,Norway,Europe,Europe & Central Asia,Northern Europe,NorvËge
+668108,282,51.5,25.25,0.173902403238709,AN,Doha,QAT,1450000,12,Asia,Qatar,Asia,Middle East & North Africa,Western Asia,Qatar
+712830,283,67,30.25,0.2112804251215,AN,Quetta,PAK,768000,11,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+716424,284,68.25,27.5,0.181769637903168,AN,Larkana,PAK,364033,10,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+571274,285,18,-29.75,0.228082490068945,AN,Springbok,ZAF,10438,6,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+580652,286,21.25,-28.5,0.209927074893406,AN,Upington,ZAF,71373,8,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+575584,287,19.5,-33.75,0.435829054507794,AN,Worcester,ZAF,127597,9,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+584235,288,22.5,-34,0.43443443530211,AN,George,ZAF,174582,9,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+616030,289,33.5,-16.25,0.416861513629556,AN,Tete,MOZ,129316,9,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+636231,290,40.5,-13,0.463865288561492,AN,Pemba,MOZ,110643,9,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+632617,291,39.25,-15.25,0.523723784269709,AN,Nampula,MOZ,388526,10,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+596516,292,26.75,-28,0.299137990068024,AN,Welkom,ZAF,431944,10,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+616716,293,33.75,-25,0.393982577222315,AN,Xai-Xai,MOZ,128805,9,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+939079,294,145.5,-6,0.894724420751586,AN,Goroka,PNG,39699,7,Oceania,Papua New Guinea,Oceania,East Asia & Pacific,Melanesia,Papouasie-Nouvelle-GuinÈe
+935475,295,144.25,-5.75,0.902765975982854,AN,Mount Hagen,PNG,59064,8,Oceania,Papua New Guinea,Oceania,East Asia & Pacific,Melanesia,Papouasie-Nouvelle-GuinÈe
+958553,296,152.25,-4.25,0.797464379081221,AN,Rabaul,PNG,8074,5,Oceania,Papua New Guinea,Oceania,East Asia & Pacific,Melanesia,Papouasie-Nouvelle-GuinÈe
+943402,297,147,-6.75,0.886655180065921,AN,Lae,PNG,131052,9,Oceania,Papua New Guinea,Oceania,East Asia & Pacific,Melanesia,Papouasie-Nouvelle-GuinÈe
+281585,298,-82.5,8.5,0.7110093513673,AN,David,PAN,110037,9,North America,Panama,Americas,Latin America & Caribbean,Central America,Panama
+513852,299,-2,34.75,0.384209034230673,AN,Oujda,MAR,409391,10,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+492933,300,-9.25,32.25,0.348719691349702,AN,Safi,MAR,353476,10,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+575168,301,19.25,42.5,0.500559727520202,AN,Podgorica,MNE,145850,9,Europe,Montenegro,Europe,Europe & Central Asia,Southern Europe,MontÈnÈgro
+626117,302,37,-18,0.403701616959139,AN,Quelimane,MOZ,188964,9,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+599380,303,27.75,-33,0.483337005205227,AN,East London,ZAF,338627,10,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+591455,304,25,-31.5,0.345922072784919,AN,Middelburg,ZAF,18164,6,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+645109,305,43.5,43.5,0.62659299125274,AN,Naltchik,RUS,307866,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+640789,306,42,45,0.596114195939718,AN,Stavropol,RUS,363064,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+1032371,307,177.75,64.75,0.748920102236849,AN,Ougolni√Ø√© Kopi,RUS,3367,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+578822,308,20.5,54.75,0.669946447805022,AN,Kaliningrad,RUS,434954,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+601185,309,28.25,57.75,0.71198839953903,AN,Pskov,RUS,201990,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+619192,310,34.5,53.25,0.701515611035354,AN,Briansk,RUS,427236,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+611988,311,32,54.75,0.720839364623482,AN,Smolensk,RUS,320991,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+618505,312,34.25,61.75,0.752573137482008,AN,Petrozavodsk,RUS,265025,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+623532,313,36,56.75,0.731972269600991,AN,Tver,RUS,400212,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+635078,314,40,59.25,0.754463262065794,AN,Vologda,RUS,294889,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+634350,315,39.75,57.5,0.737294581351858,AN,Iaroslavl,RUS,606730,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+634309,316,39.75,47.25,0.585556732321328,AN,Rostov-sur-le-Don,RUS,1052000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+634294,317,39.75,43.5,0.508045552016208,AN,Sotchi,RUS,327608,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+632137,318,39,45,0.524022833359513,AN,Krasnodar,RUS,649851,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+649474,319,45,53.25,0.684242950470159,AN,Penza,RUS,512602,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+634338,320,39.75,54.5,0.698636323326465,AN,Riazan,RUS,520173,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+632885,321,39.25,51.75,0.664332947496212,AN,Voronej,RUS,844000,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+689851,322,59,53.5,0.620681828508775,AN,Magnitogorsk,RUS,413351,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+697068,323,61.5,55.25,0.656078693654501,AN,Tcheliabinsk,RUS,1091000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+704327,324,64,67.5,0.806704674028989,AN,Vorkouta,RUS,80039,8,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+663194,325,49.75,58.5,0.746343447516362,AN,Kirov,RUS,457437,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+692753,326,60,58,0.729567044725021,AN,Nijni Taguil,RUS,381116,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+658098,327,48,46.25,0.559518937868151,AN,Astrakhan,RUS,502533,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+678308,328,55,51.75,0.616414049358079,AN,Orenbourg,RUS,550204,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+652351,329,46,51.5,0.638887818338293,AN,Saratov,RUS,843000,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+659572,330,48.5,54.25,0.680313176955238,AN,Oulianovsk,RUS,640680,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+731675,331,73.5,55,0.682012913353516,AN,Omsk,RUS,1135000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+708612,332,65.5,57.25,0.685982799439719,AN,Tioumen,RUS,519119,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+770604,333,87,53.75,0.677259800673434,AN,Novokouznetsk,RUS,539616,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+767726,334,86,55.25,0.702245951940616,AN,Kemerovo,RUS,477090,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+651597,335,45.75,43.25,0.588044145906514,AN,Grozny,RUS,226100,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+752393,336,80.75,7.25,0.761760141700506,AN,Kandy,LKA,111701,9,Asia,Sri Lanka,Asia,South Asia,Southern Asia,Sri Lanka
+750229,337,80,7,0.7502321264509,AN,Sri Jayawardenapura,LKA,115826,9,Asia,Sri Lanka,Asia,South Asia,Southern Asia,Sri Lanka
+887336,338,127.5,36.25,0.567920230780587,AN,Daejeon,KOR,1468000,12,Asia,South Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Sud
+885890,339,127,35.25,0.61801755157384,AN,Gwangju,KOR,1440000,12,Asia,South Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Sud
+891657,340,129,35,0.528460424844966,AN,Pusan,KOR,3480000,12,Asia,South Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Sud
+871357,341,122,7,0.789755974077817,AN,Zamboanga,PHL,773000,11,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+867076,342,120.5,18.25,0.546958873528197,AN,Laoag,PHL,207048,10,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+867069,343,120.5,16.5,0.681785476140001,AN,Baguio,PHL,447824,10,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+880726,344,125.25,6,0.799447790465572,AN,General Santos,PHL,950530,11,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+816044,345,102.75,58,0.722137806429104,AN,Oust-Ilimsk,RUS,100271,9,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+819627,346,104,52.5,0.618531842236266,AN,Angarsk,RUS,243158,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+783582,347,91.5,53.75,0.664982081588471,AN,Abakan,RUS,167289,9,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+774271,348,88.25,69.25,0.763315093449571,AN,Norilsk,RUS,165873,9,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+815379,349,102.5,72,0.751622179466667,AN,Khatanga,RUS,3205,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+792226,350,94.5,51.75,0.578930371525613,AN,Kyzyl,RUS,108240,9,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+829718,351,107.5,51.75,0.577375882051208,AN,Oulan-Oud√©,RUS,360278,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+887392,352,127.5,50.25,0.520578623608206,AN,Blagovechtchensk,RUS,221296,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+857121,353,117,53,0.536668380327297,AN,Bukachacha,RUS,3372,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+910441,354,135.5,44.5,0.554414467773203,AN,Dalnegorsk,RUS,8123,5,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+987689,355,162.25,69.75,0.81927404372078,AN,Ambartchik,RUS,0,0,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+908371,356,134.75,67.75,0.674837351748438,AN,Bataga√Ø,RUS,4266,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+946595,357,148,70.5,0.791555586412098,AN,Chokurdakh,RUS,2506,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+932872,358,143.25,64.5,0.725988743205865,AN,Oust-Nera,RUS,9148,5,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+851384,359,115,60.75,0.752569495841409,AN,Lensk,RUS,25589,7,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+881657,360,125.5,58.5,0.746549325684707,AN,Aldan,RUS,24426,7,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+848507,361,114,62.5,0.748387489354972,AN,Mirny,RUS,40308,7,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+875201,362,123.25,66.75,0.735144883394241,AN,Jigansk,RUS,3237,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+932852,363,143.25,59.5,0.625953278758309,AN,Okhotsk,RUS,5570,5,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+909015,364,135,48.5,0.54992618806886,AN,Khabarovsk,RUS,579000,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+932107,365,143,53.5,0.748345296829939,AN,Okha,RUS,26560,7,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+931360,366,142.75,47,0.666351904133053,AN,Ioujno-Sakhalinsk,RUS,176484,9,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+186510,367,-115.5,32.75,0.220305421516638,AN,Mexicali,MEX,885000,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+201617,368,-110.25,24.25,0.343205025772367,AN,La Paz,MEX,189767,9,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+221089,369,-103.5,25.5,0.364990820092234,AN,Torre√≥n,MEX,1144000,12,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+209550,370,-107.5,24.75,0.43679608071618,AN,Culiac√°n,MEX,809000,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+199482,371,-111,31.25,0.313555696273618,AN,Nogales,MEX,178097,9,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+199473,372,-111,29,0.291444323667692,AN,Hermosillo,MEX,595811,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+199469,373,-111,28,0.291149551355788,AN,Guaymas,MEX,103449,9,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+228286,374,-101,22.25,0.544809696236343,AN,San Luis Potos√≠,MEX,992000,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+238395,375,-97.5,26,0.508734913429979,AN,Matamoros,MEX,538785,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+232633,376,-99.5,27.5,0.452932596883991,AN,Nuevo Laredo,MEX,349550,10,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+220343,377,-103.75,19.25,0.523302143552538,AN,Colima,MEX,223287,10,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+258558,378,-90.5,19.75,0.467257825375507,AN,Campeche,MEX,205212,10,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+240522,379,-96.75,17,0.550327308193752,AN,Oaxaca de Ju√°rez,MEX,530728,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+226119,380,-101.75,21.25,0.463028771040792,AN,Le√≥n,MEX,1488000,12,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+557741,381,13.25,11.75,0.470531181799192,AN,Maiduguri,NGA,896000,11,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+539688,382,7,4.75,0.800216567561482,AN,Port Harcourt,NGA,1020000,12,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+544026,383,8.5,7.75,0.68323228671921,AN,Makurdi,NGA,292645,10,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+531047,384,4,7.5,0.759814588691701,AN,Ibadan,NGA,2628000,12,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+531771,385,4.25,8.25,0.71144168400629,AN,Ogbomoso,NGA,951000,11,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+536086,386,5.75,5.5,0.782210502886411,AN,Warri,NGA,830106,11,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+541153,387,7.5,10.5,0.577768853047129,AN,Kaduna,NGA,1442000,12,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+573773,388,18.75,54.25,0.666965897900589,AN,Gda≈Ñsk,POL,740000,11,Europe,Poland,Europe,Europe & Central Asia,Eastern Europe,Pologne
+577361,389,20,50,0.64918039174694,AN,Cracovie,POL,756000,11,Europe,Poland,Europe,Europe & Central Asia,Eastern Europe,Pologne
+821033,390,104.5,43.5,0.364671598160357,AN,Dalanzadgad,MNG,15093,6,Asia,Mongolia,Asia,East Asia & Pacific,Eastern Asia,Mongolie
+887348,391,127.5,39.25,0.504509442739866,AN,Wonsan,PRK,329207,10,Asia,North Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Nord
+878699,392,124.5,40,0.4796043817857,AN,Sinuiju,PRK,288112,10,Asia,North Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Nord
+784280,393,91.75,48,0.410614771994226,AN,Khovd,MNG,30500,7,Asia,Mongolia,Asia,East Asia & Pacific,Eastern Asia,Mongolie
+849891,394,114.5,48,0.453945456467795,AN,Choybalsan,MNG,33376,7,Asia,Mongolia,Asia,East Asia & Pacific,Eastern Asia,Mongolie
+563355,395,15.25,-26.75,0.1688950349097,AN,L√ºderitz,NAM,15137,6,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+561207,396,14.5,-23,0.296908415218985,AN,Walvis Bay,NAM,52058,8,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+614643,397,33,-2.5,0.640565707263622,AN,Mwanza,TZA,493944,10,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+628325,398,37.75,-6.75,0.598542597596393,AN,Morogoro,TZA,250902,10,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+622559,399,35.75,-6.25,0.486972643457579,AN,Dodoma,TZA,218269,10,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+625455,400,36.75,-3.25,0.637351188470017,AN,Arusha,TZA,341136,10,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+541299,401,7.5,47,0.653354479507967,AN,Berne,CHE,275329,10,Europe,Switzerland,Europe,Europe & Central Asia,Western Europe,Suisse
+557195,402,13,55.5,0.663303152516936,AN,Malm√∂,SWE,269349,10,Europe,Sweden,Europe,Europe & Central Asia,Northern Europe,SuËde
+481377,403,-13.25,27.25,0.334545720650843,AN,La√¢youne,MAR,188084,9,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+886473,404,127.25,0.75,0.770495798890338,AN,Kota Ternate,IDN,187521,9,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+889339,405,128.25,-3.75,0.773617608416261,AN,Ambon,IDN,355596,10,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+861922,406,118.75,-8.5,0.631852418184281,AN,Raba,IDN,106101,9,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+925394,407,140.75,-2.5,0.844769168306481,AN,Jayapura,IDN,169341,9,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+552101,408,11.25,43.75,0.513888511580951,AN,Florence,ITA,1500000,12,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+562891,409,15,37.5,0.371047460812737,AN,Catane,ITA,674542,11,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+580937,410,21.25,42.75,0.527260123159398,AN,Pristina,KOS,465186,10,Europe,Kosovo,Europe,Europe & Central Asia,Southern Europe,Kosovo
+628352,411,37.75,0,0.527224923512249,AN,Meru,KEN,47226,7,Africa,Kenya,Africa,Sub-Saharan Africa,Eastern Africa,Kenya
+621144,412,35.25,0.5,0.644453576342626,AN,Eldoret,KEN,353381,10,Africa,Kenya,Africa,Sub-Saharan Africa,Eastern Africa,Kenya
+794204,413,95.25,5.5,0.848260194288962,AN,Banda Aceh,IDN,513698,11,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+808624,414,100.25,5.5,0.818960660334789,AN,George Town,MYS,2500000,12,Asia,Malaysia,Asia,East Asia & Pacific,South-Eastern Asia,Malaisie
+809479,415,100.5,39,0.424463857247522,AN,Zhangye,CHN,230728,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+815964,416,102.75,38,0.453958923561555,AN,Wuwei,CHN,493092,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+792901,417,94.75,40.25,0.393748146284259,AN,Dunhuang,CHN,140094,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+825323,418,106,34.5,0.651608793460059,AN,Tianshui,CHN,1225000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+802979,419,98.25,36.25,0.534859116217404,AN,Dulan,CHN,100,1,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+793607,420,95,36.5,0.492537188992808,AN,Golmud,CHN,107092,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+837533,421,110.25,22.75,0.681714962208362,AN,Yulin,CHN,1127000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+837533,421,110.25,22.75,0.681714962208362,AN,Yulin,CHN,155960,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+826723,422,106.5,24,0.675717390960816,AN,Baicheng,CHN,175282,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+840420,423,111.25,23.5,0.662856543662422,AN,Wuzhou,CHN,442315,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+821686,424,104.75,26.5,0.771224983826731,AN,Liupanshui,CHN,1221000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+861335,425,118.5,25,0.618216436356306,AN,Quanzhou,CHN,1463000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857757,426,117.25,31.75,0.599549735698736,AN,Hefei,CHN,2035000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857044,427,117,33.75,0.567035047732519,AN,Suzhou,CHN,1650000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857044,427,117,33.75,0.567035047732519,AN,Suzhou,CHN,1964000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+838248,428,110.5,21.25,0.648894925460671,AN,Zhanjiang,CHN,1590000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+846914,429,113.5,24.75,0.656512875787237,AN,Shaoguan,CHN,720266,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+856183,430,116.75,-1.25,0.841682211241939,AN,Balikpapan,IDN,445905,10,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+837448,431,110.25,1.5,0.895345407227675,AN,Kuching,MYS,570407,11,Asia,Malaysia,Asia,East Asia & Pacific,South-Eastern Asia,Malaisie
+661469,432,49.25,-12.25,0.446550145688834,AN,Antsiranana,MDG,82937,8,Africa,Madagascar,Africa,Sub-Saharan Africa,Eastern Africa,Madagascar
+654943,433,47,-21.5,0.659332283292756,AN,Fianarantsoa,MDG,184184,9,Africa,Madagascar,Africa,Sub-Saharan Africa,Eastern Africa,Madagascar
+652803,434,46.25,-15.75,0.411161142457841,AN,Mahajanga,MDG,154657,9,Africa,Madagascar,Africa,Sub-Saharan Africa,Eastern Africa,Madagascar
+645563,435,43.75,-23.25,0.251455546300294,AN,Toliara,MDG,115319,9,Africa,Madagascar,Africa,Sub-Saharan Africa,Eastern Africa,Madagascar
+838854,436,110.75,-7.5,0.75771407760454,AN,Surakarta,IDN,555308,11,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+823000,437,105.25,-5.5,0.819320166878628,AN,Bandar Lampung,IDN,865000,11,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+830221,438,107.75,-2.75,0.830189279760375,AN,Tanjung Pandan,IDN,62374,8,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+843899,439,112.5,-8,0.794589311110251,AN,Malang,IDN,805000,11,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+875614,440,123.5,-10.25,0.563442874248281,AN,Kupang,IDN,282396,10,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+864824,441,119.75,-4,0.770835307059866,AN,Pare-Pare,IDN,87776,8,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+291633,442,-79,-3,0.841799137492975,AN,Cuenca,ECU,286878,10,South America,Ecuador,Americas,Latin America & Caribbean,South America,…quateur
+259198,443,-90.25,-0.5,0.575104807870406,AN,Santa Cruz,ECU,11262,6,South America,Ecuador,Americas,Latin America & Caribbean,South America,…quateur
+280149,444,-83,10,0.735411796605948,AN,Puerto Lim√≥n,CRI,85001,8,North America,Costa Rica,Americas,Latin America & Caribbean,Central America,Costa Rica
+301098,445,-75.75,20,0.443413192801403,AN,Santiago de Cuba,CUB,555865,11,North America,Cuba,Americas,Latin America & Caribbean,Caribbean,Cuba
+315516,446,-70.75,19.5,0.516749476788171,AN,Santiago de los Caballeros,DOM,1550753,12,North America,Dominican Republic,Americas,Latin America & Caribbean,Caribbean,RÈpublique dominicaine
+301759,447,-75.5,5,0.927899108917424,AN,Manizales,COL,375848,10,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+296697,448,-77.25,1.25,0.858923718107469,AN,San Juan de Pasto,COL,382236,10,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+303946,449,-74.75,11,0.659865935869289,AN,Barranquilla,COL,1798000,12,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+342176,450,-61.5,15.25,0.45659794353626,AN,Roseau,DMA,23336,7,North America,Dominica,Americas,Latin America & Caribbean,Caribbean,Dominique
+572114,451,18.25,0,0.761454157079711,AN,Mbandaka,COD,274996,10,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+565659,452,16,8.5,0.595538753677498,AN,Moundou,TCD,156705,9,Africa,Chad,Africa,Sub-Saharan Africa,Middle Africa,Tchad
+613331,453,32.5,30,0.20072221080067,AN,Suez,EGY,508335,11,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+612615,454,32.25,31.25,0.247861234203094,AN,Port-Sa√Ød,EGY,623864,11,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+608281,455,30.75,29.25,0.153719764573246,AN,M√©dinet el-Fayoum,EGY,316772,10,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+614749,456,33,24,0.115190513032951,AN,Assouan,EGY,313442,10,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+609715,457,31.25,27.25,0.12557001530976,AN,Assiout,EGY,420585,10,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+592304,458,25.25,0.5,0.820613349251675,AN,Kisangani,COD,578470,11,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+642824,459,42.75,13,0.274300206791271,AN,Assab,ERI,105496,9,Africa,Eritrea,Africa,Sub-Saharan Africa,Eastern Africa,…rythrÈe
+644260,460,43.25,11.5,0.37289839841877,AN,Djibouti,DJI,923000,11,Africa,Djibouti,Africa,Middle East & North Africa,Eastern Africa,Djibouti
+559340,461,13.75,51,0.671390831131827,AN,Dresde,DEU,617515,11,Europe,Germany,Europe,Europe & Central Asia,Western Europe,Allemagne
+776274,462,89,29.25,0.435001957992261,AN,ville-pr√©fecture de Xigaz√™,CHN,80000,8,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+742424,463,77.25,38.5,0.433839516770659,AN,Xian de Yarkand,CHN,851374,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+753982,464,81.25,44,0.470241727250995,AN,Yining,CHN,542507,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+773464,465,88,47.75,0.449301177748677,AN,Altay,CHN,142000,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+812940,466,101.75,3,0.843556094576012,AN,Putrajaya,MYS,67964,8,Asia,Malaysia,Asia,East Asia & Pacific,South-Eastern Asia,Malaisie
+827505,467,106.75,39.25,0.394362774677575,AN,Shizuishan,CHN,136570,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+836153,468,109.75,38.25,0.438881679353389,AN,Yulin,CHN,1127000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+836153,468,109.75,38.25,0.438881679353389,AN,Yulin,CHN,155960,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+833968,469,109,32.75,0.659252926481493,AN,Ankang,CHN,1100000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+840468,470,111.25,35.5,0.516708555546674,AN,Houma,CHN,102400,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+845491,471,113,29.5,0.636268335084121,AN,Yueyang,CHN,826000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+844039,472,112.5,27,0.665335923884854,AN,Hengyang,CHN,1016000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+821706,473,104.75,31.5,0.722491590475494,AN,Mianyang,CHN,1396000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+814482,474,102.25,28,0.616063327782534,AN,Xichang,CHN,379993,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+805818,475,99.25,25,0.567618637571507,AN,Baoshan,CHN,1000000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+817348,476,103.25,23.5,0.667793339513468,AN,Gejiu,CHN,149105,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+849851,477,114.5,38,0.439275980108615,AN,Shijiazhuang,CHN,2417000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+849845,478,114.5,36.5,0.472647645934062,AN,Handan,CHN,1631000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+874377,479,123,41,0.434536161268074,AN,Anshan,CHN,1639000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+870764,480,121.75,39,0.460461711172353,AN,Dalian,CHN,3167000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+866426,481,120.25,36,0.51180250807242,AN,Qingdao,CHN,2866000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+860654,482,118.25,35,0.542573070266482,AN,Linyi,CHN,2082000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+862811,483,119,33.5,0.579076370732351,AN,Huai'an,CHN,1264000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+867836,484,120.75,28,0.655423433378791,AN,Wenzhou,CHN,2350000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+870007,485,121.5,30,0.638750836366054,AN,Ningbo,CHN,1923000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+895977,486,130.5,33.5,0.639439504819386,AN,Fukuoka,JPN,2792000,12,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+898855,487,131.5,32,0.571165786604538,AN,Miyazaki,JPN,324384,10,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+888017,488,127.75,26.25,0.650767999503649,AN,Naha,JPN,905238,11,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+904629,489,133.5,33.5,0.595325825453708,AN,K≈çchi,JPN,335570,10,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+874215,490,123,0.5,0.795736032227675,AN,Gorontalo,IDN,365497,10,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+872224,491,122.25,43.5,0.393006244730769,AN,Tongliao,CHN,884000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+841931,492,111.75,40.75,0.40361867466885,AN,Hohhot,CHN,1726000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+862846,493,119,42.25,0.39438288862055,AN,Chifeng,CHN,1277000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+871513,494,122,46,0.41892884654755,AN,Ulan Hot,CHN,241894,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+865037,495,119.75,49.25,0.520458287136121,AN,Hailar,CHN,231171,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+895309,496,130.25,46.75,0.513398322643656,AN,Jiamusi,CHN,1020000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+884500,497,126.5,48.25,0.511934346096082,AN,Bei'an,CHN,154936,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+880167,498,125,46.5,0.454649325855302,AN,Daqing,CHN,1693000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+897466,499,131,45.25,0.524983615981359,AN,Jixi,CHN,965000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+914730,500,137,35.25,0.561917631012021,AN,Nagoya,JPN,3230000,12,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+918341,501,138.25,36.75,0.694351956022508,AN,Nagano,JPN,594311,11,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+935670,502,144.25,43,0.605082086767211,AN,Kushiro,JPN,198566,9,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+925571,503,140.75,41.75,0.635708152909171,AN,Hakodate,JPN,302984,10,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+911124,504,135.75,35,0.618466530559641,AN,Kyoto,JPN,1805000,12,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+925557,505,140.75,38.25,0.664490621424083,AN,Sendai,JPN,2250000,12,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+922676,506,139.75,39,0.696531246444493,AN,Sakata,JPN,100446,9,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+569938,507,17.5,-3.25,0.727858003003128,AN,Bandundu,COD,118211,9,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+584347,508,22.5,-6,0.709941583262249,AN,Kananga,COD,765000,11,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+596610,509,26.75,-4.5,0.746354256163944,AN,Kasongo,COD,63000,8,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+587230,510,23.5,-6.25,0.698569277019212,AN,Mbujimayi,COD,1295000,12,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+603814,511,29.25,-6,0.636579290201718,AN,Kalemie,COD,206257,10,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+603839,512,29.25,0.25,0.794044791974805,AN,Butembo,COD,286403,10,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+603831,513,29.25,-1.75,0.772485856982795,AN,Goma,COD,144124,9,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+617491,514,34,-11.5,0.534547004792275,AN,Mzuzu,MWI,110201,9,Africa,Malawi,Africa,Sub-Saharan Africa,Eastern Africa,Malawi
+620358,515,35,-15.75,0.497604205527089,AN,Blantyre,MWI,584877,11,Africa,Malawi,Africa,Sub-Saharan Africa,Eastern Africa,Malawi
+255654,516,-91.5,14.75,0.623712084679441,AN,Quetzaltenango,GTM,575263,11,North America,Guatemala,Americas,Latin America & Caribbean,Central America,Guatemala
+471949,517,-16.5,13.5,0.499855511342034,AN,Banjul,GMB,43094,7,Africa,Gambia,Africa,Sub-Saharan Africa,Western Africa,Gambie
+742384,518,77.25,28.5,0.313550551922879,AN,Faridabad,IND,1394000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+735196,519,74.75,34,0.488231435813236,AN,Srinagar,IND,1140000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+752430,520,80.75,16.5,0.5666197064248,AN,Vijayawada,IND,1137000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+741583,521,77,8.5,0.712871674843358,AN,Thiruvananthapuram,IND,954000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+739426,522,76.25,10,0.684249191290953,AN,Kochi,IND,1519000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+767587,523,86,20.5,0.522778720905384,AN,Cuttack,IND,580000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+735842,524,75,15.25,0.586001432458447,AN,Hubli-Dharwad,IND,890000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+735112,525,74.75,13,0.622394395653497,AN,Mangalore,IND,776632,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+740877,526,76.75,12.25,0.663660923639933,AN,Mysore,IND,887000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+740897,527,76.75,17.25,0.512086586716275,AN,Gulbarga,IND,483615,10,Asia,India,Asia,South Asia,Southern Asia,Inde
+733685,528,74.25,16.75,0.51120978455539,AN,Kolhapur,IND,750000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+742347,529,77.25,19.25,0.461519133229034,AN,Nanded,IND,623708,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+741632,530,77,20.75,0.410066900573756,AN,Akola,IND,503502,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+784193,531,91.75,26.25,0.56381388149704,AN,Guwahati,IND,983000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+557677,532,13.25,-4.25,0.807127469642596,AN,Kayes,COG,62521,8,Africa,Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique du Congo
+558408,533,13.5,-1.75,0.787220645357262,AN,Franceville,GAB,42967,7,Africa,Gabon,Africa,Sub-Saharan Africa,Middle Africa,Gabon
+518218,534,-0.5,44.75,0.583916238311565,AN,Bordeaux,FRA,803000,11,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+534795,535,5.25,43.25,0.421911766865488,AN,Marseille,FRA,1400000,12,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+519679,536,0,49.5,0.651489844037728,AN,Le Havre,FRA,242124,10,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+519546,537,0,16.25,0.329830292273652,AN,Gao,MLI,116967,9,Africa,Mali,Africa,Sub-Saharan Africa,Western Africa,Mali
+311651,538,-72,-45.5,0.758424882861701,AN,Coyhaique,CHL,45787,7,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+316806,539,-70.25,-18.5,0.761643273586577,AN,Arica,CHL,185999,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+316771,540,-70.25,-27.25,0.1510376274748,AN,Copiap√≥,CHL,129280,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+313876,541,-71.25,-30,0.403289629259344,AN,La Serena,CHL,154521,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+310962,542,-72.25,-37.5,0.44501571204852,AN,Los √Ångeles,CHL,145239,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+388504,543,-45.5,61.25,0.68046495544188,AN,Narsarsuaq,GRL,145,1,North America,Greenland,Americas,Europe & Central Asia,Northern America,Groenland
+364734,544,-53.75,67,0.757804012095386,AN,Sisimiut,GRL,5227,5,North America,Greenland,Americas,Europe & Central Asia,Northern America,Groenland
+357547,545,-56.25,72.75,0.778025895582907,AN,Upernavik,GRL,1129,3,North America,Greenland,Americas,Europe & Central Asia,Northern America,Groenland
+320074,546,-69.25,77.5,0.68475857015812,AN,Qaanaaq,GRL,616,2,North America,Greenland,Americas,Europe & Central Asia,Northern America,Groenland
+470537,547,-17,21,0.2517374862183,AN,Nouadhibou,MRT,86738,8,Africa,Mauritania,Africa,Sub-Saharan Africa,Western Africa,Mauritanie
+486373,548,-11.5,14.5,0.46833651747103,AN,Kayes,MLI,77207,8,Africa,Mali,Africa,Sub-Saharan Africa,Western Africa,Mali
+492150,549,-9.5,16.75,0.379556316628375,AN,A√Øoun El Atrouss,MRT,1423,3,Africa,Mauritania,Africa,Sub-Saharan Africa,Western Africa,Mauritanie
+501510,550,-6.25,13.5,0.457015477798202,AN,S√©gou,MLI,122952,9,Africa,Mali,Africa,Sub-Saharan Africa,Western Africa,Mali
+581655,551,21.5,42,0.491822278917287,AN,Skopje,MKD,494087,10,Europe,Macedonia,Europe,Europe & Central Asia,Southern Europe,RÈpublique de MacÈdoine
+586631,552,23.25,24.25,0.130892038342526,AN,Al Jawf,LBY,24132,7,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+565009,553,15.75,26.25,0.164528940687887,AN,Tmessa,LBY,500,2,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+562871,554,15,32.5,0.279877467511335,AN,Misrata,LBY,386120,10,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+554221,555,12,33,0.259050781108354,AN,Zouara,LBY,180310,9,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+647961,556,44.5,35.5,0.270447999156066,AN,Kirkouk,IRQ,601433,11,Asia,Iraq,Asia,Middle East & North Africa,Western Asia,Irak
+644359,557,43.25,36.25,0.276492155451596,AN,Mossoul,IRQ,1316000,12,Asia,Iraq,Asia,Middle East & North Africa,Western Asia,Irak
+647226,558,44.25,32,0.192830584466168,AN,Nadjaf,IRQ,665552,11,Asia,Iraq,Asia,Middle East & North Africa,Western Asia,Irak
+627677,559,37.5,11.5,0.486564643511718,AN,Baher Dar,ETH,206748,10,Africa,Ethiopia,Africa,Sub-Saharan Africa,Eastern Africa,…thiopie
+633453,560,39.5,13.5,0.395729187875986,AN,Mekele,ETH,95856,8,Africa,Ethiopia,Africa,Sub-Saharan Africa,Eastern Africa,…thiopie
+639926,561,41.75,9.5,0.417778773628401,AN,Dire Dawa,ETH,252279,10,Africa,Ethiopia,Africa,Sub-Saharan Africa,Eastern Africa,…thiopie
+594010,562,25.75,66.5,0.751987870218176,AN,Rovaniemi,FIN,34781,7,Europe,Finland,Europe,Europe & Central Asia,Northern Europe,Finlande
+581739,563,21.5,63,0.677502669281129,AN,Vaasa,FIN,57014,8,Europe,Finland,Europe,Europe & Central Asia,Northern Europe,Finlande
+588222,564,23.75,61.5,0.724582449166161,AN,Tampere,FIN,259279,10,Europe,Finland,Europe,Europe & Central Asia,Northern Europe,Finlande
+684791,565,57.25,50.25,0.599890167853146,AN,Aktioub√©,KAZ,262457,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+702106,566,63.25,53,0.614922849630768,AN,Roudny,KAZ,124000,9,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+708562,567,65.5,44.75,0.39814013486841,AN,Kyzylorda,KAZ,300000,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+669637,568,52,47,0.515921976586635,AN,Atyraou,KAZ,182753,9,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+736709,569,75.25,51.75,0.618220713215344,AN,Ekibastouz,KAZ,127868,9,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+741758,570,77,52.25,0.625149937515909,AN,Pavlodar,KAZ,329002,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+751124,571,80.25,50.5,0.565696434541182,AN,Seme√Ø,KAZ,311353,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+757611,572,82.5,50,0.558875929564238,AN,√ñskemen,KAZ,319067,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+676066,573,54.25,32,0.208275888792493,AN,Yazd,IRN,477905,10,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+660201,574,48.75,31.25,0.219692295734245,AN,Ahvaz,IRN,996000,11,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+657314,575,47.75,30.5,0.200683022959504,AN,Bassorah,IRQ,870000,11,Asia,Iraq,Asia,Middle East & North Africa,Western Asia,Irak
+681815,576,56.25,27.25,0.183463190287126,AN,Bandar Abbas,IRN,461499,10,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+659494,577,48.5,34.75,0.323010943533683,AN,Hamadan,IRN,528256,11,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+653018,578,46.25,38,0.330970078283413,AN,Tabriz,IRN,1413000,12,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+738068,579,75.75,31,0.328496940088261,AN,Ludhiana,IND,1649000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+738045,580,75.75,25.25,0.32290181960332,AN,Kota,IND,827000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+730118,581,73,26.25,0.273922146880068,AN,Jodhpur,IND,995000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+720088,582,69.5,42.25,0.423757791632053,AN,Chimkent,KAZ,465392,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+725138,583,71.25,43,0.462453560762559,AN,Taraz,KAZ,358153,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+753192,584,81,26.75,0.346199909958876,AN,Lucknow,IND,2695000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+743111,585,77.5,30,0.348107605315322,AN,Saharanpur,IND,484873,10,Asia,India,Asia,South Asia,Southern Asia,Inde
+765435,586,85.25,23.25,0.446577772752128,AN,Ranchi,IND,1044000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+770490,587,87,25.25,0.437077500758636,AN,Bhagalpur,IND,361548,10,Asia,India,Asia,South Asia,Southern Asia,Inde
+755333,588,81.75,21.25,0.446509686341001,AN,Raipur,IND,875000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+750294,589,80,23.25,0.39016753254162,AN,Jabalpur,IND,1285000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+738035,590,75.75,22.75,0.376949895650217,AN,Indore,IND,2026000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+749528,591,79.75,12,0.642223596742207,AN,Pondich√©ry,IND,227411,10,Asia,India,Asia,South Asia,Southern Asia,Inde
+745201,592,78.25,11.75,0.659451636683309,AN,Salem,IND,873000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+746639,593,78.75,10.75,0.673234311186455,AN,Tiruchirappalli,IND,951000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+554070,594,12,-4.75,0.807255608791655,AN,Pointe-Noire,COG,659084,11,Africa,Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique du Congo
+492846,595,-9.25,10.5,0.592331690939539,AN,Kankan,GIN,114009,9,Africa,Guinea,Africa,Sub-Saharan Africa,Western Africa,GuinÈe
+494277,596,-8.75,7.75,0.756170570173047,AN,Nz√©r√©kor√©,GIN,168121,9,Africa,Guinea,Africa,Sub-Saharan Africa,Western Africa,GuinÈe
+505092,597,-5,7.75,0.665428458515442,AN,Bouak√©,CIV,567481,11,Africa,Ivory Coast,Africa,Sub-Saharan Africa,Western Africa,CÙte d'Ivoire
+679459,598,55.5,-21,0.488405813773473,AN,Saint-Denis,FRA,190047,9,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+324050,599,-67.75,-10,0.716335478549202,AN,Rio Branco,BRA,257642,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+391854,600,-44.25,-2.5,0.593443156643347,AN,S√£o Lu√≠s,BRA,1038000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+334870,601,-64,-8.75,0.733427981084043,AN,Porto Velho,BRA,306180,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+378115,602,-49,-12.5,0.565947511572052,AN,Alvorada,BRA,10232,6,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+352854,603,-57.75,-19,0.525414157207265,AN,Corumb√°,BRA,96520,8,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+392505,604,-44,-20,0.552073283967647,AN,Belo Horizonte,BRA,5575000,13,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+393239,605,-43.75,-16.75,0.512662143756946,AN,Montes Claros,BRA,332379,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+380252,606,-48.25,-19,0.546617284642928,AN,Uberl√¢ndia,BRA,563536,11,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+359376,607,-55.5,-10.75,0.643974427797013,AN,Col√≠der,BRA,27139,7,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+357937,608,-56,-10,0.656954975784615,AN,Alta Floresta,BRA,40466,7,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+357915,609,-56,-15.5,0.58696337267192,AN,Cuiab√°,BRA,806000,11,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+368665,610,-52.25,-31.75,0.55794918999979,AN,Pelotas,BRA,320674,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+371559,611,-51.25,-29.25,0.578430704320922,AN,Caxias do Sul,BRA,381270,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+374460,612,-50.25,-25,0.61956337139462,AN,Ponta Grossa,BRA,292177,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+396170,613,-42.75,-5,0.585426107782758,AN,Teresina,BRA,907000,11,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+416340,614,-35.75,-9.5,0.553547780622136,AN,Macei√≥,BRA,1186000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+401899,615,-40.75,-14.75,0.659851891524864,AN,Vit√≥ria da Conquista,BRA,308204,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+389652,616,-45,-12.25,0.543132731916778,AN,Barreiras,BRA,158292,9,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+403319,617,-40.25,-20.25,0.566922108896754,AN,Vila Velha,BRA,1209091,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+417797,618,-35.25,-5.75,0.509645470051152,AN,Natal,BRA,1088000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+237793,619,-97.75,55.75,0.708532804341027,AN,Thompson,CAN,13727,6,North America,Canada,Americas,North America,Northern America,Canada
+231280,620,-100,49.75,0.588744836210302,AN,Brandon,CAN,28418,7,North America,Canada,Americas,North America,Northern America,Canada
+196713,621,-112,60,0.675065309147943,AN,Fort Smith,CAN,518,2,North America,Canada,Americas,North America,Northern America,Canada
+198142,622,-111.5,56.75,0.628226490521973,AN,Fort McMurray,CAN,21863,7,North America,Canada,Americas,North America,Northern America,Canada
+181557,623,-117.25,56.25,0.621073586584041,AN,Rivi√®re-la-Paix,CAN,5340,5,North America,Canada,Americas,North America,Northern America,Canada
+171463,624,-120.75,56.25,0.641002432189205,AN,Fort St. John,CAN,18776,6,North America,Canada,Americas,North America,Northern America,Canada
+322182,625,-68.5,63.75,0.811136138484334,AN,Iqaluit,CAN,6124,5,North America,Canada,Americas,North America,Northern America,Canada
+216937,626,-105,69,0.784661157000246,AN,Ikaluktutiak,CAN,1477,3,North America,Canada,Americas,North America,Northern America,Canada
+187371,627,-115.25,67.75,0.776318182773662,AN,Kugluktuk,CAN,1302,3,North America,Canada,Americas,North America,Northern America,Canada
+258011,628,-90.75,63.25,0.831731515626113,AN,Chesterfield Inlet,CAN,374,2,North America,Canada,Americas,North America,Northern America,Canada
+248629,629,-94,61,0.842954528376912,AN,Arviat,CAN,1868,3,North America,Canada,Americas,North America,Northern America,Canada
+250105,630,-93.5,69.5,0.758287149171035,AN,Taloyoak,CAN,774,2,North America,Canada,Americas,North America,Northern America,Canada
+283991,631,-81.75,69.25,0.752545509600278,AN,Igloolik,CAN,1612,3,North America,Canada,Americas,North America,Northern America,Canada
+117419,632,-139.5,64,0.658998670790232,AN,Dawson City,CAN,1319,3,North America,Canada,Americas,North America,Northern America,Canada
+285350,633,-81.25,48.5,0.701601325675394,AN,Timmins,CAN,34974,7,North America,Canada,Americas,North America,Northern America,Canada
+290388,634,-79.5,46.25,0.668398836684047,AN,North Bay,CAN,50170,8,North America,Canada,Americas,North America,Northern America,Canada
+295471,635,-77.75,55.25,0.799422648142685,AN,Kuujjuarapik,CAN,1243,3,North America,Canada,Americas,North America,Northern America,Canada
+322159,636,-68.5,58,0.791096319980694,AN,Kuujjuaq,CAN,1273,3,North America,Canada,Americas,North America,Northern America,Canada
+345904,637,-60.25,46,0.708808098101255,AN,Sydney,CAN,37538,7,North America,Canada,Americas,North America,Northern America,Canada
+326465,638,-67,53,0.818488909665382,AN,Labrador City,CAN,10313,6,North America,Canada,Americas,North America,Northern America,Canada
+551938,639,11.25,3,0.870431503788992,AN,Ebolowa,CMR,87875,8,Africa,Cameroon,Africa,Sub-Saharan Africa,Middle Africa,Cameroun
+579347,640,20.75,5.75,0.67331395794948,AN,Bambari,CAF,62098,8,Africa,Central African Republic,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique centrafricaine
+554992,641,12.25,45.5,0.536941420625557,AN,Venise,ITA,270816,10,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+310911,642,-72.25,-50.25,0.635147738976009,AN,El Calafate,ARG,8000,5,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+321801,643,-68.5,-31.5,0.29068982217348,AN,San Juan,ARG,447048,10,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+331848,644,-65,-43.25,0.409002542439284,AN,Rawson,ARG,26335,7,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+323213,645,-68,-39,0.380001826578695,AN,Neuqu√©n,ARG,242092,10,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+331962,646,-65,-14.75,0.661145015930136,AN,Trinidad,BOL,84259,8,South America,Bolivia,Americas,Latin America & Caribbean,South America,Bolivie
+334038,647,-64.25,-36.5,0.420656499932661,AN,Santa Rosa,ARG,111424,9,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+313831,648,-71.25,-41.25,0.635791207917712,AN,San Carlos de Bariloche,ARG,95394,8,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+330480,649,-65.5,-24.75,0.588859508886482,AN,Salta,ARG,512686,11,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+331193,650,-65.25,-26.75,0.494358071323597,AN,San Miguel de Tucum√°n,ARG,830000,11,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+351383,651,-58.25,-26.25,0.467422551052137,AN,Formosa,ARG,221383,10,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+344152,652,-60.75,-31.5,0.433948408925172,AN,Santa Fe,ARG,489505,10,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+344146,653,-60.75,-33,0.43811272903148,AN,Rosario,ARG,1203000,12,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+383841,654,-47,-23,0.549146775777141,AN,Campinas,BRA,2791000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+382397,655,-47.5,-23.5,0.577257511290637,AN,Sorocaba,BRA,563281,11,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+381685,656,-47.75,-21.25,0.526042195037007,AN,Ribeir√£o Preto,BRA,551267,11,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+402641,657,-40.5,-9.5,0.528989279191151,AN,Petrolina,BRA,260985,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+549066,658,10.25,6,0.770344886703022,AN,Bamenda,CMR,445299,10,Africa,Cameroon,Africa,Sub-Saharan Africa,Middle Africa,Cameroun
+558452,659,13.5,9.25,0.577023658054796,AN,Garoua,CMR,436899,10,Africa,Cameroon,Africa,Sub-Saharan Africa,Middle Africa,Cameroun
+699147,660,62.25,34.25,0.221095295131487,AN,H√©rat,AFG,481009,10,Asia,Afghanistan,Asia,South Asia,Southern Asia,Afghanistan
+712856,661,67,36.75,0.303906247334618,AN,Maz√¢r-e Char√Æf,AFG,458151,10,Asia,Afghanistan,Asia,South Asia,Southern Asia,Afghanistan
+817306,662,103.25,13,0.701044899383278,AN,Battambang,KHM,154773,9,Asia,Cambodia,Asia,East Asia & Pacific,South-Eastern Asia,Cambodge
+818749,663,103.75,13.25,0.687814315611666,AN,Siem Reap,KHM,109398,9,Asia,Cambodia,Asia,East Asia & Pacific,South-Eastern Asia,Cambodge
+566308,664,16.25,-9.5,0.646672286347232,AN,Malanje,AGO,125856,9,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+558365,665,13.5,-12.5,0.677227549029119,AN,Benguela,AGO,151226,9,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+558355,666,13.5,-15,0.474528985062727,AN,Lubango,AGO,125632,9,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+554749,667,12.25,-15.25,0.421900382053784,AN,Mo√ß√¢medes,AGO,132900,9,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+332656,668,-64.75,-21.5,0.63408973813057,AN,Tarija,BOL,159269,9,South America,Bolivia,Americas,Latin America & Caribbean,South America,Bolivie
+347935,669,-59.5,13,0.51169933773803,AN,Bridgetown,BRB,191152,9,North America,Barbados,Americas,Latin America & Caribbean,Caribbean,Barbade
+541980,670,7.75,37,0.421974420801483,AN,Annaba,DZA,503524,11,Africa,Algeria,Africa,Middle East & North Africa,Northern Africa,AlgÈrie
+526728,671,2.5,9.25,0.61323634828582,AN,Parakou,BEN,188853,9,Africa,Benin,Africa,Sub-Saharan Africa,Western Africa,BÈnin
+526717,672,2.5,6.5,0.686826772254073,AN,Porto-Novo,BEN,300000,10,Africa,Benin,Africa,Sub-Saharan Africa,Western Africa,BÈnin
+538372,673,6.5,36.25,0.445803678933192,AN,Constantine,DZA,605179,11,Africa,Algeria,Africa,Middle East & North Africa,Northern Africa,AlgÈrie
+588184,674,23.75,52,0.676192725585266,AN,Brest,BLR,300715,10,Europe,Belarus,Europe,Europe & Central Asia,Eastern Europe,BiÈlorussie
+777690,675,89.5,22.75,0.51326671526344,AN,Khuln√¢,BGD,1553000,12,Asia,Bangladesh,Asia,South Asia,Southern Asia,Bangladesh
+598706,676,27.5,-21.25,0.34585352480468,AN,Francistown,BWA,89979,8,Africa,Botswana,Africa,Sub-Saharan Africa,Southern Africa,Botswana
+596536,677,26.75,-23,0.328408567587648,AN,Mahalapye,BWA,50744,8,Africa,Botswana,Africa,Sub-Saharan Africa,Southern Africa,Botswana
+596538,678,26.75,-22.5,0.333975193443511,AN,Serowe,BWA,48573,7,Africa,Botswana,Africa,Sub-Saharan Africa,Southern Africa,Botswana
+900832,679,132.25,-14.5,0.492416794327172,AN,Katherine,AUS,10141,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+851727,680,115.25,-33.75,0.468512629130573,AN,Busselton,AUS,10214,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+853174,681,115.75,-32.5,0.385944315458112,AN,Mandurah,AUS,73356,8,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+871978,682,122.25,-18,0.329729030811877,AN,Broome,AUS,13218,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+869764,683,121.5,-30.75,0.349029837063316,AN,Kalgoorlie,AUS,36852,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+859653,684,118,-35,0.609054110944271,AN,Albany,AUS,26445,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+861154,685,118.5,-20.25,0.246272644070401,AN,Port Hedland,AUS,14288,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+856105,686,116.75,-20.75,0.229478958683709,AN,Karratha,AUS,16796,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+849584,687,114.5,-28.75,0.31192520128168,AN,Geraldton,AUS,27258,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+940408,688,146,-34.25,0.394762971579577,AN,Griffith,AUS,15455,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+949064,689,149,-33.25,0.437282338343335,AN,Orange,AUS,39329,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+947626,690,148.5,-32.25,0.380873600980549,AN,Dubbo,AUS,31574,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+957006,691,151.75,-30.5,0.471264009053509,AN,Armidale,AUS,22673,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+927439,692,141.5,-32,0.324339729310437,AN,Broken Hill,AUS,17395,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+910845,693,135.75,-34.75,0.518077510775942,AN,Port Lincoln,AUS,13630,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+915899,694,137.5,-33,0.395608273588798,AN,Whyalla,AUS,22559,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+927414,695,141.5,-38.25,0.626012694880818,AN,Portland,AUS,11808,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+935351,696,144.25,-36.75,0.476935884830627,AN,Bendigo,AUS,81657,8,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+941121,697,146.25,-36.25,0.448232253110319,AN,Wangaratta,AUS,14022,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+931070,698,142.75,-25.5,0.258471756044662,AN,Windorah,AUS,158,1,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+921716,699,139.5,-20.75,0.290384416468442,AN,Mount Isa,AUS,33200,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+953430,700,150.5,-23.25,0.391007460653782,AN,Rockhampton,AUS,65850,8,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+939756,701,145.75,-17,0.576568554014419,AN,Cairns,AUS,154225,9,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+962063,702,153.5,-28,0.423647166822444,AN,Gold Coast,AUS,527660,11,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+941101,703,146.25,-41.25,0.575081226500598,AN,Devonport,AUS,19317,6,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+507269,704,-4.25,11.25,0.507524035334813,AN,Bobo-Dioulasso,BFA,360106,10,Africa,Burkina Faso,Africa,Sub-Saharan Africa,Western Africa,Burkina Faso
+774813,705,88.5,24.5,0.478837280745872,AN,R√¢jsh√¢h√Æ,BGD,810000,11,Asia,Bangladesh,Asia,South Asia,Southern Asia,Bangladesh
+796433,706,96,22,0.513562065647971,AN,Mandalay,MMR,1300000,12,Asia,Myanmar,Asia,East Asia & Pacific,South-Eastern Asia,Birmanie
+787774,707,93,20.25,0.528940092433583,AN,Sittwe,MMR,179032,9,Asia,Myanmar,Asia,East Asia & Pacific,South-Eastern Asia,Birmanie
+603824,708,29.25,-3.5,0.751456529353604,AN,Bujumbura,BDI,331700,10,Africa,Burundi,Africa,Sub-Saharan Africa,Eastern Africa,Burundi
+26981,709,-170.75,-14.25,0.625837334064823,AN,Pago Pago,ASM,12576,6,Oceania,American Samoa,Oceania,East Asia & Pacific,Polynesia,Samoa amÈricaines
+342889,710,-61.25,13.25,0.499919899203109,AN,Kingstown,VCT,49485,7,North America,Saint Vincent and the Grenadines,Americas,Latin America & Caribbean,Caribbean,Saint-Vincent-et-les-Grenadines
+343613,711,-61,14,0.519412597472018,AN,Castries,LCA,37963,7,North America,Saint Lucia,Americas,Latin America & Caribbean,Caribbean,Sainte-Lucie
+338579,712,-62.75,17.25,0.449748075821183,AN,Basseterre,KNA,21887,7,North America,Saint Kitts and Nevis,Americas,Latin America & Caribbean,Caribbean,Saint-Christophe-et-NiÈvËs
+474891,713,-15.5,28,0.404091351806666,AN,Las Palmas de Gran Canaria,ESP,378495,10,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+649303,714,45,10.5,0.327229593428924,AN,Berbera,SOL,242344,10,Africa,Somaliland,Africa,Sub-Saharan Africa,Eastern Africa,Somaliland
+685230,715,57.5,-20.25,0.470633428318031,AN,Port-Louis,MUS,595491,11,Seven seas (open ocean),Mauritius,Africa,Sub-Saharan Africa,Eastern Africa,Maurice
+619105,716,34.5,31.5,0.32109411625248,AN,Gaza,PSX,505700,11,Asia,Palestine,Asia,Middle East & North Africa,Western Asia,Palestine
+341442,717,-61.75,12,0.531959079262434,AN,Saint-Georges,GRD,33734,7,North America,Grenada,Americas,Latin America & Caribbean,Caribbean,Grenade
+88253,718,-149.5,-17.5,0.566148765723814,AN,Papeete,PYF,131695,9,Oceania,French Polynesia,Oceania,East Asia & Pacific,Polynesia,PolynÈsie franÁaise
+665228,719,50.5,26.25,0.175222693144998,AN,Manama,BHR,563920,11,Asia,Bahrain,Asia,Middle East & North Africa,Western Asia,BahreÔn
+292472,720,-78.75,26.5,0.546079527699586,AN,Freeport,BHS,25383,7,North America,The Bahamas,Americas,Latin America & Caribbean,Caribbean,Bahamas
+341462,721,-61.75,17,0.455818935777202,AN,Saint John's,ATG,35499,7,North America,Antigua and Barbuda,Americas,Latin America & Caribbean,Caribbean,Antigua-et-Barbuda
+867821,722,120.75,24.25,0.571387617086822,AN,Taichung,TWN,2629323,12,Asia,Taiwan,Asia,East Asia & Pacific,Eastern Asia,TaÔwan
+1029791,723,177,-39.5,0.531786898094596,AN,Napier,NZL,57800,8,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+1024033,724,175,-37,0.591391601119981,AN,Manukau City,NZL,375600,10,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+1024751,725,175.25,-37.75,0.61866842063539,AN,Hamilton,NZL,148200,9,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+1021131,726,174,-41.5,0.544970492296147,AN,Blenheim,NZL,30300,7,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+1011019,727,170.5,-46,0.657145364040678,AN,Dunedin,NZL,117700,9,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+743128,728,77.5,34.25,0.514475859758077,AN,Leh,IND,30870,7,Asia,India,Asia,South Asia,Southern Asia,Inde
+751709,729,80.5,16.5,0.569454835671367,AN,Amaravati,IND,5800000,13,Asia,India,Asia,South Asia,Southern Asia,Inde
+737989,730,75.75,11.25,0.662633960784385,AN,Kozhikode,IND,953000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+766865,731,85.75,20.25,0.516224319312834,AN,Bhubaneswar,IND,844000,11,Asia,India,Asia,South Asia,Southern Asia,Inde
+768317,732,86.25,22.75,0.453443650057483,AN,Jamshedpur,IND,1300000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+357116,733,-56.25,-35,0.493864356003928,AN,Montevideo,URY,1513000,12,South America,Uruguay,Americas,Latin America & Caribbean,South America,Uruguay
+196659,734,-112,46.5,0.557131746501634,AN,Helena,USA,38725,7,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+229105,735,-100.75,46.75,0.54540565655087,AN,Bismarck,USA,63871,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+184390,736,-116.25,43.5,0.453363947118774,AN,Boise,USA,338071,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+167782,737,-122,37.25,0.404856661052415,AN,San Jos√©,USA,1668000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+169229,738,-121.5,38.5,0.366988450549825,AN,Sacramento,USA,1604000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+187245,739,-115.25,36.25,0.28757963096723,AN,Las Vegas,USA,1823000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+213920,740,-106,35.75,0.342956319169113,AN,Santa Fe,USA,92681,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+165652,741,-122.75,45.5,0.617324779600357,AN,Portland,USA,1875000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+196636,742,-112,40.75,0.457484339900089,AN,Salt Lake City,USA,966000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+217547,743,-104.75,41.25,0.455549768031095,AN,Cheyenne,USA,72927,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+249993,744,-93.5,41.5,0.546462500975891,AN,Des Moines,USA,380655,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+242782,745,-96,41.25,0.509689801908804,AN,Omaha,USA,877110,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+238433,746,-97.5,35.5,0.443734263380369,AN,Oklahoma City,USA,788000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+230537,747,-100.25,44.25,0.496660009308747,AN,Pierre,USA,13879,6,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+235525,748,-98.5,29.5,0.514880332926458,AN,San Antonio,USA,1473000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+311143,749,-72.25,7.75,0.818933553316377,AN,San Crist√≥bal,VEN,438798,10,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+323410,750,-68,10.25,0.79919567365538,AN,Valencia,VEN,1770000,12,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+259329,751,-90.25,32.25,0.521834526098136,AN,Jackson,USA,250902,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+292509,752,-78.75,35.75,0.541233070759159,AN,Raleigh,USA,1163515,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+283880,753,-81.75,41.5,0.63274771675016,AN,Cleveland,USA,1890000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+275940,754,-84.5,39.25,0.59485557754383,AN,Cincinnati,USA,1636000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+269439,755,-86.75,36.25,0.567678749222647,AN,Nashville,USA,877000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+260062,756,-90,35.25,0.523086498124582,AN,Memphis,USA,1081000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+299723,757,-76.25,36.75,0.550295172880093,AN,Norfolk,USA,1047869,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+265861,758,-88,43,0.601926580861663,AN,Milwaukee,USA,1388000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+291817,759,-79,43,0.633105142211372,AN,Buffalo,USA,1016000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+288923,760,-80,40.5,0.642776786603711,AN,Pittsburgh,USA,1838000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+339264,761,-62.5,8.25,0.686869658416871,AN,Ciudad Guayana,VEN,746535,11,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+523111,762,1.25,6.25,0.665289164605466,AN,Lom√©,TGO,1452000,12,Africa,Togo,Africa,Sub-Saharan Africa,Western Africa,Togo
+549189,763,10.25,36.75,0.383292696720949,AN,Tunis,TUN,2412500,12,Africa,Tunisia,Africa,Middle East & North Africa,Northern Africa,Tunisie
+79902,764,-152.5,57.75,0.71453736880512,AN,Kodiak,USA,9461,5,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+50331,765,-162.75,55.25,0.823654009875926,AN,Cold Bay,USA,200,1,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+53237,766,-161.75,60.75,0.720311201939529,AN,Bethel,USA,6228,5,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+38847,767,-166.75,68.25,0.769432770144759,AN,Point Hope,USA,461,2,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+67699,768,-156.75,71.25,0.884114822880788,AN,Utqiagvik,USA,4336,4,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+42437,769,-165.5,64.5,0.702889594842087,AN,Nome,USA,3485,4,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+97941,770,-146.25,61.25,0.786626130342484,AN,Valdez,USA,4036,4,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+131816,771,-134.5,58.25,0.773599228285479,AN,Juneau,USA,30711,7,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+93629,772,-147.75,64.75,0.629156813928575,AN,Fairbanks,USA,56993,8,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+90767,773,-148.75,70.25,0.830536937397538,AN,Prudhoe Bay,USA,2500,4,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+616273,774,33.5,44.5,0.48347872789159,AN,S√©bastopol,RUS,379200,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+676036,775,54.25,24.5,0.177185297047606,AN,Abou Dabi,ARE,603492,11,Asia,United Arab Emirates,Asia,Middle East & North Africa,Western Asia,…mirats arabes unis
+688347,776,58.5,38,0.320848356494962,AN,Achgabat,TKM,727700,11,Asia,Turkmenistan,Asia,Europe & Central Asia,Central Asia,TurkmÈnistan
+712868,777,67,39.75,0.378597383218056,AN,Samarcande,UZB,708000,11,Asia,Uzbekistan,Asia,Europe & Central Asia,Central Asia,OuzbÈkistan
+600892,778,28.25,-15.5,0.43151434394531,AN,Lusaka,ZMB,1328000,12,Africa,Zambia,Africa,Sub-Saharan Africa,Eastern Africa,Zambie
+608814,779,31,-17.75,0.41984634104213,AN,Harare,ZWE,1572000,12,Africa,Zimbabwe,Africa,Sub-Saharan Africa,Eastern Africa,Zimbabwe
+601594,780,28.5,-20.25,0.387630933246604,AN,Bulawayo,ZWE,699385,11,Africa,Zimbabwe,Africa,Sub-Saharan Africa,Eastern Africa,Zimbabwe
+881389,781,125.5,-8.5,0.609605854998032,AN,Dili,TLS,234331,10,Asia,East Timor,Asia,East Asia & Pacific,South-Eastern Asia,Timor oriental
+1004643,782,168.25,-17.75,0.625812827411926,AN,Port-Vila,VUT,44040,7,Oceania,Vanuatu,Oceania,East Asia & Pacific,Melanesia,Vanuatu
+267908,783,-87.25,14,0.618989894223033,AN,Tegucigalpa,HND,946000,11,North America,Honduras,Americas,Latin America & Caribbean,Central America,Honduras
+351515,784,-58.25,6.75,0.662039100446484,AN,Georgetown,GUY,264350,10,South America,Guyana,Americas,Latin America & Caribbean,South America,Guyana
+456290,785,-22,64.25,0.756020409704158,AN,Reykjavik,ISL,166212,9,Europe,Iceland,Europe,Europe & Central Asia,Northern Europe,Islande
+311186,786,-72.25,18.5,0.566878355362199,AN,Port-au-Prince,HTI,1998000,12,North America,Haiti,Americas,Latin America & Caribbean,Caribbean,HaÔti
+507447,787,-4.25,55.75,0.746137974162897,AN,Glasgow,GBR,1160000,12,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+613212,788,32.5,0.25,0.722047814026927,AN,Kampala,UGA,1420000,12,Africa,Uganda,Africa,Sub-Saharan Africa,Eastern Africa,Ouganda
+649312,789,45,12.75,0.281177065532768,AN,Aden,YEM,1000000,11,Asia,Yemen,Asia,Middle East & North Africa,Western Asia,YÈmen
+360163,790,-55.25,5.75,0.654494033731294,AN,Paramaribo,SUR,254169,10,South America,Suriname,Americas,Latin America & Caribbean,South America,Suriname
+502327,791,-6,37.5,0.360568545434173,AN,S√©ville,ESP,1212045,12,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+545492,792,9,13.75,0.375294606201351,AN,Zinder,NER,230358,10,Africa,Niger,Africa,Sub-Saharan Africa,Western Africa,Niger
+525303,793,2,13.5,0.399301015800147,AN,Niamey,NER,915000,11,Africa,Niger,Africa,Sub-Saharan Africa,Western Africa,Niger
+626988,794,37.25,19.5,0.274468458544244,AN,Port-Soudan,SDN,489725,10,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+717910,795,68.75,38.5,0.427727620117366,AN,Douchanb√©,TJK,1086244,12,Asia,Tajikistan,Asia,Europe & Central Asia,Central Asia,Tadjikistan
+311779,796,-72,-13.5,0.724261379038746,AN,Cuzco,PER,361182,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+316808,797,-70.25,-18,0.628302496152394,AN,Tacna,PER,280098,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+291613,798,-79,-8,0.649281307829149,AN,Trujillo,PER,765171,11,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+300962,799,-75.75,-14,0.500096068971537,AN,Ica,PER,279420,10,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+352829,800,-57.75,-25.25,0.477259268250429,AN,Asuncion,PRY,1870000,12,South America,Paraguay,Americas,Latin America & Caribbean,South America,Paraguay
+270785,801,-86.25,12.25,0.55357534994343,AN,Managua,NIC,920000,11,North America,Nicaragua,Americas,Latin America & Caribbean,Central America,Nicaragua
+481302,802,-13.25,8.5,0.64244669912891,AN,Freetown,SLE,827000,11,Africa,Sierra Leone,Africa,Sub-Saharan Africa,Western Africa,Sierra Leone
+542621,803,8,17,0.253516926627719,AN,Agadez,NER,117770,9,Africa,Niger,Africa,Sub-Saharan Africa,Western Africa,Niger
+591629,804,25,12,0.40819729517468,AN,Nyala,SDN,392373,10,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+600264,805,28,7.75,0.587818962437186,AN,Wau,SSD,127384,9,,,,,,
+607520,806,30.5,19.25,0.131827043396752,AN,Dongola,SDN,26404,7,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+624809,807,36.5,15.5,0.257223251550882,AN,Kassala,SDN,401477,10,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+574556,808,19,69.75,0.757343358275565,AN,Troms√∏,NOR,52436,8,Europe,Norway,Europe,Europe & Central Asia,Northern Europe,NorvËge
+550017,809,10.5,63.5,0.731880138656407,AN,Trondheim,NOR,147139,9,Europe,Norway,Europe,Europe & Central Asia,Northern Europe,NorvËge
+534864,810,5.25,60.5,0.720501358987707,AN,Bergen,NOR,213585,10,Europe,Norway,Europe,Europe & Central Asia,Northern Europe,NorvËge
+730148,811,73,33.75,0.344138181824802,AN,Islamabad,PAK,780000,11,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+725808,812,71.5,30.25,0.222363276873666,AN,Multan,PAK,1522000,12,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+716416,813,68.25,25.5,0.215601667645387,AN,Hyder√¢b√¢d,PAK,1459000,12,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+725823,814,71.5,34,0.341209476672565,AN,Peshawar,PAK,1303000,12,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+765453,815,85.25,27.75,0.577793706998681,AN,Katmandou,NPL,895000,11,Asia,Nepal,Asia,South Asia,Southern Asia,NÈpal
+636946,816,40.75,-14.5,0.418761464400273,AN,Nacala,MOZ,224795,10,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+595070,817,26.25,-29,0.292147903703153,AN,Bloemfontein,ZAF,463064,10,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+600851,818,28.25,-25.75,0.335445238735922,AN,Pretoria,ZAF,1338000,12,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+944112,819,147.25,-9.5,0.789298037010612,AN,Port Moresby,PNG,283733,10,Oceania,Papua New Guinea,Oceania,East Asia & Pacific,Melanesia,Papouasie-Nouvelle-GuinÈe
+980883,820,160,-9.5,0.823464546465513,AN,Honiara,SLB,76328,8,Oceania,Solomon Islands,Oceania,East Asia & Pacific,Melanesia,Œles Salomon
+290239,821,-79.5,9,0.742155545137145,AN,Panama,PAN,1281000,12,North America,Panama,Americas,Latin America & Caribbean,Central America,Panama
+505197,822,-5,34,0.378707778555426,AN,F√®s,MAR,1002000,12,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+500150,823,-6.75,34,0.415233735728896,AN,Rabat,MAR,1705000,12,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+496536,824,-8,31.75,0.332092235274049,AN,Marrakech,MAR,872000,11,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+602584,825,28.75,47,0.582074318589135,AN,Chi»ôinƒÉu,MDA,688134,11,Europe,Moldova,Europe,Europe & Central Asia,Eastern Europe,Moldavie
+619621,826,34.75,-19.75,0.410350286938024,AN,Beira,MOZ,530604,11,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+592887,827,25.5,-34,0.444435762693033,AN,Port Elizabeth,ZAF,1021000,12,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+613107,828,32.5,-26,0.404908101159063,AN,Maputo,MOZ,1446000,12,Africa,Mozambique,Africa,Sub-Saharan Africa,Eastern Africa,Mozambique
+764847,829,85,56.5,0.725344290448861,AN,Tomsk,RUS,535479,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+1031650,830,177.5,64.75,0.766613130542365,AN,Anadyr,RUS,10332,6,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+614929,831,33,69,0.797362133634813,AN,Mourmansk,RUS,319263,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+636541,832,40.5,64.5,0.765878512326515,AN,Arkhangelsk,RUS,356051,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+646602,833,44,56.25,0.716578636431333,AN,Nijni Novgorod,RUS,1278000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+648014,834,44.5,48.75,0.606891466981986,AN,Volgograd,RUS,984000,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+681204,835,56,54.75,0.682209543319363,AN,Oufa,RUS,1018000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+694190,836,60.5,56.75,0.7208993589562,AN,Iekaterinbourg,RUS,1313000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+664615,837,50.25,53.25,0.655549665066329,AN,Samara,RUS,1137000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+661020,838,49,55.75,0.701191881615104,AN,Kazan,RUS,1115000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+731700,839,73.5,61.25,0.773207297153545,AN,Sourgout,RUS,400000,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+761229,840,83.75,53.25,0.6513999675711,AN,Barnaoul,RUS,599579,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+759073,841,83,55,0.694045508788391,AN,Novossibirsk,RUS,1389000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+649990,842,45.25,2,0.479550282103997,AN,Mogadiscio,SOM,1100000,12,Africa,Somalia,Africa,Sub-Saharan Africa,Eastern Africa,Somalie
+688289,843,58.5,23.5,0.169814550264908,AN,Mascate,OMN,734697,11,Asia,Oman,Asia,Middle East & North Africa,Western Asia,Oman
+749508,844,79.75,7,0.726065961361835,AN,Colombo,LKA,217000,10,Asia,Sri Lanka,Asia,South Asia,Southern Asia,Sri Lanka
+877138,845,124,10.25,0.746189646197088,AN,Cebu,PHL,815000,11,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+872814,846,122.5,10.75,0.76099535326163,AN,Iloilo,PHL,387681,10,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+882172,847,125.75,7,0.774850911601926,AN,Davao,PHL,1402000,12,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+812432,848,101.5,56.25,0.715668022068161,AN,Bratsk,RUS,246348,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+820347,849,104.25,52.25,0.616455721810009,AN,Irkoutsk,RUS,586695,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+787196,850,92.75,56,0.712914562135032,AN,Krasno√Øarsk,RUS,925000,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+751937,851,80.5,73.5,0.842212222968087,AN,Dikson,RUS,1113,3,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+847023,852,113.5,52,0.52985059153853,AN,Tchita,RUS,308500,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+900342,853,132,43.25,0.550393488032348,AN,Vladivostok,RUS,587022,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+911991,854,136,71.5,0.761524439986908,AN,Nizhneyansk,RUS,400,2,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+893928,855,129.75,62,0.690914278229078,AN,Iakoutsk,RUS,235600,10,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+891083,856,128.75,71.75,0.834651435189175,AN,Tiksi,RUS,5700,5,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+954482,857,150.75,59.5,0.734042320626252,AN,Magadan,RUS,95282,8,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+182183,858,-117,32.5,0.415842294975212,AN,Tijuana,MEX,1553000,12,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+213892,859,-106,28.75,0.348776853953799,AN,Chihuahua,MEX,793000,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+212428,860,-106.5,23.25,0.464658629967634,AN,Mazatl√°n,MEX,368204,10,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+237659,861,-97.75,22.25,0.518611915691784,AN,Tampico,MEX,859419,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+231148,862,-100,16.75,0.48397619785233,AN,Acapulco,MEX,715584,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+241973,863,-96.25,19.25,0.549059153619138,AN,Veracruz,MEX,578963,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+250615,864,-93.25,16.75,0.652138052903342,AN,Tuxtla Guti√©rrez,MEX,481128,10,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+269379,865,-86.75,21.25,0.474053535328219,AN,Canc√∫n,MEX,542043,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+261447,866,-89.5,21,0.467693741179325,AN,M√©rida,MEX,965000,11,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+541137,867,7.5,6.5,0.76345537015886,AN,Enugu,NGA,688862,11,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+534674,868,5.25,13,0.431825240326086,AN,Sokoto,NGA,732178,11,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+681938,869,56.25,58,0.740580480432872,AN,Perm,RUS,997000,11,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+819613,870,104,49,0.481061769141392,AN,Erdenet,MNG,79647,8,Asia,Mongolia,Asia,East Asia & Pacific,Eastern Asia,Mongolie
+828261,871,107,48,0.476235888616154,AN,Oulan-Bator,MNG,885000,11,Asia,Mongolia,Asia,East Asia & Pacific,Eastern Asia,Mongolie
+616059,872,33.5,-9,0.656596683022199,AN,Mbeya,TZA,291649,10,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+568419,873,17,-22.5,0.264310266328693,AN,Windhoek,NAM,268132,10,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+571315,874,18,-19.5,0.357835315089412,AN,Grootfontein,NAM,24099,7,Africa,Namibia,Africa,Sub-Saharan Africa,Southern Africa,Namibie
+632653,875,39.25,-6.25,0.497730378287308,AN,Zanzibar,TZA,403658,10,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+518197,876,-0.5,39.5,0.408511486976887,AN,Valence,ESP,808000,11,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+981157,877,160,59,0.730936347760938,AN,Palana,RUS,3671,4,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+976807,878,158.5,53,0.680271503825983,AN,Petropavlovsk-Kamtchatski,RUS,187282,9,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+541147,879,7.5,9,0.643825538174221,AN,Abuja,NGA,1576000,12,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+808598,880,100.25,-1,0.860435956581073,AN,Padang,IDN,855000,11,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+474826,881,-15.5,11.75,0.551868272945285,AN,Bissau,GNB,403339,10,Africa,Guinea-Bissau,Africa,Sub-Saharan Africa,Western Africa,GuinÈe-Bissau
+557847,882,13.25,38.25,0.390277870253406,AN,Palerme,ITA,863000,11,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+623433,883,36,32,0.229410179731944,AN,Amman,JOR,1060000,12,Asia,Jordan,Asia,Middle East & North Africa,Western Asia,Jordanie
+592521,884,25.25,54.75,0.709915227397825,AN,Vilnius,LTU,542366,11,Europe,Lithuania,Europe,Europe & Central Asia,Northern Europe,Lituanie
+588925,885,24,57,0.681023635083076,AN,Riga,LVA,742572,11,Europe,Latvia,Europe,Europe & Central Asia,Northern Europe,Lettonie
+734511,886,74.5,43,0.503780892513918,AN,Bichkek,KGZ,837000,11,Asia,Kyrgyzstan,Asia,Europe & Central Asia,Central Asia,Kirghizistan
+802993,887,98.25,39.75,0.429002075371417,AN,Jiayuguan,CHN,148279,9,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+813074,888,101.75,36.5,0.55523942591566,AN,Xining,CHN,1048000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+837543,889,110.25,25.25,0.679722418726394,AN,Guilin,CHN,987000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857040,890,117,32.75,0.588595023096511,AN,Huainan,CHN,1451000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+856281,891,116.75,23.25,0.600669522402865,AN,Shantou,CHN,1601000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+859085,892,117.75,3.25,0.785604947557052,AN,Tarakan,IDN,193069,9,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+634104,893,39.75,-4,0.516490538463448,AN,Mombasa,KEN,882000,11,Africa,Kenya,Africa,Sub-Saharan Africa,Eastern Africa,Kenya
+598674,894,27.5,-29.25,0.324780963050823,AN,Maseru,LSO,361324,10,Africa,Lesotho,Africa,Sub-Saharan Africa,Southern Africa,Lesotho
+656395,895,47.5,-19,0.647621856381496,AN,Antananarivo,MDG,1697000,12,Africa,Madagascar,Africa,Sub-Saharan Africa,Eastern Africa,Madagascar
+838135,896,110.5,-7,0.733977817111846,AN,Semarang,IDN,1396000,12,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+821568,897,104.75,-3,0.836441626377178,AN,Palembang,IDN,1749000,12,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+849686,898,114.5,-3.25,0.816238585069324,AN,Banjarmasin,IDN,603576,11,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+864098,899,119.5,-5.25,0.72503385500926,AN,Makassar,IDN,1262000,12,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+533363,900,4.75,45.75,0.597403215752407,AN,Lyon,FRA,1423000,12,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+293086,901,-78.5,-0.25,0.795234861811905,AN,Quito,ECU,1701000,12,South America,Ecuador,Americas,Latin America & Caribbean,South America,…quateur
+277265,902,-84,10,0.778023699016282,AN,San Jos√©,CRI,1284000,12,North America,Costa Rica,Americas,Latin America & Caribbean,Central America,Costa Rica
+262139,903,-89.25,13.75,0.559386694211174,AN,San Salvador,SLV,1433000,12,North America,El Salvador,Americas,Latin America & Caribbean,Central America,Salvador
+298206,904,-76.75,18,0.489627788294897,AN,Kingston,JAM,937700,11,North America,Jamaica,Americas,Latin America & Caribbean,Caribbean,JamaÔque
+301781,905,-75.5,10.5,0.689466021842126,AN,Carthag√®ne des Indes,COL,887000,11,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+316885,906,-70.25,1.25,0.84571781415831,AN,Mit√∫,COL,5917,5,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+584380,907,22.5,2.25,0.757031304479549,AN,Bumba,COD,160539,9,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+562789,908,15,12,0.456784689347401,AN,N'Djam√©na,TCD,989000,11,Africa,Chad,Africa,Sub-Saharan Africa,Middle Africa,Tchad
+579379,909,20.75,13.75,0.366755175376029,AN,Ab√©ch√©,TCD,158317,9,Africa,Chad,Africa,Sub-Saharan Africa,Middle Africa,Tchad
+544731,910,8.75,3.75,0.787965956398032,AN,Malabo,GNQ,155963,9,Africa,Equatorial Guinea,Africa,Sub-Saharan Africa,Middle Africa,GuinÈe Èquatoriale
+614035,911,32.75,25.75,0.11537465862189,AN,Louxor,EGY,609248,11,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+632018,912,39,15.25,0.454596151823573,AN,Asmara,ERI,620802,11,Africa,Eritrea,Africa,Sub-Saharan Africa,Eastern Africa,…rythrÈe
+565808,913,16,45.75,0.59340570291335,AN,Zagreb,HRV,722526,11,Europe,Croatia,Europe,Europe & Central Asia,Southern Europe,Croatie
+591098,914,24.75,59.5,0.686061636403655,AN,Tallinn,EST,394024,10,Europe,Estonia,Europe,Europe & Central Asia,Northern Europe,Estonie
+782044,915,91,29.75,0.506252874422706,AN,Lhassa,CHN,219599,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+789306,916,93.5,42.75,0.373482740399512,AN,Yizhou,CHN,580000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+750349,917,80,37,0.435065768264008,AN,Hotan,CHN,408894,10,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+738823,918,76,39.5,0.444065621800043,AN,Kachgar,CHN,506640,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+826060,919,106.25,38.5,0.419832756855723,AN,Yinchuan,CHN,991000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+847646,920,113.75,27.5,0.655999221133464,AN,Pingxiang,CHN,961000,11,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+894532,921,130,32.75,0.615736537020315,AN,Nagasaki,JPN,435455,10,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+877286,922,124,47.25,0.448461308680249,AN,Qiqihar,CHN,1641000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+573536,923,18.75,-5,0.709173442287879,AN,Kikwit,COD,637736,11,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+558392,924,13.5,-5.75,0.816257138369662,AN,Matadi,COD,245862,10,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+592980,925,25.5,-10.75,0.568663055825076,AN,Kolwezi,COD,418000,10,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+598744,926,27.5,-11.75,0.52174690375669,AN,Lubumbashi,COD,1352000,12,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+616760,927,33.75,-14,0.469795698130673,AN,Lilongwe,MWI,646750,11,Africa,Malawi,Africa,Sub-Saharan Africa,Eastern Africa,Malawi
+258537,928,-90.5,14.5,0.635647058486939,AN,Guatemala-Ville,GTM,1024000,12,North America,Guatemala,Americas,Latin America & Caribbean,Central America,Guatemala
+368812,929,-52.25,5,0.650739157515945,AN,Cayenne,FRA,61550,8,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+546881,930,9.5,0.5,0.832183961841193,AN,Libreville,GAB,578156,11,Africa,Gabon,Africa,Sub-Saharan Africa,Middle Africa,Gabon
+759645,931,83.25,17.75,0.523639397469886,AN,Visakhapatnam,IND,1529000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+1034202,932,178.5,-18.25,0.697780444089211,AN,Suva,FJI,175399,9,Oceania,Fiji,Oceania,East Asia & Pacific,Melanesia,Fidji
+544713,933,8.75,-0.75,0.779694594442845,AN,Port-Gentil,GAB,116836,9,Africa,Gabon,Africa,Sub-Saharan Africa,Middle Africa,Gabon
+510896,934,-3,16.75,0.32857103786911,AN,Tombouctou,MLI,68872,8,Africa,Mali,Africa,Sub-Saharan Africa,Western Africa,Mali
+314504,935,-71,-53.25,0.725599008301894,AN,Punta Arenas,CHL,117430,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+316799,936,-70.25,-20.25,0.611990908555912,AN,Iquique,CHL,227499,10,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+316064,937,-70.5,-23.75,0.391051560471004,AN,Antofagasta,CHL,309832,10,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+313143,938,-71.5,-33,0.356642180715095,AN,Valpara√≠so,CHL,854000,11,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+308069,939,-73.25,-39.75,0.567781050774184,AN,Valdivia,CHL,159599,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+308802,940,-73,-36.75,0.438205321643953,AN,Concepci√≥n,CHL,889725,11,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+308783,941,-73,-41.5,0.677467585513086,AN,Puerto Montt,CHL,174629,9,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+370491,942,-51.75,64.25,0.740206062342181,AN,Nuuk,GRL,14798,6,North America,Greenland,Americas,Europe & Central Asia,Northern America,Groenland
+473409,943,-16,18,0.325539509286032,AN,Nouakchott,MRT,742144,11,Africa,Mauritania,Africa,Sub-Saharan Africa,Western Africa,Mauritanie
+496460,944,-8,12.75,0.496979807023749,AN,Bamako,MLI,1494000,12,Africa,Mali,Africa,Sub-Saharan Africa,Western Africa,Mali
+482071,945,-13,20.5,0.279457504042622,AN,Atar,MRT,44265,7,Africa,Mauritania,Africa,Sub-Saharan Africa,Western Africa,Mauritanie
+506559,946,-4.5,14,0.429117730338917,AN,Djenn√©,MLI,32944,7,Africa,Mali,Africa,Sub-Saharan Africa,Western Africa,Mali
+561407,947,14.5,27,0.174214398976994,AN,Sebha,LBY,100249,9,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+577289,948,20,32,0.268740285554844,AN,Benghazi,LBY,1180000,12,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+585976,949,23,40.75,0.448689728128639,AN,Thessalonique,GRC,828000,11,Europe,Greece,Europe,Europe & Central Asia,Southern Europe,GrËce
+621998,950,35.5,33.75,0.296588848161539,AN,Beyrouth,LBN,1846000,12,Asia,Lebanon,Asia,Middle East & North Africa,Western Asia,Liban
+648707,951,44.75,41.75,0.526002025457494,AN,Tbilissi,GEO,1100000,12,Asia,Georgia,Asia,Europe & Central Asia,Western Asia,GÈorgie
+627681,952,37.5,12.5,0.474805896875985,AN,Gondar,ETH,156230,9,Africa,Ethiopia,Africa,Sub-Saharan Africa,Eastern Africa,…thiopie
+725892,953,71.5,51.25,0.623365005421819,AN,Noursoultan,KAZ,345604,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+730213,954,73,50,0.596846212604732,AN,Karaganda,KAZ,451800,10,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+741722,955,77,43.25,0.534980723803694,AN,Almaty,KAZ,1209000,12,Asia,Kazakhstan,Asia,Europe & Central Asia,Central Asia,Kazakhstan
+668859,956,51.75,32.75,0.234272299591932,AN,Ispahan,IRN,1628000,12,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+671010,957,52.5,29.75,0.217705762627619,AN,Chiraz,IRN,1240000,12,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+735187,958,74.75,31.75,0.323543324445685,AN,Amritsar,IND,1212000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+758954,959,83,25.25,0.368085810590084,AN,B√©nar√®s,IND,1352000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+770484,960,87,23.75,0.451767321676016,AN,Asansol,IND,1328000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+753891,961,81.25,21.25,0.443545608626058,AN,Bhilai,IND,1097000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+743084,962,77.5,23.25,0.377602382165082,AN,Bhopal,IND,1727000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+744473,963,78,10,0.671248298985037,AN,Madurai,IND,1294000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+741593,964,77,11,0.675523071578055,AN,Coimbatore,IND,1696000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+815163,965,102.5,18,0.592798183418133,AN,Vientiane,LAO,754000,11,Asia,Laos,Asia,East Asia & Pacific,South-Eastern Asia,Laos
+563445,966,15.25,-4.25,0.740644463422624,AN,Brazzaville,COG,1355000,12,Africa,Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique du Congo
+479864,967,-13.75,9.5,0.612327351883957,AN,Conakry,GIN,1494000,12,Africa,Guinea,Africa,Sub-Saharan Africa,Western Africa,GuinÈe
+504367,968,-5.25,6.75,0.710469803349538,AN,Yamoussoukro,CIV,206499,10,Africa,Ivory Coast,Africa,Sub-Saharan Africa,Western Africa,CÙte d'Ivoire
+309639,969,-72.75,-7.75,0.762052024065545,AN,Cruzeiro do Sul,BRA,56862,8,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+317584,970,-70,-4.25,0.831425819658872,AN,Leticia,COL,59575,8,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+346429,971,-60,-3,0.764085142449899,AN,Manaus,BRA,1753000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+394729,972,-43.25,-4.75,0.591555227948861,AN,Caxias,BRA,134640,9,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+361572,973,-54.75,-2.5,0.687712475205913,AN,Santar√©m,BRA,230428,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+378144,974,-49,-5.25,0.6302915131391,AN,Marab√°,BRA,166182,9,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+346390,975,-60,-12.75,0.662278906018897,AN,Vilhena,BRA,63231,8,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+340630,976,-62,-10.75,0.688542981321613,AN,Ji-Paran√°,BRA,65016,8,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+362221,977,-54.5,-20.5,0.518080170294552,AN,Campo Grande,BRA,778000,11,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+379497,978,-48.5,-27.5,0.650599054540649,AN,Florian√≥polis,BRA,1023000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+406956,979,-39,-12.25,0.611223980558641,AN,Feira de Santana,BRA,481911,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+239212,980,-97.25,50,0.612235915818901,AN,Winnipeg,CAN,632063,11,North America,Canada,Americas,North America,Northern America,Canada
+247899,981,-94.25,58.75,0.800223850165353,AN,Churchill,CAN,1000,2,North America,Canada,Americas,North America,Northern America,Canada
+218305,982,-104.5,50.5,0.594963428874811,AN,Regina,CAN,176183,9,North America,Canada,Americas,North America,Northern America,Canada
+211823,983,-106.75,52.25,0.602324465233268,AN,Saskatoon,CAN,198958,9,North America,Canada,Americas,North America,Northern America,Canada
+190909,984,-114,51,0.582519423893907,AN,Calgary,CAN,1110000,12,North America,Canada,Americas,North America,Northern America,Canada
+144057,985,-130.25,54.25,0.779254805973985,AN,Prince Rupert,CAN,14708,6,North America,Canada,Americas,North America,Northern America,Canada
+164222,986,-123.25,48.5,0.60121987878599,AN,Victoria,CAN,289625,10,North America,Canada,Americas,North America,Northern America,Canada
+273912,987,-85.25,73,0.790857785804705,AN,Arctic Bay,CAN,604,2,North America,Canada,Americas,North America,Northern America,Canada
+245800,988,-95,74.75,0.839939472575983,AN,Resolute,CAN,250,2,North America,Canada,Americas,North America,Northern America,Canada
+271002,989,-86.25,66.5,0.803244685810624,AN,Naujaat,CAN,1000,2,North America,Canada,Americas,North America,Northern America,Canada
+189513,990,-114.5,62.5,0.676230525767261,AN,Yellowknife,CAN,19234,6,North America,Canada,Americas,North America,Northern America,Canada
+148431,991,-128.75,66.25,0.667736870998686,AN,Fort Good Hope,CAN,597,2,North America,Canada,Americas,North America,Northern America,Canada
+130384,992,-135,60.75,0.69272909144109,AN,Whitehorse,CAN,23276,7,North America,Canada,Americas,North America,Northern America,Canada
+344289,993,-60.75,2.75,0.710458648249959,AN,Boa Vista,BRA,235150,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+372397,994,-51,0,0.661789989381126,AN,Macap√°,BRA,499166,10,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+301200,995,-75.75,45.5,0.652351098643108,AN,Ottawa,CAN,1145000,12,North America,Canada,Americas,North America,Northern America,Canada
+266634,996,-87.75,56,0.765562181445685,AN,Fort Severn,CAN,125,1,North America,Canada,Americas,North America,Northern America,Canada
+262278,997,-89.25,48.5,0.639432453183514,AN,Thunder Bay,CAN,99334,8,North America,Canada,Americas,North America,Northern America,Canada
+314183,998,-71.25,46.75,0.640793953090906,AN,Qu√©bec,CAN,624177,11,North America,Canada,Americas,North America,Northern America,Canada
+336526,999,-63.5,44.75,0.677775131256292,AN,Halifax,CAN,359111,10,North America,Canada,Americas,North America,Northern America,Canada
+367540,1000,-52.75,47.5,0.754781500182369,AN,Saint-Jean de Terre-Neuve,CAN,131469,9,North America,Canada,Americas,North America,Northern America,Canada
+341620,1001,-61.75,56.5,0.682230119452332,AN,Nain,CAN,1151,3,North America,Canada,Americas,North America,Northern America,Canada
+337253,1002,-63.25,46.25,0.674984969198704,AN,Charlottetown,CAN,42402,7,North America,Canada,Americas,North America,Northern America,Canada
+579358,1003,20.75,8.5,0.611387722589301,AN,Nd√©l√©,CAF,11764,6,Africa,Central African Republic,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique centrafricaine
+578782,1004,20.5,44.75,0.548825416939728,AN,Belgrade,SRB,1099000,12,Europe,Republic of Serbia,Europe,Europe & Central Asia,Southern Europe,Serbie
+595929,1005,26.5,5.5,0.683025194839998,AN,Obo,CAF,12887,6,Africa,Central African Republic,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique centrafricaine
+851161,1006,115,5,0.830483011449828,AN,Bandar Seri Begawan,BRN,296500,10,Asia,Brunei,Asia,East Asia & Pacific,South-Eastern Asia,Brunei
+328946,1007,-66,-47.75,0.474284728706786,AN,Puerto Deseado,ARG,3305,4,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+319557,1008,-69.25,-51.75,0.600156156741309,AN,R√≠o Gallegos,ARG,85700,8,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+324628,1009,-67.5,-45.75,0.434308377405008,AN,Comodoro Rivadavia,ARG,140850,9,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+321074,1010,-68.75,-33,0.336228117854758,AN,Mendoza,ARG,893000,11,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+331224,1011,-65.25,-19,0.63593871078708,AN,Sucre,BOL,224838,10,South America,Bolivia,Americas,Latin America & Caribbean,South America,Bolivie
+329093,1012,-66,-11,0.705595140373617,AN,Riberalta,BOL,74014,8,South America,Bolivia,Americas,Latin America & Caribbean,South America,Bolivie
+339797,1013,-62.25,-38.75,0.436554135416042,AN,Bah√≠a Blanca,ARG,281536,10,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+353499,1014,-57.5,-38,0.519861980482484,AN,Mar del Plata,ARG,555897,11,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+334058,1015,-64.25,-31.5,0.415335172053539,AN,C√≥rdoba,ARG,1452000,12,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+357868,1016,-56,-27.25,0.474306865736391,AN,Posadas,ARG,357119,10,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+263595,1017,-88.75,17.25,0.608824362018795,AN,Belmopan,BLZ,15220,6,North America,Belize,Americas,Latin America & Caribbean,Central America,Belize
+572852,1018,18.5,4.25,0.699258234690536,AN,Bangui,CAF,831925,11,Africa,Central African Republic,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique centrafricaine
+560620,1019,14.25,10.5,0.522672371261499,AN,Maroua,CMR,319941,10,Africa,Cameroon,Africa,Sub-Saharan Africa,Middle Africa,Cameroun
+552662,1020,11.5,3.75,0.856670792581457,AN,Yaound√©,CMR,1611000,12,Africa,Cameroon,Africa,Sub-Saharan Africa,Middle Africa,Cameroun
+576605,1021,19.75,41.25,0.431001670291704,AN,Tirana,ALB,895350,11,Europe,Albania,Europe,Europe & Central Asia,Southern Europe,Albanie
+647980,1022,44.5,40.25,0.405475104622769,AN,Erevan,ARM,1102000,12,Asia,Armenia,Asia,Europe & Central Asia,Western Asia,ArmÈnie
+663122,1023,49.75,40.5,0.45795620642038,AN,Bakou,AZE,2122300,12,Asia,Azerbaijan,Asia,Europe & Central Asia,Western Asia,AzerbaÔdjan
+709230,1024,65.75,31.5,0.171213619818445,AN,Kandah√¢r,AFG,715542,11,Asia,Afghanistan,Asia,South Asia,Southern Asia,Afghanistan
+822347,1025,105,11.5,0.722006718882106,AN,Phnom Penh,KHM,1466000,12,Asia,Cambodia,Asia,East Asia & Pacific,South-Eastern Asia,Cambodge
+570613,1026,17.75,-14.75,0.505069046799856,AN,Menongue,AGO,13030,6,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+564853,1027,15.75,-12.75,0.560288176963557,AN,Huambo,AGO,1100000,12,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+322582,1028,-68.25,-16.5,0.674476573977507,AN,La Paz,BOL,1590000,12,South America,Bolivia,Americas,Latin America & Caribbean,South America,Bolivie
+336997,1029,-63.25,-17.75,0.661110394493197,AN,Santa Cruz de la Sierra,BOL,2102998,12,South America,Bolivia,Americas,Latin America & Caribbean,South America,Bolivie
+518182,1030,-0.5,35.75,0.374914061334549,AN,Oran,DZA,798000,11,Africa,Algeria,Africa,Middle East & North Africa,Northern Africa,AlgÈrie
+526716,1031,2.5,6.25,0.658816258846359,AN,Cotonou,BEN,762000,11,Africa,Benin,Africa,Sub-Saharan Africa,Western Africa,BÈnin
+535434,1032,5.5,22.75,0.28524370629792,AN,Tamanrasset,DZA,76000,8,Africa,Algeria,Africa,Middle East & North Africa,Northern Africa,AlgÈrie
+530426,1033,3.75,32.5,0.246927730619174,AN,Gharda√Øa,DZA,125480,9,Africa,Algeria,Africa,Middle East & North Africa,Northern Africa,AlgÈrie
+586705,1034,23.25,42.75,0.525299195708199,AN,Sofia,BGR,1185000,12,Europe,Bulgaria,Europe,Europe & Central Asia,Eastern Europe,Bulgarie
+599007,1035,27.5,54,0.706553554331715,AN,Minsk,BLR,1805000,12,Europe,Belarus,Europe,Europe & Central Asia,Eastern Europe,BiÈlorussie
+778430,1036,89.75,27.5,0.695990425957875,AN,Thimphou,BTN,98676,8,Asia,Bhutan,Asia,South Asia,Southern Asia,Bhoutan
+594366,1037,26,-24.75,0.305605058283122,AN,Gaborone,BWA,208411,10,Africa,Botswana,Africa,Sub-Saharan Africa,Southern Africa,Botswana
+896514,1038,130.75,-12.5,0.560142582621087,AN,Darwin,AUS,93080,8,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+905842,1039,134,-23.75,0.263515768798463,AN,Alice Springs,AUS,27710,7,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+949777,1040,149.25,-35.25,0.524662373079495,AN,Canberra,AUS,327700,10,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+956996,1041,151.75,-33,0.440023430086898,AN,Newcastle,AUS,540796,11,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+918775,1042,138.5,-35,0.461913434111259,AN,Ad√©la√Øde,AUS,1145000,12,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+942631,1043,146.75,-19.25,0.475129280860226,AN,Townsville,AUS,138954,9,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+960623,1044,153,-27.5,0.421380254044903,AN,Brisbane,AUS,1860000,12,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+943979,1045,147.25,-42.75,0.642216025654114,AN,Hobart,AUS,80870,8,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+515204,1046,-1.5,12.25,0.464922940894736,AN,Ouagadougou,BFA,1149000,12,Africa,Burkina Faso,Africa,Sub-Saharan Africa,Western Africa,Burkina Faso
+573010,1047,18.5,43.75,0.61834943023595,AN,Sarajevo,BIH,696731,11,Europe,Bosnia and Herzegovina,Europe,Europe & Central Asia,Southern Europe,Bosnie-HerzÈgovine
+796424,1048,96,19.75,0.524354132978867,AN,Naypyidaw,MMR,930000,11,Asia,Myanmar,Asia,East Asia & Pacific,South-Eastern Asia,Birmanie
+328490,1049,-66.25,18.5,0.504322464831851,AN,San Juan,PRI,2478905,12,North America,Puerto Rico,Americas,Latin America & Caribbean,Caribbean,Porto Rico
+352723,1050,-57.75,-51.75,0.673118310670058,AN,Port Stanley,FLK,2213,4,South America,Falkland Islands,Americas,Latin America & Caribbean,South America,Óles Malouines
+332871,1051,-64.75,32.25,0.60403703266021,AN,Hamilton,BMU,52320,8,North America,Bermuda,Americas,North America,Northern America,Bermudes
+13975,1052,-175.25,-21.25,0.643397426176252,AN,Nuku ªalofa,TON,42620,7,Oceania,Tonga,Oceania,East Asia & Pacific,Polynesia,Tonga
+646415,1053,44,9.5,0.389981999315999,AN,Hargeisa,SOL,477876,10,Africa,Somaliland,Africa,Sub-Saharan Africa,Eastern Africa,Somaliland
+679525,1054,55.5,-4.5,0.630343473883289,AN,Victoria,SYC,33576,7,Seven seas (open ocean),Seychelles,Africa,Sub-Saharan Africa,Eastern Africa,Seychelles
+538949,1055,6.75,0.25,0.748451299062281,AN,S√£o Tom√©,STP,88219,8,Africa,S„o TomÈ and Principe,Africa,Sub-Saharan Africa,Middle Africa,Sao TomÈ-et-Principe
+24099,1056,-171.75,-13.75,0.646528251920686,AN,Apia,WSM,61916,8,Oceania,Samoa,Oceania,East Asia & Pacific,Polynesia,Samoa
+561443,1057,14.5,36,0.312385161855315,AN,La Valette,MLT,368250,10,Europe,Malta,Europe,Middle East & North Africa,Southern Europe,Malte
+731472,1058,73.5,4.25,0.675528793962616,AN,Mal√©,MDV,112927,9,Seven seas (open ocean),Maldives,Asia,South Asia,Southern Asia,Maldives
+621269,1059,35.25,31.75,0.247782339546547,AN,J√©rusalem,ISR,1029300,12,Asia,Israel,Asia,Middle East & North Africa,Western Asia,IsraÎl
+451767,1060,-23.5,15,0.456214566009514,AN,Praia,CPV,113364,9,Africa,Cabo Verde,Africa,Sub-Saharan Africa,Western Africa,Cap-Vert
+296792,1061,-77.25,25,0.503322319833167,AN,Nassau,BHS,227940,10,North America,The Bahamas,Americas,Latin America & Caribbean,Caribbean,Bahamas
+615515,1062,33.25,35.25,0.261262670752,AN,Nicosie,CYP,224300,10,Asia,Cyprus,Asia,Europe & Central Asia,Western Asia,Chypre
+866373,1063,120.25,22.75,0.612577272974181,AN,Kaohsiung,TWN,2769072,12,Asia,Taiwan,Asia,East Asia & Pacific,Eastern Asia,TaÔwan
+1023295,1064,174.75,-41.25,0.540358580648899,AN,Wellington,NZL,393400,10,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+1017518,1065,172.75,-43.5,0.580836390681339,AN,Christchurch,NZL,363200,10,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+848347,1066,114,22.5,0.631469099415523,AN,Shenzhen,CHN,7581000,13,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+859940,1067,118,36.75,0.485614842481234,AN,Zibo,CHN,3061000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+250728,1068,-93.25,45,0.586823905620611,AN,Minneapolis,USA,2616000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+64615,1069,-157.75,21.25,0.356073559854518,AN,Honolulu,USA,786000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+167102,1070,-122.25,47.5,0.652071643169179,AN,Seattle,USA,3074000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+196607,1071,-112,33.5,0.287859490917375,AN,Phoenix,USA,3551000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+181463,1072,-117.25,32.75,0.423172871779763,AN,San Diego,USA,2916000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+259355,1073,-90.25,38.75,0.551828970963305,AN,Saint-Louis,USA,2199000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+260041,1074,-90,30,0.517760081555356,AN,La Nouvelle-Orl√©ans,USA,785000,11,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+240585,1075,-96.75,32.75,0.466895024151062,AN,Dallas,USA,4798000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+312597,1076,-71.75,10.75,0.699662129705151,AN,Maracaibo,VEN,2072000,12,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+314886,1077,-71,42.25,0.57646151146654,AN,Boston,USA,4467000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+281663,1078,-82.5,28,0.5100805763381,AN,Tampa,USA,2314000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+302620,1079,-75.25,40,0.572057385449157,AN,Philadelphie,USA,5492000,13,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+280278,1080,-83,42.25,0.616558892708836,AN,D√©troit,USA,4101000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+87126,1081,-150,61.25,0.686929479580034,AN,Anchorage,USA,260283,10,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+824548,1082,105.75,21,0.744533604857597,AN,Hano√Ø,VNM,4378000,12,Asia,Vietnam,Asia,East Asia & Pacific,South-Eastern Asia,ViÍt Nam
+827391,1083,106.75,10.75,0.726878376621189,AN,H√¥ Chi Minh-Ville,VNM,5314000,13,Asia,Vietnam,Asia,East Asia & Pacific,South-Eastern Asia,ViÍt Nam
+614092,1084,32.75,40,0.39407626869665,AN,Ankara,TUR,3716000,12,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+574467,1085,19,47.5,0.581037067102664,AN,Budapest,HUN,1679000,12,Europe,Hungary,Europe,Europe & Central Asia,Eastern Europe,Hongrie
+647159,1086,44.25,15.25,0.3192341617365,AN,Sanaa,YEM,2008000,12,Asia,Yemen,Asia,Middle East & North Africa,Western Asia,YÈmen
+526136,1087,2.25,41.5,0.481516874310645,AN,Barcelone,ESP,4920000,12,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+594643,1088,26,44.5,0.534478340241494,AN,Bucarest,ROU,1942000,12,Europe,Romania,Europe,Europe & Central Asia,Eastern Europe,Roumanie
+627055,1089,37.25,36.25,0.301429236540571,AN,Alep,SYR,2738000,12,Asia,Syria,Asia,Middle East & North Africa,Western Asia,Syrie
+624160,1090,36.25,33.5,0.286548102323926,AN,Damas,SYR,2466000,12,Asia,Syria,Asia,Middle East & North Africa,Western Asia,Syrie
+544185,1091,8.5,47.5,0.634353067838785,AN,Zurich,CHE,1108000,12,Europe,Switzerland,Europe,Europe & Central Asia,Western Europe,Suisse
+492959,1092,-9.25,38.75,0.438366174246326,AN,Lisbonne,PRT,2812000,12,Europe,Portugal,Europe,Europe & Central Asia,Southern Europe,Portugal
+613273,1093,32.5,15.5,0.242678851245507,AN,Khartoum,SDN,4754000,12,Africa,Sudan,Africa,Sub-Saharan Africa,Northern Africa,Soudan
+632764,1094,39.25,21.5,0.183016928120968,AN,Djeddah,SAU,3012000,12,Asia,Saudi Arabia,Asia,Middle East & North Africa,Western Asia,Arabie saoudite
+634206,1095,39.75,21.5,0.203213554489511,AN,La Mecque,SAU,1385000,12,Asia,Saudi Arabia,Asia,Middle East & North Africa,Western Asia,Arabie saoudite
+550724,1096,10.75,60,0.679770391434431,AN,Oslo,NOR,835000,11,Europe,Norway,Europe,Europe & Central Asia,Northern Europe,NorvËge
+733744,1097,74.25,31.5,0.299133192197504,AN,Lahore,PAK,6577000,13,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+712808,1098,67,24.75,0.28242747661319,AN,Karachi,PAK,12130000,14,Asia,Pakistan,Asia,South Asia,Southern Asia,Pakistan
+608766,1099,31,-29.75,0.483803149820729,AN,Durban,ZAF,2729000,12,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+606962,1100,30.25,60,0.722228260993055,AN,Saint-P√©tersbourg,RUS,4553000,12,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+221791,1101,-103.25,20.75,0.48935879422634,AN,Guadalajara,MEX,4198000,12,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+236204,1102,-98.25,19,0.498352115945608,AN,Puebla,MEX,2195000,12,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+544043,1103,8.5,12,0.467057899741287,AN,Kano,NGA,3140000,12,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+580254,1104,21,52.25,0.666437388933969,AN,Varsovie,POL,1707000,12,Europe,Poland,Europe,Europe & Central Asia,Eastern Europe,Pologne
+882300,1105,125.75,39,0.505977523484917,AN,Pyongyang,PRK,3300000,12,Asia,North Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Nord
+632651,1106,39.25,-6.75,0.503071417185393,AN,Dar es Salam,TZA,2930000,12,Africa,United Republic of Tanzania,Africa,Sub-Saharan Africa,Eastern Africa,Tanzanie
+804290,1107,98.75,3.5,0.867545800904433,AN,Medan,IDN,2115000,12,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+501669,1108,-6.25,53.25,0.730226698472644,AN,Dublin,IRL,1059000,12,Europe,Ireland,Europe,Europe & Central Asia,Northern Europe,Irlande
+488503,1109,-10.75,6.25,0.736862017688426,AN,Monrovia,LBR,1041000,12,Africa,Liberia,Africa,Sub-Saharan Africa,Western Africa,Liberia
+560741,1110,14.25,40.75,0.423407475830931,AN,Naples,ITA,2250000,12,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+546340,1111,9.25,45.5,0.531697193781535,AN,Milan,ITA,2945000,12,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+812941,1112,101.75,3.25,0.858493639889992,AN,Kuala Lumpur,MYS,1448000,12,Asia,Malaysia,Asia,East Asia & Pacific,South-Eastern Asia,Malaisie
+818840,1113,103.75,36,0.532310147854415,AN,Lanzhou,CHN,2561000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+831765,1114,108.25,22.75,0.680377274977439,AN,Nanning,CHN,2167000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+827454,1115,106.75,26.5,0.777056442291448,AN,Guiyang,CHN,3662000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+826745,1116,106.5,29.5,0.744275939509724,AN,Chongqing,CHN,6461000,13,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+863502,1117,119.25,26,0.702514772670287,AN,Fuzhou,CHN,2606000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+846186,1118,113.25,23,0.657656938063376,AN,Canton,CHN,8829000,13,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+847628,1119,113.75,23,0.646422712470998,AN,Dongguan,CHN,4528000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+829483,1120,107.5,-7,0.811543906502651,AN,Bandung,IDN,2394000,12,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+844623,1121,112.75,-7.25,0.68026791987094,AN,Surabaya,IDN,2845000,12,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+288752,1122,-80,-2.25,0.841908203155706,AN,Guayaquil,ECU,2514000,12,South America,Ecuador,Americas,Latin America & Caribbean,South America,…quateur
+301764,1123,-75.5,6.25,0.889829759570685,AN,Medell√≠n,COL,3297000,12,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+298869,1124,-76.5,3.5,0.886730664833026,AN,Cali,COL,2254000,12,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+282365,1125,-82.25,23.25,0.478137457686843,AN,La Havane,CUB,2174000,12,North America,Cuba,Americas,Latin America & Caribbean,Caribbean,Cuba
+606126,1126,30,31.25,0.261352315248752,AN,Alexandrie,EGY,4165000,12,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+544916,1127,8.75,50,0.657172645018859,AN,Francfort,DEU,2895000,12,Europe,Germany,Europe,Europe & Central Asia,Western Europe,Allemagne
+548535,1128,10,53.5,0.697444115285621,AN,Hambourg,DEU,1757000,12,Europe,Germany,Europe,Europe & Central Asia,Western Europe,Allemagne
+552840,1129,11.5,48.25,0.653459557416764,AN,Munich,DEU,1275000,12,Europe,Germany,Europe,Europe & Central Asia,Western Europe,Allemagne
+561499,1130,14.5,50,0.649043525371588,AN,Prague,CZE,1162000,12,Europe,Czechia,Europe,Europe & Central Asia,Eastern Europe,RÈpublique tchËque
+658030,1131,48,29.25,0.190573381590653,AN,Kowe√Øt,KWT,2063000,12,Asia,Kuwait,Asia,Middle East & North Africa,Western Asia,KoweÔt
+833974,1132,109,34.25,0.548930668526075,AN,Xi'an,CHN,4009000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+844083,1133,112.5,38,0.454855666241863,AN,Taiyuan,CHN,2913000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+849100,1134,114.25,30.5,0.608304581294457,AN,Wuhan,CHN,7243000,13,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+845486,1135,113,28.25,0.653715315528891,AN,Changsha,CHN,2604000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+815912,1136,102.75,25,0.572374929476417,AN,Kunming,CHN,2931000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+847675,1137,113.75,34.75,0.527548827118043,AN,Zhengzhou,CHN,2636000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+875822,1138,123.5,41.75,0.438018401802489,AN,Shenyang,CHN,4787000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857056,1139,117,36.75,0.478907044243181,AN,Jinan,CHN,2798000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+857786,1140,117.25,39,0.428693373828675,AN,Tianjin,CHN,7180000,13,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+854140,1141,116,28.75,0.628497970488036,AN,Nanchang,CHN,2350000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+862084,1142,118.75,32,0.602877827756333,AN,Nankin,CHN,3679000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+866403,1143,120.25,30.25,0.629175830971111,AN,Hangzhou,CHN,3007000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+901749,1144,132.5,34.5,0.618755754422058,AN,Hiroshima,JPN,2045000,12,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+880877,1145,125.25,43.75,0.465251467275349,AN,Changchun,CHN,3183000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+836163,1146,109.75,40.75,0.378292899409478,AN,Baotou,CHN,2036000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+885211,1147,126.75,45.75,0.493858460619143,AN,Harbin,CHN,3621000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+927018,1148,141.25,43,0.683206971283212,AN,Sapporo,JPN,2544000,12,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+317675,1149,-70,18.5,0.515320294282653,AN,Saint-Domingue,DOM,2154000,12,North America,Dominican Republic,Americas,Latin America & Caribbean,Caribbean,RÈpublique dominicaine
+518782,1150,-0.25,5.5,0.619044052154729,AN,Accra,GHA,2121000,12,Africa,Ghana,Africa,Sub-Saharan Africa,Western Africa,Ghana
+742385,1151,77.25,28.75,0.313583786154843,AN,Delhi,IND,15926000,14,Asia,India,Asia,South Asia,Southern Asia,Inde
+745945,1152,78.5,17.5,0.520102132859668,AN,Hyderabad,IND,6376000,13,Asia,India,Asia,South Asia,Southern Asia,Inde
+732250,1153,73.75,18.5,0.489475373305719,AN,Pune,IND,4672000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+747402,1154,79,21.25,0.423641443249036,AN,Nagpur,IND,2454000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+557826,1155,13.25,33,0.275540041507956,AN,Tripoli,LBY,2189000,12,Africa,Libya,Africa,Middle East & North Africa,Northern Africa,Libye
+619828,1156,34.75,32,0.271038236717383,AN,Tel Aviv,ISR,3112000,12,Asia,Israel,Asia,Middle East & North Africa,Western Asia,IsraÎl
+591822,1157,25,60.25,0.698694931173867,AN,Helsinki,FIN,1115000,12,Europe,Finland,Europe,Europe & Central Asia,Northern Europe,Finlande
+691224,1158,59.5,36.25,0.31246186048498,AN,Mechhed,IRN,2469000,12,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+738052,1159,75.75,27,0.303056724246055,AN,Jaipur,IND,2917000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+751028,1160,80.25,26.5,0.343906525635358,AN,Kanpur,IND,3162000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+765445,1161,85.25,25.75,0.401813687855434,AN,Patna,IND,2158000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+750974,1162,80.25,13,0.625676364835465,AN,Chennai,IND,7163000,13,Asia,India,Asia,South Asia,Southern Asia,Inde
+728663,1163,72.5,23,0.320456251564654,AN,Ahmedabad,IND,5375000,13,Asia,India,Asia,South Asia,Southern Asia,Inde
+729377,1164,72.75,21.25,0.344258344215412,AN,Surate,IND,3842000,12,Asia,India,Asia,South Asia,Southern Asia,Inde
+555754,1165,12.5,55.75,0.666839376656395,AN,Copenhague,DNK,1085000,12,Europe,Denmark,Europe,Europe & Central Asia,Northern Europe,Danemark
+507966,1166,-4,5.25,0.660050255669789,AN,Abidjan,CIV,3802000,12,Africa,Ivory Coast,Africa,Sub-Saharan Africa,Western Africa,CÙte d'Ivoire
+379601,1167,-48.5,-1.5,0.644530218094587,AN,Bel√©m,BRA,2167000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+380986,1168,-48,-15.75,0.568338575123838,AN,Brasilia,BRA,3716996,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+371556,1169,-51.25,-30,0.571030307335384,AN,Porto Alegre,BRA,3917000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+377342,1170,-49.25,-25.5,0.745681713363438,AN,Curitiba,BRA,3084000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+408432,1171,-38.5,-3.75,0.491378156806935,AN,Fortaleza,BRA,3602319,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+408395,1172,-38.5,-13,0.50354640468052,AN,Salvador,BRA,3484000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+192361,1173,-113.5,53.5,0.609203982985381,AN,Edmonton,CAN,1058000,12,North America,Canada,Americas,North America,Northern America,Canada
+307689,1174,-73.5,45.5,0.628373761294466,AN,Montr√©al,CAN,3678000,12,North America,Canada,Americas,North America,Northern America,Canada
+377377,1175,-49.25,-16.75,0.55727838060226,AN,Goi√¢nia,BRA,2022000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+418509,1176,-35,-8,0.56781596193711,AN,Recife,BRA,3651000,12,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+531941,1177,4.25,50.75,0.6735623183124,AN,Bruxelles,BEL,1743000,12,Europe,Belgium,Europe,Europe & Central Asia,Western Europe,Belgique
+780578,1178,90.5,23.75,0.521188570031275,AN,Dacca,BGD,12797394,14,Asia,Bangladesh,Asia,South Asia,Southern Asia,Bangladesh
+557659,1179,13.25,-8.75,0.658535936903773,AN,Luanda,AGO,5172900,13,Africa,Angola,Africa,Sub-Saharan Africa,Middle Africa,Angola
+528280,1180,3,36.75,0.38239225505315,AN,Alger,DZA,3354000,12,Africa,Algeria,Africa,Middle East & North Africa,Northern Africa,AlgÈrie
+784177,1181,91.75,22.25,0.504665497422331,AN,Chittagong,BGD,4529000,12,Asia,Bangladesh,Asia,South Asia,Southern Asia,Bangladesh
+853176,1182,115.75,-32,0.37460489652938,AN,Perth,AUS,1532000,12,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+797133,1183,96.25,16.75,0.585868727429911,AN,Rangoun,MMR,4088000,12,Asia,Myanmar,Asia,East Asia & Pacific,South-Eastern Asia,Birmanie
+166342,1184,-122.5,37.75,0.505022692748092,AN,San Francisco,USA,3450000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+216820,1185,-105,39.75,0.42567872261685,AN,Denver,USA,2313000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+244899,1186,-95.25,29.75,0.540664276221033,AN,Houston,USA,4459000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+288143,1187,-80.25,25.75,0.533571944318035,AN,Miami,USA,5585000,13,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+276639,1188,-84.25,33.75,0.545825272911426,AN,Atlanta,USA,4506000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+266577,1189,-87.75,41.75,0.598174537108703,AN,Chicago,USA,8990000,13,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+326295,1190,-67,10.5,0.703628201489196,AN,Caracas,VEN,2985000,12,South America,Venezuela,Americas,Latin America & Caribbean,South America,Venezuela
+607645,1191,30.5,50.5,0.65476996372595,AN,Kiev,UKR,2709000,12,Europe,Ukraine,Europe,Europe & Central Asia,Eastern Europe,Ukraine
+678923,1192,55.25,25.25,0.170845963761112,AN,Duba√Ø,ARE,1379000,12,Asia,United Arab Emirates,Asia,Middle East & North Africa,Western Asia,…mirats arabes unis
+719363,1193,69.25,41.25,0.41704305775012,AN,Tachkent,UZB,2184000,12,Asia,Uzbekistan,Asia,Europe & Central Asia,Central Asia,OuzbÈkistan
+508828,1194,-3.75,40.5,0.423925407400185,AN,Madrid,ESP,5567000,13,Europe,Spain,Europe,Europe & Central Asia,Southern Europe,Espagne
+537691,1195,6.25,46.25,0.606534445376107,AN,Gen√®ve,CHE,1240000,12,Europe,Switzerland,Europe,Europe & Central Asia,Western Europe,Suisse
+571630,1196,18,59.25,0.660192150961269,AN,Stockholm,SWE,1264000,12,Europe,Sweden,Europe,Europe & Central Asia,Northern Europe,SuËde
+809378,1197,100.5,13.75,0.670415134761821,AN,Bangkok,THA,6704000,13,Asia,Thailand,Asia,East Asia & Pacific,South-Eastern Asia,ThaÔlande
+297365,1198,-77,-12,0.713857196610082,AN,Lima,PER,8012000,13,South America,Peru,Americas,Latin America & Caribbean,South America,PÈrou
+469070,1199,-17.5,14.75,0.442745852368799,AN,Dakar,SEN,2604000,12,Africa,Senegal,Africa,Sub-Saharan Africa,Western Africa,SÈnÈgal
+600128,1200,28,-26.25,0.35071333331959,AN,Johannesbourg,ZAF,3435000,12,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+534110,1201,5,52.25,0.678385598641454,AN,Amsterdam,NLD,1031000,12,Europe,Netherlands,Europe,Europe & Central Asia,Western Europe,Pays-Bas
+497985,1202,-7.5,33.5,0.408081062702519,AN,Casablanca,MAR,3181000,12,Africa,Morocco,Africa,Middle East & North Africa,Northern Africa,Maroc
+885899,1203,127,37.5,0.541754008807016,AN,S√©oul,KOR,9796000,13,Asia,South Korea,Asia,East Asia & Pacific,Eastern Asia,CorÈe du Sud
+868503,1204,121,14.5,0.665147558306203,AN,Manille,PHL,11100000,14,Asia,Philippines,Asia,East Asia & Pacific,South-Eastern Asia,Philippines
+230463,1205,-100.25,25.75,0.438294158317149,AN,Monterrey,MEX,3712000,12,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+558625,1206,13.5,52.5,0.672894746742465,AN,Berlin,DEU,3406000,12,Europe,Germany,Europe,Europe & Central Asia,Western Europe,Allemagne
+772006,1207,87.5,43.75,0.454684061929584,AN,√úr√ºmqi,CHN,3575000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+819540,1208,104,30.75,0.708825264126063,AN,Chengdu,CHN,4123000,12,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+910402,1209,135.5,34.75,0.59441578907497,AN,Osaka,JPN,11294000,14,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+563445,1210,15.25,-4.25,0.740644463422624,AN,Kinshasa,COD,7843000,13,Africa,Democratic Republic of the Congo,Africa,Sub-Saharan Africa,Middle Africa,RÈpublique dÈmocratique du Congo
+742384,1211,77.25,28.5,0.313550551922879,AN,New Delhi,IND,317797,10,Asia,India,Asia,South Asia,Southern Asia,Inde
+743043,1212,77.5,13,0.647379796232351,AN,Bangalore,IND,6787000,13,Asia,India,Asia,South Asia,Southern Asia,Inde
+588128,1213,23.75,38,0.360541380694926,AN,Ath√®nes,GRC,3242000,12,Europe,Greece,Europe,Europe & Central Asia,Southern Europe,GrËce
+647952,1214,44.5,33.25,0.212216587193711,AN,Bagdad,IRQ,5054000,13,Asia,Iraq,Asia,Middle East & North Africa,Western Asia,Irak
+631272,1215,38.75,9,0.527696847972093,AN,Addis-Abeba,ETH,3100000,12,Africa,Ethiopia,Africa,Sub-Saharan Africa,Eastern Africa,…thiopie
+668150,1216,51.5,35.75,0.2953271649665,AN,T√©h√©ran,IRN,7873000,13,Asia,Iran,Asia,Middle East & North Africa,Southern Asia,Iran
+164946,1217,-123,49.25,0.663014737945615,AN,Vancouver,CAN,2313328,12,North America,Canada,Americas,North America,Northern America,Canada
+290378,1218,-79.5,43.75,0.616347986075914,AN,Toronto,CAN,5213000,13,North America,Canada,Americas,North America,Northern America,Canada
+350629,1219,-58.5,-34.5,0.46528013598061,AN,Buenos Aires,ARG,12795000,14,South America,Argentina,Americas,Latin America & Caribbean,South America,Argentine
+719336,1220,69.25,34.5,0.274834033214685,AN,Kaboul,AFG,3277000,12,Asia,Afghanistan,Asia,South Asia,Southern Asia,Afghanistan
+566539,1221,16.25,48.25,0.614270998560118,AN,Vienne,AUT,2400000,12,Europe,Austria,Europe,Europe & Central Asia,Western Europe,Autriche
+937510,1222,145,-37.75,0.572479313860337,AN,Melbourne,AUS,4170000,12,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+869987,1223,121.5,25,0.704932018888719,AN,Taipei,TWN,6900273,13,Asia,Taiwan,Asia,East Asia & Pacific,Eastern Asia,TaÔwan
+1023313,1224,174.75,-36.75,0.587592509546966,AN,Auckland,NZL,1377200,12,Oceania,New Zealand,Oceania,East Asia & Pacific,Australia and New Zealand,Nouvelle-ZÈlande
+178584,1225,-118.25,34,0.354012930539973,AN,Los Angeles,USA,12500000,14,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+297569,1226,-77,39,0.566193964219455,AN,Washington,USA,4338000,12,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+306228,1227,-74,40.75,0.572915518825704,AN,New York,USA,19040000,14,North America,United States of America,Americas,North America,Northern America,…tats-Unis
+519687,1228,0,51.5,0.684570610071674,AN,Londres,GBR,8567000,13,Europe,United Kingdom,Europe,Europe & Central Asia,Northern Europe,Royaume-Uni
+603281,1229,29,41,0.468693827786906,AN,Istanbul,TUR,10061000,14,Asia,Turkey,Asia,Europe & Central Asia,Western Asia,Turquie
+654407,1230,46.75,24.75,0.19038125929144,AN,Riyad,SAU,4465000,12,Asia,Saudi Arabia,Asia,Middle East & North Africa,Western Asia,Arabie saoudite
+572699,1231,18.5,-34,0.395853165142013,AN,Le Cap,ZAF,3215000,12,Africa,South Africa,Africa,Sub-Saharan Africa,Southern Africa,Afrique du Sud
+627854,1232,37.5,55.75,0.719106509378462,AN,Moscou,RUS,10452000,14,Europe,Russia,Europe,Europe & Central Asia,Eastern Europe,Russie
+233322,1233,-99.25,19.5,0.554577921376084,AN,Mexico,MEX,19028000,14,North America,Mexico,Americas,Latin America & Caribbean,Central America,Mexique
+529601,1234,3.5,6.5,0.708571009055683,AN,Lagos,NGA,9466000,13,Africa,Nigeria,Africa,Sub-Saharan Africa,Western Africa,Nigeria
+555699,1235,12.5,42,0.434129838408394,AN,Rome,ITA,3339000,12,Europe,Italy,Europe,Europe & Central Asia,Southern Europe,Italie
+855627,1236,116.5,40,0.410273182742072,AN,P√©kin,CHN,11106000,14,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+625463,1237,36.75,-1.25,0.66605932829958,AN,Nairobi,KEN,3010000,12,Africa,Kenya,Africa,Sub-Saharan Africa,Eastern Africa,Kenya
+827323,1238,106.75,-6.25,0.753319430983428,AN,Jakarta,IDN,9125000,13,Asia,Indonesia,Asia,East Asia & Pacific,South-Eastern Asia,IndonÈsie
+306083,1239,-74,4.5,0.869995645727172,AN,Bogota,COL,7772000,13,South America,Colombia,Americas,Latin America & Caribbean,South America,Colombie
+609726,1240,31.25,30,0.191157319667664,AN,Le Caire,EGY,11893000,14,Africa,Egypt,Africa,Middle East & North Africa,Northern Africa,…gypte
+870012,1241,121.5,31.25,0.61411754425728,AN,Shanghai,CHN,14987000,14,Asia,China,Asia,East Asia & Pacific,Eastern Asia,RÈpublique populaire de Chine
+922663,1242,139.75,35.75,0.597511126123595,AN,Tokyo,JPN,35676000,14,Asia,Japan,Asia,East Asia & Pacific,Eastern Asia,Japon
+730089,1243,73,19,0.435031089028626,AN,Bombay,IND,18978000,14,Asia,India,Asia,South Asia,Southern Asia,Inde
+526165,1244,2.25,48.75,0.655693293182236,AN,Paris,FRA,9904000,13,Europe,France,Europe,Europe & Central Asia,Western Europe,France
+315304,1245,-70.75,-33.5,0.348281058482826,AN,Santiago,CHL,5720000,13,South America,Chile,Americas,Latin America & Caribbean,South America,Chili
+774084,1246,88.25,22.5,0.499541319257608,AN,Calcutta,IND,14787000,14,Asia,India,Asia,South Asia,Southern Asia,Inde
+394656,1247,-43.25,-23,0.565874570246899,AN,Rio de Janeiro,BRA,11748000,14,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+384560,1248,-46.75,-23.5,0.661083345724778,AN,S√£o Paulo,BRA,18845000,14,South America,Brazil,Americas,Latin America & Caribbean,South America,BrÈsil
+955551,1249,151.25,-33.75,0.454028455484094,AN,Sydney,AUS,4630000,12,Oceania,Australia,Oceania,East Asia & Pacific,Australia and New Zealand,Australie
+818701,1250,103.75,1.25,0.799791864486355,AN,Singapour,SGP,5183700,13,Asia,Singapore,Asia,East Asia & Pacific,South-Eastern Asia,Singapour
+849067,1251,114.25,22.25,0.626559584147551,AN,Hong Kong,HKG,7206000,13,Asia,Hong Kong S.A.R.,Asia,East Asia & Pacific,Eastern Asia,Hong Kong

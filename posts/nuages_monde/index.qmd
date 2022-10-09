@@ -1,0 +1,1026 @@
+---
+title: "Nébulosité"
+author: "Mathieu"
+showonlyimage: false
+draft: false
+date: "2022-10-09"
+image: img/img_nuages_monde.png
+weight: 0
+type: "post"
+description: "Au dessus de nos têtes, sur toute la planète"
+categories: ["météo"]
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(stringr)
+library(raster)
+library(rgdal)
+library(raster)
+library(tidyverse)
+library(stringr)
+library(sf)
+library(scales)
+library(viridis)
+library(hrbrthemes)
+library(data.table)
+library(conflicted)
+library(qgisprocess)
+library(ggridges)
+library(ggrepel)
+library(magrittr)
+library(rmapshaper)
+library(geomtextpath)
+library(rnaturalearth)
+library(nngeo)
+library(forcats)
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+conflict_prefer("extract", "raster")
+conflict_prefer("between", "dplyr")
+
+
+
+# contours pays
+ned_pays_full <- ne_countries(type = 'countries', scale = 'large', returnclass = "sf")
+ned_etats_amn <- ne_states(country = 'United States of America',   returnclass = "sf") %>%
+  rbind.data.frame(ne_states(country = 'Canada',   returnclass = "sf"))
+ned_etats_por <- ne_states(country = 'Portugal',   returnclass = "sf")
+ned_etats_nor <- ne_states(country = 'Norway',   returnclass = "sf")
+ned_etats_zaf <- ne_states(country = 'South Africa',   returnclass = "sf")
+ned_etats_nzl <- ne_states(country = 'New Zealand',   returnclass = "sf")
+
+
+cities <- ne_download(scale = 50, type = 'populated_places',
+                      returnclass = "sf",
+                      category = 'cultural')
+
+
+#### données pré-traitées
+# moyenne annuelle par carreau
+r_cloudcovermois.df.monde.histo.stat.an <- fread("./data/r_cloudcovermois.df.monde.histo.stat.an.csv", stringsAsFactors=FALSE)
+
+# moyenne annuelle par ville
+r_cloudcovermois.df.monde.histo.stat.an.villes <- fread("./data/r_cloudcovermois.df.monde.histo.stat.an.villes.csv", stringsAsFactors=FALSE)
+
+
+##### fonctions utiles
+
+# fonction de renommage champ geometrie
+rename_geometry <- function(g, name){
+  current = attr(g, "sf_column")
+  names(g)[names(g)==current] = name
+  st_geometry(g)=name
+  g
+}
+
+# conversion raster en dataframe pour affichage ggplot
+gplot_data <- function(x, maxpixels = 6000000)  {
+  x <- raster::sampleRegular(x, maxpixels, asRaster = TRUE)
+  coords <- raster::xyFromCell(x, seq_len(raster::ncell(x)))
+  dat <- utils::stack(as.data.frame(raster::getValues(x))) 
+  names(dat) <- c('value', 'variable')
+  
+  dat <- dplyr::as.tbl(data.frame(coords, dat))
+  
+  if (!is.null(levels(x))) {
+    dat <- dplyr::left_join(dat, levels(x)[[1]], 
+                            by = c("value" = "ID"))
+  }
+  dat %>% dplyr::select(-variable)
+}
+
+
+# fonction pour traçage des isobandes
+f_isobandes <- function(df,var,crs, discr_min, discr_max, discr_step){
+  kr <-
+    df %>% select(x,y,!!sym(var)) %>%
+    filter(!is.na(!!sym(var))) %>%
+    filter(!is.nan(!!sym(var)))
+
+  kr.r <- rasterFromXYZ(kr)
+  kr.l <- rasterToContour(kr.r,
+                          levels = seq(discr_min,discr_max,discr_step)
+                          ) %>% 
+    st_as_sf() %>% 
+    st_set_crs(crs)
+  # split des lignes
+  st_cast(kr.l, "LINESTRING") 
+}
+
+# reprojection raster
+f_df_zone <- function(df_source , var ){
+df <- df_source %>%
+  filter(!is.na(!!sym(var)))  %>%
+  filter(!is.nan(!!sym(var))) %>%
+  select(x,y,!!sym(var))
+rdf <- rasterFromXYZ(df)
+crs(rdf) <- '+init=EPSG:4326' 
+rdf <- crop(rdf, as(bbox_zone %>% st_as_sfc() %>% st_sf()  %>% st_buffer(1000000), "Spatial"))
+rdf <- projectRaster(rdf, crs = crs_zone)
+rdf <- gplot_data(rdf) %>%
+  rename(!!sym(var) := value)
+}
+
+
+```
+
+```{r dl_data_copernicus, include=FALSE, eval=F}
+
+#### détails
+
+# téléchargement et structuration des données copernicus
+
+library(ecmwfr)
+
+wf_set_key(
+  user = "XX",
+  key = "XX",
+  service = "cds")
+
+
+# couverture nuageuse par mois
+
+f_cloudmois_AAAAMM <- function(AAAA,MM,JJ,HH, var){
+  raster::raster(wf_request(user = "114166",
+                            request = list(
+                              product_type = "monthly_averaged_reanalysis",
+                              variable = var,
+                              year = AAAA,
+                              month = MM,
+                              time = "00:00",
+                              # monde
+                              area = c(90, -180, -90, 180),
+                              format = "grib",
+                              dataset_short_name = "reanalysis-era5-single-levels-monthly-means",
+                              target = paste0("download_",AAAA,MM, "_",var,".grib")
+                            ),   
+                            transfer = TRUE,  
+                            path = "./data/",
+                            verbose = FALSE))
+  
+}
+
+# sur tous les mois de 2000 à 2021
+l.AAAA <- seq(2000,2021,1) %>% as.character()
+l.MM <- seq(1, 12,1) %>% as.character() %>% str_pad(., width = 2, pad = "0")
+l.var = "total_cloud_cover"
+
+l <- tibble::lst(l.AAAA, l.AAAA, l.var)
+args.df <- data.frame(lapply(l, `length<-`, max(lengths(l)))) %>% 
+  expand( l.AAAA, l.MM, l.var) %>%
+  filter(!is.na(l.var))
+
+args <- list(AAAA = args.df$l.AAAA,
+             MM = args.df$l.MM,
+             var = args.df$l.var)
+
+r_cloudcovermois.s.monde.histo <- stack(pmap(args, f_cloudmois_AAAAMM))
+
+# liste des noms des couches du raster
+liste_r_names <- paste0(args.df$l.var,"_",args.df$l.AAAA,args.df$l.MM) 
+names(r_precipmois.s.monde.histo) <- liste_r_names
+
+# projection wgs1984
+r_precipmois.s.monde.histo <- projectRaster(r_precipmois.s.monde.histo,
+                                           crs=CRS('+init=EPSG:4326'))
+
+# conversion du stack raster en dataframe
+f_conv_raster_df <- function(id, rasterstack){
+  gplot_data(rasterstack[[id]],
+             maxpixels = 10000000) %>%
+    mutate(indic = id)
+}
+
+r_precipmois.df.monde.histo <- liste_r_names %>% 
+  purrr::map(f_conv_raster_df, 
+             rasterstack = r_precipmois.s.monde.histo) %>% 
+  bind()
+
+# formatage des variables du dataframe
+r_cloudcovermois.df.monde.histo <-
+  r_cloudcovermois.df.monde.histo %>%
+mutate(type_var = substr(indic, 1,17),
+       date = substr(indic, 19,26)) %>%
+  mutate(date_MM = substr(date,5,6),
+         date_AAAA = substr(date,1,4)) %>%
+  select(-indic)
+  
+r_cloudcovermois.df.monde.histo.stat.an <-
+  r_cloudcovermois.df.monde.histo %>%
+                     # agrégation par an
+                     group_by(x,y) %>%
+                     summarise(pct_cloud  =mean(value, na.rm = T) ) %>%
+                     ungroup() %>%
+                     mutate(date_MM = "AN")
+
+#### calcul des stats par ville
+
+villes <-
+  cities %>%
+  select(NAME_FR, ADM0_A3) %>%
+  mutate(id_c = row_number())
+
+r_cloudcovermois.df.monde.histo.stat.an.villes_l <-
+  villes %>%
+  st_nn(.,r_cloudcovermois.df.monde.histo.stat.an %>%
+          filter(!is.nan(pct_cloud)) %>%
+          st_as_sf(coords = c("x","y"), crs = 4326)  %>%
+          mutate(id_n = row_number())%>%
+          select(id_n),
+        returnDist = TRUE) %>%
+  identity()
+
+r_cloudcovermois.df.monde.histo.stat.an.villes_s <- 
+  r_cloudcovermois.df.monde.histo.stat.an.villes_l$nn %>%
+  unlist(.) %>%
+  as.data.frame() %>%
+  set_colnames("id") %>%
+  mutate(id_c = row_number()) %>%
+  cbind.data.frame(r_cloudcovermois.df.monde.histo.stat.an.villes_l$dist %>%
+                     as.vector() %>%
+                     as.data.frame() %>%
+                     set_colnames("dist_max")) %>%
+  select(id, id_c) %>%
+  left_join(r_cloudcovermois.df.monde.histo.stat.an %>%
+              filter(!is.nan(pct_cloud)) %>%
+              mutate(id = row_number()),
+            by = "id") %>%
+  left_join(villes, by = "id_c") %>%
+  select(-geometry)
+
+r_cloudcovermois.df.monde.histo.stat.an.villes <-
+  r_cloudcovermois.df.monde.histo.stat.an.villes_s %>%
+  left_join(cities %>% st_drop_geometry() %>%
+              select(ADM0_A3,NAME_FR, POP_MAX, RANK_MAX),
+            by = c("ADM0_A3", "NAME_FR")) %>%
+  left_join(ned_pays_full %>%
+              st_drop_geometry() %>%
+              select(adm0_a3, continent,admin, region_un, region_wb, subregion, name_fr),
+            by = c("ADM0_A3"= "adm0_a3")) 
+
+```
+
+
+Copernicus, le programme d'observation de la Terre de l'UE basé notamment sur ses satellites, met a disposition du grand public un ['climate data store'](https://cds.climate.copernicus.eu) fournissant une quantité folles de données météo. Ce sont par exemple ces données qui ont été utilisées pour cette jolie carte bivariée pour visualiser les zones où [quand il pleut, ça tombe dru](https://erdavis.com/2021/04/01/when-it-rains-does-it-pour/).
+
+Pour revoir les bases de l'ensoleillement sur la planète, on va ici l'approcher par son contraire : la nébulosité.
+On s'intéresse [au taux de couverture nuageuse](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means?tab=overview), soit la part du carreau recouvert de nuages à chaque heure, le tout moyenné entre 2000 et 2021, avec une résolution spatiale d'1/4 de degré en latitude et longitude, soit environ 28 km au niveau de l'Equateur.
+Des détails sur le code en bas de page.
+
+
+```{r carte_monde, echo=F, message=F, warning=F ,fig.height=10,fig.width=11, dpi=160,eval=T}
+
+r_cloudcovermois.df.monde.histo.stat.an.monde <- 
+  r_cloudcovermois.df.monde.histo.stat.an %>%
+    filter(!is.na(pct_cloud))  %>%
+    filter(!is.nan(pct_cloud)) %>%
+    select(x,y,pct_cloud)
+
+crs_zone <-  "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs"
+
+bbox_zone <- 
+  ned_pays_full %>%
+  st_set_crs(4326) %>%
+  st_buffer(90000) 
+
+r_cloudcovermois.df.monde.histo.stat.an.monde.r <-
+  rasterFromXYZ(r_cloudcovermois.df.monde.histo.stat.an.monde)
+  crs(r_cloudcovermois.df.monde.histo.stat.an.monde.r) <- '+init=EPSG:4326' 
+
+r_cloudcovermois.df.monde.histo.stat.an.monde.r <- projectRaster(r_cloudcovermois.df.monde.histo.stat.an.monde.r, crs =crs_zone)
+
+r_cloudcovermois.df.monde.histo.stat.an.monde.rdf <- 
+  gplot_data(r_cloudcovermois.df.monde.histo.stat.an.monde.r) %>%
+  rename(pct_cloud = value)
+
+# carto
+ggplot() + 
+  geom_tile(data = r_cloudcovermois.df.monde.histo.stat.an.monde.rdf,
+            aes(x = x, y = y, fill = pct_cloud)) +
+  geom_sf(data=ned_pays_full %>%
+            st_transform(., crs = crs_zone) %>%
+            ms_simplify(., keep = 0.02) %>%
+            identity(),
+          color = "white",
+          lwd = 0.1,
+          fill = NA,
+          alpha = 0.75) +
+  scale_alpha_continuous() +
+  scale_fill_gradientn(colours=c("#ffffd9","#edf8b1", "#c7e9b4","#7fcdbb", "#41b6c4","#1d91c0", "#225ea8","#253494", "#081d58",  "#000208"),
+                     na.value = "transparent",
+                     breaks=c(0,0.1, 0.3, 0.5, 0.7,0.9),
+                     name = "",
+                     limits=c(0.1,1),
+                     # na.value = "#225ea8",
+                     labels = scales::percent_format(accuracy = 5L)) +
+ 
+  scale_x_continuous(name = "",
+                   expand=c(0.005,0.005)) +
+  scale_y_continuous(name = "", 
+                     expand=c(0.005,0.005)) +
+  theme_ipsum() +
+  theme(axis.title = element_blank(),
+        axis.text = element_blank(),
+        text = element_text(family = "Avenir Black"),
+        plot.title = element_text(family = "Phosphate Inline"),
+        plot.subtitle = element_text(family = "Phosphate Inline"),
+        plot.caption = element_text(family = "Avenir Black"),
+        panel.background = element_rect(fill = "white", colour = "white"),
+        plot.background = element_rect(fill = "white", colour = "white"),
+        legend.position = c(0.95,0.95),
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+        panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+  labs(title = "Taux de couverture nuageuse",
+       caption = "Valeur moyenne 2000-2021. Copernicus CDS.")
+
+```
+
+```{r fonction_cartes_zones, echo=F, message=F, warning=F , include=TRUE}
+
+
+f_carto_ggplot <- function(pos_leg_x, pos_leg_y, titre){
+
+  ggplot() +
+  geom_tile(data = r_cloudcovermois.df.monde.histo.stat.an.zone,
+            aes(x = x, y = y, fill = pct_cloud)) +
+  geom_sf(data=mask_zone %>%
+            st_transform(crs_zone),
+          color=NA,fill="white") +
+  geom_sf(data=ned_pays_full %>%
+            st_transform(crs_zone) %>%
+            identity(),
+          color = "grey40",
+          lwd = 0.05,
+          fill = NA,
+          alpha = 0.9) +
+  geom_textsf(data = r_cloudcovermois.dfl.monde.histo.stat.an.zone %>%
+                mutate(pct_n = as.numeric(level) ,
+                       pct = percent(as.numeric(level) )),
+              aes(label = pct,
+                  alpha = pct_n),
+              text_smoothing = 5,
+              family = "Avenir Black",
+              linecolour = "white",
+              linewidth = 0.21,
+              color = "white",
+              hjust = +0.3,
+              alpha = 0.8,
+              fontface = "bold",
+              size = 2.65) +
+  scale_alpha_continuous() +
+  scale_fill_gradientn(colours=c("#ffffd9","#edf8b1", "#c7e9b4","#7fcdbb", "#41b6c4","#1d91c0", "#225ea8","#253494", "#081d58",  "#000208"),
+                       na.value = "transparent",
+                       breaks=c(0,0.1, 0.3, 0.5, 0.7,0.9),
+                       name = "",
+                       limits=c(0.1,1),
+                       labels = scales::percent_format(accuracy = 5L)) +
+  scale_x_continuous(name = "",expand=c(0,0), limits = c(bbox_zonecrs$xmin %>% as.vector(),bbox_zonecrs$xmax %>% as.vector())) +
+  scale_y_continuous(name = "",expand=c(0,0), limits = c(bbox_zonecrs$ymin %>% as.vector(),bbox_zonecrs$ymax %>% as.vector())) +
+  theme_ipsum() +
+  coord_sf(crs = crs_zone,
+           datum = NA) +
+  theme(axis.title = element_blank(),
+        axis.text = element_blank(),
+        text = element_text(family = "Avenir Black"),
+        plot.title = element_text(family = "Phosphate Inline"),
+        plot.subtitle = element_text(family = "Phosphate Inline"),
+        plot.caption = element_text(family = "Avenir Black"),
+        panel.background = element_rect(fill = "white", colour = NA),
+        plot.background = element_rect(fill = "white", colour = NA),
+        legend.position = c(pos_leg_x,pos_leg_y),
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "cm"),
+        panel.margin = unit(c(0.25, 0.25, 0.25, 0.25), "cm")) +
+  labs(title = paste0("Taux de couverture nuageuse - ", titre),
+       caption = "Valeur moyenne 2000-2021. Copernicus CDS.")
+
+
+}
+
+```
+
+
+Les lignes de crête ci-dessous montrent la dispersion du territoire de chacun des pays selon leur taux de couverture nuageuse, classés selon le taux moyen par pays.
+
+Les pays situés au niveau de l'équateur arrivent en tête avec 90% en moyenne, notamment la Papouasie-Nouvelle Guinée, la Guinée-Equatoriale ou le sultanat de Brunei.
+
+L'Inde, Madagascar mais surtout le Chili ont des différences de nébulosité de grande amplitude au sein même de leur territoire.
+
+```{r carte_pays_disp, echo=F, message=F, warning=F , include=TRUE,fig.height=23,fig.width=11,dpi=160, eval=T}
+
+r_cloudcovermois.df.monde.histo.stat.an.pays <-
+r_cloudcovermois.df.monde.histo.stat.an %>%
+  filter(!is.nan(pct_cloud)) %>%
+  st_as_sf(coords = c("x","y"), crs = 4326) %>%
+  st_join(., ned_pays_full %>%
+            select(sov_a3, sovereignt, adm0_a3, admin, name_fr, continent, region_un, region_wb, subregion), join = st_within) %>%
+  identity() %>%
+  filter(!is.na(adm0_a3)) 
+
+
+ggplot(r_cloudcovermois.df.monde.histo.stat.an.pays %>%
+         st_drop_geometry() %>%
+         mutate(name_fr = fct_reorder(name_fr,pct_cloud , mean)) %>%
+         filter(!name_fr %in% c('Russie', 'Fidji', 'Antarctique')) %>%
+         identity(), 
+       aes(x = pct_cloud, y = name_fr, fill = stat(x))) +
+  geom_density_ridges_gradient(scale = 3.3, rel_min_height = 0.002, color = "grey50", size = 0.2) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(expand=c(0,0),
+                     limits = c(0,1),
+                     breaks = seq(0,1,0.1),
+                     labels = scales::percent_format(accuracy = 5L),
+                     name = "") +
+  scale_fill_gradientn(colours=c("#ffffd9","#edf8b1", "#c7e9b4","#7fcdbb", "#41b6c4","#1d91c0", "#225ea8","#253494", "#081d58",  "#000208"),
+                       na.value = "transparent",
+                       breaks=c(0,0.1, 0.3, 0.5, 0.7,0.9),
+                       name = "",
+                       limits=c(0.06,1),
+                       labels = scales::percent_format(accuracy = 5L)) +
+  theme(axis.title = element_blank(),
+        axis.text.x = element_text(size = 7),
+        axis.text.y = element_text(size = 7),
+        text = element_text(family = "Avenir Black"),
+        plot.title = element_text(family = "Phosphate Inline", size = 14),
+        plot.subtitle = element_text(family = "Phosphate Inline"),
+        plot.caption = element_text(family = "Avenir Black"),
+        panel.background = element_rect(fill = "white", colour = NA),
+        plot.background = element_rect(fill = "white", colour = NA),
+        legend.position = c(0.9,0.1),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(linetype = "solid", color = "black", size = 0.08),
+        panel.grid.minor.x = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "cm"),
+        panel.margin = unit(c(0.25, 0.25, 0.25, 0.25), "cm")) +
+  labs(title = "Taux de couverture nuageuse - par pays",
+       caption = "Valeur moyenne 2000-2021. Copernicus CDS.")
+
+
+```
+
+
+
+Le Moyen-Orient et l'Afrique du Nord placent leurs représentants parmi les pays les plus ensoleillés : l'Egypte, Bahrein et le Qatar.
+
+
+
+Avec une analyse sur les grandes villes, on sera peut-être surpris de trouver les cités colombiennes aussi hautes dans le classement, devant Yaoundé, Singapour mais surtout devant Manchester, pourtant pas réputé pour son soleil radieux.
+
+
+```{r graphique_continent_villes, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11.5,dpi=160, eval=T}
+
+
+ggplot() + 
+  geom_density_ridges_gradient(data = r_cloudcovermois.df.monde.histo.stat.an.pays %>%
+                                 filter(!is.na(adm0_a3)) %>%
+                                 mutate(continent_fr = case_when(continent %in% "Asia" ~ "Asie",
+                                                                 continent %in% "South America" ~ "Amérique du Sud",
+                                                                 continent %in% "Africa" ~ "Afrique",
+                                                                 continent %in% "Europe" ~ "Europe",
+                                                                 continent %in% "North America" ~ "Amérique du Nord",
+                                                                 continent %in% "Oceania" ~ "Océanie",
+                                                                 TRUE ~ "NA")) %>%
+                                 filter(!continent_fr %in% "NA") %>%
+                                 mutate(continent_fr = factor(continent_fr, levels = c("Europe","Amérique du Nord","Amérique du Sud","Afrique","Asie","Océanie"))) %>%
+                                 mutate(pct_cloud = round(pct_cloud,3)) %>%
+                                 identity(),
+                               aes(x=pct_cloud ,
+                                   y=continent_fr,
+                                   fill = stat(x)),
+                               scale = 0.5, rel_min_height = 0.001, color = "grey50", size = 0.2) +
+geom_text_repel(data = r_cloudcovermois.df.monde.histo.stat.an.villes %>%
+            distinct(NAME_FR, continent, POP_MAX, RANK_MAX,.keep_all = T) %>%
+              filter(RANK_MAX >= 10) %>%
+            mutate(POP_MAX = as.numeric(POP_MAX)) %>%
+            mutate(continent_fr = case_when(continent %in% "Asia" ~ "Asie",
+                                            continent %in% "South America" ~ "Amérique du Sud",
+                                            continent %in% "Africa" ~ "Afrique",
+                                            continent %in% "Europe" ~ "Europe",
+                                            continent %in% "North America" ~ "Amérique du Nord",
+                                            continent %in% "Oceania" ~ "Océanie",
+                                            TRUE ~ "NA")) %>%
+            filter(!continent_fr %in% "NA") %>%
+            mutate(continent_fr = factor(continent_fr, levels = c("Europe","Amérique du Nord","Amérique du Sud","Afrique","Asie","Océanie"))) %>%
+            # n villes les plus peuplées par continent
+            group_by(continent_fr)  %>%
+            arrange(desc(POP_MAX)) %>%
+            filter(row_number()<=30) %>%
+            ungroup(),
+          aes(x=pct_cloud , y=continent_fr, label = NAME_FR),
+          color = "white",
+          size = 2.7, 
+          direction    = "both",
+          max.overlaps = 50,
+          force_pull   = 0.1,
+          force = 0.9,
+          bg.color = "black", 
+          bg.r = 0.16 ,
+          segment.size  = 0,
+          segment.color = NA,
+          family = "Avenir Black") +
+  facet_grid (.~ continent_fr, 
+              # space = "free_x", 
+              scales = "free_x") +
+  scale_fill_gradientn(colours=c("#ffffd9","#edf8b1", "#c7e9b4","#7fcdbb", "#41b6c4","#1d91c0", "#225ea8","#253494", "#081d58",  "#000208"),
+                       na.value = "transparent",
+                       breaks=c(0,0.1, 0.3, 0.5, 0.7,0.9),
+                       name = "",
+                       limits=c(0.06,1),
+                       labels = scales::percent_format(accuracy = 5L)) +
+  scale_y_discrete(expand=c(0,0),
+                   name = "") +
+  scale_x_continuous(name = "",
+                     expand=c(0,0), 
+                     limits = c(0,1),
+                     breaks = seq(0.1,0.9,0.1),
+                     position = "top",
+                     labels = scales::percent_format(accuracy = 5L)) +
+  theme_ipsum() +
+  coord_flip() +
+  theme(axis.title = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_text(size = 8),
+      axis.line.y  = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.title.y = element_blank(),
+      text = element_text(family = "Avenir Black"),
+      plot.title = element_text(family = "Phosphate Inline"),
+      plot.subtitle = element_text(family = "Phosphate Inline"),
+      plot.caption = element_text(family = "Avenir Black"),
+      panel.background = element_rect(fill = "white", colour = "white"),
+      plot.background = element_rect(fill = "white", colour = "white"),
+      legend.position = "none",
+      panel.grid.minor = element_blank(),
+      panel.grid.major = element_line(linetype = "dashed", size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      strip.text = element_text(family = "Phosphate Inline", size=10.5, face = "bold", angle = 0),
+      strip.background = element_rect(fill=NA,colour=NA)) +
+  labs(title = "Taux de couverture nuageuse - villes par continent",
+       caption = "Valeur moyenne 2000-2021. Copernicus CDS.")
+
+```
+
+
+#### Isoplèthes par continent
+
+
+Quelques cartes plus locales pour voir que l'Europe et son climat tempéré possède sûrement les disparités de nébulosité les plus faibles.
+
+```{r carte_europe, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+# europe
+
+crs_zone <- 3035
+
+bbox_zone <- 
+  ned_pays_full %>%
+  filter(adm0_a3 %in% c("DNK", "GIB", "GRC","IRL","POL", "EST","UKR")) %>%
+  select(adm0_a3) %>%
+  rbind.data.frame(ned_etats_por %>% filter(adm1_code %in% "PRT-745") %>%
+                     rbind.data.frame(ned_etats_nor %>% filter(adm1_code %in% "NOR-925")) %>%
+                     select(adm0_a3)) %>%
+  st_buffer(50000) %>%
+  st_set_crs(4326) %>%
+  st_buffer(30000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 200)
+
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  sf::read_sf(qgis_output(qgis_run_algorithm(
+    "native:clip",
+    INPUT = r_cloudcovermois.dfl.monde.histo.stat.an.zone  ,
+    OVERLAY = st_union(ned_pays_full  %>%
+                         st_intersection(bbox_zone_2 %>%
+                                           st_as_sfc()%>%
+                                           st_buffer(100000)) ) %>%
+      st_as_sf(),
+    .quiet = TRUE
+  ), "OUTPUT")) %>%
+  rename_geometry(., "geometry") %>%
+  st_cast("LINESTRING")  %>%
+  filter(!geometry %in% "numeric(0)")
+
+f_carto_ggplot(pos_leg_x=0.1,pos_leg_y=0.9, titre = "Europe")
+
+```
+
+
+
+
+```{r carte_amnord, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+# amnord
+
+crs_zone <- 2163
+
+bbox_zone <- 
+  ned_etats_amn %>%
+  filter(iso_3166_2 %in% "US-KS") %>%
+  st_buffer(2000000) %>%
+  st_set_crs(4326) %>%
+  st_buffer(30000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 400)
+
+f_carto_ggplot(pos_leg_x=0.1,pos_leg_y=0.1, titre = "Amerique du Nord")
+
+```
+
+
+
+
+
+
+```{r carte_amsud, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+crs_zone <- 31972
+
+bbox_zone <- 
+ned_pays_full %>%
+  filter(adm0_a3 %in% c("ARG","COL","BRA", "NIC")) %>%
+  st_set_crs(4326) %>%
+  st_buffer(30000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 600)
+
+f_carto_ggplot(pos_leg_x=0.9,pos_leg_y=0.9, titre = "Amerique du Sud")
+
+```
+
+
+
+
+
+```{r carte_afrique, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+crs_zone <- 32635
+
+bbox_zone <- 
+  ned_pays_full %>%
+  filter(adm0_a3 %in% c("DZA","SEN","MDG","SOM")) %>%
+  select(adm0_a3) %>%
+  rbind.data.frame(ned_etats_zaf %>% filter(!adm1_code %in% "ZAF-1189") %>%
+                     select(adm0_a3)) %>%
+  st_set_crs(4326) %>%
+  st_buffer(90000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 500)
+
+f_carto_ggplot(pos_leg_x=0.1,pos_leg_y=0.1, titre = "Afrique")
+
+```
+
+
+
+
+
+
+```{r carte_asiesud, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+crs_zone <- 24378
+
+bbox_zone <- 
+  ned_pays_full %>%
+  filter(adm0_a3 %in% c("IND","BTN","PAK", "IRN", "AFG", "MMR", "OMN", "KGZ", "UZB", "LKA")) %>%
+  st_set_crs(4326) %>%
+  st_buffer(100000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 700)
+
+f_carto_ggplot(pos_leg_x=0.25,pos_leg_y=0.1, titre = "Asie du Sud")
+
+```
+
+
+
+
+```{r carte_asiesudest, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+
+crs_zone <- 3415
+
+bbox_zone <- 
+  ned_pays_full %>%
+  filter(adm0_a3 %in% c("THA","JPN","MNG")) %>%
+  st_set_crs(4326) %>%
+  st_buffer(90000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 300) 
+
+f_carto_ggplot(pos_leg_x=0.8,pos_leg_y=0.2, titre = "Asie du Sud-Est")
+
+```
+
+
+
+
+```{r carte_oceanie, echo=F, message=F, warning=F , include=TRUE,fig.height=10,fig.width=11,dpi=160, eval=T}
+
+crs_zone <- 4462
+
+bbox_zone <- 
+  ned_pays_full %>%
+  filter(adm0_a3 %in% c("AUS","IDN")) %>%
+  select(adm0_a3) %>%
+  rbind.data.frame(ned_etats_nzl %>% filter(adm1_code %in% c("NZL-3396","NZL-3408")) %>%
+                     select(adm0_a3)) %>%
+  st_set_crs(4326) %>%
+  st_buffer(90000) 
+
+bbox_zonecrs <-
+  bbox_zone %>%
+  st_transform(crs_zone) %>%
+  st_bbox()
+
+bbox_zone_2 <-
+  bbox_zone %>%
+  st_bbox()
+
+bbox_zone_crs <-
+  bbox_zone_2 %>%
+  st_as_sfc() %>%
+  st_transform(crs_zone) %>%
+  st_sf()
+
+
+mask_zone <- st_difference(st_union(bbox_zone_2 %>%
+                                      st_as_sfc() %>%
+                                      st_buffer(2000000)),
+                           st_union(ned_pays_full  %>%
+                                      st_intersection(bbox_zone_2 %>%
+                                                        st_as_sfc()%>%
+                                                        st_buffer(1000000)) ))
+
+r_cloudcovermois.df.monde.histo.stat.an.zone <-
+  f_df_zone(df_source =r_cloudcovermois.df.monde.histo.stat.an,
+          var = "pct_cloud")
+
+# isolignes
+r_cloudcovermois.dfl.monde.histo.stat.an.zone <-
+  f_isobandes(df = r_cloudcovermois.df.monde.histo.stat.an.zone ,
+              var = "pct_cloud",
+              crs = crs_zone,
+              discr_min = 0.1,
+              discr_max = 0.9,
+              discr_step = 0.1) %>%
+  # suppression des lignes trop courtes
+  mutate(longueur = as.numeric(st_length(.)) / 1000) %>%
+  filter(longueur > 300) 
+
+f_carto_ggplot(pos_leg_x=0.2,pos_leg_y=0.2, titre = "Océanie")
+
+```
+
+
+
+
+#### Méthodo
+
+L'intégralité des traitements est comme d'habitude dans le [code-source de la page](https://github.com/mtmx/mtmx.github.io/blob/master/posts/nuages_monde/index.qmd). On peut citer une partie des libraires très cools utilisées ici, merci à leurs développeurs :
+
+- [ecmwfr](https://github.com/bluegreen-labs/ecmwfr) pour récupérer les données du [Climate Data Store](https://cds.climate.copernicus.eu/) de Copernicus
+
+- [geomtextpath](https://github.com/AllanCameron/geomtextpath) pour tracer les isolignes
+
+- [ggridges](https://github.com/wilkelab/ggridges) pour les graphiques en 'lignes de crêtes'
+
+- [qgisprocess](https://github.com/paleolimbot/qgisprocess) pour appeler des fonctions QGis
+
+- [rnaturalearth](https://github.com/ropensci/rnaturalearth) pour télécharger les données du projet [Natural Earth](https://www.naturalearthdata.com/)
+

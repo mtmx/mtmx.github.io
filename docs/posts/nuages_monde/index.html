@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.179">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mathieu">
+<meta name="dcterms.date" content="2022-09-10">
+<meta name="description" content="Au dessus de nos têtes, sur toute la planète">
+
+<title>mtmx - Nébulosité</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/img_campagne_rond.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #e8eeed;
+    }
+    </style>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="mtmx - Nébulosité">
+<meta property="og:description" content="Au dessus de nos têtes, sur toute la planète">
+<meta property="og:image" content="https://mtmx.github.io/posts/nuages_monde/img/img_nuages_monde.png">
+<meta property="og:site-name" content="mtmx">
+<meta property="og:image:height" content="921">
+<meta property="og:image:width" content="941">
+<meta name="twitter:title" content="mtmx - Nébulosité">
+<meta name="twitter:description" content="Au dessus de nos têtes, sur toute la planète">
+<meta name="twitter:image" content="https://mtmx.github.io/images/img_mosaique.png">
+<meta name="twitter:creator" content="@matamix">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="625">
+<meta name="twitter:image-width" content="766">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/img_campagne_rond.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">mtmx</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Des posts</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bots.html">Des bots</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Et sinon</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matamix"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Nébulosité</h1>
+                  <div>
+        <div class="description">
+          Au dessus de nos têtes, sur toute la planète
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">météo</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Auteur</div>
+      <div class="quarto-title-meta-contents">
+               <p>Mathieu </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Publication</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">09/10/2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sommaire</h2>
+   
+  <ul>
+  <li><a href="#isoplèthes-par-continent" id="toc-isoplèthes-par-continent" class="nav-link active" data-scroll-target="#isoplèthes-par-continent">Isoplèthes par continent</a></li>
+  <li><a href="#méthodo" id="toc-méthodo" class="nav-link" data-scroll-target="#méthodo">Méthodo</a></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Copernicus, le programme d’observation de la Terre de l’UE basé notamment sur ses satellites, met a disposition du grand public un <a href="https://cds.climate.copernicus.eu">‘climate data store’</a> fournissant une quantité folles de données météo. Ce sont par exemple ces données qui ont été utilisées pour cette jolie carte bivariée pour visualiser les zones où <a href="https://erdavis.com/2021/04/01/when-it-rains-does-it-pour/">quand il pleut, ça tombe dru</a>.</p>
+<p>Pour revoir les bases de l’ensoleillement sur la planète, on va ici l’approcher par son contraire : la nébulosité. On s’intéresse <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means?tab=overview">au taux de couverture nuageuse</a>, soit la part du carreau recouvert de nuages à chaque heure, le tout moyenné entre 2000 et 2021, avec une résolution spatiale d’1/4 de degré en latitude et longitude, soit environ 28 km au niveau de l’Equateur. Des détails sur le code en bas de page.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_monde-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<p>Les lignes de crête ci-dessous montrent la dispersion du territoire de chacun des pays selon leur taux de couverture nuageuse, classés selon le taux moyen par pays.</p>
+<p>Les pays situés au niveau de l’équateur arrivent en tête avec 90% en moyenne, notamment la Papouasie-Nouvelle Guinée, la Guinée-Equatoriale ou le sultanat de Brunei.</p>
+<p>L’Inde, Madagascar mais surtout le Chili ont des différences de nébulosité de grande amplitude au sein même de leur territoire.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_pays_disp-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Le Moyen-Orient et l’Afrique du Nord placent leurs représentants parmi les pays les plus ensoleillés : l’Egypte, Bahrein et le Qatar.</p>
+<p>Avec une analyse sur les grandes villes, on sera peut-être surpris de trouver les cités colombiennes aussi hautes dans le classement, devant Yaoundé, Singapour mais surtout devant Manchester, pourtant pas réputé pour son soleil radieux.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/graphique_continent_villes-1.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="isoplèthes-par-continent" class="level4">
+<h4 class="anchored" data-anchor-id="isoplèthes-par-continent">Isoplèthes par continent</h4>
+<p>Quelques cartes plus locales pour voir que l’Europe et son climat tempéré possède sûrement les disparités de nébulosité les plus faibles.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_europe-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_amnord-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_amsud-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_afrique-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_asiesud-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_asiesudest-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/carte_oceanie-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="méthodo" class="level4">
+<h4 class="anchored" data-anchor-id="méthodo">Méthodo</h4>
+<p>L’intégralité des traitements est comme d’habitude dans le <a href="https://github.com/mtmx/mtmx.github.io/blob/master/posts/nuages_monde/index.qmd">code-source de la page</a>. On peut citer une partie des libraires très cools utilisées ici, merci à leurs développeurs :</p>
+<ul>
+<li><p><a href="https://github.com/bluegreen-labs/ecmwfr">ecmwfr</a> pour récupérer les données du <a href="https://cds.climate.copernicus.eu/">Climate Data Store</a> de Copernicus</p></li>
+<li><p><a href="https://github.com/AllanCameron/geomtextpath">geomtextpath</a> pour tracer les isolignes</p></li>
+<li><p><a href="https://github.com/wilkelab/ggridges">ggridges</a> pour les graphiques en ‘lignes de crêtes’</p></li>
+<li><p><a href="https://github.com/paleolimbot/qgisprocess">qgisprocess</a> pour appeler des fonctions QGis</p></li>
+<li><p><a href="https://github.com/ropensci/rnaturalearth">rnaturalearth</a> pour télécharger les données du projet <a href="https://www.naturalearthdata.com/">Natural Earth</a></p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/\.mtmx\.github\.io\/**/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="mtmx/blog_comm" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
