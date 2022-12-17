@@ -30,13 +30,14 @@ format:
     theme: [minty, custom.scss]
     highlight-style: arrow
     # fig-dpi: 600
+    fontsize : 1em
     fig-align: center
     fig-width: 8
     fig-asp: 0.618 # 1 / pi
     fig-format: png
     smooth-scroll: true
     date-format: "DD/MM/YYYY"
-    css: styles.css
+    # css: styles.css
     link-external-icon: false
     link-external-newwindow: true
     link-external-filter: '^(?:http:|https:)\/\/\.mtmx\.github\.io\/**'
