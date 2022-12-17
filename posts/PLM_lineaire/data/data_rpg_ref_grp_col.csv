@@ -1,0 +1,25 @@
+CODE_GROUPE_CULTURE,LIBELLE_GROUPE_CULTURE,col_hex
+1,Blé tendre,#ffe39f
+2,Maïs grain et ensilage,#ffc026
+3,Orge,#eec36f
+4,Autres céréales,#cd8b0d
+5,Colza,#ffdc00
+6,Tournesol,#e4cf18
+7,Autres oléagineux,#b1a112
+8,Protéagineux,#e3dcd2
+9,Plantes à fibres,#d2c7b7
+11,Gel (surfaces gelées sans production),#e8e6e7
+14,Riz,#f4f4f4
+15,Légumineuses à grains,#fae9e9
+16,Fourrage,#ccdcb9
+17,Estives et landes,#9ab973
+18,Prairies permanentes,#3D9970
+19,Prairies temporaires,#336857
+20,Vergers,#bf4c4c
+21,Vignes,#620000
+22,Fruits à coque,#a25e51
+23,Oliviers,#A3C1AD
+24,Autres cultures industrielles,#99a1a4
+25,Légumes ou fleurs,#ffa9d9
+26,Canne à sucre,#994373
+28,Divers,#dba086

@@ -1,0 +1,45 @@
+code_clc_niveau_3,libelle_fr,libelle_en,couleur,rouge,vert,bleu,col_hex
+111,Tissu urbain continu,Continuous urban fabric,,230,000,077,#E6004D
+112,Tissu urbain discontinu,Discontinuous urban fabric,,255,000,000,#FF0000
+121,Zones industrielles ou commerciales et installations publiques,Industrial or commercial units and public facilities,,204,077,242,#CC4DF2
+122,Réseaux routier et ferroviaire et espaces associés,Road and rail networks and associated land,,204,000,000,#CC0000
+123,Zones portuaires,Port areas,,230,204,204,#E6CCCC
+124,Aéroports,Airports,,230,204,230,#E6CCE6
+131,Extraction de matériaux,Mineral extraction sites,,166,000,204,#A600CC
+132,Décharges,Dump sites,,166,077,000,#A64D00
+133,Chantiers,Construction sites,,255,077,255,#FF4DFF
+141,Espaces verts urbains,Green urban areas,,255,166,255,#FFA6FF
+142,Equipements sportifs et de loisirs,Sport and leisure facilities,,255,230,255,#FFE6FF
+211,Terres arables hors périmètres d'irrigation,Non-irrigated arable land,,255,255,168,#FFFFA8
+212,Périmètres irrigués en permanence,Permanently irrigated land,,255,255,000,#FFFF00
+213,Rizières,Rice fields,,230,230,000,#E6E600
+221,Vignobles,Vineyards,,230,128,000,#E68000
+222,Vergers et petits fruits,Fruit trees and berry plantations,,242,166,077,#F2A64D
+223,Oliveraies,Olive groves,,230,166,000,#E6A600
+231,Prairies et autres surfaces toujours en herbe à usage agricole,"Pastures, meadows and other permanent grasslands under agricultural use",,230,230,077,#E6E64D
+241,Cultures annuelles associées à des cultures permanentes,Annual crops associated with permanent crops,,255,230,166,#FFE6A6
+242,Systèmes culturaux et parcellaires complexes,Complex cultivation patterns,,255,230,077,#FFE64D
+243,"Surfaces essentiellement agricoles, interrompues par des espaces naturels importants","Land principally occupied by agriculture, with significant areas of natural vegetation",,230,204,077,#E6CC4D
+244,Territoires agroforestiers,Agro-forestry areas,,242,204,166,#F2CCA6
+311,Forêts de feuillus,Broad-leaved forest,,128,255,000,#80FF00
+312,Forêts de conifères,Coniferous forest,,000,166,000,#00A600
+313,Forêts mélangées,Mixed forest,,077,255,000,#4DFF00
+321,Pelouses et pâturages naturels,Natural grasslands,,204,242,077,#CCF24D
+322,Landes et broussailles,Moors and heathland,,166,255,128,#A6FF80
+323,Végétation sclérophylle,Sclerophyllous vegetation,,166,230,077,#A6E64D
+324,Forêt et végétation arbustive en mutation,Transitional woodland-shrub,,166,242,000,#A6F200
+331,"Plages, dunes et sable","Beaches, dunes, sands",,230,230,230,#E6E6E6
+332,Roches nues,Bare rocks,,204,204,204,#CCCCCC
+333,Végétation clairsemée,Sparsely vegetated areas,,204,255,204,#CCFFCC
+334,Zones incendiées,Burnt areas,,000,000,000,#000000
+335,Glaciers et neiges éternelles,Glaciers and perpetual snow,,166,230,204,#A6E6CC
+411,Marais intérieurs,Inland marshes,,166,166,255,#A6A6FF
+412,Tourbières,Peat bogs,,077,077,255,#4D4DFF
+421,Marais maritimes,Coastal salt marshes,,204,204,255,#CCCCFF
+422,Marais salants,Salines,,230,230,255,#E6E6FF
+423,Zones intertidales,Intertidal flats,,166,166,230,#A6A6E6
+511,Cours et voies d'eau,Water courses,,000,204,242,#00CCF2
+512,Plans d'eau,Water bodies,,128,242,230,#80F2E6
+521,Lagunes littorales,Coastal lagoons,,000,255,166,#00FFA6
+522,Estuaires,Estuaries,,166,255,230,#A6FFE6
+523,Mers et océans,Sea and ocean,,230,242,255,#E6F2FF

@@ -1,0 +1,409 @@
+---
+title: "PLM en train"
+author: "Mathieu"
+showonlyimage: false
+draft: false
+date: "2022-12-19"
+image: img/img_PLM_lineaire.png
+weight: 0
+type: "post"
+description: "Description d'un itinéraire linéarisé"
+categories: ["train", "animaux", "campagne"]
+---
+
+
+```{r setup, include=FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE)
+# import données
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(ggiraph)
+library(scales)
+library(hrbrthemes)
+library(stringr)
+
+# import data
+ligne.xy.DATAVECT_stats.pc <- fread( "./data/ligne.xy.DATAVECT_stats.pc.csv")
+ligne.xy.DEP_pos <- fread( "./data/ligne.xy.DEP_pos.csv")
+ligne.xy.ARN_pos <- fread( "./data/ligne.xy.ARN_pos.csv")
+data_clc_nom2 <- fread("./data/data_clc_nom2.csv") %>%
+  mutate(libelle_fr=str_replace(libelle_fr, " \\s*\\([^\\)]+\\)", ""))
+
+ligne.xy.DATAVECT_RPG_stats.pc <- fread( "./data/ligne.xy.DATAVECT_RPG_stats.pc.csv")
+data_rpg_ref <- fread( "./data/data_rpg_ref.csv") %>%
+  mutate(LIBELLE_CULTURE=str_replace(LIBELLE_CULTURE, " \\s*\\([^\\)]+\\)", ""))
+data_rpg_ref_grp_col <- fread("./data/data_rpg_ref_grp_col.csv")
+
+ligne.xy.COMM_stats.betail <- fread( "./data/ligne.xy.COMM_stats.betail.csv")
+
+
+  # style du popup
+# tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0;width:50px;height:10px"
+tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white;opacity:0.2"
+
+theme_maison <-
+  theme(
+    plot.title = element_text(family = "Avenir Black"),
+    plot.subtitle = element_text(family = "Avenir Black", 
+                                 margin = margin(0,0,45,0)),
+    plot.caption = element_text(family = "Avenir Black", size = 10),
+    axis.text.y = element_text(size = 13, face = "italic", color = "grey40"),
+    axis.text.x = element_text(size = 10.5, face = "italic", color = "grey40"),
+    axis.title.x = element_blank(),
+    # axis.ticks.x = element_blank(),
+    axis.ticks.x = element_line(size = 0.5, color = "black"),
+    axis.ticks.y = element_line(size = 0.5, color = "black"),
+    legend.position = c(0.4,1.022),
+    legend.direction = "horizontal",
+    legend.key.size = unit(0.9,"line"),
+    legend.key.width = unit(0.35, 'cm'),
+    legend.text=element_text(size=13),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(size = 0.4, color = "grey70", linetype = "dashed"),
+    panel.grid.minor.y = element_blank(),
+    panel.background = element_rect(fill = "white",color = "white"),
+    plot.background = element_rect(fill = "white",color = "white"),
+    strip.text.x = element_text(size = 8, face = "bold", angle = 0),
+    # panel.margin = unit(0, "lines"),
+    panel.spacing = unit(0,'lines'),
+    panel.border = element_blank())
+
+  
+```
+
+
+
+L'idée de distordre l'espace n'est pas nouvelle : cette [carte du littoral du lac Michigan](https://somethingaboutmaps.wordpress.com/2015/09/28/a-matter-of-perspective/) "dépliée" sur un axe vertical par Daniel Huffman avait par exemple beaucoup de classe. Avec ce principe on peut profiter de toute la hauteur de page en scrollant de haut en bas et ça fonctionne bien pour simuler l'itinéraire sur un axe de transport : tentons ça pour visualiser notre trajet Paris - Lyon - Marseille en quantifiant ce qu'on peut trouver le long de la voie (à 1 km de part et d'autre).
+
+La carte devient donc un graphique de type diagramme en barres non dénué de spatialité (distance en km du départ à l'arrivée) puisqu'on a linéarisé une voie qui serpente , disons une polyligne recto-rectifiée ?
+
+Trois dimensions viennent à l'esprit si on veut essayer de retranscrire l'expérience du paysage quand on s'assied confortablement dans ce train  :
+
+- 🐄 🐑 🚶 **- Ce qui vit** : est-ce qu'on peut apercevoir du monde derrière sa fenêtre ? Des humains ou des animaux ? Difficile de connaître la localisation des chevreuils et des sangliers alors concentrons nous sur [les vaches](https://twitter.com/matamix/status/1601995129820151811?cxt=HHwWhoCwzaaFt7ssAAAA) et les autres.
+
+- ⛰️ 🏭 🌲 **- Ce qu'on voit** : En regardant l'occupation du sol aux abords de la voie ferrée, on se rapproche de l'impression visuelle que l'on peut ressentir en regardant par la fenêtre.
+
+- 🌱 🍆 🍇 **- Ce qui pousse** : les cultures sur les parcelles à proximité nous montrent aussi qu'on traverse des mondes différents au fur et à mesure de l'approche de la Méditerranée.
+
+
+Pour se localiser en plus de la distance parcourue depuis le départ du train on indique les limites des départements mais aussi celles des régions naturelles issues du superbe projet photographique de [Nelly Monnier et Eric Tabuchi](https://www.archive-arn.fr/).
+
+
+<br>
+
+#### 🐄 🐑 🚶 **- Ce qui vit**
+
+
+```{r graphique_cheptels, echo=F, message=F, warning=F, fig.height=21, fig.width=5 }
+
+
+ggi <-
+  ggplot() +
+  geom_col_interactive(data = ligne.xy.COMM_stats.betail %>%
+             mutate( interval_moy = rowMeans(select(.,interval_min, interval_max), na.rm = TRUE)) %>%
+             mutate(type_betail = case_when(type_betail %in% "total_caprins" ~ "chèvres, boucs",
+                                            type_betail %in% "total_bovins" ~ "vaches, boeufs",
+                                            type_betail %in% "total_equides" ~ "chevaux, ânes, poneys",
+                                            type_betail %in% "total_ovins" ~ "moutons, brebis",
+                                            type_betail %in% "total_porcins" ~ "cochons, truies",
+                                            type_betail %in% "total_population" ~ "humains")) %>%
+             mutate(type_betail = factor(type_betail, levels = c("vaches, boeufs","chèvres, boucs","moutons, brebis","chevaux, ânes, poneys","cochons, truies", "humains"))) %>%
+               mutate(tip = case_when(type_betail %in% "humains" ~ paste0("<b>","<font size=2.5 color=black>",format(round(nb*100), big.mark = " ", scientific = FALSE)," ", type_betail,"</b>","</font>", "<br>"), TRUE ~ paste0("<b>","<font size=2.5 color=black>",format(round(nb), big.mark = " ", scientific = FALSE)," ", type_betail,"</b>","</font>", "<br>"))) %>%
+             identity(),
+           aes(x = interval_moy,
+               y = nb, 
+               data_id = type_betail,
+               tooltip = tip ,
+               fill = type_betail),
+           position = "stack",
+           color = NA,
+           size = 0
+  )  +
+  geom_text(data = ligne.xy.DEP_pos,
+            aes(x = dist_deb_moy,
+                y = 1500,
+                label = LIBGEO,
+                group = DEP),
+            size = 4,
+            fontface = "bold") +
+  # # limites départements
+  geom_segment(data = ligne.xy.DEP_pos %>%
+                 filter(dist_deb_min > 0),
+               aes(x = dist_deb_min,
+                   xend = dist_deb_min,
+                   y = 1250,
+                   yend = 1750),
+               size = 0.5,
+               color = "black") +
+    scale_fill_manual(
+    values = c("#8b3626","#b8ce9d","#9fdbf3","#ffa087", "#ffa9d9", "grey"),
+    name = "") +
+  guides(fill = guide_legend(nrow = 1)) +
+  scale_x_continuous(name = "",
+                     trans = "reverse",
+                     breaks = c(seq(0,700000,50000),750000),
+                     labels = c("Gare de Lyon",paste0(seq(50000,700000,50000)/1000, " km"),"Gare Saint Charles"),
+                     expand = c(0.01,0.002)) +
+  scale_y_continuous(name = "",
+                     limits = c(-200,1800),
+                     breaks = c(0,500,1000),
+                        sec.axis = sec_axis(~.,breaks =  c(0,500,1000), name = ""),
+                     expand = c(0.002,0.002)) +
+  # annotations
+geom_curve(data = data.frame(x = c(67720,92720), y = c(420,420), xend = c(61700,92720), yend = c(70,70)),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) +
+geom_text(data = data.frame(x = c(67750, 92720 ),
+y = c(635, 635),
+label = c("Ah, quelques chevaux", "Plus personne ici" )),
+mapping = aes(x = x, y = y, label = label),
+color = "grey") +
+geom_curve(data = data.frame(x = 419446.243500015, y = 485.51119463576, xend = 413990.438885293, yend = 126.350367669088),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+curvature = 0.23, arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_curve(data = data.frame(x = 134895.715647969, y = 485.51119463576, xend = 130531.071956192, yend = 104.583044822623),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+angle = 137L, curvature = -0.32, arrow = arrow(40L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_curve(data = data.frame(x = 438541.559651542, y = 510.906404623303, xend = 452181.071188347, yend = 129.978254810165),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+curvature = -0.22, arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_curve(data = data.frame(x = 266077.511925078, y = 692.300761677178, xend = 265531.931463606, yend = 289.605289017575),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+curvature = 0.18, arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_curve(data = data.frame(x = 219460.687176159, y = 866.439344448898, xend = 242375.066557991, yend = 652.394003125325),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+curvature = -0.31, arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_text(data = data.frame(x = c(133258.974263553, 428418.018488578, 271412.072737296, 538928.381212219, 211519.465777859),
+y = c(743.091181652263, 732.20752022903, 899.090328718595, 706.812310241488, 830.160473038123 ),
+label = c("Premières vaches en vue", "Des chevaux autour de Lyon", "Et les moutons s'y mettent", "Pas mal de cochons", "Ça broute à fond" )),
+mapping = aes(x = x, y = y, label = label),
+color = "grey",
+inherit.aes = FALSE) +
+  geom_curve(data = data.frame(x = 533957.551807512, y = 536.301614610845, xend = 525773.844885429, yend = 307.744724722963),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+curvature = -0.145, arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_curve(data = data.frame(x = 680051.838379967, y = 260.582191888955, xend = 674596.033765245, yend = 104.583044822623),
+mapping = aes(x = x, y = y, xend = xend, yend = yend),
+color = "grey",
+curvature = -0.14, arrow = arrow(30L, unit(0.1, "inches"),
+"last", "closed"),
+inherit.aes = FALSE) + 
+geom_text(data = data.frame(x = 678960.710756611, y = 590.719921727008, label = "Dernières brebis avant Marseille"),
+mapping = aes(x = x, y = y, label = label),
+color = "grey",
+inherit.aes = FALSE) +
+  coord_flip() +
+  theme_ipsum() +
+  labs(title = "Type de cheptel à proximité de la LGV Paris-Lyon-Marseille",
+       subtitle = "",
+       caption = "Source : Recensement agricole 2010, Agreste, Ministère de l'agriculture.") +
+  theme_maison
+
+# ggiraph
+ggiraph(code = {print(ggi)},
+        height_svg = 30,
+         width_svg = 10,
+        tooltip_extra_css = tooltip_css,
+        tooltip_offx = -40, tooltip_offy = -30,
+        zoom_max = 1,
+        hover_css = "{fill:orange;color:orange;r:6px;}")
+
+```
+
+
+#### ⛰️ 🏭 🌲 **- Ce qu'on voit**
+
+```{r graphique_os, echo=F, message=F, warning=F, fig.height=30, fig.width=10  }
+
+
+ggi <-
+  ggplot() +
+  geom_col_interactive(data = ligne.xy.DATAVECT_stats.pc %>%
+             left_join(data_clc_nom2 %>%
+                         select(-couleur, -libelle_en),
+                       by = c("CODE_18" = "code_clc_niveau_3")) %>%
+           mutate( interval_moy = rowMeans(select(.,interval_min, interval_max), na.rm = TRUE)),
+           aes(x = interval_moy,
+               y = pct_area_vect, 
+               data_id = interval,
+               tooltip = paste0("<b>","<font size=2.5 color=black>", libelle_fr," : ",scales::percent(pct_area_vect,  accuracy = 1),"</b>","</font>", "<br>"),
+               # alpha = nb_exp,
+               fill = col_hex),
+           position = "stack",
+           color = NA,
+           size = 0
+  )  +
+  # noms départements
+  geom_text(data = ligne.xy.ARN_pos,
+            aes(x = dist_deb_moy,
+                y = 1.2,
+                label = nom_rn,
+                group = id_rn),
+            size = 4,
+            fontface = "bold") +
+  # # limites départements
+  geom_segment(data = ligne.xy.ARN_pos %>%
+                 filter(dist_deb_min > 0),
+               aes(x = dist_deb_min,
+                   xend = dist_deb_min,
+                   y = 1.02,
+                   yend = 1.38),
+               size = 0.5,
+               color = "black") +
+  scale_fill_identity( name = "" )+
+  scale_x_continuous(name = "",
+                     trans = "reverse",
+                    breaks = c(seq(0,700000,50000),750000),
+                     labels = c("Gare de Lyon",paste0(seq(50000,700000,50000)/1000, " km"),"Gare Saint Charles"),
+                     expand = c(0.01,0.002)) +
+  scale_y_continuous(name = "Occupation du sol",
+                     limits = c(-0.4,1.4),
+                     breaks = seq(0,1,0.2),
+                        sec.axis = sec_axis(~.,breaks = seq(0,1,0.2),
+                        labels = percent_format(), name = ""),
+                     labels = percent_format(),
+                     expand = c(0.002,0.002)) +
+  geom_text(data = data.frame(x = c(92888.790266999, 359432.392738074, 243344.989922104, 431085.298894687, 71062.8016557229, 679627.535020587, 525834.450136887, 120710.623649692, 27416.3647379476, 707416.3647379476),
+y = c(-0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711  ),
+label = c("L'autoroute...\nEt des céréales\nà perte de vue.", "Vignes en vue", "Place aux prairies", "Retour dans le dur", "La Seine, l'Yonne\net des étangs", "La Durance\nprend ses aises", "Premiers vergers", "On rentre en forêt", "Les premiers champs", "Entrée dans le maquis")),
+mapping = aes(x = x, y = y, label = label),
+color = "grey",
+inherit.aes = FALSE) +
+  coord_flip() +
+  theme_ipsum() +
+  labs(title = "Occupation du sol à proximité de la LGV Paris-Lyon-Marseille",
+       subtitle = "",
+       caption = "Source : Corine Land Cover, 2018, SDES.") +
+  theme_maison
+
+# ggiraph
+ggiraph(code = {print(ggi)},
+        height_svg = 30,
+         width_svg = 10,
+        tooltip_extra_css = tooltip_css,
+        tooltip_offx = -40, tooltip_offy = -30,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+
+
+#### 🌱 🍆 🍇 **- Ce qui pousse**
+
+```{r graphique_rpg, echo=F, message=F, warning=F }
+
+
+ggi <-
+  ggplot() +
+  geom_col_interactive(data = ligne.xy.DATAVECT_RPG_stats.pc %>%
+             filter(!CODE_CULTU %in% "000") %>%
+             # RPG
+             left_join(data_rpg_ref %>%
+                         select(CODE, LIBELLE_CULTURE),
+                       by = c("CODE_CULTU" = "CODE")) %>%
+             left_join(data_rpg_ref_grp_col,
+                       by = c("CODE_GROUP" = "CODE_GROUPE_CULTURE")) %>%
+           mutate( interval_moy = rowMeans(select(.,interval_min, interval_max), na.rm = TRUE)),
+           aes(x = interval_moy,
+               y = pct_area_vect, 
+               data_id = interval,
+               tooltip = paste0("<b>","<font size=2.5 color=black>", LIBELLE_CULTURE," : ",scales::percent(pct_area_vect,  accuracy = 1)," ","</b>","</font>", "<br>"),
+               fill = col_hex),
+           position = "stack",
+           color = NA,
+           size = 0
+  )  +
+  # noms départements
+  geom_text(data = ligne.xy.ARN_pos,
+            aes(x = dist_deb_moy,
+                y = 1.2,
+                label = nom_rn,
+                group = id_rn),
+            size = 4,
+            fontface = "bold") +
+  # # limites départements
+  geom_segment(data = ligne.xy.ARN_pos %>%
+                 filter(dist_deb_min > 0),
+               aes(x = dist_deb_min,
+                   xend = dist_deb_min,
+                   y = 1.02,
+                   yend = 1.38),
+               size = 0.5,
+               color = "black") +
+  scale_fill_identity( name = "" )+
+  scale_x_continuous(name = "",
+                     trans = "reverse",
+                    breaks = c(seq(0,700000,50000),750000),
+                     labels = c("Gare de Lyon",paste0(seq(50000,700000,50000)/1000, " km"),"Gare Saint Charles"),
+                     expand = c(0.01,0.002)) +
+  scale_y_continuous(name = "Occupation du sol",
+                     limits = c(-0.4,1.4),
+                     breaks = seq(0,1,0.2),
+                        sec.axis = sec_axis(~.,breaks = seq(0,1,0.2),
+                        labels = percent_format(), name = ""),
+                     labels = percent_format(),
+                     expand = c(0.002,0.002)) +
+  geom_text(data = data.frame(x = c(43909.012844561, 590457.404675809, 392977.741959256, 616492.090964149, 95198.5373746695, 682598.596570123, 266163.628066266, 508994.028262073, 358964.672373688),
+y = c(-0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711, -0.218884228584711 ),
+label = c("Du blé,\nde la betterave ...", "Oh de la lavande", "Le maïs arrive", "Et du melon", "Mais aussi\nde l'orge et\ndes tournesols", "Et des fruits", "De la bonne herbe", "Ca se diversifie", "Et du raisin" )),
+mapping = aes(x = x, y = y, label = label),
+color="grey",
+inherit.aes = FALSE) +
+  coord_flip() +
+  theme_ipsum() +
+  labs(title = "Type de cultures à proximité de la LGV Paris-Lyon-Marseille",
+       subtitle = "",
+       caption = "Source : Registre Parcellaire Graphique 2021, IGN.") +
+  theme_maison
+
+
+# ggiraph
+ggiraph(code = {print(ggi)},
+        height_svg = 30,
+         width_svg = 10,
+        tooltip_extra_css = tooltip_css,
+        tooltip_offx = -40, tooltip_offy = -30,
+        zoom_max = 1,
+        hover_css = "{fill:orange;r:6px;}")
+
+```
+
+<br>
+
+C'est un bon début mais on pourrait faire mieux : déjà, analyser tous les paysages qu'on peut voir depuis sa fenêtre et non pas seulement ceux au bord de la voie ferrée. [Mathieu Rajerison](https://twitter.com/datagistips) a élaboré une méthode pour circonscire les [zones visibles depuis la LGV](https://datagistips.hypotheses.org/138), une piste à creuser. Pourquoi pas tenter une analyse chromatique du sol à partir d'imageries aériennes pour voir quelles couleurs dominent sur chaque tronçon, avec probablement un dégradé Nord-Sud ? Et bien sûr répliquer les graphiques sur la ligne de son choix. Encore tellement de projets inutiles à réaliser !
+
+#### Méthodo
+
+L'intégralité des traitements est comme d'habitude dans le [code-source de la page](https://github.com/mtmx/mtmx.github.io/blob/master/posts/PLM_linéaire/index.qmd). Ah non, le code est dans un sale état pour l'instant, on nettoiera ça plus tard : il n'y a dans le code publié que la création des graphiques et pas le calcul des stats. On peut citer une partie des libraires très cools utilisées ici, merci à leurs développeurs :
+
+- [sf](https://r-spatial.github.io/sf/) évidemment pour une grande partie des manipulations de géometries
+
+- [nngeo](https://github.com/michaeldorman/nngeo) pour calculer des voisinages de points et de polygones
+
+- [ggiraph](https://github.com/davidgohel/ggiraph) pour la petite touche interactive sur les graphiques [ggplot](https://ggplot2.tidyverse.org/)
+
