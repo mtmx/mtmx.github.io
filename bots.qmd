@@ -1,6 +1,6 @@
 ---
 title: Des bots
-subtitle: ... perdus dans l'internet
+subtitle: ... achevés par la nouvelle tarification de l'API Twitter
 comments:
   utterances: 
     repo:  mtmx/blog_comm

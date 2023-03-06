@@ -7,6 +7,9 @@ about:
     - icon: twitter
       text: Twitter
       href: https://twitter.com/matamix
+    - icon: mastodon
+      text: Mastodon
+      href: https://mapstodon.space/@mat
     - icon: github
       text: Github
       href: https://github.com/mtmx

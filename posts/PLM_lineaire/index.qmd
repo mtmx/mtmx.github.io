@@ -399,7 +399,7 @@ C'est un bon début mais on pourrait faire mieux : déjà, analyser tous les pay
 
 #### Méthodo
 
-L'intégralité des traitements est comme d'habitude dans le [code-source de la page](https://github.com/mtmx/mtmx.github.io/blob/master/posts/PLM_linéaire/index.qmd). Ah non, le code est dans un sale état pour l'instant, on nettoiera ça plus tard : il n'y a dans le code publié que la création des graphiques et pas le calcul des stats. On peut citer une partie des libraires très cools utilisées ici, merci à leurs développeurs :
+L'intégralité des traitements est comme d'habitude dans le [code-source de la page](https://github.com/mtmx/mtmx.github.io/blob/master/posts/PLM_lineaire/index.qmd). Ah non, le code est dans un sale état pour l'instant, on nettoiera ça plus tard : il n'y a dans le code publié que la création des graphiques et pas le calcul des stats. On peut citer une partie des libraires très cools utilisées ici, merci à leurs développeurs :
 
 - [sf](https://r-spatial.github.io/sf/) évidemment pour une grande partie des manipulations de géometries
 

@@ -20,6 +20,7 @@ website:
       - text: "Des posts"
         file: index.qmd
       - bots.qmd
+      - visuels.qmd
       - about.qmd
       - icon: github
         href: https://github.com/mtmx

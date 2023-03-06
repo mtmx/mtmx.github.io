@@ -100,5 +100,11 @@
   },
   "posts/PLM_lineaire/index.qmd": {
     "index.html": "0f33dd41"
+  },
+  "images.qmd": {
+    "images.html": "fc49ed7f"
+  },
+  "visuels.qmd": {
+    "visuels.html": "c2751001"
   }
 }

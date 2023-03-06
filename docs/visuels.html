@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.179">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mtmx - Des visuels à la pelle</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/img_campagne_rond.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="mtmx - Des visuels à la pelle">
+<meta property="og:description" content="… et à la pioche">
+<meta property="og:site-name" content="mtmx">
+<meta name="twitter:title" content="mtmx - Des visuels à la pelle">
+<meta name="twitter:description" content="… et à la pioche">
+<meta name="twitter:image" content="https://mtmx.github.io/images/img_mosaique.png">
+<meta name="twitter:creator" content="@matamix">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="625">
+<meta name="twitter:image-width" content="766">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/img_campagne_rond.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">mtmx</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">Des posts</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bots.html">Des bots</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./visuels.html" aria-current="page">Des visuels à la pelle</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">Et sinon</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtmx"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matamix"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Des visuels à la pelle</h1>
+<p class="subtitle lead">… et à la pioche</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1632406332866195457?cxt=HHwWgsCz-aW6vKctAAAA" width="800" target="_blank"><img src="images/visuels/campingscars.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1629430038364864512?cxt=HHwWgIC28ZP_8pwtAAAA" target="_blank"><img src="images/visuels/enseignes_pointscardinaux.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1616741588847456256?cxt=HHwWgMDTjZj66O8sAAAA" target="_blank"><img src="images/visuels/terrains_foot.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1601995129820151811?cxt=HHwWhoCwzaaFt7ssAAAA" target="_blank"><img src="images/visuels/lgv_vaches.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1585197347088531457?cxt=HHwWgoDUwdSl4P8rAAAA" target="_blank"><img src="images/visuels/carreau_filo.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1573970101967134720?cxt=HHwWgICx7f3d7tcrAAAA" target="_blank"><img src="images/visuels/prononciations_bzh.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1576522720149311488?cxt=HHwWgMCorfXD9-ArAAAA" target="_blank"><img src="images/visuels/sentinel_camargue.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://mapstodon.space/@mat/109733750764816923" target="_blank"><img src="images/visuels/sentinel_gayeulles.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://mapstodon.space/@mat/109743921947191782" target="_blank"><img src="images/visuels/sentinel_salins.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://mapstodon.space/@mat/109762601552017639" target="_blank"><img src="images/visuels/sentinel_bauce.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://mapstodon.space/@mat/109830212585524265" target="_blank"><img src="images/visuels/sentinel_lac.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1346535536564072449?cxt=HHwWgsC75fW77a8lAAAA" target="_blank"><img src="images/visuels/affluence_ligue1.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1332633888607375364?cxt=HHwWiMC4ocHdu_4kAAAA" target="_blank"><img src="images/visuels/houle.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1332632813531787266?cxt=HHwWhMC7qfeeu_4kAAAA" target="_blank"><img src="images/visuels/longueur_littoral.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1332987057942241280?cxt=HHwWgIC57dWq3P8kAAAA" target="_blank"><img src="images/visuels/trafic_maritime.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1341808682624053254?cxt=HHwWjMC7xef4h58lAAAA" target="_blank"><img src="images/visuels/noel.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1325498563275722752?cxt=HHwWgMC45fT6juUkAAAA" target="_blank"><img src="images/visuels/sorcieres.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1307623640566038528?cxt=HHwWgIC8vbyxzqUkAAAA" target="_blank"><img src="images/visuels/cadastre_stade_1.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1307623161043865600" target="_blank"><img src="images/visuels/cadastre_stade_2.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1307622547920486400" target="_blank"><img src="images/visuels/cadastre_stade_3.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1298678372114014208?cxt=HHwWgIC19ajG6oUkAAAA" target="_blank"><img src="images/visuels/maisons_bivarie.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1292809748702736386?cxt=HHwWhMC1mb3n_fAjAAAA" target="_blank"><img src="images/visuels/fanbase_monde.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1292808672414961664" target="_blank"><img src="images/visuels/fanbase_carto.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1283463791674642432?cxt=HHwWgMC-jZfh488jAAAA" target="_blank"><img src="images/visuels/logements_anciens.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1283352873854742528?cxt=HHwWgMC1-fSosc8jAAAA" target="_blank"><img src="images/visuels/logements_periode.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1269188667408625664?cxt=HHwWgMC9ncuXiJ0jAAAA" target="_blank"><img src="images/visuels/cher.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1263513849388511239?cxt=HHwWjsC1mdrJ84gjAAAA" target="_blank"><img src="images/visuels/histo_demo.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1249361578262171648?cxt=HHwWgMC0xY3vz9YiAAAA" target="_blank"><img src="images/visuels/noms_malsonnants.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1249714120103952384?cxt=HHwWgICw-d6X8NciAAAA" target="_blank"><img src="images/visuels/filmo_lambert.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1233529285094313984?cxt=HHwWgMC0oa2WsJ4iAAAA" target="_blank"><img src="images/visuels/michel.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1231918260553232384?cxt=HHwWgMC9ibHI05giAAAA" target="_blank"><img src="images/visuels/noms_navires.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1231917208558800902?cxt=HHwWjMC0jZOL05giAAAA" target="_blank"><img src="images/visuels/noms_navires_evol.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1213150445583110144?cxt=HHwWgMC0geP5_NUhAAAA" target="_blank"><img src="images/visuels/pqr.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1209414727052476417?cxt=HHwWgoC2gauS2sghAAAA" target="_blank"><img src="images/visuels/persos_wiki.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1208059739902529536?cxt=HHwWgMC6hdr78cMhAAAA" target="_blank"><img src="images/visuels/persos_wiki_sport.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1181627525451128833?cxt=HHwWgoC19an-_eUgAAAA" target="_blank"><img src="images/visuels/venise.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1169204253107335168?cxt=HHwWgMC1hdrE7LkgAAAA" target="_blank"><img src="images/visuels/taille_moyenne.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1156612247826968577?cxt=HHwWgsC96cOtjo0gAAAA" target="_blank"><img src="images/visuels/nemo_bars.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1155486823025651712?cxt=HHwWgMC10ZfJjokgAAAA" target="_blank"><img src="images/visuels/nemo_foot.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1110882978861891585?cxt=HHwWgoC64d-L0-oeAAAA" target="_blank"><img src="images/visuels/reseau_ferre.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1109874494351519744?cxt=HHwWgMC10Zy-iOceAAAA" target="_blank"><img src="images/visuels/natifs_paris.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1096026681880530945?cxt=HHwWgsC23bmd77UeAAAA" target="_blank"><img src="images/visuels/pop_paris.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1078293414020612096?cxt=HHwWgIC8pbSJ7_YdAAAA" target="_blank"><img src="images/visuels/noms_rondspoints.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1052450295761051648?cxt=HHwWgIC96fj9hpsdAAAA" target="_blank"><img src="images/visuels/bati.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1029658614544388096?cxt=HHwWgMC2_b7DisocAAAA" target="_blank"><img src="images/visuels/golfe.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/1019988405994868736?cxt=HHwWgMC65aKD3accAAAA" target="_blank"><img src="images/visuels/parisianisme.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/964785336105799680?cxt=HHwWgMC8sdnJzeMaAAAA" target="_blank"><img src="images/visuels/cotes_foot.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/989201613213655041?cxt=HHwWgoC_7YnorLobAAAA" target="_blank"><img src="images/visuels/classement_relief.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/960853837136498688?cxt=HHwWgMC8uave0dUaAAAA" target="_blank"><img src="images/visuels/neige.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/934813805036670976?cxt=HHwWgMC8xf2MkPkZAAAA" target="_blank"><img src="images/visuels/derby.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/932192147062784000?cxt=HHwWgICwwbP05-8ZAAAA" target="_blank"><img src="images/visuels/meteo_europe.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/927266379555885056?cxt=HHwWgMC62f_2p94ZAAAA" target="_blank"><img src="images/visuels/linemap.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/923866469779296256?cxt=HHwWgMC28ZnqndIZAAAA" target="_blank"><img src="images/visuels/restau_paris.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/882276211401125888?cxt=HHwWgMC75cXivL4YAAAA" target="_blank"><img src="images/visuels/maisons_xxl.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/857180097031352320?cxt=HHwWgMC1gbewqOUXAAAA" target="_blank"><img src="images/visuels/metro_elections.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/844872882169626624?cxt=HHwWgICm4Z7ay7kXAAAA" target="_blank"><img src="images/visuels/wiki_elections.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/824945688597377025?cxt=HHwWgsCx_fTu5fIWAAAA" target="_blank"><img src="images/visuels/ban_croquis.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/819254929974067201?cxt=HHwWgoC8mZWByt4WAAAA" target="_blank"><img src="images/visuels/correlations.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/790466604584865792?cxt=HHwWgMC40YrMpvgVAAAA" target="_blank"><img src="images/visuels/sexratio_paris.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/772875954142187520?cxt=HHwWgMCw4bul57kVAAAA" target="_blank"><img src="images/visuels/poneys_dep.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/758345011536723968?cxt=HHwWgICw3aSxl4YVAAAA" target="_blank"><img src="images/visuels/resid_sec.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/735054712643440640?cxt=HHwWgMC22buXuLMUAAAA" target="_blank"><img src="images/visuels/soins.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/756070835119611904?cxt=HHwWgICzheaajf4UAAAA" target="_blank"><img src="images/visuels/geronto.gif" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/729616372452438016?cxt=HHwWgMCx5bOOj6AUAAAA" target="_blank"><img src="images/visuels/enfer.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/675694465709944833?cxt=HHwWgsC11auixuASAAAA" target="_blank"><img src="images/visuels/corr.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/674559444009775104?cxt=HHwWgMCzgbGPwtwSAAAA" target="_blank"><img src="images/visuels/corr_chomage.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/659785981193768960?cxt=HHwWgMCyzdX2g6gSAAAA" target="_blank"><img src="images/visuels/natifs_bzh.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/659785024661815296?cxt=HHwWgIC48f6-g6gSAAAA" target="_blank"><img src="images/visuels/natifs_paris.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/583237491974664193?cxt=HHwWgsC3jZXaiZgQAAAA" target="_blank"><img src="images/visuels/pendulaire.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/547013947208253440?cxt=HHwWgIDCqK2SsZcPAAAA" target="_blank"><img src="images/visuels/dom_ext.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/540125311057526784?cxt=HHwWgIDAvPrG9P4OAAAA" target="_blank"><img src="images/visuels/poneys.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<figure class="figure">
+<p><a href="https://twitter.com/matamix/status/515109558260613121?cxt=HHwWgoDCiMDahKYOAAAA" target="_blank"><img src="images/visuels/numeros.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/\.mtmx\.github\.io\/**/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="mtmx/blog_comm" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
