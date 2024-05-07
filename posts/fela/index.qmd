@@ -1,0 +1,658 @@
+---
+title: "Faites entrer la carto"
+author: "Mathieu"
+showonlyimage: false
+draft: false
+date: "2024-05-07"
+image: img/img_fela.png
+weight: 0
+type: "post"
+description: "Localisation des affaires de l'émission FELA"
+categories: ["crime","tv"]
+---
+
+
+```{r scrap_datafela, eval=FALSE, include=FALSE}
+
+library(RSelenium)
+library(rvest)
+
+# start a firefox browser
+rD <- rsDriver(browser="firefox", port=4555L, verbose=F, chromever = NULL)
+remDr <- rD[["client"]]
+
+# function recup
+
+get_url_aff <- function(url){
+  
+  remDr$navigate(url)
+  
+  #get the page html
+  page_source<-remDr$getPageSource()
+  
+  #parse it
+  url_aff <-
+
+    read_html(page_source[[1]]) %>%
+    html_nodes('.lienA') %>%
+    html_attr("href")
+  
+  df_info <- 
+    tibble(url = url_aff
+    ) 
+  
+}
+
+df_url_aff <- get_url_aff("https://www.fela.fr/episodes")
+
+# infos page
+
+get_infos_aff <- function(url){
+  
+  remDr$navigate(paste0("https://www.fela.fr/",url))
+
+  #get the page html
+  page_source<-remDr$getPageSource()
+  
+  nom_aff <-
+    read_html(page_source[[1]]) %>%
+    html_nodes('.episodeShowTitre') %>%
+    html_text()
+  
+  pipe_aff <-
+    read_html(page_source[[1]]) %>%
+    html_nodes('.pipe') %>%
+    html_attr("alt")
+  
+  saisonepisode_aff <-
+    read_html(page_source[[1]]) %>%
+    html_nodes(xpath='/html/body/div[2]/div/div[1]/div/p') %>%
+    html_text()
+  
+  texte_aff <-
+    read_html(page_source[[1]]) %>%
+    html_nodes(xpath='/html/body/div[2]/div/div[3]/div/div[1]/div[2]/p') %>%
+    html_text()
+    
+    lieu_date_aff <-
+      read_html(page_source[[1]]) %>%
+      html_nodes('div.col-lg-4:nth-child(1)') %>%
+      html_text2(., preserve_nbsp = T)  
+    
+    video_aff <-
+      read_html(page_source[[1]]) %>%
+      html_nodes('#player') %>%
+      html_attr('src') %>%
+      {if(length(.) == 0) NA else .}
+    
+  df_info <- 
+    tibble(nom = nom_aff,
+           pipe = pipe_aff,
+           saisonepisode = saisonepisode_aff,
+           lieu_date = lieu_date_aff,
+           video = video_aff,
+           url = url
+           
+    ) 
+  
+}
+
+
+df_infos_aff <-
+  df_url_aff %>%
+  pull(url) %>%
+  map(get_infos_aff) %>%
+  bind_rows() 
+
+remDr$close()
+# stop the selenium server
+rD[["server"]]$stop() 
+
+
+# nettoyage
+df_infos_affs <-
+  df_infos_aff %>%
+  mutate(date = str_sub(lieu_date,-5,-1)) %>%
+  mutate(lieu_a = gsub("Début.*", "", lieu_date)) %>%
+  mutate(lieu_a = str_remove_all(lieu_a,"Lieu : ")) %>%
+  mutate(lieu_a = str_remove_all(lieu_a,"Lieux : "))%>%
+  separate(col = lieu_a, into = c("lieu_1", "lieu_2", "lieu_3", "lieu_4", "lieu_5", "lieu_6", "lieu_7", "lieu_8", "lieu_9", "lieu_10", "lieu_11"), sep = ",")
+
+df_infos_affs_lieux <-
+  df_infos_affs %>%
+  select(nom, starts_with("lieu_"), -lieu_date) %>%
+  pivot_longer(cols = starts_with("lieu"),
+               names_to = "n",
+               values_to = "lieu",
+               values_drop_na = TRUE) %>%
+  mutate(lieu = str_trim(lieu)) %>%
+mutate(dep = stringr::str_extract(string = lieu,
+                     pattern = "(?<=\\().*(?=\\))")) %>%
+mutate(lieu_ville = gsub(r"{\s*\([^\)]+\)}","",lieu))
+
+# rectifs
+
+library(COGugaison)
+
+df_infos_affs_lieux_geo <-
+  df_infos_affs_lieux %>%
+  left_join(table_supracom_2019 %>%
+              select(CODGEO, LIBGEO, DEP),
+            by = c("lieu_ville" = "LIBGEO", "dep"="DEP")) %>%
+  mutate(CODGEO = case_when(lieu %in% "Mourmelon (51)" ~ "51388",
+                            lieu %in% "Montigny-les-Metz (57)" ~ "57480",
+                            lieu %in% "Saint-Maurice-de-Navacelles (34)" ~ "34277",
+                            lieu %in% "Ogy (57)" ~ "57482",
+                            lieu %in% "Port Grimaud (83)" ~ "83068",
+                            lieu %in% "Bez-de-Naussac (12)" ~ "12170",
+                            lieu %in% "Chabenet (36)" ~ "36161",
+                            lieu %in% "Cormeille (27)" ~ "27170",
+                            lieu %in% "Département de l'Yonne (89)" ~ "89024",
+                            lieu %in% "Sainte-Cécile (62)" ~ "62201",
+                            lieu %in% "Hossegor (40)" ~ "40304",
+                            lieu %in% "Chambery (73)" ~ "73065",
+                            lieu %in% "Barbezieux (16)" ~ "16028",
+                            lieu %in% "Menthon Saint-Bernard (74)" ~ "74176",
+                            lieu %in% "Oulmes (85)" ~ "85162",
+                            lieu %in% "Dombasle (54)" ~ "54159",
+                            lieu %in% c("Roissy (93)","Roissy (95)") ~ "95527",
+                            lieu %in% "Forêt d'Halatte(60)" ~ "60028",
+                            lieu %in% "Fontaine-la-Soret (27)" ~ "27425",
+                            lieu %in% "Juan-les-Pins (06)" ~ "06004",
+                            lieu %in% "Roumazières (16)" ~ "16192",
+                            lieu %in% "Forêt de Carnelle (95)" ~ "95052",
+                            lieu %in% "Valence d'Agen (82)" ~ "82186",
+                            lieu %in% "La Gouesnières (35)" ~ "35122",
+                            lieu %in% "Vandoeuvre (54)" ~ "54547",
+                            lieu %in% "Saint-Andéol-le-Château (69)" ~ "69179",
+                            lieu %in% "La Baule (44)" ~ "44055",
+                            lieu %in% "Artigues (47)" ~ "47174",
+                            lieu %in% "Vritz (44)" ~ "44180",
+                            lieu %in% "Thaon-les-Vosges (88)" ~ "88465",
+                            lieu %in% "Vandœuvre-lès-Nancy (54)" ~ "54547",
+                            lieu %in% "Saint-Lambert-du-Lattay (49)" ~ "49292",
+                            lieu %in% "Saint-Martin d'Ablois (51)" ~ "51002",
+                            TRUE ~ CODGEO))
+
+
+
+coord_pays <- tribble(
+  ~ pays, ~ COD,  ~ long, ~ lat,
+  "Allemagne",               "ALL" ,48.34457 , 8.9221,
+  "Belgique",               "BEL",50.888388 , 4.443537,
+  "Brésil",                 "BRE",44.304207 , -3.893948,
+  "Canada",                 "CAN",46.552346 , -3.893948,
+  "Corée du Sud",           "COR",41.923228 , 6.679291,
+  "Côte d'Ivoire",          "COT",41.923228 , 5.310304,
+  "Espagne",                "ESP",42.13958 , 0.882943,
+  "Italie",                 "ITA",44.926218 , 8.281297,
+  "Luxembourg",             "LUX",50.150634 , 6.708419,
+  "Maroc",                  "MAR",41.923228 , 4.0287,
+  "Nouvelle-Calédonie",     "NC",41.923228 , 7.815259,
+  "Pays-Bas",               "PB",50.778393 , 5.865841,
+  "Portugal",               "POR",42.527155 , -1.010337,
+  "Suisse",                  "SUI",47.14994 , 8.164788,
+  "États-Unis",              "USA",45.41903 , -3.893948
+)
+
+coord_pays_poly <- coord_pays %>% st_as_sf(., coords = c("lat", "long"), crs = st_crs(4326)) %>%
+  st_transform(2154) %>%
+  st_buffer(., dist = 20000)
+
+
+df_infos_affs_lieux_geoo <-
+  df_infos_affs_lieux_geo %>%
+  left_join(GEO_COMM.xy %>%
+              select(CODGEO = INSEE_COM, x_ctr, y_ctr),
+              by = "CODGEO")
+
+
+# 1 point par ville/affaire
+
+
+# infos aff
+df_infos_affs_lieux_cpt <-
+  df_infos_affs_lieux %>%
+  group_by(nom) %>%
+  summarise(nb_lieux = n()) %>%
+  ungroup()
+
+
+df_infos_affs_lieux_geooo <-
+  GEO_COMM %>% select(CODGEO = INSEE_COM) %>%
+  rbind.data.frame(coord_pays_poly %>% select(CODGEO=COD)) %>%
+  right_join(df_infos_affs_lieux_geoo,
+             by = "CODGEO") %>%
+  filter(!is.na(CODGEO)) %>%
+  filter(!is.na(x_ctr)) %>%
+  mutate(nb=1) %>%
+  left_join(df_infos_affs %>%
+            select(nom,url, pipe, saisonepisode, video, date), by ="nom") %>%
+  left_join(df_infos_affs_lieux_cpt, by = "nom")
+
+library(cartogram)
+df_infos_affs_lieux_geooo.dor <-
+  df_infos_affs_lieux_geooo %>%
+  cartogram_dorling(. , 
+                    k = 0.008,
+                    m_weight = 0.1,
+                    itermax = 50,
+                    "nb")
+
+df_infos_affs_lieux_geooo.dor.xy <- 
+  df_infos_affs_lieux_geooo.dor %>%
+  mutate(x = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+         y = map_dbl(geometry, ~st_centroid(.x)[[2]])) %>%
+  st_drop_geometry()
+
+```
+
+
+
+```{r setup, echo=F, message=F, warning=F ,eval=T, include=T}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(ggiraph)
+library(scales)
+library(hrbrthemes)
+library(stringr)
+library(sf)
+library(COGugaison)
+
+# import carto
+
+library(rmapshaper)
+GEO_DEP.s <- st_read("./data/GEO_DEP.gpkg", quiet = TRUE) %>%
+  rename(DEP = INSEE_DEP) %>%
+  filter(!substr(DEP,1,2) %in% "97") %>%
+  ms_simplify(., keep = 0.02)
+
+# import data
+
+df_infos_affs_lieux_geooo.dor.xy <- fread("./data/df_infos_affs_lieux_geooo.dor.xy.csv")
+df_infos_affs <- fread("./data/df_infos_affs.csv")
+df_infos_affs_lieux <- fread("./data/df_infos_affs_lieux.csv")
+dep_pop <- fread("./data/dep_pop.csv")
+
+df_infos_affs_lieux_geooo.dor.xy.map <-
+  df_infos_affs_lieux_geooo.dor.xy %>%
+  mutate(nom = str_replace_all(nom, "'","’"))
+
+df_infos_affs_lieux_geooo.dor.xy.map.l <-
+  df_infos_affs_lieux_geooo.dor.xy.map %>%
+  select(nom, x, y) %>%
+  full_join(df_infos_affs_lieux_geooo.dor.xy.map %>%
+              select(nom, x_2=x, y_2=y), by = "nom") %>%
+  identity()
+
+
+
+coord_pays <- tribble(
+  ~ pays, ~ COD,  ~ long, ~ lat,
+  "Allemagne",               "ALL" ,48.34457 , 8.9221,
+  "Belgique",               "BEL",50.888388 , 4.443537,
+  "Brésil",                 "BRE",44.304207 , -3.893948,
+  "Canada",                 "CAN",46.552346 , -3.893948,
+  "Corée du Sud",           "COR",41.923228 , 6.679291,
+  "Côte d'Ivoire",          "COT",41.923228 , 5.310304,
+  "Espagne",                "ESP",42.13958 , 0.882943,
+  "Italie",                 "ITA",44.926218 , 8.281297,
+  "Luxembourg",             "LUX",50.150634 , 6.708419,
+  "Maroc",                  "MAR",41.923228 , 4.0287,
+  "Nouvelle-Calédonie",     "NC",41.923228 , 7.815259,
+  "Pays-Bas",               "PB",50.778393 , 5.865841,
+  "Portugal",               "POR",42.527155 , -1.010337,
+  "Suisse",                  "SUI",47.14994 , 8.164788,
+  "États-Unis",              "USA",45.41903 , -3.893948
+)
+
+coord_pays_poly <- coord_pays %>% st_as_sf(., coords = c("lat", "long"), crs = st_crs(4326)) %>%
+  st_transform(2154) %>%
+  st_buffer(., dist = 20000)
+
+library(cowplot)
+library(magick)
+logo <- magick::image_read("./img/fela_2.png")
+
+```
+
+Faites entrer l'accusé, FELA pour les fans, est diffusé depuis 2000 : 280 épisodes au total qui racontent les grandes affaires criminelles françaises. Passé sous le prisme de la géographie, il semblerait que certaines régions du pays reviennent plus souvent que d'autres dans l'émission. Pour être plus précis et sans avoir vu l'intégralité des épisodes, on pourrait avoir l'impression que ces affaires sont plutôt localisées à Paris et au nord de la capitale, mais aussi sur le pourtout méditerranéen. Et qu'on entende par conséquent beaucoup moins parler de toute une moitié ouest du pays. 
+
+Grâce au site non-officiel [fela.fr](https://www.fela.fr/) qui a recensé l'intégralité des 24 saisons (à l'exception de la première qui n'était pas dans le même esprit que les suivantes), on peut dresser la carte des affaires traitées dans l'émission. 
+
+Sans surprise, avec 31 affaires recensées Paris est de loin la ville en tête du classement en tant que carrefour du crime. 
+Suit un quator sudiste composé de Marseille, Toulouse, Nice et Perpignan.
+
+En cliquant sur chaque point on affichera des détails, les commentaires et le lien vers la vidéo de l'épisode si elle est disponible en ligne :
+```{r carte_affaires, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=T, include=T}
+# carto 
+
+gg_carte_s <-
+  ggplot() +
+  geom_sf(data=GEO_DEP.s,
+          color = "white",
+          fill = "grey80",
+          size = 0.15) +
+    geom_sf(data=coord_pays_poly,
+          color = "white",
+          fill = "grey80",
+          size = 0.15) +
+    geom_text(data = coord_pays_poly %>%
+              st_centroid() %>%
+              cbind(st_coordinates(.)) %>%
+              rename(x_ctr = X, y_ctr = Y) %>%
+              st_drop_geometry() %>%
+              mutate(pays = case_when(pays %in% "Nouvelle-Calédonie"~ "Nouvelle\nCalédonie",
+                                      pays %in% "Corée du Sud"~ "Corée\ndu Sud",
+                                      TRUE ~ pays)),
+            aes(label = pays,
+                x=x_ctr,
+                y=y_ctr-35000),
+            size = 1.75,
+             family = "Avenir Heavy",
+            lineheight = .7,
+            # vjust = 3,
+            color = "white") +
+  ggiraph::geom_segment_interactive(data=df_infos_affs_lieux_geooo.dor.xy.map.l %>%
+                                      identity(),
+                                    aes(x=x, y=y,
+                                        xend=x_2,yend=y_2,
+                                        group=nom,
+                                        data_id = nom),
+                                    guides = FALSE,
+                                    size = 0.28,
+                                    color = NA,
+                                    alpha = 0.2,
+                                    curvature = 0.1
+  ) +
+  # petits points sur les destinations
+  geom_point_interactive(data=df_infos_affs_lieux_geooo.dor.xy.map.l %>%
+                           left_join(df_infos_affs_lieux_geooo.dor.xy.map , by =c("nom" = "nom", "x"="x","y"="y")) %>%
+                           mutate(url = paste0("https://www.fela.fr/", url)) %>%
+                                                      mutate(pipe = factor(pipe, levels = c("Pipe de diamant - excellent épisode" ,
+                                                                 "Pipe d'or - très bon épisode" ,
+                                                                 "Pipe d'argent - bon épisode"  ,       
+                                                                 "Pipe de bronze - épisode moyen"))) %>%
+                           identity(),
+                         aes(x=x, y=y,
+                             data_id = nom,
+                             fill = pipe,
+                             tooltip =  paste0(  "<strong>", nom,"</strong>", "<br />",
+                                                 lieu, "<br />",
+                                                 "Début de l'affaire : ",date, "<br />"
+                             ),
+                             onclick=paste0('window.open(\"', url , '/\")' )
+                         ),
+                         guides = FALSE,
+                         hover_nearest = TRUE,
+                         shape = 22,
+                         color = "black",
+                         stroke = 0.1,
+                         size = 1.35) +
+    scale_fill_manual(values = c("Pipe de diamant - excellent épisode" = "#67000d",
+                               "Pipe d'or - très bon épisode" = "#a50f15",
+                               "Pipe d'argent - bon épisode" = "#cb181d" ,       
+                               "Pipe de bronze - épisode moyen"="#ef3b2c" ),
+                    name = "") +
+  scale_x_continuous(name = "", expand=c(0,0)) +
+  scale_y_continuous(name = "",expand=c(0,0)) +
+  coord_sf( datum = NA) +
+  labs(
+    title = "Localsations des affaires de 'Faites entrer l'accusé'",
+    subtitle="Cliquez pour visionner l'épisode",
+    caption="Source : www.fela.fr"
+  ) +
+  theme_ipsum() +
+  guides(fill = guide_legend(byrow = TRUE)) +
+  theme(axis.text = element_blank(),
+        legend.box = "vertical",
+        legend.position = c(0.9,0.98),
+        legend.spacing.y = unit(0.01, 'cm'),
+        legend.key.size = unit(0.3, "cm"),
+        legend.text = element_text(family="Avenir Heavy", colour = "white", size = 6),
+        panel.grid = element_line(size = 0),
+        panel.background = element_rect(fill = "black", colour = "black"),
+        plot.background = element_rect(fill = "black", colour = "black"),
+        text = element_text(family="Avenir Heavy"),
+        plot.title = element_blank(),
+        plot.subtitle = element_blank(),
+        plot.caption = element_text(family="Avenir Heavy", colour = "white")) 
+
+gg_carte_s_img <-
+  ggdraw(gg_carte_s) + 
+  draw_image(logo,
+             x = 0.35, y = 1.05, hjust = 1, vjust = 1, width = 0.26, height = 0.3)
+
+
+x <- girafe( code = print(gg_carte_s_img ), width_svg = 8, height_svg = 8)
+x <- girafe_options(x,
+                    opts_hover(css = "fill:red;r:1.15pt;size:3.6pt;stroke:grey;color:black;opacity:0.85;background-color:gray") ,
+                    opts_tooltip(use_fill = FALSE) , 
+                    opts_toolbar(saveaspng = FALSE) )
+
+x
+
+  
+```
+
+
+Assez distinctement on remarque que la moitié ouest du pays présente moins de cas, et notamment ne recense aucune affaire classée "pipe de diamant" (les épisodes les plus retentissants d'après les auteurs du site).
+
+
+En rapportant ces affaires à la population du territoire, certains départements (on ne compte qu'une fois une affaire même si elle est localisée dans plusieurs lieux d'un même département) se détachent avec plus d'un cas pour 100 000 habitants : les Alpes-maritimes (Omar Raddad, Albert Spaggiari, Agnès Le Roux...) arrivent en tête devant les
+Ardennes (Francis Heaulme, Michel Fourniret...) et Paris (Guy Georges, Jacques Mesrine, l'enlèvement du baron Empain...).
+
+Et en agrégeant au niveau régional, on va mieux se dessiner les pôles Nord-Est / Sud-Est :
+
+```{r cartes_pop_affaires, echo=F, message=F, warning=F ,fig.height=7.2,fig.width=12, dpi=160,eval=T, include=T}
+
+cpt_dep_aff <-
+  df_infos_affs_lieux %>%
+  left_join(df_infos_affs %>%
+              select(nom, pipe)) %>%
+  distinct(nom, dep) %>%
+  group_by(dep) %>%
+  summarise(nb_aff=n()) %>%
+  ungroup() %>%
+  rename(INSEE_DEP = dep)
+
+carte_dep <-
+ggplot() +
+  geom_sf(data=GEO_DEP.s %>%
+            rename(INSEE_DEP = DEP) %>%
+            left_join(dep_pop, by = "INSEE_DEP") %>%
+            left_join(cpt_dep_aff, by = "INSEE_DEP")  %>%
+            mutate(ratio = (nb_aff / pop)*100000 ) %>%
+               ungroup(),
+             aes(fill = ratio),
+          color = "grey80") +
+  scale_fill_distiller(palette = "Reds",
+                       na.value = "#fff5f0",
+                       direction = 1) +
+  coord_sf(datum = NA) +
+  theme_ipsum() +
+  labs(
+    title = "Nombre d'affaires pour 100 000 habitants",
+    subtitle="par département",
+    caption=""
+  ) +
+  theme_ipsum() +
+  theme(axis.text = element_blank(),
+        legend.box = "vertical",
+        legend.position = c(0.9,0.98),
+        legend.spacing.y = unit(0.01, 'cm'),
+        legend.key.size = unit(0.3, "cm"),
+        legend.text = element_text(family="Avenir Heavy", colour = "white", size = 6),
+        panel.grid = element_line(size = 0),
+        panel.background = element_rect(fill = "black", colour = "black"),
+        plot.background = element_rect(fill = "black", colour = "black"),
+        text = element_text(family="Avenir Heavy"),
+        plot.title = element_text(family="Avenir Heavy", colour = "white"),
+        plot.subtitle = element_text(family="Avenir Heavy", colour = "white"),
+        plot.caption = element_text(family="Avenir Heavy", colour = "white")) 
+
+
+reg_pop <-
+  dep_pop %>%
+  left_join(table_supracom_2012 %>%
+              distinct(DEP,REG), by = c("INSEE_DEP"="DEP")) %>%
+  # select(-INSEE_REG) %>%
+  rename(INSEE_REG = REG) %>% 
+  group_by(INSEE_REG) %>%
+  summarise(pop = sum(pop, na.rm = T)) %>%
+  ungroup()
+  
+cpt_reg_aff <-
+  df_infos_affs_lieux %>%
+  left_join(table_supracom_2012 %>%
+              distinct(DEP,REG), by = c("dep"="DEP")) %>%
+  left_join(df_infos_affs %>%
+              select(nom, pipe)) %>%
+  distinct(nom, REG) %>%
+  group_by(REG) %>%
+  summarise(nb_aff=n()) %>%
+  ungroup() %>%
+  rename(INSEE_REG = REG)
+
+GEO_REG.s <- GEO_DEP.s %>%
+  rename(INSEE_DEP = DEP) %>%
+  left_join(table_supracom_2012 %>%
+              distinct(DEP,REG), by = c("INSEE_DEP"="DEP")) %>%
+  select(-INSEE_REG) %>%
+  rename(INSEE_REG = REG) %>% 
+  group_by(INSEE_REG) %>%
+  summarise()
+
+carte_reg <-
+ggplot() +
+  geom_sf(data=GEO_REG.s %>% summarise(), fill="grey") +
+  geom_sf(data=GEO_REG.s %>%
+            left_join(reg_pop, by = "INSEE_REG") %>%
+            left_join(cpt_reg_aff, by = "INSEE_REG")  %>%
+            mutate(ratio = (nb_aff / pop)*100000 ) %>%
+            ungroup(),
+          aes(fill = ratio),
+          color = "grey80") +
+  scale_fill_distiller(palette = "Reds",
+                       breaks = c(0.2,0.5,1),
+                       na.value = "#fff5f0",
+                       direction = 1) +
+  coord_sf(datum = NA) +
+  theme_ipsum() +
+  labs(
+    title = "Nombre d'affaires pour 100 000 habitants",
+    subtitle="par (ancienne) région administrative",
+    caption="Source : www.fela.fr"
+  ) +
+  theme_ipsum() +
+  theme(axis.text = element_blank(),
+        legend.box = "vertical",
+        legend.position = c(0.9,0.98),
+        legend.spacing.y = unit(0.01, 'cm'),
+        legend.key.size = unit(0.3, "cm"),
+        legend.text = element_text(family="Avenir Heavy", colour = "white", size = 6),
+        panel.grid = element_line(size = 0),
+        panel.background = element_rect(fill = "black", colour = "black"),
+        plot.background = element_rect(fill = "black", colour = "black"),
+        text = element_text(family="Avenir Heavy"),
+        plot.title = element_text(family="Avenir Heavy", colour = "white"),
+        plot.subtitle = element_text(family="Avenir Heavy", colour = "white"),
+        plot.caption = element_text(family="Avenir Heavy", colour = "white")) 
+
+plot_grid(carte_dep,carte_reg)
+```
+
+
+En bonus, si on se demandait de quand date ces affaires, c'est bien les années 1990-2000 qui sont le plus souvent représentées à l'écran :
+
+```{r timeline_affaires, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=T, include=T}
+
+df_infos_affs_anan <-
+  df_infos_affs %>%
+  mutate(nom = str_replace_all(nom, "'","’"))%>%
+  mutate(pipe = factor(pipe, levels = c("Pipe de diamant - excellent épisode" ,
+                                           "Pipe d'or - très bon épisode" ,
+                                           "Pipe d'argent - bon épisode"  ,       
+                                           "Pipe de bronze - épisode moyen"))) %>%
+  arrange(date, pipe) %>%
+  mutate(date = as.numeric(date)) %>%
+  group_by(date) %>%
+  mutate(id_an = row_number()) %>%
+  mutate(url = paste0("https://www.fela.fr/", url))%>%
+  identity() %>%
+  ungroup()
+
+
+gg_timeline_s <-
+ggplot() +
+  geom_point_interactive(data=df_infos_affs_anan ,
+             aes(x=date,
+                 y = id_an,
+                 data_id = nom,
+                 tooltip =  paste0(  "<strong>", nom,"</strong>", "<br />",
+                                     "Début de l'affaire : ",date, "<br />"
+                 ),
+                 onclick=paste0('window.open(\"', url , '/\")' ),
+                 fill = pipe),
+             color = "white",
+             stroke = 0.1,
+             hover_nearest = TRUE,
+             size = 1.8,
+             shape = 22) +
+    scale_fill_manual(values = c("Pipe de diamant - excellent épisode" = "#67000d",
+                               "Pipe d'or - très bon épisode" = "#a50f15",
+                               "Pipe d'argent - bon épisode" = "#cb181d" ,       
+                               "Pipe de bronze - épisode moyen"="#ef3b2c" ),
+                    # guide=F,
+                    name = "") +
+  scale_x_continuous(limits = c(1960,2010),
+                     name = "",
+                     breaks = seq(1960,2020,10)) +
+  scale_y_continuous(name = "",expand=c(0.04,0.04)) +
+  labs(
+    title = "Localsations des affaires de 'Faites entrer l'accusé'",
+    subtitle="Cliquez pour visionner l'épisode",
+    caption="Source : www.fela.fr"
+  ) +
+  theme_ipsum() +
+  theme(axis.text = element_text(colour = "white"),
+        axis.text.y = element_blank(), 
+        legend.box = "vertical",
+        legend.position = c(0.45,0.98),
+        legend.spacing.y = unit(0.01, 'cm'),
+        legend.key.size = unit(0.3, "cm"),
+        legend.text = element_text(family="Avenir Heavy", colour = "white", size = 6),
+        panel.grid.major = element_blank() ,
+        panel.grid.minor = element_blank() ,
+        panel.background = element_rect(fill = "black", colour = "black"),
+        plot.background = element_rect(fill = "black", colour = "black"),
+        text = element_text(family="Avenir Heavy", colour = "white"),
+        plot.title = element_blank(),
+        plot.subtitle = element_blank(),
+        plot.caption = element_text(family="Avenir Heavy", colour = "white")) 
+
+gg_timeline_s_img <-
+  ggdraw(gg_timeline_s) + 
+  draw_image(logo,
+             x = 0.29, y = 0.98, hjust = 1, vjust = 1, width = 0.26, height = 0.3)
+
+x <- girafe( code = print(gg_timeline_s_img ), width_svg = 8, height_svg = 3)
+x <- girafe_options(x,
+                    opts_hover(css = "fill:#0570b0;r:1.15pt;size:1.6pt;stroke:grey;color:black;opacity:0.45;background-color:gray") ,
+                    opts_tooltip(use_fill = FALSE) , 
+                    opts_toolbar(saveaspng = FALSE) )
+
+x
+
+  
+```
+
+
+<br>
+<br>
+
+L'intégralité des traitements est comme d'habitude dans le [code-source de la page](https://github.com/mtmx/mtmx.github.io/blob/master/posts/fela/index.qmd). 

@@ -106,5 +106,11 @@
   },
   "visuels.qmd": {
     "visuels.html": "c2751001"
+  },
+  "posts/patronymes/index.qmd": {
+    "index.html": "c4f4d6c9"
+  },
+  "posts/fela/index.qmd": {
+    "index.html": "b26ff648"
   }
 }
