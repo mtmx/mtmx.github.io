@@ -10,7 +10,9 @@ filters:
 ---
 
 ::: {layout-ncol=3}
-[![](images/visuels/campingscars.jpg)](https://twitter.com/matamix/status/1632406332866195457?cxt=HHwWgsCz-aW6vKctAAAA){width="800"}
+[![](images/visuels/voiturettes.png)](https://mapstodon.space/@mat/111255505245019273)
+
+[![](images/visuels/campingscars.jpg)](https://mapstodon.space/@mat/109943509032624171){width="800"}
 
 [![](images/visuels/enseignes_pointscardinaux.jpg)](https://twitter.com/matamix/status/1629430038364864512?cxt=HHwWgIC28ZP_8pwtAAAA)
 
