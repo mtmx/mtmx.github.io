@@ -10,6 +10,8 @@ filters:
 ---
 
 ::: {layout-ncol=3}
+[![](images/visuels/insee_nes_etranger.png)](https://mapstodon.space/@mat/116018112420374780)
+
 [![](images/visuels/voiturettes.png)](https://mapstodon.space/@mat/111255505245019273)
 
 [![](images/visuels/campingscars.jpg)](https://mapstodon.space/@mat/109943509032624171){width="800"}
