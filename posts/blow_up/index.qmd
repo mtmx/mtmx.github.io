@@ -61,7 +61,7 @@ df_metadata_emissions <- fread( "./data/df_metadata_emissions.csv") %>%
   identity()
 
 df_metadonnees_real <- fread( "./data/df_metadonnees_real.csv") %>% 
-  mutate(film_miniature = str_replace(film_miniature, "./", "/img/"))%>%
+  mutate(film_miniature = str_replace(film_miniature, "./", "./img/"))%>%
   # host github
   # mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/")) %>%
   identity()
@@ -71,7 +71,7 @@ df_films_BU <- fread( "./data/df_films_BU.csv") %>%
   # basse def
   mutate(film_miniature = str_replace(film_miniature, "/img_png/", "/img_BD_png/")) %>%
   # host github
-  mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/")) %>%
+  # mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/")) %>%
     mutate(langue_originale_lib = case_when(langue_originale %in% 'cn' ~ "Chinois",
                                           langue_originale %in% 'de' ~ "Allemand",
                                           langue_originale %in% 'fr' ~ "Français",
@@ -1089,7 +1089,7 @@ ggplot(cpt_films_cites %>%
  girafe(
     ggobj = ggi_palmares,
       width_svg = 9,
-      # height_svg = 38,
+      height_svg = 38,
       #     width_svg = 9,
       # height_svg = 18,
     options = list(
