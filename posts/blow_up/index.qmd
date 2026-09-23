@@ -1,0 +1,1192 @@
+---
+title: "Blow up"
+author: "Mathieu"
+showonlyimage: false
+draft: false
+date: "2026-09-23"
+image: img/logo_affiches.png
+weight: 0
+type: "post"
+description: "Le cinéma vue par l'émission Blow Up"
+categories: ["cinéma","youtube"]
+---
+```{r locale, include=FALSE, results='hide'}
+
+
+Sys.setlocale("LC_TIME", "fr_FR.UTF-8") 
+```
+
+
+```{r setup, echo=F, message=F, warning=F ,eval=T, include=T}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+
+library(data.table)
+library(tidyverse)
+library(hrbrthemes)
+library(ggplot2)
+library(ggimage)
+library(ggstream)
+library(cowplot)
+library(paletteer)
+library(dplyr)
+library(colorspace)
+library(lubridate)
+library(hrbrthemes)
+library(ggrepel)
+library(ggiraph)
+library(glue)
+library(gdtools)
+library(rnaturalearth)
+library(sf)
+library(janitor)
+library(cartogram)
+library(scales)
+library(rmapshaper)
+
+# register_gfont("Phosphate Inline")
+# register_gfont("Avenir Black")
+
+# gdtools::register_gfont(family = "Phosphate Inline")
+# html_dep <- gdtools::gfontHtmlDependency(family = "Phosphate Inline")
+
+# import des sources
+
+df_metadata_emissions <- fread( "./data/df_metadata_emissions.csv") %>% 
+  # sous-dossier img
+  mutate(loc_miniature = str_replace(loc_miniature, "./", "./img/")) %>%
+  # host github
+  mutate(loc_miniature = str_replace(loc_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/"))
+
+df_metadonnees_real <- fread( "./data/df_metadonnees_real.csv") %>% 
+  mutate(film_miniature = str_replace(film_miniature, "./", "./img/"))%>%
+  # host github
+  mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/"))
+
+df_films_BU <- fread( "./data/df_films_BU.csv") %>% 
+  mutate(film_miniature = str_replace(film_miniature, "./", "./img/")) %>%
+  # basse def
+  mutate(film_miniature = str_replace(film_miniature, "/img_png/", "/img_BD_png/")) %>%
+  # host github
+  mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/")) %>%
+    mutate(langue_originale_lib = case_when(langue_originale %in% 'cn' ~ "Chinois",
+                                          langue_originale %in% 'de' ~ "Allemand",
+                                          langue_originale %in% 'fr' ~ "Français",
+                                          langue_originale %in% 'en' ~ "Anglais",
+                                          langue_originale %in% 'it' ~ "Italien",
+                                          langue_originale %in% 'ja' ~ "Japonais",
+                                          langue_originale %in% 'es' ~ "Espagnol",
+                                          langue_originale %in% 'sv' ~ "Suédois",
+                                          langue_originale %in% 'pt' ~ "Portugais",
+                                          langue_originale %in% 'ru' ~ "Russe",
+                                          TRUE ~ "Autres")) %>%
+  identity()
+
+# 
+# fonction pour gérer accents
+conv_accents <- function(x) {
+  x <- gsub(pattern = "è", replacement = "&egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&ccedil;", x = x)
+  
+  x <- gsub(pattern = "è", replacement = "&Egrave;", x = x)
+  x <- gsub(pattern = "é", replacement = "&Eacute;", x = x)
+  x <- gsub(pattern = "ê", replacement = "&Ecirc;", x = x)
+  x <- gsub(pattern = "ë", replacement = "&Euml;", x = x)
+  x <- gsub(pattern = "î", replacement = "&Icirc;", x = x)
+  x <- gsub(pattern = "ï", replacement = "&Iuml;", x = x)
+  x <- gsub(pattern = "û", replacement = "&Ucirc;", x = x)
+  x <- gsub(pattern = "ü", replacement = "&Uuml;", x = x)
+  x <- gsub(pattern = "ô", replacement = "&Ocirc;", x = x)
+  x <- gsub(pattern = "à", replacement = "&Agrave;", x = x)
+  x <- gsub(pattern = "â", replacement = "&Acirc;", x = x)
+  x <- gsub(pattern = "ç", replacement = "&Ccedil;", x = x)
+  x <- gsub(pattern = "'", replacement = "&apos;", x = x)
+  
+  return(x)
+}
+
+
+tooltip_css <- "background-color:white;padding:2px;font-size: 80%;color: white"
+
+```
+
+Vous connaissez Blow-Up ? Pas le film, l'émission.
+
+Diffusée sur le site d'Arte et sur YouTube, c'est un magazine qui raconte des histoires de cinéma, dans tous les sens du terme. Plusieurs rubriques ont émergé au fil des années : des thématiques ou des gens du cinéma "résumés" par des extraits de films (c'est le boulot principal de [Luc Lagier](https://www.youtube.com/watch?v=tOFKRuR1yw4), le taulier de l'émission), des épisodes sur la musique de films (par [Thierry Jousse](https://www.youtube.com/watch?v=GW7UqKAv7fk), des explorations foutraques d'oeuvres tombés dans l'oubli (par [Trufo](https://www.youtube.com/watch?v=AtIOc9DrZTc)) , des cartes blanches à des cinéastes, etc... La série de Benoit Forgeard ([l'acier chez Rohmer](https://www.youtube.com/watch?v=NxLlYJQxpok), [le cheveu chez Tavernier](https://www.youtube.com/watch?v=0WiY9fkpSVw), etc...) était impeccable mais malheureusement trop courte.
+
+Deux questions qui me reviennent régulièrement au sujet de cette émission :
+
+- comment font-ils pour voir autant de films et en mémoriser chaque plan ?
+
+- quels sont les films les plus régulièrement cités ?
+
+
+On peut tenter de répondre à cette deuxième question en scrutant les panneaux en fin d'émission qui sourcent les films vus pendant l'épisode. L'exercice est périlleux mais pas impossible : la méthode est expliquée rapidement à la fin de ce post. Passons directement aux résultats.
+
+
+
+## L"historique des épisodes de Blow-Up
+
+Avec les métadonnées de la chaine youtube de Blow-Up on peut reconstituer un panorama de la vie de l'émission depuis la première au printemps 2014 :
+```{r episodes, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=T, include=T}
+
+ggi_emissions <-
+ggplot(df_metadata_emissions %>%
+         mutate(dt_mise_en_ligne = as.Date(date_mise_en_ligne)) %>%
+         mutate(dt_mise_en_ligne_annee = year(dt_mise_en_ligne)) %>%
+         mutate(dt_mise_en_ligne_jour = day(dt_mise_en_ligne)) %>%
+         mutate(dt_mise_en_ligne_mois = month(dt_mise_en_ligne)) %>%  
+         mutate(dt_mise_en_ligne_jourannee = as.Date(paste0("2020", "-",dt_mise_en_ligne_mois,"-",dt_mise_en_ligne_jour ))) %>%
+         mutate(dt_mise_en_ligne_annee = factor(dt_mise_en_ligne_annee, levels = rev(seq(2014,2026,1)))) %>%
+         mutate(age_limite_cl = case_when(age_limite == 18 ~ "+ de 18 ans",
+                                          TRUE ~ "Pas de limite d'âge")) %>%
+         identity(),
+       aes(x = dt_mise_en_ligne_jourannee,
+           y = dt_mise_en_ligne_annee,
+           # fill = type_blowup,
+           data_id = video_id, 
+           tooltip=paste0("<style> div.leaflet-popup-content {width:auto!important;}</style>",
+                          "<b>","<font size=2.5 color=black>" , gsub("- Blow up - ARTE|- Blow Up - ARTE","",titre_video),"</b>","</font>", "<br>",
+                          "<img src = ", conv_accents(loc_miniature), " height=\"90\"width=\"160\">"),
+           onclick=paste0('window.open("', video_url , '")'),
+       
+           color = age_limite_cl,
+           size = nb_vues)) +
+  ggiraph::geom_point_interactive(shape = 21,
+             fill = "grey",
+             stroke = 0.45) +
+  scale_color_manual(values = c("Pas de limite d'âge" = "white",
+                                "+ de 18 ans" = "red"),
+                     name = "") +
+  scale_size_continuous(trans = "sqrt",
+                        labels=function(x) format(x, big.mark = " ", scientific = FALSE),
+                        breaks = c(10000,100000,1000000),
+                        name = "Nombre de vues") +
+  scale_y_discrete(name = "") +
+  scale_x_date(date_breaks = "1 month",
+               # date_minor_breaks = "1 week",
+               date_labels = "%B",
+               expand = c(0.01,0.01),
+               name = "") +
+  theme_ipsum() +
+  theme(axis.title = element_blank(),
+                axis.text.y = element_text( size =10, color = "grey"),
+        axis.text.x = element_text(angle = 45, face = "italic",size =9, color = "grey"),
+      # text = element_text(family = "Avenir Black"),
+        # plot.title = element_text(family = "Phosphate Inline"),
+        # plot.subtitle = element_text(family = "Phosphate Inline"),
+        # plot.caption = element_text(family = "Avenir Black"),
+        text = element_text(family = "Roboto condensed"),
+        plot.title = element_text(family = "Roboto condensed"),
+        plot.subtitle = element_text(family = "Roboto condensed"),
+        plot.caption = element_text(family = "Roboto condensed"),
+        panel.background = element_rect(fill = "white", colour = "white"),
+        plot.background = element_rect(fill = "white", colour = "white"),
+        # legend.position = c(0.95,0.95),
+        legend.position = "top",
+        legend.direction = "vertical",
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+        panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+  labs(title = "",
+       caption = "Blow-up / Arte / Youtube / TMDB.")
+
+
+ggi_emissions_p<-
+girafe(
+  ggobj = ggi_emissions,
+  width_svg = 8,
+  height_svg = 8,
+  options = list(
+    # opts_sizing(rescale = FALSE),
+    opts_hover(css = "fill:orange;stroke:black;r:5pt;"),
+    opts_tooltip(css = "padding:8px;background:white;color:white;border-radius:5px;"),
+    opts_hover_inv(css = "opacity:0.4"),
+    opts_toolbar(saveaspng = FALSE),
+    opts_zoom(max = 1)
+  )
+)
+ggi_emissions_p
+  
+```
+
+
+1100 épisodes diffusés sur un rythme de croisière impeccablement régulier (à l'exception notable du premier confinement Covid) avec une pause estivale respectée, et des temps forts comme le festival de Cannes en avril.
+On remarquera que les 7 épisodes les plus populaires sont interdits aux moins de 18 ans , comme quoi ça fait bien vendre.
+N'hésitez pas à vous offrir un bonbon en cliquant sur la vignette d'un épisode au hasard.
+
+Rentrons maintenant dans le coeur de la question. Au total on a retrouvé plus de 9400 films différents crédités dans au moins un épisode de Blow-Up : c'est une masse de références énorme d'autant plus que tous n'ont pas pu être identifiés sur la base TMDB. La crême de la crême avec plus de 20 épisodes de Blow-Up qui évoquent ces films :
+
+
+## Les films les plus cités dans Blow-Up
+
+```{r films, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=T, include=T}
+
+
+cpt_films_cites <-
+  df_films_BU %>%
+  as.data.frame() %>%
+  # slice(1:10) %>%
+  inner_join(df_metadata_emissions %>%
+               as.data.frame() %>%
+               identity(), by = "video_url") %>%
+  group_by(tmdb_id, imdb_id, titre_tmdb, annee_tmdb, synopsis, accroche, genres, duree_minutes, note_moyenne,nb_votes,         
+           langue_originale, langue_originale_lib, pays_production, realisateur,societes_production, poster_url, film_miniature) %>%
+  summarise(nb = n()) %>%
+  ungroup() %>%
+  arrange(desc(nb)) %>%
+  identity()
+
+
+
+  ggi_films <-
+  ggplot(cpt_films_cites %>%
+           filter(nb > 20) %>% 
+           # filter(!is.na(film_miniature)) %>%
+           identity(),
+         aes( annee_tmdb, nb,
+              label = titre_tmdb,
+              size = nb,
+              data_id = tmdb_id, 
+              tooltip=paste0(#"<style> div.leaflet-popup-content {width:auto!important;}</style>",
+                             "<img src = ", conv_accents(film_miniature), " height=\"180\"width=\"120\">", "<br>",
+                             "<b>","<font size=2.5 color=black>" , titre_tmdb,"</b>","</font>", "<br>",
+                             "<i>","<font size=2.35 color=black>" , realisateur,"</i>","</font>"),
+              onclick=paste0('window.open("https://www.themoviedb.org/movie/', tmdb_id , '")'),
+              color = langue_originale_lib)) + 
+    geom_text_repel_interactive(fontface = "bold",
+                    force = 0.4,
+                    force_pull = 0.5,
+                    max.overlaps = 500,
+                    # size=2.5,
+                    min.segment.length = 200) +
+    scale_size_continuous(range = c(2.5,4),
+                          # trans = "sqrt",
+                          guide = "none") +
+    scale_y_continuous(trans = "sqrt",
+                       name = "Nombre de citations") +
+    scale_x_continuous(breaks = seq(1940,2020, by = 10),
+                       name = "Année de sortie des films") +
+    scale_color_manual(values = 
+                         # c("Allemand" = "orange",
+                         #          "Français" = "darkblue",
+                         #          "Anglais" = "#1c9099",
+                         #          "Italien" = "darkgreen",
+                         #          "Espagnol" = "darkred",
+                         #          "Russe" = "lightblue",
+                         #          "Portugais" = "#fc9272",
+                         #          "Chinois" = "#dd1c77",
+                         #          "Japonais" = "#807dba",
+                         #          "Suédois" = "#fec44f",
+                         #          "Autres" = "darkgrey")
+                       c("Allemand" = "#b15928",
+                                  "Français" = "#1f78b4",
+                                  "Anglais" = "#a6cee3",
+                                  "Italien" = "#33a02c",
+                                  "Espagnol" = "#e31a1c",
+                                  "Russe" = "#cab2d6",
+                                  "Portugais" = "#fb9a99",
+                                  "Chinois" = "#dd1c77",
+                                  "Japonais" = "#6a3d9a",
+                                  "Suédois" = "#fec44f",
+                                  "Autres" = "grey80") ,
+                       name = "Langue principale") +
+    theme_ipsum() +
+    theme(#axis.title = element_blank(),
+          axis.text.x = element_text( face = "italic",size =10, color = "grey"),
+          axis.text.y = element_text( size =10, color = "grey"),
+          axis.title.x = element_text( size =12, color = "black"),
+          axis.title.y = element_text( size =12, color = "black"),
+          text = element_text(family = "Roboto condensed"),
+          plot.title = element_text(family = "Roboto condensed"),
+          plot.subtitle = element_text(family = "Roboto condensed"),
+          plot.caption = element_text(family = "Roboto condensed"),
+          panel.background = element_rect(fill = "white", colour = "white"),
+          plot.background = element_rect(fill = "white", colour = "white"),
+          # legend.position = c(0.95,0.95),
+          legend.position = c(0.9,0.9),
+          legend.background = element_rect(fill = "white", color = "grey"),
+          legend.direction = "vertical",
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+          panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+    labs(title = "",
+         caption = "Blow-up / Arte / Youtube / TMDB.")
+
+  
+  girafe(
+    ggobj = ggi_films,
+      width_svg = 8,
+    height_svg = 8,
+    options = list(
+      opts_hover(
+      css = girafe_css(
+        css = "fill:grey20;stroke:black;",
+        text = "stroke:none;fill:black;r:1pt;"
+      )),
+      opts_tooltip(css = "padding:1px;background:white;color:white;border-radius:1px;"),
+      opts_hover_inv(css = "opacity:0.8"),
+      opts_toolbar(saveaspng = FALSE),
+      opts_zoom(max = 1)
+    )
+  )  
+  
+  
+```
+
+La palme (hinhin) du film le plus souvent cité revient à Sueurs froides/Vertigo en VO , le classique d'Alfred Hitchcock. Qui n'a d'ailleurs jamais eu la palme d'or à Cannes ! 
+Le film en langue française le plus cité commence à dater aussi : Pierrot le fou sorti en 1965. Les films les plus cités peuvent être à la fois des évidences, mais aussi des obsessions de la part des auteurs. Ou tout simplement des références qui ont influencé les générations suivantes de cinéastes.
+Rien à voir, et c'est ça qui est bien : le Dude arrive en très bonne place dans ce classement.
+
+
+Et si on fait un classement des réalisateurs ?
+
+
+## Les réalisateurs les plus cités dans Blow-Up
+
+```{r reals, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=F, include=F}
+
+cpt_reals_cites <-
+  df_films_BU %>%
+  as.data.frame() %>%
+  inner_join(df_metadata_emissions %>%
+               as.data.frame() %>%
+               identity(), by = "video_url") %>%
+  group_by( realisateur) %>%
+  summarise(nb = n()) %>%
+  ungroup() %>%
+  arrange(desc(nb)) %>%
+  # langue principale du real
+  left_join(df_films_BU %>%
+              group_by(realisateur, langue_originale_lib) %>%
+              summarise(nb_r = n()) %>%
+              ungroup() %>%
+              group_by(realisateur) %>%
+              slice(which.max(nb_r)) %>%
+              select(-nb_r), by = "realisateur" ) %>%
+  filter(!is.na(realisateur)) %>%
+  # annee moyenne des films du real
+  left_join(df_films_BU %>%
+              group_by(realisateur,) %>%
+              summarise(annee_moy = mean(annee_tmdb, na.rm = T)) %>%
+              ungroup() , by = "realisateur" ) %>%
+
+  filter(!is.na(realisateur)) %>%
+  identity()
+
+
+
+ggplot(cpt_reals_cites %>%
+         filter(nb > 50) %>%
+         # filter(!is.na(film_miniature)) %>%
+         identity(),
+       aes( annee_moy, nb,
+            label = realisateur,
+            color = langue_originale_lib)) + 
+  geom_text_repel(fontface = "bold",
+                  force = 0.4,
+                  force_pull = 0.5,
+                  max.overlaps = 500,
+                  min.segment.length = 20,
+             size=4.5) +
+  scale_y_continuous(trans = "sqrt",
+                     name = "Nombre de citations") +
+  scale_x_continuous(breaks = seq(1940,2020, by = 10),
+                     name = "Période d'activité") +
+  scale_color_manual(values = c("Allemand" = "orange",
+                                  "Français" = "darkblue",
+                                  "Anglais" = "#1c9099",
+                                  "Italien" = "darkgreen",
+                                  "Espagnol" = "darkred",
+                                  "Russe" = "lightblue",
+                                  "Portugais" = "#fc9272",
+                                  "Chinois" = "#dd1c77",
+                                  "Japonais" = "#807dba",
+                                  "Suédois" = "#fec44f",
+                                  "Autres" = "darkgrey"),
+                     name = "Langue principale") +
+  theme_ipsum() +
+  theme(  axis.text.x = element_text( face = "italic",size =10, color = "grey"),
+          axis.text.y = element_text( size =10, color = "grey"),
+          axis.title.x = element_text( size =12, color = "black"),
+          axis.title.y = element_text( size =12, color = "black"),
+        text = element_text(family = "Roboto condensed"),
+        plot.title = element_text(family = "Roboto condensed"),
+        plot.subtitle = element_text(family = "Roboto condensed"),
+        plot.caption = element_text(family = "Roboto condensed"),
+        legend.background = element_rect(fill = "white", color = "grey"),
+        panel.background = element_rect(fill = "white", colour = "white"),
+        plot.background = element_rect(fill = "white", colour = "white"),
+        # legend.position = c(0.95,0.95),
+        legend.position = c(0.95,0.85),
+        legend.direction = "vertical",
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+        panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+  labs(title = "",
+       caption = "Blow-up / Arte / Youtube / TMDB.")
+
+```
+
+
+
+```{r reals_interactif, echo=F, message=F, warning=F ,fig.height=6,fig.width=12, dpi=160,eval=T, include=T}
+
+cpt_reals_cites <-
+  df_films_BU %>%
+  as.data.frame() %>%
+  # slice(1:10) %>%
+  inner_join(df_metadata_emissions %>%
+               as.data.frame() %>%
+               identity(), by = "video_url") %>%
+  group_by( realisateur) %>%
+  summarise(nb = n()) %>%
+  ungroup() %>%
+  arrange(desc(nb)) %>%
+  # langue principale du real
+  left_join(df_films_BU %>%
+              group_by(realisateur, langue_originale_lib) %>%
+              summarise(nb_r = n()) %>%
+              ungroup() %>%
+              group_by(realisateur) %>%
+              slice(which.max(nb_r)) %>%
+              select(-nb_r), by = "realisateur" ) %>%
+  filter(!is.na(realisateur)) %>%
+  # annee moyenne des films du real
+  left_join(df_films_BU %>%
+              group_by(realisateur,) %>%
+              summarise(annee_moy = mean(annee_tmdb, na.rm = T)) %>%
+              ungroup() , by = "realisateur" ) %>%
+
+  filter(!is.na(realisateur)) %>%
+  identity()
+
+
+  ggi_reals <-
+  ggplot(cpt_reals_cites %>%
+         filter(nb > 50) %>%
+         left_join(df_metadonnees_real, by = c("realisateur" = "nom_recherche") ) %>%
+         identity(),
+         aes( annee_moy, nb,
+              label = nom_tmdb,
+              size = nb,
+              data_id = personne_id, 
+              tooltip=paste0(#"<style> div.leaflet-popup-content {width:auto!important;}</style>",
+                "<img src = ", conv_accents(film_miniature), " height=\"180\"width=\"120\">", "<br>",
+                "<b>","<font size=2.5 color=black>" , nom_tmdb,"</b>","</font>"#,
+                # "<img src = ", conv_accents(film_miniature), " height=\"180\"width=\"120\">"
+                ),
+              onclick=paste0('window.open("https://www.themoviedb.org/person/', personne_id , '")'),
+            color = langue_originale_lib)) + 
+    geom_text_repel_interactive(fontface = "bold",
+                    force = 0.3,
+                    force_pull = 0.5,
+                    max.overlaps = 500,
+                    # size=2.5,
+                    min.segment.length = 200) +
+    scale_size_continuous(range = c(2.5,4),
+                          # trans = "sqrt",
+                          guide = "none") +
+    scale_y_continuous(trans = "sqrt",
+                       name = "Nombre de citations") +
+    scale_x_continuous(breaks = seq(1940,2020, by = 10),
+                       name = "Période d'activité") +
+    scale_color_manual(values = 
+                         # c("Allemand" = "orange",
+                         #          "Français" = "darkblue",
+                         #          "Anglais" = "#1c9099",
+                         #          "Italien" = "darkgreen",
+                         #          "Espagnol" = "darkred",
+                         #          "Russe" = "lightblue",
+                         #          "Portugais" = "#fc9272",
+                         #          "Chinois" = "#dd1c77",
+                         #          "Japonais" = "#807dba",
+                         #          "Suédois" = "#fec44f",
+                         #          "Autres" = "darkgrey")
+                       c("Allemand" = "#b15928",
+                                  "Français" = "#1f78b4",
+                                  "Anglais" = "#a6cee3",
+                                  "Italien" = "#33a02c",
+                                  "Espagnol" = "#e31a1c",
+                                  "Russe" = "#cab2d6",
+                                  "Portugais" = "#fb9a99",
+                                  "Chinois" = "#dd1c77",
+                                  "Japonais" = "#6a3d9a",
+                                  "Suédois" = "#fec44f",
+                                  "Autres" = "grey80") ,
+                       name = "Langue principale") +
+    theme_ipsum() +
+    theme(#axis.title = element_blank(),
+          axis.text.x = element_text( face = "italic",size =10, color = "grey"),
+          axis.text.y = element_text( size =10, color = "grey"),
+          axis.title.x = element_text( size =12, color = "black"),
+          axis.title.y = element_text( size =12, color = "black"),
+          text = element_text(family = "Roboto condensed"),
+          plot.title = element_text(family = "Roboto condensed"),
+          plot.subtitle = element_text(family = "Roboto condensed"),
+          plot.caption = element_text(family = "Roboto condensed"),
+          panel.background = element_rect(fill = "white", colour = "white"),
+          plot.background = element_rect(fill = "white", colour = "white"),
+          # legend.position = c(0.95,0.95),
+          legend.position = c(0.06,0.87),
+          legend.background = element_rect(fill = "white", color = "grey"),
+          legend.direction = "vertical",
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+          panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+    labs(title = "",
+         caption = "Blow-up / Arte / Youtube / TMDB.")
+
+  
+
+  girafe(
+    ggobj = ggi_reals,
+      width_svg = 8,
+    height_svg = 8,
+    options = list(
+      # opts_hover(css = "fill:black;stroke:black;r:0pt;"),
+      opts_hover(
+      css = girafe_css(
+        css = "fill:grey20;stroke:black;",
+        text = "stroke:none;fill:black;r:1pt;"
+      )),
+      opts_tooltip(css = "padding:1px;background:white;color:white;border-radius:1px;"),
+      opts_hover_inv(css = "opacity:0.8"),
+      opts_toolbar(saveaspng = FALSE),
+      opts_zoom(max = 1)
+    )
+  )  
+  
+```
+
+
+Brian De Palma prend la tête .
+En bleu on voit se former la nouvelle vague avec dans l'ordre Godard et Truffaut, plus loin Rohmer, Alain Resnais, Agnès Varda, Jacques Demy...
+Les cinéastes italiens se font une bonne place mais les anglos-saxons se taillent la part du lion.
+
+Ce qu'on voit sur la carte des pays producteurs les plus fréquents :
+
+## Les pays de productions les plus cités
+
+
+```{r carto_prod_interactif, echo=F, message=F, warning=F ,fig.height=6,fig.width=12, dpi=160,eval=T, include=T}
+
+df_films_pays_prod <-
+  df_films_BU %>%
+  select(tmdb_id, pays_production) %>%
+  filter(!is.na(pays_production)) %>%
+  separate(col = pays_production,into = c("paysprod_1", "paysprod_2", "paysprod_3", "paysprod_4", "paysprod_5", "paysprod_6", "paysprod_7"),sep = ",") %>%
+  pivot_longer(!tmdb_id, names_to = "type", values_to = "paysprod" ) %>%
+  filter(!is.na(paysprod)) %>%
+  mutate(paysprod = str_trim(paysprod)) %>%
+  select(-type) %>%
+  distinct(tmdb_id, paysprod)
+
+
+cpt_palmares_films_paysprod <-
+   df_films_pays_prod %>%
+  left_join(cpt_films_cites %>% select(-pays_production) %>%
+              
+              identity(), by ="tmdb_id" ) %>%
+  group_by(paysprod) %>%
+  summarise(nb = n()) %>%
+  ungroup()
+
+
+REF_NED_pays.niv1.sp <- ne_countries(scale = "large")
+REF_NED_pays.niv1 <- st_as_sf(REF_NED_pays.niv1.sp)
+
+library(rmapshaper)
+REF_NED_pays.niv1.s <- rmapshaper::ms_simplify(input = as(REF_NED_pays.niv1 %>% filter(!gu_a3 %in% c('ATA')), 'Spatial'),  
+                                               keep = 0.05, method = "vis", keep_shapes = TRUE) %>% st_as_sf() %>% st_transform(3035)
+
+
+# admin
+
+corresp_pays <-
+df_films_pays_prod %>%
+  count(paysprod) %>%
+  mutate(paysprod_c = case_when(paysprod %in% "Hong Kong" ~ "Hong Kong S.A.R.",
+                                paysprod %in% "Soviet Union" ~ "Russia",
+                                paysprod %in% "Czech Republic" ~ "Czechia",
+                                paysprod %in% "Czechoslovakia" ~ "Czechia",
+                                paysprod %in% "Yugoslavia" ~ "Republic of Serbia",
+                                paysprod %in% "Serbia and Montenegro" ~ "Republic of Serbia",
+                                paysprod %in% "Cote D'Ivoire" ~ "Ivory Coast",
+                                paysprod %in% "Congo" ~ "Republic of the Congo",
+                                paysprod %in% "Palestinian Territory" ~ "Palestine",
+                                TRUE ~ paysprod)) %>%
+  left_join(REF_NED_pays.niv1 %>%
+              st_drop_geometry() %>%
+              select(geounit) %>%
+              mutate(geo = "ok"),
+            by = c("paysprod_c" = "geounit")) %>%
+  
+  identity()
+
+
+corresp_pays_fr <-
+  REF_NED_pays.niv1.s %>%
+  st_drop_geometry() %>%
+  select(geounit, name_fr) %>%
+  group_by(geounit) %>%
+  slice(1)
+
+cpt_palmares_films_paysprod_dor <-
+REF_NED_pays.niv1.s  %>%
+  left_join(cpt_palmares_films_paysprod %>%
+              left_join(corresp_pays, by = "paysprod") %>%
+              group_by(paysprod_c) %>%
+              summarise(nb = sum(nb))
+              , by =c("geounit"= "paysprod_c")) %>%
+  filter(nb > 0) %>%
+  select(geounit, nb) %>%
+  # cartogram_dorling(. , 
+  #                   k = 0.4,
+  #                   m_weight = 0.6,
+  #                   itermax = 200,
+  #                   "nb") %>%
+    cartogram_dorling(. , 
+                    k = 0.9,
+                    m_weight = 0.9,
+                    itermax = 200,
+                    "nb") %>%
+  identity()
+
+
+ggi_carto <-
+ggplot() +
+  geom_sf(data = REF_NED_pays.niv1.s %>%
+            filter(!geounit %in% "Greenland"), 
+          color = "white", fill = "grey95", size = 0.5) +
+  geom_point_interactive(data = cpt_palmares_films_paysprod_dor %>%
+               mutate(x_ctr = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+                      y_ctr = map_dbl(geometry, ~st_centroid(.x)[[2]])) %>% 
+               st_drop_geometry() %>%
+               as.data.frame()  %>%
+              left_join(corresp_pays_fr, by = "geounit") %>%
+               mutate(nb = as.numeric(nb)) %>%
+                # mutate(gsub("'", "&#39;", name_fr )) %>%
+               identity(),
+             aes(
+               fill = nb,
+               size = nb,
+               x  =x_ctr,
+               y = y_ctr,
+               data_id = geounit, 
+               tooltip=paste0(#"<style> div.leaflet-popup-content {width:auto!important;}</style>",
+                 "<b>","<font size=2.5 color=black>" , conv_accents(name_fr),"</b>","</font>", "<br>",
+                             "<i>","<font size=2.35 color=black>" , nb, " citations","</i>","</font>")),
+             # size = 2.2,
+             # fill = "red",
+             color = "grey20",
+             stroke = 0.4,
+             pch = 21) +
+
+  # geom_text_repel(data = cpt_palmares_films_paysprod_dor %>%
+  #             mutate(x_ctr = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+  #                    y_ctr = map_dbl(geometry, ~st_centroid(.x)[[2]])) %>% 
+  #             st_drop_geometry() %>%
+  #             as.data.frame()  %>%
+  #             left_join(corresp_pays_fr, by = "geounit") %>%
+  #             mutate(nb = as.numeric(nb)) %>%
+  #             # filter(nb > 50) %>%
+  #             identity(),
+  #           aes(
+  #             label = name_fr,
+  #             size = nb/150,
+  #             x  =x_ctr,
+  #             y = y_ctr),
+  #           fontface = "bold",
+  #           force = 0.8,
+  #           force_pull = 0.5,
+  #           max.overlaps = 500,
+  #           # size=2.5,
+  #           # min.segment.length = 200,
+  #           color = "black",
+  #           stroke = 0.4,
+  #           pch = 21) +
+  scale_x_continuous(name = '') +
+  scale_y_continuous(name = '') +
+  scale_size_continuous(#range = c(1,15),
+                        range = c(2,16),
+                        # trans = "sqrt",
+                        guide = F,
+                        name = "Nombre de citations") +
+  scale_fill_distiller(palette = "PuRd",
+                       trans = "sqrt",
+                       direction = 1,
+                       name = "Nombre de citations") +
+  theme_ipsum() +
+  theme(axis.title.x = element_blank() ,
+        axis.title.y = element_blank(),
+        legend.position = c(0.9,0.1)) +
+  labs(title = "",
+       caption = "") +
+  coord_sf(#crs = st_crs(54030), 
+    datum = NA)
+
+
+  girafe(
+    ggobj = ggi_carto,
+      width_svg = 8,
+    height_svg = 8,
+    options = list(
+      # opts_hover(css = "fill:black;r:0pt;"),
+      # opts_tooltip(css = "padding:1px;background:white;color:white;border-radius:1px;"),
+      # opts_hover_inv(css = "opacity:1"),
+      # opts_toolbar(saveaspng = FALSE),
+      # opts_zoom(max = 1)
+            opts_hover(
+      css = girafe_css(
+        css = "fill:grey20;stroke:black;",
+        text = "stroke:none;fill:black;r:1pt;"
+      )),
+      opts_tooltip(css = "padding:1px;background:white;color:white;border-radius:1px;"),
+      opts_hover_inv(css = "opacity:0.8"),
+      opts_toolbar(saveaspng = FALSE),
+      opts_zoom(max = 1)
+    )
+  )  
+
+```
+
+Avec les Etats-Unis qui s'impose largement mais ça reste eclectique avec plus de 110 pays représentés.
+
+D'ailleurs on peut voir des périodes fastes se dessiner pour les pays majeurs de l'industrie cinématographique (ici représentés par la langue dans laquelle les films ont été tournés) :
+
+## Les langues et périodes les plus référencées
+
+```{r langues, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=F, include=F}
+
+cpt_langue_originale_lib_cpt <-
+  df_films_BU %>%
+  # distinct(tmdb_id, .keep_all = T) %>%
+  group_by(langue_originale_lib) %>%
+  summarise(nb_films = n()) %>%
+  ungroup() %>%
+  ungroup()
+
+
+
+df_films_BU %>%
+  distinct(tmdb_id, .keep_all = T) %>%
+  # filter(langue_originale %in% (cpt_langue_originale %>% arrange(desc(nb_films)) %>% slice(1:10) %>% select(langue_originale) %>% pull())) %>%
+  left_join(cpt_langue_originale_lib_cpt, by = "langue_originale_lib") %>%
+  group_by(annee_tmdb, langue_originale_lib) %>%
+  summarise(nb = n()) %>%
+  identity() %>%
+  mutate(langue_originale_lib = factor(langue_originale_lib, levels = (cpt_langue_originale_lib_cpt %>% select(langue_originale_lib) %>% pull()) )) %>%
+  ggplot(aes(annee_tmdb, nb, fill = langue_originale_lib, label = langue_originale_lib),
+         color = "white") +
+  geom_stream(extra_span = 0.13, type = "ridge", n_grid = 3000, bw = .58, alpha = 0.9) +
+  geom_stream_label(extra_span = 0.13,
+                    size = 4, type = "ridge", 
+                    fontface = "bold",
+                    n_grid = 3000, color = "white") +
+  scale_fill_manual(values =
+                      # c("Allemand" = "orange",
+                      #             "Français" = "darkblue",
+                      #             "Anglais" = "#1c9099",
+                      #             "Italien" = "darkgreen",
+                      #             "Espagnol" = "darkred",
+                      #             "Russe" = "lightblue",
+                      #             "Portugais" = "#fc9272",
+                      #             "Chinois" = "#dd1c77",
+                      #             "Japonais" = "#807dba",
+                      #             "Suédois" = "#fec44f",
+                      #             "Autres" = "darkgrey")
+                     c("Allemand" = "#b15928",
+                                  "Français" = "#1f78b4",
+                                  "Anglais" = "#a6cee3",
+                                  "Italien" = "#33a02c",
+                                  "Espagnol" = "#e31a1c",
+                                  "Russe" = "#cab2d6",
+                                  "Portugais" = "#fb9a99",
+                                  "Chinois" = "#dd1c77",
+                                  "Japonais" = "#6a3d9a",
+                                  "Suédois" = "#fec44f",
+                                  "Autres" = "grey80")  ,
+                    name = "Langue principale") +
+  # cowplot::theme_minimal_vgrid(font_size = 18) +
+    scale_x_continuous(breaks = seq(1940,2020, by = 10),
+                       # sec.axis = dup_axis(name="", seq(1940,2020, by = 10)),
+                     name = "Nombre de citations") +
+  scale_x_continuous(name = "Date de sortie des films") +
+  theme_ipsum() +
+  theme(#axis.title = element_blank(),
+       axis.text.x = element_text( face = "italic",size =10, color = "grey"),
+          axis.text.y = element_text( size =10, color = "grey"),
+          axis.title.x = element_text( size =12, color = "black"),
+          axis.title.y = element_text( size =12, color = "black"),
+        text = element_text(family = "Roboto condensed"),
+        plot.title = element_text(family = "Roboto condensed"),
+        plot.subtitle = element_text(family = "Roboto condensed"),
+        plot.caption = element_text(family = "Roboto condensed"),
+        panel.background = element_rect(fill = "white", colour = "white"),
+        plot.background = element_rect(fill = "white", colour = "white"),
+        # legend.position = c(0.95,0.95),
+        legend.background = element_rect(fill = "white", color = "grey"),
+        legend.position = c(0.15,0.75),
+        legend.direction = "vertical",
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+        panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+  labs(title = "Langue principale des films cités dans les émissions BLOW UP",
+       caption = "Blow-up / Arte / Youtube / TMDB.")
+
+```
+
+
+
+```{r langues_interactif, echo=F, message=F, warning=F ,fig.height=11,fig.width=12, dpi=160,eval=T, include=T}
+
+cpt_langue_originale_lib_cpt <-
+  df_films_BU %>%
+  # distinct(tmdb_id, .keep_all = T) %>%
+  group_by(langue_originale_lib) %>%
+  summarise(nb_films = n()) %>%
+  ungroup() %>%
+  ungroup()
+
+
+
+cpt_lang_stream <-
+df_films_BU %>%
+  distinct(tmdb_id, .keep_all = T) %>%
+  mutate(langue_originale_lib = case_when(langue_originale %in% 'cn' ~ "Chinois",
+                                          langue_originale %in% 'de' ~ "Allemand",
+                                          langue_originale %in% 'fr' ~ "Français",
+                                          langue_originale %in% 'en' ~ "Anglais",
+                                          langue_originale %in% 'it' ~ "Italien",
+                                          langue_originale %in% 'ja' ~ "Japonais",
+                                          langue_originale %in% 'es' ~ "Espagnol",
+                                          langue_originale %in% 'sv' ~ "Suédois",
+                                          langue_originale %in% 'pt' ~ "Portugais",
+                                          langue_originale %in% 'ru' ~ "Russe",
+                                          TRUE ~ "Autres")) %>%
+  # filter(langue_originale %in% (cpt_langue_originale %>% arrange(desc(nb_films)) %>% slice(1:10) %>% select(langue_originale) %>% pull())) %>%
+  # left_join(cpt_langue_originale_lib_cpt, by = "langue_originale_lib") %>%
+  group_by(annee_tmdb, langue_originale_lib) %>%
+  summarise(nb = n()) %>%
+  identity() %>%
+  mutate(langue_originale_lib = factor(langue_originale_lib, levels = c(cpt_langue_originale_lib_cpt %>% filter(!langue_originale_lib %in% "Autres") %>% arrange(desc(nb_films)) %>% select(langue_originale_lib) %>% pull(), "Autres"))) %>%
+ identity()
+
+ggi_lang <-
+  ggplot(data = cpt_lang_stream,
+         aes(annee_tmdb, nb,
+            tooltip = langue_originale_lib,             
+           data_id = langue_originale_lib ,
+           fill = langue_originale_lib, label = langue_originale_lib),
+         color = "white") +
+  geom_stream(geom = "polygon_interactive",
+              color = "white", lwd = 0.25,
+              extra_span = 0.13, type = "ridge",
+              n_grid = 3000, bw = .58, alpha = 1) +
+  # geom_stream_label(data = cpt_lang_stream %>% filter(langue_originale_lib %in% c("Anglais", "Français")),
+  #                   extra_span = 0.13,
+  #                   size = 4, type = "ridge", 
+  #                   fontface = "bold",
+  #                   n_grid = 3000, color = "white") +
+  scale_fill_manual(values = 
+                                  # c("Allemand" = "#ec7014",
+                                  # "Français" = "darkblue",
+                                  # "Anglais" = "#9ecae1",
+                                  # "Italien" = "darkgreen",
+                                  # "Espagnol" = "darkred",
+                                  # "Russe" = "#a1d99b",
+                                  # "Portugais" = "#fc9272",
+                                  # "Chinois" = "#dd1c77",
+                                  # "Japonais" = "#807dba",
+                                  # "Suédois" = "#fec44f",
+                                  # "Autres" = "grey80"),
+                                c("Allemand" = "#b15928",
+                                  "Français" = "#1f78b4",
+                                  "Anglais" = "#a6cee3",
+                                  "Italien" = "#33a02c",
+                                  "Espagnol" = "#e31a1c",
+                                  "Russe" = "#cab2d6",
+                                  "Portugais" = "#fb9a99",
+                                  "Chinois" = "#dd1c77",
+                                  "Japonais" = "#6a3d9a",
+                                  "Suédois" = "#fec44f",
+                                  "Autres" = "grey80"),
+                    name = "Langue principale") +
+  # cowplot::theme_minimal_vgrid(font_size = 18) +
+    scale_x_continuous(breaks = seq(1940,2020, by = 10),
+                       # sec.axis = dup_axis(name="", seq(1940,2020, by = 10)),
+                     name = "Date de sortie des films") +
+  scale_y_continuous(name = "Nombre de citations par an") +
+  theme_ipsum() +
+  theme(#axis.title = element_blank(),
+       axis.text.x = element_text( face = "italic",size =10, color = "grey"),
+          axis.text.y = element_text( size =10, color = "grey"),
+          axis.title.x = element_text( size =12, color = "black"),
+          axis.title.y = element_text( size =12, color = "black"),
+        text = element_text(family = "Roboto condensed"),
+        plot.title = element_text(family = "Roboto condensed"),
+        plot.subtitle = element_text(family = "Roboto condensed"),
+        plot.caption = element_text(family = "Roboto condensed"),
+        panel.background = element_rect(fill = "white", colour = "white"),
+        plot.background = element_rect(fill = "white", colour = "white"),
+        # legend.position = c(0.95,0.95),
+        legend.background = element_rect(fill = "white", color = "grey"),
+        legend.position = c(0.15,0.75),
+        legend.direction = "vertical",
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+        panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+  labs(title = "",
+       caption = "Blow-up / Arte / Youtube / TMDB.")
+  
+    girafe(
+    ggobj = ggi_lang,
+      width_svg = 8,
+    height_svg = 8,
+    options = list(
+      opts_hover(css = "color:black;r:0pt;"),
+      opts_tooltip(css = "padding:1px;background:black;color:white;border-radius:1px;"),
+      opts_hover_inv(css = "r:0pt;opacity:0.5"),
+      opts_toolbar(saveaspng = FALSE),
+      opts_zoom(max = 1)
+    )
+  ) 
+
+```
+
+
+Si les films anglophones dominent depuis le début, on voit apparaître l'âge d'or du cinéma italien entre 1960 et 1980 puis celui venu d'Espagne.
+Au global les années 1970 font bonne figure mais ce sont logiquement les films sortis dans les années 2000 qui sont les plus souvent cités dans Blow-Up.
+
+
+
+## Le palmarès par décennie
+
+
+En bonus le top 20 détaillé (du #1 en haut à gauche au #20 en bas à droite) par décennie. Avez-vous vu tous ces classiques ?
+
+
+
+```{r palmares_interactif, echo=F, message=F, warning=F ,fig.height=16,fig.width=12, dpi=160,eval=T, include=T}
+
+# ggplot(cpt_films_cites %>%
+#          # filter(nb > 20) %>%
+#          filter(!is.na(film_miniature)) %>%
+#          mutate(decennie = paste0("Années " ,substr(as.character(annee_tmdb),1,3) , "0")) %>%
+#          mutate(annee_decennie = as.numeric(substr(as.character(annee_tmdb),4,4))) %>%
+#          group_by(decennie) %>%
+#          mutate(id_n = row_number()-1) %>%
+#          filter(id_n <= 19) %>%
+#          mutate(ligne =  as.numeric(substr(str_pad(as.character(id_n), width = 2, pad="0", side = "left"),1,1))) %>%
+#          mutate(colonne =  as.numeric(substr(str_pad(as.character(id_n), width = 2, pad="0", side = "left"),2,2))) %>%
+#          filter(!decennie %in% c("Années 1890", "Années 1900", "Années NA0", "Années 2020")) %>%
+#          identity(),
+#        aes(colonne, ligne)) +
+#   ggimage::geom_image(aes(image=poster_url),
+#              size=20.325) +
+#   scale_y_continuous(trans = "reverse",
+#                      expand = c(0,0),
+#                      limits = c(-0.65,1.55)) +
+#   facet_wrap(~decennie, ncol  =1) +
+#   theme_ipsum() +
+#   theme(axis.title.x = element_blank(),
+#         axis.title.y = element_blank(),
+#         axis.text.x = element_blank(),
+#         axis.text.y = element_blank(),
+#         text = element_text(family = "Roboto condensed"),
+#         plot.title = element_text(family = "Roboto condensed"),
+#         plot.subtitle = element_text(family = "Roboto condensed"),
+#         plot.caption = element_text(family = "Roboto condensed"),
+#         panel.background = element_rect(fill = "white", colour = "white"),
+#         plot.background = element_rect(fill = "white", colour = "white"),
+#         # legend.position = c(0.95,0.95),
+#         strip.background =element_rect(fill="grey30"),
+#         strip.text.x = element_text(size = 14, colour = "white", angle = 0,family = "Roboto condensed"),
+#         legend.position = "top",
+#         legend.direction = "vertical",
+#         panel.grid.major = element_blank(),
+#                 panel.grid.minor = element_blank(),
+# 
+#         panel.border = element_blank(),
+#         plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+#         panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+#   labs(title = "",
+#        subtitle = '',
+#        caption = "Blow-up / Arte / Youtube / TMDB.")
+
+ggi_palmares <-
+ggplot(cpt_films_cites %>%
+         # filter(nb > 20) %>%
+         filter(!is.na(film_miniature)) %>%
+         mutate(decennie = paste0("Années " ,substr(as.character(annee_tmdb),1,3) , "0")) %>%
+         mutate(annee_decennie = as.numeric(substr(as.character(annee_tmdb),4,4))) %>%
+         group_by(decennie) %>%
+         mutate(id_n = row_number()-1) %>%
+         filter(id_n <= 19) %>%
+         mutate(ligne =  as.numeric(substr(str_pad(as.character(id_n), width = 2, pad="0", side = "left"),1,1))) %>%
+         mutate(colonne =  as.numeric(substr(str_pad(as.character(id_n), width = 2, pad="0", side = "left"),2,2))) %>%
+         filter(!decennie %in% c("Années 1890", "Années 1900", "Années NA0", "Années 2020")) %>%
+         identity(),
+       aes(colonne, ligne)) +
+  geom_image_interactive(aes(image=film_miniature,
+                             data_id = tmdb_id,
+              tooltip=paste0(#"<style> div.leaflet-popup-content {width:auto!important;}</style>",
+                             "<b>","<font size=2.95 color=black>" , titre_tmdb,"</b>","</font>", "<br>",
+                             "<i>","<font size=2.35 color=black>" , realisateur,"</i>","</font>"),
+              onclick=paste0('window.open("https://www.themoviedb.org/movie/', tmdb_id , '")')),
+             size=0.325) +
+  scale_y_continuous(trans = "reverse",
+                     expand = c(0,0),
+                     limits = c(-0.65,1.55)) +
+  facet_wrap(~decennie, ncol  =1) +
+  theme_ipsum() +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        text = element_text(family = "Roboto condensed"),
+        plot.title = element_text(family = "Roboto condensed"),
+        plot.subtitle = element_text(family = "Roboto condensed"),
+        plot.caption = element_text(family = "Roboto condensed"),
+        panel.background = element_rect(fill = "white", colour = "white"),
+        plot.background = element_rect(fill = "white", colour = "white"),
+        # legend.position = c(0.95,0.95),
+        strip.background =element_rect(fill="grey30"),
+        strip.text.x = element_text(size = 14, colour = "white", angle = 0,family = "Roboto condensed"),
+        legend.position = "top",
+        legend.direction = "vertical",
+        panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank(),
+
+        panel.border = element_blank(),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+        panel.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) +
+  labs(title = "",
+       subtitle = '',
+       caption = "Blow-up / Arte / Youtube / TMDB.")
+
+# ggi_palmares
+ girafe(
+    ggobj = ggi_palmares,
+      width_svg = 9,
+      # height_svg = 38,
+      #     width_svg = 9,
+      # height_svg = 18,
+    options = list(
+      # opts_hover(css = "fill:black;stroke:black;r:2pt;"),
+      opts_tooltip(css = "padding:8px;background:white;color:white;border-radius:5px;"),
+      opts_hover_inv(css = "opacity:1"),
+      opts_toolbar(saveaspng = FALSE),
+      opts_zoom(max = 1)
+    )
+  )
+       
+
+```
+
+
+## Methodo
+
+
+Une rapide explication de la méthode employée pour arriver aux résultats. En toute honnêteté l'OCR étant un procédé fastidieux Claude AI a été sollicité ; les scripts en vrac sont dispos [ici](https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/scripts) au cas où.
+
+
+<br>
+<br>
+
+
+
+/ Liste des urls des videos de la chaine.
+
+/ Téléchargement de la video.
+
+/ Extraction d’une image par seconde.
+
+
+<br>
+
+<div style= "float:right;position: relative; top: -10px;">
+```{r fig.width=4, fig.height=2.5,echo=FALSE, align = 'right'}
+library(png)
+library(grid)
+img <- readPNG("./img/method_1.png")
+ grid.raster(img)
+```
+
+</div>
+
+/ Détection des images s’apparentant à un panneau (grande proportion de pixels de deux couleurs distinctes). 
+
+/ Regroupement des images ~ identiques.
+
+<br>
+<br>
+<br>
+
+<div style= "float:left;position: relative; top: -10px;">
+```{r fig.width=4, fig.height=2.5,echo=FALSE, align = 'left'}
+img <- readPNG("./img/method_2.png")
+ grid.raster(img)
+```
+</div>
+<br>
+<br>
+
+/ Zoom sur la partie textuelle (hors cadre et logo) et conversion de l’image en police noire / fond blanc : ça rend l'étape suivante plus efficace.
+
+
+
+<br>
+<br>
+
+
+<div style= "float:right;position: relative; top: -10px;">
+```{r fig.width=4, fig.height=2.5,echo=FALSE, align = 'right'}
+img <- readPNG("./img/method_3.png")
+ grid.raster(img)
+```
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+/ Reconnaissance optique de caractères (OCR) par ligne : la disposition des chaines de caractères a évolué au fil des vidéos, plus ou moins bien structurés ce qui rend leur complétude (titre / année / réalisateur / producteur) parfois difficilement reconstituable.
+
+ 
+<br>
+<br>
+
+
+<div style= "float:left;position: relative; top: -20px;">
+```{r fig.width=4, fig.height=2,echo=FALSE, align = 'left'}
+img <- readPNG("./img/method_4.png")
+ grid.raster(img)
+```
+</div>
+<br>
+<br>
+/ Matching textuel avec l’API TMDB : l'objectif est récupérer l'identifiant unique du film dans la base TMDB ainsi que ces métadonnées associées (réalisateur, genres, année de sortie, affiche…) : le Matching se fait à partir des infos récoltées (titre, parfois le producteur, parfois le réalisateur) pour lesquelles on calcule un score de probabilité sur une entité film en requêtant l'API (gratuite !) TMDB.
+
+<br>
+<br>
+<br>  
+Au final vu les différentes étapes et les erreurs/omissions à chacune d'entre elles, on doit être à 70% / 80% de films correctement identifiés. Ce qui est bien mais pas top.
