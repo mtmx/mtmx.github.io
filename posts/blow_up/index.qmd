@@ -57,12 +57,14 @@ df_metadata_emissions <- fread( "./data/df_metadata_emissions.csv") %>%
   # sous-dossier img
   mutate(loc_miniature = str_replace(loc_miniature, "./", "./img/")) %>%
   # host github
-  mutate(loc_miniature = str_replace(loc_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/"))
+  # mutate(loc_miniature = str_replace(loc_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/")) %>%
+  identity()
 
 df_metadonnees_real <- fread( "./data/df_metadonnees_real.csv") %>% 
-  mutate(film_miniature = str_replace(film_miniature, "./", "./img/"))%>%
+  mutate(film_miniature = str_replace(film_miniature, "./", "/img/"))%>%
   # host github
-  mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/"))
+  # mutate(film_miniature = str_replace(film_miniature, "./", "https://github.com/mtmx/mtmx.github.io/tree/master/posts/blow_up/")) %>%
+  identity()
 
 df_films_BU <- fread( "./data/df_films_BU.csv") %>% 
   mutate(film_miniature = str_replace(film_miniature, "./", "./img/")) %>%
@@ -136,7 +138,7 @@ On peut tenter de répondre à cette deuxième question en scrutant les panneaux
 
 
 
-## L"historique des épisodes de Blow-Up
+## L'historique des épisodes de Blow-Up
 
 Avec les métadonnées de la chaine youtube de Blow-Up on peut reconstituer un panorama de la vie de l'émission depuis la première au printemps 2014 :
 ```{r episodes, echo=F, message=F, warning=F ,fig.height=12,fig.width=12, dpi=160,eval=T, include=T}
